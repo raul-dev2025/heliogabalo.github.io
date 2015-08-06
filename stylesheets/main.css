@@ -6,10 +6,12 @@ html, body, h1, h2, h3, h4, ul, ol, li, p, a {
 h1 {
   color: #000000;
   margin: 0 0 15px 0;
+	text-align: center;
 }
 h2 {
   color: #000000;
   margin: 15px 0 15px;
+	text-align: center;
 }
 h3 {
   color: #333333;
@@ -35,13 +37,14 @@ li {
   margin-bottom: 5px;
 }
 body {
-  padding: 15px;
+  padding: 0;
 }
 ol {
   padding: 0 0 0 20px;
 }
 .nav {
   padding: 0;
+	text-align: center;
 }
 .nav li {
   display: inline;
@@ -52,9 +55,37 @@ ol {
 }
 .day-time {
   color: #444444;
-  text-decoration: underline;
+  margin: 0 0 3px 0;
 }
 .concert-location {
   color: #888888;
-  text-decoration: underline;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+	margin: 0 auto;
+}
+.album {
+  border: 2px dashed  #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+}
+.bands-list h3{
+  border: none;
+  margin: 0px;
+}
+.bands-list {
+  list-style-type: none;
+  padding-left: 0;  
+}
+.bands-list a {
+  text-decoration: none;
+  color: #ff2244;
+}
+.bands-list li {
+  border: 1px solid #555555;
 }
