@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[CajónDeSastre]]></title>
+  <link href="http://heliogabalo.github.io/atom.xml" rel="self"/>
+  <link href="http://heliogabalo.github.io/"/>
+  <updated>2015-03-27T22:33:37+01:00</updated>
+  <id>http://heliogabalo.github.io/</id>
+  <author>
+    <name><![CDATA[Heliogábalo Santos]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopres]]></title>
+    <link href="http://heliogabalo.github.io/title"/>
+    <updated>2015-03-27T22:13:37+01:00</updated>
+    <id>http://heliogabalo.github.io/new-article</id>
+    <content type="html"><![CDATA[<p><a href="http://octopress.org/">Octopress 3.0</a></p>
+
+<p><em>Octopress 3.0</em> está a punto de ser lanzado. Esto quiere decir que versiones
+anteriores, dejarán de ser distribuidas y mantenidas. En muchos aspectos, el
+funcionamiento de <em>Octopress</em>, no era del todo correcto. Así que antes de hablar
+de los nuevos y emocionantes cambios, explicaremos que es lo que funciona mal.</p>
+
+<h2>¿Qué está mal?</h2>
+
+<p>Puede resultar una afirmación un tanto radical, pero ahora mismo Octopress, es
+básicamente un blog de <em>Jekill</em>, que puede ser enlazado y modificado.
+El primer, y más obvio error, es que <em>Octopress</em> se distribuye a través de <em>Git</em>.
+Es como darse contra una pared, ver los conflitos de fusión, que
+experimentan los usuarios, al tratar de actualizar sus <em>páginas web</em>. Es absurdo.</p>
+
+<p><em>Octopress</em> fue liberado como un solo producto, pero se ha convertido en una
+colección de <em>plugins</em> y configuraciones, que son difíciles de desentrañar. Si
+deseamos cambiar o quitar algo, nos alejamos de <em>camino de baldosas amarillas</em>.
+Produciéndose un efecto espeluznante, en la experiencia de usuario.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>. . .
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+</feed>
