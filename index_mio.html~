@@ -2,14 +2,14 @@
 
 <html>
   <head>
-    <style type="text/css">
+    <style type="text/css" rel="stylesheet" href="/stylesheet/main.css">
       
     </style>
   </head>
   <body>
     <h1>CajónDeSastre</h1>
 
-    <ul class="main-navi">
+    <ul class="nav">
       <li><a href="/">Home</a></li>
 			<li><a href="/blog/archives">Archivo</a></li>
 			<li><a href="/title/sugerencias.html" target="_blank">Enlaces</a></li>
