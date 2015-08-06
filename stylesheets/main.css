@@ -86,8 +86,15 @@ ol {
   border: 1px solid #555555;
 }
 }
+<<<<<<< HEAD
 .header img {	
   margin: 0 auto 15px auto;	
+=======
+.header img {
+	width: 630px;
+  margin: 0 auto 15px auto;
+	background-color: ffffff;
+>>>>>>> 9506b4eedd82ad3397eb37d3baee46d9b3ab7342
   display: block;
 }
 .cabecetangulo h3 {
