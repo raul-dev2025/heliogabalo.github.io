@@ -1,5 +1,15 @@
-<h2>About</h2>
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+  
+		<h2>About</h2>
 
-	<ul>
-		<li>@equipo</li>
-	</ul>
+			<ul>
+				<li>@equipo</li>
+			</ul>
+	
+	 </body>
+</html>
