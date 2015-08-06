@@ -59,8 +59,11 @@ anteriores, dejarán de ser distribuidas y mantenidas. En &hellip;">
 </form>
   
 <ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
+  <li><a href="/">Home</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/title/sugerencias.html" target="_blank">Enlaces</a></li>
+	<li><a href="/title/about.html" target="_self">About</a></li>
+	<li><a href=""></a>About</li>
 </ul>
 
 </nav>
@@ -76,7 +79,11 @@ anteriores, dejarán de ser distribuidas y mantenidas. En &hellip;">
     
       <h1 class="entry-title"><a href="/title">Octopres</a></h1>
     
+
+    	<h2>Esto es una prueba???</h2>
+
     
+
       <p class="meta">
         
 

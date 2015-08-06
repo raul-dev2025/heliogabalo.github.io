@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>CajónDeSastre</title>
+  <title>Octopres - CajónDeSastre</title>
   <meta name="author" content="Heliogábalo Santos">
 
   
@@ -19,7 +19,7 @@ anteriores, dejarán de ser distribuidas y mantenidas. En &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://heliogabalo.github.io/">
+  <link rel="canonical" href="http://heliogabalo.github.io/title">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="CajónDeSastre" type="application/atom+xml">
@@ -59,30 +59,21 @@ anteriores, dejarán de ser distribuidas y mantenidas. En &hellip;">
 </form>
   
 <ul class="main-navigation">
-  <li><a href="/">Home</a></li>
+  <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
-	<li><a href="/title/sugerencias.html" target="_blank">Enlaces</a></li>
-	<li><a href="/title/about.html" target="_self">About</a></li>
 </ul>
 
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/title">Octopres</a></h1>
+      <h1 class="entry-title">Octopres</h1>
     
-
-    	<h2>Esto es una prueba???</h2>
-
     
-
       <p class="meta">
         
 
@@ -96,7 +87,7 @@ anteriores, dejarán de ser distribuidas y mantenidas. En &hellip;">
   </header>
 
 
-  <div class="entry-content"><p><a href="http://octopress.org/">Octopress 3.0</a></p>
+<div class="entry-content"><p><a href="http://octopress.org/">Octopress 3.0</a></p>
 
 <p><em>Octopress 3.0</em> está a punto de ser lanzado. Esto quiere decir que versiones
 anteriores, dejarán de ser distribuidas y mantenidas. En muchos aspectos, el
@@ -121,18 +112,44 @@ Produciéndose un efecto espeluznante, en la experiencia de usuario.</p>
 </span></code></pre></td></tr></table></div></figure>
 
 </div>
-  
-  
 
 
-    </article>
+  <footer>
+    <p class="meta">
+      
   
-  <div class="pagination">
+
+<span class="byline author vcard">Posted by <span class="fn">Heliogábalo Santos</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-03-27T22:13:37+01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:13 pm</span></time>
+      
+
+
+    </p>
     
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://heliogabalo.github.io/title" data-via="https://twitter.com/heliogabalo2" data-counturl="http://heliogabalo.github.io/title" >Tweet</a>
+  
+  
+  
 </div>
+
+    
+    <p class="meta">
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -161,6 +178,7 @@ Produciéndose un efecto espeluznante, en la experiencia de usuario.</p>
 
   
 </aside>
+
 
     </div>
   </div>
