@@ -108,7 +108,7 @@ ol {
 .bands-list li {
   border: 1px solid #555555;
   background-color: #ffffff;
-	height: 120px;
+	height: 240px;
 }
 .bands-list img {
   float: left;
@@ -128,4 +128,28 @@ ol {
 .recording-now p {
   color: #ffff00;
   font-size: 20px;
+}
+extarea {
+  display: block;
+  margin-bottom: 15px;
+  width: 445px;
+  font-size: 20px;
+}
+label {
+  display: block;
+  font-weight: bold;
+}
+input {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+input[type=text] {
+    width: 445px;
+}
+input[type=submit] {
+  width: 165px;
+}
+label[for=on-tour], input[type=checkbox] {
+  display: inline;
 }
