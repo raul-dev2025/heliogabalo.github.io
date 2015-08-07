@@ -6,7 +6,7 @@ html, body, h1, h2, h3, h4, ul, ol, li, p, a {
 h1 {
   color: #000000;
   margin: 15px 0 15px;
-	text-align: center;
+  text-align: center;
 }
 h2 {
   color: #333333;
@@ -33,7 +33,7 @@ li {
 }
 body {
   padding: 0;
-	background: #555555 url(/images/tile.png) top left repeat;	
+  background: #555555 url(/images/tile.png) top left repeat;	
 }
 ol {
   padding: 0 0 0 20px;
@@ -62,27 +62,27 @@ ol {
 }
 .header {
   padding: 15px;
-	background: #242424 url(/images/glow.png) top center repeat;
+  background: #242424 url(/images/glow.png) top center repeat;
 }
 .content-section {
   padding: 15px;
   width: 450px;
-	margin: 0 auto;
-	background: #dddddd url(/images/code_bg.png) top left repeat;
-}
+  margin: 0 auto;
+  background: #dddddd url(/images/code_bg.png) top left repeat;
+} 
 .album {
   border: 2px dashed #bbbbbb;
   padding: 5px 10px 5px 10px;
   margin-bottom: 5px;
-	background-color: #ffffff;
+  background-color: #ffffff;
 }
 .bands-list {
   list-style-type: none;
   padding-left: 0;
 }
 .bands-list h2 {
-  border-bottom: 0px;
-  margin: 0px;
+  border-bottom: 0;
+  margin: 0;
 }
 .bands-list a {
   text-decoration: none;
@@ -90,10 +90,10 @@ ol {
 }
 .bands-list li {
   border: 1px solid #555555;
-	background-color: #ffffff;
+  background-color: #ffffff;
 }
 .header img {
-	height: 80px;
+  height: 80px;
   margin: 0 auto 15px auto;
   display: block;
 }
