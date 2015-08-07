@@ -33,7 +33,7 @@ li {
 }
 body {
   padding: 0;
-	background: #555555 url(images/bg-tile.jpg) top left repeat;
+	background: #555555 url(images/tile.png) top left repeat;
 }
 ol {
   padding: 0 0 0 20px;
