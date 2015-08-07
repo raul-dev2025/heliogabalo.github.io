@@ -62,7 +62,7 @@ ol {
 }
 .header {
   padding: 15px;
-	background: #242424 url(/images/code_bg.png) top center no-repeat;
+	background: #242424 url(/images/tile.png) top center repeat;
 }
 .content-section {
   padding: 15px;
@@ -93,6 +93,7 @@ ol {
 	background-color: #ffffff;
 }
 .header img {
+	height: 120px;
   margin: 0 auto 15px auto;
   display: block;
 }
