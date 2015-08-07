@@ -34,7 +34,7 @@ li {
 body {
   padding: 0;
 	background_color: #555555;
-	background-image: url(images/tile.png) top left repeat;
+	background-image: url(/images/tile.png) top left repeat;
 }
 ol {
   padding: 0 0 0 20px;
@@ -63,13 +63,13 @@ ol {
 }
 .header {
   padding: 15px;
-	background: #242424 url(images/code_bg.png) top center no-repeat;
+	background: #242424 url(/images/code_bg.png) top center no-repeat;
 }
 .content-section {
   padding: 15px;
   width: 450px;
 	margin: 0 auto;
-	background: #dddddd url(images/code_bg.png) top left repeat;
+	background: #dddddd url(/images/code_bg.png) top left repeat;
 }
 .album {
   border: 2px dashed #bbbbbb;
