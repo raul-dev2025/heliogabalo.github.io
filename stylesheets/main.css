@@ -92,8 +92,7 @@ ol {
   border: 1px solid #555555;
   background-color: #ffffff;
 }
-.header img {
-  height: 80px;
+.header img {  
   margin: 0 auto 15px auto;
   display: block;
 }
