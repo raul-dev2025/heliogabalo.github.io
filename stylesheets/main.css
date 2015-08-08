@@ -96,9 +96,9 @@ ol {
 .album-nest {
 	padding: 15px 15px 15px 15px;		
 }
-.album-nest2 img {
-	position: relative;
+.album-nest2 img {	
 	padding: 15px 15px 15px 15px;
+	z-index: 1;
 }
 .bands-list {
   list-style-type: none;
