@@ -90,19 +90,21 @@ ol {
   margin-bottom: 5px;
   background-color: #ffffff;
 }
-.album img {
-	width: 70px;
-	height: 70px;
+.album img {	
   float: right;	
 }
-/*
+
 .album-nest {
+	width: 120px;
+	height: 120px;
 	padding: 15px 15px 15px 15px;		
 }
-.album-nest2 img {	
+.album-nest2 img {
+	width: 120px;
+	height: 206px;
 	padding: 15px 15px 15px 15px;	
 }
-*/
+
 .bands-list {
   list-style-type: none;
   padding-left: 0;
