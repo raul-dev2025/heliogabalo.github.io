@@ -105,7 +105,6 @@ ol {
   margin: 0;
 	text-align: center;
 	margin-top: 100px;
-	margin-bottom: 100px;
 }
 .bands-list a {
   text-decoration: none;
@@ -114,7 +113,7 @@ ol {
 .bands-list li {
   border: 1px solid #555555;
   background-color: #ffffff;
-	height: auto;
+	height: 250px;
 }
 .bands-list img {
   float: left;
@@ -174,5 +173,7 @@ label[for=on-tour], input[type=checkbox] {
   .bands-list img {
 		float: none;
 	}
-  
+	.bands-list li{		
+	}
+.bands-list h2 {}  
 }  
