@@ -173,7 +173,15 @@ label[for=on-tour], input[type=checkbox] {
   .bands-list img {
 		float: none;
 	}
-	.bands-list li{		
+	.bands-list li {
+  border: 1px solid #555555;
+  background-color: #ffffff;
+	height: 250px;
+}
+	.bands-list h2 {
+  border-bottom: 0;
+  margin: 0;
+	text-align: center;
+	margin-top: 100px;
 	}
-.bands-list h2 {}  
 }  
