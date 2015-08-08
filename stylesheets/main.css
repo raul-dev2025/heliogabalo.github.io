@@ -104,7 +104,7 @@ ol {
   border-bottom: 0;
   margin: 0;
 	text-align: center;
-	margin-top: 50px;
+	margin-top: 100px;
 }
 .bands-list a {
   text-decoration: none;
@@ -113,7 +113,7 @@ ol {
 .bands-list li {
   border: 1px solid #555555;
   background-color: #ffffff;
-	height: 250px;
+	height: auto;
 }
 .bands-list img {
   float: left;

@@ -4,4 +4,5 @@ require 'rubygems'
 require 'bundler/setup'
 require 'execjs'
 
+gem 'serve'
 gem "octopress", '~> 3.0'
