@@ -108,7 +108,7 @@ ol {
 .bands-list li {
   border: 1px solid #555555;
   background-color: #ffffff;
-	height: 240px;
+	height: 250px;
 }
 .bands-list img {
   float: left;
@@ -129,7 +129,7 @@ ol {
   color: #ffff00;
   font-size: 20px;
 }
-extarea {
+textarea {
   display: block;
   margin-bottom: 15px;
   width: 445px;
