@@ -1,5 +1,4 @@
-@media screen and (max-width: 320px){}
-	html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
   padding: 0;
   border: 0;
   margin: 0;
@@ -156,4 +155,16 @@ input[type=submit] {
 }
 label[for=on-tour], input[type=checkbox] {
   display: inline;
+}
+ /* -------------------Media Queries-------------------- */
+ 
+ @media screen and (max-width: 320px) {
+  .content-section {
+		width: inherit;
+    float: none;
+  }
+  .nav {
+		width: inherit;
+    float: none;
+  }
 }
