@@ -94,7 +94,7 @@ ol {
   float: right;
 }
 .album-nest {
-	padding: 15% 15px 15% 15px;		
+	padding: 15px 15px 15px 15px;		
 }
 .bands-list {
   list-style-type: none;
@@ -115,7 +115,7 @@ ol {
 }
 .bands-list img {
   float: left;
-  padding: 15% 15px 15% 15px;
+  padding: 15px 15px 15px 15px;
 }
 .header img {  
   margin: 0 auto 15px auto;
