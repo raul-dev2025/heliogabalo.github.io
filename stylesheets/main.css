@@ -91,10 +91,9 @@ ol {
   background-color: #ffffff;
 }
 .album img {
-  float: right;
-	padding: 15px 15px 15px 15px;
-	height: auto;
-	width: auto;
+	width: 70px;
+	height: 70px;
+  float: right;	
 }
 /*
 .album-nest {
