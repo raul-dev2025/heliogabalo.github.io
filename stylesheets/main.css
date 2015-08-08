@@ -80,7 +80,7 @@ ol {
 }
 .content-section {
   padding: 15px;
-  width: 450px;
+  width: 960px;
   margin: 0 auto;
   background: #dddddd url(/images/code_bg.png) top left repeat;
 } 
@@ -96,14 +96,6 @@ ol {
 .album img {	
   float: right;	
 }
-/*
-.album-nest img {
-	padding: 15px 15px 15px 15px;		
-}
-.album-nest2 img {
-	padding: 15px 15px 15px 15px;	
-}
-*/
 .bands-list {
   list-style-type: none;
   padding-left: 0;
