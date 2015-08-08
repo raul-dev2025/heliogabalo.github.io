@@ -1,4 +1,4 @@
-@media screen and (max-width: 320px){
+@media screen and (max-width: 320px){}
 	html, body, h1, h2, h3, h4, ul, ol, li, p, a {
   padding: 0;
   border: 0;
@@ -156,5 +156,4 @@ input[type=submit] {
 }
 label[for=on-tour], input[type=checkbox] {
   display: inline;
-}
 }
