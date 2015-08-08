@@ -93,6 +93,8 @@ ol {
 .album img {
   float: right;
 	padding: 15px 15px 15px 15px;
+	height: auto;
+	width: auto;
 }
 /*
 .album-nest {
