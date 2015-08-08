@@ -160,11 +160,16 @@ label[for=on-tour], input[type=checkbox] {
  
  @media screen and (max-width: 320px) {
   .content-section {
-		width: inherit;
-    float: none;
+		width: inherit;    
   }
   .nav {
-		width: inherit;
-    float: none;
+		width: inherit;    
   }
-}
+  .bands-list img {
+		float: none;
+  }
+  .bands-list img {
+		float: none;
+	}
+  
+}  
