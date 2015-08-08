@@ -85,7 +85,10 @@ ol {
   background: #dddddd url(/images/code_bg.png) top left repeat;
 } 
 .album {
-  border: 2px dashed #bbbbbb;
+  position: relative;
+	height: auto;
+	overflow: hidden;
+	border: 2px dashed #bbbbbb;
   padding: 5px 10px 5px 10px;
   margin-bottom: 5px;
   background-color: #ffffff;
@@ -93,18 +96,14 @@ ol {
 .album img {	
   float: right;	
 }
-
-.album-nest {
-	width: 120px;
-	height: 120px;
+/*
+.album-nest img {
 	padding: 15px 15px 15px 15px;		
 }
 .album-nest2 img {
-	width: 120px;
-	height: 206px;
 	padding: 15px 15px 15px 15px;	
 }
-
+*/
 .bands-list {
   list-style-type: none;
   padding-left: 0;
