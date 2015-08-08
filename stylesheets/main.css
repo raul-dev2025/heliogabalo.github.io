@@ -103,6 +103,7 @@ ol {
 .bands-list h2 {
   border-bottom: 0;
   margin: 0;
+	text-align: center;
 }
 .bands-list a {
   text-decoration: none;
@@ -160,7 +161,7 @@ label[for=on-tour], input[type=checkbox] {
  
  @media screen and (max-width: 320px) {
   .content-section {
-		width: inherit;    
+		width: inherit;
   }
   .nav {
 		width: inherit;    
