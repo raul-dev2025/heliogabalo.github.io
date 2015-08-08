@@ -80,7 +80,7 @@ ol {
 }
 .content-section {
   padding: 15px;
-  width: 960px;
+  width: 750%;
   margin: 0 auto;
   background: #dddddd url(/images/code_bg.png) top left repeat;
 } 
