@@ -97,7 +97,8 @@ ol {
 	padding: 15px 15px 15px 15px;		
 }
 .album-nest2 img {
-	padding: 15px 15px 15px 15px !important;
+	position: fixed;
+	padding: 15px 15px 15px 15px;
 }
 .bands-list {
   list-style-type: none;
