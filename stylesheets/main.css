@@ -7,26 +7,26 @@ html, body, h1, h2, h3, h4, ul, ol, li, p, a {
 }
 h1 {
   color: #000000;
-  margin: 15px 0 15px;
+  margin: 1.5em 0 1.5em;
   text-align: center;
 	font-family: Verdana, sans-serif;
-	font-size: 32px;
+	font-size: 3.2em;
   font-weight: bold;
 }
 h2 {
   color: #333333;
-  margin: 20px 0 5px 0;
-  border-bottom: 1px solid #aaaaaa;
-  padding: 2px;
+  margin: 2.0em 0 0.5em 0;
+  border-bottom: 0.1em solid #aaaaaa;
+  padding: 0.2em;
 	font-family: Verdana, sans-serif;
-	font-size: 25px;
+	font-size: 2.5em; /* 25/10*/  
   font-weight: bold;
 }
 h3 {
   color: #666666;
-  margin: 10px 0 10px 0;
+  margin: 1em 0 1em 0;
 	font-family: Verdana, sans-serif;
-	font-size: 20px;
+	font-size: 2em; /* 20/10 */
 }
 p {
   color: #444444;
@@ -161,21 +161,7 @@ label[for=on-tour], input[type=checkbox] {
  /* -------------------Media Queries-------------------- */
  
  @media screen and (max-width: 320px) {
-	 h1 {  
-    margin: 1.5em 0 1.5em;	
-	  font-size: 3.2em; /*32/10*/ 
-}
-   h2 {  
-    margin: 2.0em 0 0.5em 0;
-    border-bottom: 0.1em solid #aaaaaa;
-    padding: 0.2em;	
-	  font-size: 2.5em; /* 25/10*/
-  
-}
-   h3 {    
-    margin: 1em 0 1em 0;	  
-	  font-size: 2em; /* 20/10 */
-}
+
 	 p {  
     margin: 0 0 0.5em 0;
 	  line-height: 1.2em;
