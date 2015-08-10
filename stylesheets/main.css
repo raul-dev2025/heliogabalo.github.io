@@ -120,7 +120,7 @@ ol {
   float: left;
   padding: 15px 15px 15px 15px;
 }
-.band-list:hover { /* añadido estado hover*/
+.band-list img:hover { /* añadido estado hover no funciona*/
   background-color: rgba(196, 71, 67, 0.10);
   color: #d56d68;
 }
