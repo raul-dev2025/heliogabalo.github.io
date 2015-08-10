@@ -7,26 +7,26 @@ html, body, h1, h2, h3, h4, ul, ol, li, p, a {
 }
 h1 {
   color: #000000;
-  margin: 1.5em 0 1.5em;
+  margin: 15px 0 15px;
   text-align: center;
 	font-family: Verdana, sans-serif;
-	font-size: 3.2em;
+	font-size: 32px;
   font-weight: bold;
 }
 h2 {
   color: #333333;
-  margin: 2.0em 0 0.5em 0;
-  border-bottom: 0.1em solid #aaaaaa;
-  padding: 0.2em;
+  margin: 20px 0 10px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
 	font-family: Verdana, sans-serif;
-	font-size: 2.5em; /* 25/10*/  
+	font-size: 25px; /* 25/10*/  
   font-weight: bold;
 }
 h3 {
   color: #666666;
-  margin: 1em 0 1em 0;
+  margin: 10px 0 10px 0;
 	font-family: Verdana, sans-serif;
-	font-size: 2em; /* 20/10 */
+	font-size: 20px; /* 20/10 */
 }
 p {
   color: #444444;
@@ -45,7 +45,7 @@ li {
 }
 body {
   padding: 0;
-  background: #555555 url(/images/tile.png) top left repeat;	
+  background: #555555 url(/images/tile-black-thread.png) top left repeat;	
 	font-family: Garamond, serif;
 	font-size: 16px;
 }
@@ -112,12 +112,17 @@ ol {
 }
 .bands-list li {
   border: 1px solid #555555;
+	box-shadow: 0 1px 1px #000; /*añadido box-shadow*/
   background-color: #ffffff;
 	height: 250px;
 }
 .bands-list img {
   float: left;
   padding: 15px 15px 15px 15px;
+}
+.band-list:hover { /* añadido estado hover*/
+  background-color: rgba(196, 71, 67, 0.10);
+  color: #d56d68;
 }
 .header img {  
   margin: 0 auto 15px auto;
