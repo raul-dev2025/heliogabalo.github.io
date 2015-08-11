@@ -1,3 +1,6 @@
+body { /* aleja al menu statico */
+	padding-top: 70px;	
+}
 .footer {
 	background-color: #303030;
 	color: white;
