@@ -22,7 +22,21 @@
         <div class='col-md-6'>
           <h2>The Fastest Way to Space</h2>
           <p class='lead'>Make your way to space in the comfort of your own rocket, elevator or transporter.</p>
-          <button type='button' class='btn btn-lg btn-default'>Take the Tour</button>
+
+          <div class='btn-group'>
+            <button data-toggle='dropdown' type='button' 
+               class='btn btn-default btn-lg dropdown-toggle'>
+              Take the Tour<span class='caret'></span>
+            </button>
+            <ul class='dropdown-menu'>
+              <li><a href='#'>Transporter</a></li>
+              <li><a href='#'>Orbital Elevator</a></li>
+              <li><a href='#'>RocketBus</a></li>
+              <li class='divider'></li>
+              <li><a href='#'>Learn More</a></li>
+            </ul>
+          </div>
+
           <button type='button' class='btn btn-lg btn-primary'>Book Tickets Now</button>
         </div>
         <div class='col-md-6 visible-md visible-lg'>
@@ -64,6 +78,7 @@
           <p>Learn more about our transport systems to find out which one is right for you. Pick out the mode of transport that works for your budget and risk level.</p>
         </div>
       </div>
+
       <div class='row text-center'>
         <div class='transporter col-md-3 col-md-offset-1 well well-sm'>
           <h3>Transporter</h3>
@@ -125,21 +140,16 @@
             </div>
           </div>
         </div>
+
         <div class='col-md-3 col-md-offset-1'>
           <div class='panel-group'>
             <div class='panel panel-success'>
               <div class='panel-heading'>
                 <h4 class='panel-title'>
-                  
-               <!--     <a role="button" data-toggle="collapse" data-parent=".panel-group" 
-                     href="#systemsOperational" aria-expanded="true" 
-                     aria-controls="systemsOperational">All Systems Operational</a>-->
-                 
-                <a data-toggle='collapse' data-parent=".panel-group" 
-                     href='#systemsOperational'>All Systems Operational</a> 
+                  <a data-toggle='collapse' data-parent='.panel-group' href='#systemsOperational'>All Systems Operational</a>
                 </h4>
               </div>
-              <div id='systemsOperational' class='panel-collapse collapse in'>                
+              <div id='systemsOperational' class='panel-collapse collapse in'>
                 <div class='panel-body'>
                   <p>All systems are operational</p>
                   <ul class='list-unstyled'>
@@ -154,8 +164,7 @@
             <div class='panel panel-warning'>
               <div class='panel-heading'>
                 <h4 class='panel-title'>
-                  <a data-toggle='collapse' data-parent=".panel-group" 
-                     href='#weatherAlert'>Weather Alert</a>
+                  <a data-toggle='collapse' data-parent='.panel-group' href='#weatherAlert'>Weather Alert</a>
                 </h4>
               </div>
               <div id='weatherAlert' class='panel-collapse collapse'>
@@ -173,8 +182,7 @@
             <div class='panel panel-danger'>
               <div class='panel-heading'>
                 <h4 class='panel-title'>
-                  <a data-toggle='collapse' data-parent=".panel-group" 
-                     href='#transportationWarning'>Transportation Generals Warning: Transporters</a>
+                  <a data-toggle='collapse' data-parent='.panel-group' href='#transportationWarning'>Transportation Generals Warning: Transporters</a>
                 </h4>
               </div>
               <div id='transportationWarning' class='panel-collapse collapse'>
