@@ -6,13 +6,18 @@
     <link href='css/main.css' rel='stylesheet'>
   </head>
   <body>
-    <div class='container'>
-      <div class='row'>
-        <div class='col-md-12'>
-          <h1>Blasting Off With Bootstrap</h1>
-        </div>
+  <div class='navbar navbar-default navbar-static-top'>
+    <div class='container'>    
+      <a href='index.html' class='navbar-brand'>Blasting Off with Bootstrap</a>
+          <ul class='nav navbar-nav navbar-right'>
+            <li><a href='tickets.html'>Tickets</a></li>
+            <li><a href='stations.html'>Stations</a></li>
+            <li><a href='about.html'>About</a></li>
+          </ul>        
       </div>
+    </div>
 
+    <div class='container'>
       <div class='row well well-lg'>
         <div class='col-md-6'>
           <h2>The Fastest Way to Space</h2>
@@ -53,7 +58,6 @@
         </blockquote>
       </div>
     </div>
-
     <div class='container transport-systems'>
       <div class='row'>
         <div class='col-md-10 col-md-offset-1'>
@@ -62,37 +66,36 @@
         </div>
       </div>
 
-      <div class='row text-center features'>
-        <div class='transporter col-sm-4 col-xs-10 col-xs-offset-1 col-sm-offset-0 well'>
+      <div class='row text-center'>
+        <div class='transporter col-md-3 col-md-offset-1 well well-sm'>
           <h3>Transporter</h3>
-          <ul class="list-unstyled">
+          <ul class='list-unstyled'>
             <li>8 second travel time</li>
             <li>Chance of death only 1 in 7,593</li>
             <li>Low price of only $15.99!</li>
           </ul>
-          <p><button class="btn btn-info"><i class='glyphicon glyphicon-transfer'></i> Beam Me Up!</button></p>
+          <p><button class='btn btn-info'><i class='glyphicon glyphicon-transfer'></i> Beam Me Up!</button></p>
         </div>
-        <div class='space-elevator col-sm-4 col-xs-6 well'>
+        <div class='space-elevator col-md-3 col-md-offset-1 well well-sm'>
           <h3>Space Elevator</h3>
-          <ul class="list-unstyled">
+          <ul class='list-unstyled'>
             <li>8 hour scenic ride</li>
             <li>Only 1 horrific death per 12,456</li>
             <li>Only $45.99 if you book today!</li>
           </ul>
-          <p><button class="btn btn-info"><i class='glyphicon glyphicon-sort'></i> Board the Elevator!</button></p>
+          <p><button class='btn btn-info'><i class='glyphicon glyphicon-sort'></i> Board the Elevator!</button></p>
         </div>
-        <div class='rocketbus col-sm-4 col-xs-6 well'>
+        <div class='rocketbus col-md-3 col-md-offset-1 well well-sm'>
           <h3>RocketBus</h3>
-          <ul class="list-unstyled">
+          <ul class='list-unstyled'>
             <li>8 minute scenic ride</li>
             <li>Plunging death rate of under 1/100k</li>
             <li>$74.99 lets you blast off today!</li>
           </ul>
-          <p><button class="btn btn-info"><i class='glyphicon glyphicon-plane'></i> Blast Off!</button></p>
+          <p><button class='btn btn-info'><i class='glyphicon glyphicon-plane'></i> Blast Off!</button></p>
         </div>
       </div>
     </div>
-
     <div class='footer'>
       <div class='container'>
         <div class='row'>
@@ -105,7 +108,7 @@
           <div class='col-md-offset-1 col-sm-2 col-xs-6'>
             <h4>Links</h4>
             <ul class='list-unstyled'>
-              <li><a href='/'>Home</a></li>
+              <li><a href='index.html'>Home</a></li>
               <li><a href='tickets.html'>Tickets</a></li>
               <li><a href='stations.html'>Stations</a></li>
             </ul>
