@@ -64,7 +64,6 @@
           <p>Learn more about our transport systems to find out which one is right for you. Pick out the mode of transport that works for your budget and risk level.</p>
         </div>
       </div>
-
       <div class='row text-center'>
         <div class='transporter col-md-3 col-md-offset-1 well well-sm'>
           <h3>Transporter</h3>
@@ -131,10 +130,16 @@
             <div class='panel panel-success'>
               <div class='panel-heading'>
                 <h4 class='panel-title'>
-                  <a data-target='#systemsOperational' data-toggle="collapse" href='#systemsOperational'>All Systems Operational</a>
+                  
+               <!--     <a role="button" data-toggle="collapse" data-parent=".panel-group" 
+                     href="#systemsOperational" aria-expanded="true" 
+                     aria-controls="systemsOperational">All Systems Operational</a>-->
+                 
+                <a data-toggle='collapse' data-parent=".panel-group" 
+                     href='#systemsOperational'>All Systems Operational</a> 
                 </h4>
               </div>
-              <div id='systemsOperational' class='panel-collapse collapse collapse in'>
+              <div id='systemsOperational' class='panel-collapse collapse in'>                
                 <div class='panel-body'>
                   <p>All systems are operational</p>
                   <ul class='list-unstyled'>
@@ -148,9 +153,10 @@
 
             <div class='panel panel-warning'>
               <div class='panel-heading'>
-                 <h4 class='panel-title'>
-                   <a data-target='#weatherAlert' data-toggle="collapse" href='#weatherAlert'>Weather Alert</a>
-                 </h4>
+                <h4 class='panel-title'>
+                  <a data-toggle='collapse' data-parent=".panel-group" 
+                     href='#weatherAlert'>Weather Alert</a>
+                </h4>
               </div>
               <div id='weatherAlert' class='panel-collapse collapse'>
                 <div class='panel-body'>
@@ -167,7 +173,8 @@
             <div class='panel panel-danger'>
               <div class='panel-heading'>
                 <h4 class='panel-title'>
-                  <a data-target='#transportationWarning' data-toggle="collapse" href='#transportationWarning'>Transportation Generals Warning: Transporters</a>
+                  <a data-toggle='collapse' data-parent=".panel-group" 
+                     href='#transportationWarning'>Transportation Generals Warning: Transporters</a>
                 </h4>
               </div>
               <div id='transportationWarning' class='panel-collapse collapse'>
