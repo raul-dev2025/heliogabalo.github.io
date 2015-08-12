@@ -8,21 +8,15 @@
   </head>
 
   <body class ="container" ng-controller="StoreController as store">
- 		  
- 		  	<div class='row well well-lg'>
-						<div class='col-md-10'>
-							<div ng-show="!store.product.soldOut"
-									 class="product row"
-									 ng-repeat="product in store.products">
-									<h3>
-									{{store.product.name}}
-										<em class="pull-right">${{store.product.price}}</em>
-									</h3>
-									<button ng-show="store.product.canPurchase">
-									Add to Cart</button>
-							</div>
-						</div>
-					</div>
-			
-  </body>
+ 		  <div class='col-md-10' ng-show="!store.product.soldOut"
+					 class="product row"
+					 ng-repeat="product in store.products">
+				<h3>
+					{{store.product.name}}
+					<em class="pull-right">${{store.product.price}}</em>
+				</h3>
+					<button ng-show="store.product.canPurchase">
+					Add to Cart</button>
+			</div>
+	 </body>
 </html>
