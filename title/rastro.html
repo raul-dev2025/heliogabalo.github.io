@@ -8,7 +8,7 @@
   </head>
 
   <body class ="container" ng-controller="StoreController as store">
- 		  <div ng-show="!store.product.soldOut"
+ 		  <div class='col-md-10' ng-show="store.product.soldOut"
 					 class="product row" ng-repeat="product in store.products">
 				<h3>
 					{{store.product.name}}
