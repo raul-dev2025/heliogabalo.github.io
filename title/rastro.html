@@ -9,10 +9,10 @@
 
   <body ng-controller="StoreController as store">
  		  <div class ="container">
- 		  	<div class='row well well-lg'>
+ 		  	
 						<div class='col-md-10'>
 							<div ng-show="!store.product.soldOut"
-							
+									 class="product row"
 									 ng-repeat="product in store.products">
 									<h3>
 									{{store.product.name}}
@@ -21,7 +21,7 @@
 									<button ng-show="store.product.canPurchase">
 									Add to Cart</button>
 							</div>
-						</div>
+						
 					</div>
 			</div>
   </body>
