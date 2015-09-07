@@ -1,13 +1,20 @@
 (function() {
-  var app = angular.module('gemStore', []);
+  var app = angular.module('gemStore', ['store-directives']);
 
-  app.controller('StoreController', function(){
-    this.products = gems;
+   app.controller('StoreController', ['$http', function($http) {
+    var store = this;
+    store.products = [];
+    $http.get('../Angular/store-products.json').success(function(data){
+      store.products = data;
+    });
+  }]);
+  app.controller('ReviewController', function() {
+    this.review = {};
+
+    this.addReview = function(product) {
+      product.reviews.push(this.review);
+
+      this.review = {};
+    };
   });
-
-  var gems = [
-    { name: 'Azurite', price: 2.95 },
-    { name: 'Bloodstone', price: 5.95 },
-    { name: 'Zircon', price: 3.95 }
-  ];
 })();

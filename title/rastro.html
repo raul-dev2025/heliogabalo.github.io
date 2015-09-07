@@ -3,16 +3,32 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../Angular/main.css" />
-    <script type="text/javascript" src="../Angular/angular.min.js"></script>
+    <script type="text/javascript" src="../Angular/angular.min.js"></script>        
     <script type="text/javascript" src="../Angular/app.js"></script>
+    <script type="text/javascript" src="../Angular/products.js"></script>
   </head>
 
-  <body class="container" ng-controller="StoreController as store">
-    <div class="product row"
-         ng-repeat="product in store.products">
-      <h3>
-        {{product.name}}
-        <em class="pull-right">${{product.price}}</em>
-      </h3>
+	<body ng-controller="StoreController as store">
+    <!--  Store Header  -->
+    <header>
+      <h1 class="text-center">Flatlander Crafted Gems</h1>
+      <h2 class="text-center">- an Angular store -</h2>
+    </header>
+
+    <!--  Products Container  -->
+    <div class="list-group">
+      <!--  Product Container  -->
+      <div class="list-group-item" ng-repeat="product in store.products">
+        <h3>{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h3>
+
+        <!-- Image Gallery  -->
+        <product-gallery></product-gallery>
+
+        <!-- Product Tabs  -->
+       <product-tabs></product-tabs>
+
+      </div>
+
     </div>
   </body>
+</html>
