@@ -27,6 +27,7 @@ header{
 body{
   max-width: 500px;
   margin: 0 auto;
+  padding-top: 5px;
 }
 
 a {
