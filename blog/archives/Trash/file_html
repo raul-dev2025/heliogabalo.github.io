@@ -1,0 +1,19 @@
+
+
+<ol>
+<li>El disco duro</li>
+<li>El Mbr</li>
+<li>Tabla de particiones</li>
+<li>Espacio vacío</li>
+<li>Particionado de disco</li>
+<li>Formateo de disco</li>
+<li>EXPERIMENTAL
+<ul>
+<li>Técnicas de particionado y formateo
+<ul>
+<li>Sobre la superficie física de disco</li>
+<li>Sobre una imagen creada como archivo</li>
+</ul></li>
+</ul></li>
+<li>Agradecimientos</li>
+</ol>
