@@ -8,3 +8,6 @@ body { /* aleja al menu statico */
 .features .glyphicon {
 	font-size: 32px;	
 }
+div.txt-files{
+  margin: auto;
+}
