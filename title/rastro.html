@@ -11,15 +11,17 @@
 	<body ng-controller="StoreController as store">
     <!--  Store Header  -->
     <header>
-      <h1 class="text-center">Flatlander Crafted Gems</h1>
-      <h2 class="text-center">- an Angular store -</h2>
+      <h1 class="text-center">El Zoco</h1>
+      <h3 class="text-center">- Comparativas - Ofertas - Oportunidades -</h3>
+      <li ng-style="{'background-image':'url(/static/'+imgURL+')'}">...</li>
     </header>
 
     <!--  Products Container  -->
-    <div class="list-group">
-      <!--  Product Container  -->
-      <div class="list-group-item" ng-repeat="product in store.products">
-        <h3>{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h3>
+      <div class="list-group">
+
+        <!--  Product Container  -->
+        <div class="list-group-item" ng-repeat="product in store.products">
+           <h3>{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h3>
 
         <!-- Image Gallery  -->
         <product-gallery></product-gallery>
@@ -28,7 +30,6 @@
        <product-tabs></product-tabs>
 
       </div>
-
     </div>
   </body>
 </html>
