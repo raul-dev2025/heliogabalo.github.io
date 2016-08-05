@@ -22,15 +22,10 @@ header{
   background-image: url("../images/medusa.jpg");
   background-color: #cccccc;
 }
-
-header{
-  background-color: yellow;
-  width: 100px;
-  padding: 10%;
-}
 body{
   max-width: 500px;
   margin: 0 auto;
+  padding: 10px;
 }
 
 a {
