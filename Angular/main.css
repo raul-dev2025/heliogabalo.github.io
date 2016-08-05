@@ -17,6 +17,8 @@
 header{
   background-image: url("../images/medusa.jpg");
   background-color: #cccccc;
+  color: blue;
+  background: transparent;
 }
 
 
