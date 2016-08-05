@@ -14,7 +14,12 @@
   border-color: green;
 }
 /*pull-left*/
-*/
+head{
+  background-image: url("../images/medusa.jpg");
+  background-color: #cccccc;
+}
+
+
 body{
   max-width: 500px;
   margin: 0 auto;
