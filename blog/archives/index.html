@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 
-<html>
+<html ng-app="gemStore">
   <head>
     <title>Territorio Linux</title>
     <link href='css/bootstrap.min.css' rel='stylesheet'>
-    <link href='css/main.css' rel='stylesheet'> 
     <link rel="stylesheet" type="text/css" href="../Angular/main.css" />
     <script type="text/javascript" src="../Angular/angular.min.js"></script>
     <script type="text/javascript" src="../Angular/app.js"></script>
     <script type="text/javascript" src="../Angular/products.js"></script>
+    <!--    <link href='css/main.css' rel='stylesheet'> -->
   </head>
-  <body>
-        <!-- Barra de navegación - static lo libera-->
+
+  <body ng-controller="StoreController as store">
+                  <!-- static lo libera-->
     <div class='navbar navbar-default navbar-fixed-top'>
       <div class='container'>
         <div class='navbar-header'>
           <a href='/' class='navbar-brand'>Territorio Linux</a>
             <button type='button' class='navbar-toggle'
-                                                        data-toggle='collapse'
-                                                        data-target='.navbar-collapse'>
+                    data-toggle='collapse'
+                    data-target='.navbar-collapse'>
                <span class='sr-only'>Toggle navigation</span>
                <span class='icon-bar'></span>
                <span class='icon-bar'></span>
@@ -28,7 +29,7 @@
 
         <ul class='nav navbar-nav navbar-right collapse navbar-collapse'>
           <li><a href='tickets.html'>Tickets</a></li>
-          <li><a href='stations.html'>Stations</a></li>
+          <li><a href='../stations.html'>Stations</a></li>
           <li>
             <a href='About.html' data-target='#' data-toggle='dropdown'>
                         About <span class='caret'></span></a>
@@ -45,20 +46,14 @@
         </ul>
       </div>
     </div>
+    <!--  Store Header  -->
 
-        <!-- Cabecera -->
-      <header>
-        <div>
-          <h1 class='text-center'>Índice del Archivo</h1>      
-        </div>
-      </header>
-
-      <md-content layout-padding>
-        Esto _es_ __una__ `prueba` de escrito 
-      </md-content>
-  </body>
-</html>
-  
+    <header>
+      <div class=head-div>
+        <h1 class="text-center">Índice del Archivo</h1>
+        <md-content layout-padding> prueba _con_ __md__ `algo`</md-content>
+      </div>
+    </header>  
 
 
 
