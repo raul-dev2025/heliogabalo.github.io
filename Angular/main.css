@@ -18,16 +18,17 @@ header{
   color: white;
   background: transparent;
   border: 1px solid darkblue;
-  border-radius: 2px;
+  border-radius: 3px;
   background-image: url("../images/medusa.jpg");
   background-color: #cccccc;
 }
 
-
+header.div.absolute{
+  padding-top: 5px;
+}
 body{
   max-width: 500px;
   margin: 0 auto;
-  padding-top: 5px;
 }
 
 a {
