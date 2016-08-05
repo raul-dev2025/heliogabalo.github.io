@@ -54,7 +54,22 @@
         <md-content layout-padding> prueba _con_ __md__ `algo`</md-content>
       </div>
     </header>  
+  </body>
+</html>
 
+
+
+<!--Script de bootstrap -->
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+<script src='js/bootstrap.min.js'></script>
+<script>
+  $(function() {
+    $('.nav-tabs a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    });
+  });
+</script>
 
 
 
