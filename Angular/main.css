@@ -23,8 +23,10 @@ header{
   background-color: #cccccc;
 }
 
-header.div.absolute{
-  padding-top: 5px;
+header{
+  background-color: yellow;
+  width: 100px;
+  padding: 10%;
 }
 body{
   max-width: 500px;
