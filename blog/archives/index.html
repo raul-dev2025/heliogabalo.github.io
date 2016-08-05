@@ -1,73 +1,75 @@
 <!DOCTYPE html>
 
-<html ng-app="gemStore">
+<html>
   <head>
-    <title>Territorio Linux</title>
+    <title>Blasting Off With Bootstrap</title>
     <link href='css/bootstrap.min.css' rel='stylesheet'>
-    <link rel="stylesheet" type="text/css" href="../Angular/main.css" />
-    <script type="text/javascript" src="../Angular/angular.min.js"></script>
-    <script type="text/javascript" src="../Angular/app.js"></script>
-    <script type="text/javascript" src="../Angular/products.js"></script>
-    <!--    <link href='css/main.css' rel='stylesheet'> -->
+    <link href='css/main.css' rel='stylesheet'>
   </head>
-
-  <body ng-controller="StoreController as store">
-                  <!-- static lo libera-->
+  <body>                                                                                                                <!-- static lo libera-->
     <div class='navbar navbar-default navbar-fixed-top'>
       <div class='container'>
         <div class='navbar-header'>
-          <a href='/' class='navbar-brand'>Territorio Linux</a>
+          <a href='/' class='navbar-brand'>Blasting Off With Bootstrap</a>
             <button type='button' class='navbar-toggle'
-                    data-toggle='collapse'
-                    data-target='.navbar-collapse'>
-               <span class='sr-only'>Toggle navigation</span>
-               <span class='icon-bar'></span>
-               <span class='icon-bar'></span>
-               <span class='icon-bar'></span>
-            </button>
-           </div>
+                                                        data-toggle='collapse'
+                                                        data-target='.navbar-collapse'>
+                <span class='sr-only'>Toggle navigation</span>
+                <span class='icon-bar'></span>
+                <span class='icon-bar'></span>
+                <span class='icon-bar'></span>
+                </button>
+          </div>
 
         <ul class='nav navbar-nav navbar-right collapse navbar-collapse'>
           <li><a href='tickets.html'>Tickets</a></li>
-          <li><a href='../stations.html'>Stations</a></li>
+          <li><a href='stations.html'>Stations</a></li>
           <li>
             <a href='About.html' data-target='#' data-toggle='dropdown'>
                         About <span class='caret'></span></a>
-              <ul class='dropdown-menu'>
-                <li><a href='/blog'>Our Story</a></li>
-                <li><a href='contact.html'>Contact Us</a></li>
-                <li class='divider'></li>
-                <li><a href='/title/rastro.html'>Blog</a></li>
-                <li class='divider'></li>
-                <li><a href='http://twitter.com/codeschool'>Twitter</a></li>
-                <li><a href='http://facebook.com/codeschool'>Facebook</a></li>
-              </ul>
-            </li>
+          <ul class='dropdown-menu'>
+            <li><a href='/blog'>Our Story</a></li>
+            <li><a href='contact.html'>Contact Us</a></li>
+            <li class='divider'></li>
+            <li><a href='/title/rastro.html'>Blog</a></li>
+            <li class='divider'></li>
+            <li><a href='http://twitter.com/codeschool'>Twitter</a></li>
+            <li><a href='http://facebook.com/codeschool'>Facebook</a></li>
+          </ul>
+        </li>
         </ul>
       </div>
     </div>
-    <!--  Store Header  -->
-
-    <header>
-      <div class=head-div>
-        <h1 class="text-center">Índice del Archivo</h1>
-        <md-content layout-padding> prueba _con_ __md__ `algo`</md-content>
-      </div>
-    </header>  
 
 
 
-<!--Script de bootstrap -->
-<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-<script src='js/bootstrap.min.js'></script>
-<script>
-  $(function() {
-    $('.nav-tabs a').click(function (e) {
-      e.preventDefault();
-      $(this).tab('show');
-    });
-  });
-</script>
+
+    <!--Script de bootstrap -->
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script src='js/bootstrap.min.js'></script>
+    <script>
+      $(function() {
+        $('.nav-tabs a').click(function (e) {
+          e.preventDefault();
+          $(this).tab('show');
+        });
+      });
+    </script>
+
+    <!--escript de Analitics, está la opción de hacerlo con php,
+      es el mismo escript, escrito en un archivo, y referenciado
+      en la (plantilla php??
+      El escript debe ir incrustado en todas la páginas a seguir -->
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-36392075-6', 'auto');
+      ga('send', 'pageview');
+    </script>
 
   </body>
 </html>
