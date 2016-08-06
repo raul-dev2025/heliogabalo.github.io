@@ -66,16 +66,17 @@
         <!--  Product Container  -->
         <div class="list-group-item" ng-repeat="product in store.products">
            <h3>{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h3>
-             <button ng-show="product.canPurchase">Add to Cart</button>
         <!-- Image Gallery  -->
         <product-gallery></product-gallery>
 
         <!-- Product Tabs  -->
        <product-tabs></product-tabs>
-
+        <button ng-show="product.canPurchase">Add to Cart</button>
       </div>
     </div>
-
+  </div>
+ </div>
+</div>
 
 
     <!--Footer -->
