@@ -1,4 +1,3 @@
-## DRM
 
 DRM - Direct Rendering Manager. Gestor de renderización directa. Es decir, digital right manager  
 o gestión digital de derechos, __no__ es lo mismo. Es como si nos empeñamos en decir que USA,  
