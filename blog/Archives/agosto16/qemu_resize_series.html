@@ -1,0 +1,78 @@
+<p>Desde la redacción de Territorio Linux, queremos presentaros una serie de artículos,
+dirigidos a virtualizar o para-virtualizar una máquina, corriendo desde un servidor
+Linux.</p>
+
+<p>Vamos a empezar casi por el final, pués mientras escribo estas líneas, el equipo de
+desarrolladores, trabaja en ésta serie de artículos, realizando las comprobaciones 
+oportunas, para evitar que la información sea erronea o desactualizada...</p>
+
+<p>Presentamos <strong>Qemu</strong>. Se trata de un <em>emulador</em>, que cuenta con una ámplia gama de 
+utilidades y <em>accesorios</em> útiles tanto en entorno gráfico, como sobre la línea de 
+comandos.</p>
+
+<p>Aquí, vamos a centrarnos en una aproximación a sus funciones, siempre sobre la 
+<em>cónsola</em>. Probablemente muchas personas habituadas a leer código, no encontrarán mayor
+problema, siendo éstas instrucciones, encapsuladas en bloques de código:</p>
+
+<pre><code>
+  $ bloque de código &lt;-- '$' denota permisos de usuario
+</code></pre>
+
+<pre><code>
+  # otro bloque con permisos &lt;-- '#' usuario root o administrador
+</code>  </pre>
+
+<h4>Redimensionar una imagen</h4>
+
+<p>En Qemu hablamos de imágen, para referirnos a un dispositivo virtual, que hará las veces
+de disco duro. Dejamos para otro momento, el cómo, crear y administrar imágenes. Partiremos
+desde este concepto principal, que es la <em>imagen</em>.</p>
+
+<p>Bajo el comando <code>qemu-img</code> tenemos la opción <code>resize</code>, utilizada para alterar el tamaño de una
+imagen, previamente creada.
+El tamaño de una imagen, únicamente puede ser alterada, cuando la própia imagen fue creada en
+formato <em>raw</em> o crudo en inglés.</p>
+
+<p>Sobre la distribución <em>fedora</em>(reseña al final del artículo), ha sido añadida otra característica
+para esta opción <code>resize</code>. Pueden modificarse tamaños de imagen, creados en formato qcow2, 
+para aumentar su tamaño, unicamente. Es decir, no podrá disminuir su espacio o hacerla más
+pequeña.</p>
+
+<blockquote>
+  <p>qcow2 -- qemu copy on write, version 2.</p>
+</blockquote>
+
+<pre><code>
+  # qemu-img resize imagen tamaño
+</code>  </pre>
+
+<p>De esta forma añadimos espacio a la imagen ya creada, pero ojo, es un valor <em>absoluto</em>. Con
+esto quiero decir, que si la imagen tenía 10 Gigas, utilizando este anterior comando:
+<pre><code>
+  # qemu-img resize miImagen.raw 10G
+</code></pre><br />
+... la imagen pasará a tener 20 Gigas !!!</p>
+
+<p>Para un efecto más granulado, puden usarse los operadores <code>+</code> y <code>-</code>, así: <br />
+<pre><code>
+  # qemu-img resize miImagen.raw +2G
+</code></pre><br />
+Ahora nuestra imagen tendrá el tamaño deseado; 12 Gigas.</p>
+
+<blockquote>
+  <p>man page: <br />
+qemu-img resize filename [+|-]size[K|M|G|T] <br />
+Los sufijos que pueden ser usados son: <br />
+K -- kilobytes <br />
+M -- megabytes <br />
+G -- gigabytes <br />
+T -- terabytes  </p>
+</blockquote>
+
+<p><strong>Reseña:</strong> en Territorio Linux, hemos encontrado que una de la librerías más importantes
+de Qemu <em>libvirt</em>, no están completamente <em>integradas</em> en otras distribuciones fuera 
+de <em>Fedora</em>. 
+Nuestro equipo utiliza generalmente máquinas <em>Debian</em>, y es verdad que las sibrerías están, 
+pero nosotros no hemos sido capaces de instalarlas, <em>'sin romper el sistema'</em>.
+Aconsejamos el uso de <em>Fedora</em>, que por otro lado tiene un entorno de usuario que, sencillamente
+es glorioso!. Perfecto para un usario medio.</p>
