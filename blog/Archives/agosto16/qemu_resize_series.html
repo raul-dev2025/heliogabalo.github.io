@@ -69,23 +69,30 @@ G -- gigabytes <br />
 T -- terabytes  </p>
 </blockquote>
 
-<p>PRECAUCION:</p>
+<div class='panel panel-danger' role='alert'>
+  <div class='panel-heading'>
+     <span class='glyphicon glyphicon-warning-sign' aria-hidden='true'></span>
+     <span class='panel-title'>PRECAUCION</span>
+  </div >
+  <div class='panel-body'>
+    <p>Un aspecto importante que debe tenerse en cuenta, es ajustar el dispositivo acorde al
+    nuevo tamaño asignado a la imagen. De otra forma, es posible corromper los datos de la
+    imagen:</p>
 
-<p>Un aspecto importante que debe tenerse en cuenta, es ajustar el dispositivo acorde al 
-nuevo tamaño asignado a la imagen. De otra forma, es posible corromper los datos de la
-imagen:</p>
+    <h4>Aumentar su tamaño:</h4>
 
-<h3>Aumentar su tamaño:</h3>
+    <p>Si el tamaño es aumentado, <em>después</em> de asignar el espacio a la imagen, con el comando
+    descrito líneas arriba, debe ajustarse el tamaño del dispositivo, con las herramientas
+    propias de particionado de disco.</p>
 
-<p>Si el tamaño es aumentado, <em>después</em> de asignar el espacio a la imagen, con el comando 
-descrito líneas arriba, debe ajustarse el tamaño del dispositivo, con las herramientas 
-propias de particionado de disco.</p>
+    <h4>Disminuir el tamaño:</h4>
 
-<h3>Disminuir el tamaño:</h3>
+    <p>Para reducir el tamaño, primero es obligatorio el uso de estas herramientas de particionado.
+    Es decir, hay que lanzar la <em>Supuesta(VM)</em> y reducir el espacio de disco <em>antes</em> de
+    redimensionar con qemu.</p>
+  </div>
+</div>
 
-<p>Para reducir el tamaño, primero es obligatorio el uso de estas herramientas de particionado.
-Es decir, hay que lanzar la <em>Supuesta(VM)</em> y reducir el espacio de disco <em>antes</em> de 
-redimensionar con qemu.</p>
 
 <blockquote>
   <blockquote>
