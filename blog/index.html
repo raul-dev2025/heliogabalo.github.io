@@ -78,13 +78,13 @@ comandos.</p>
 <em>cónsola</em>. Probablemente muchas personas habituadas a leer código, no encontrarán mayor
 problema, siendo éstas instrucciones, encapsuladas en bloques de código:</p>
 
-<pre><code>
+<p><code>
   $ bloque de código &lt;-- '$' denota permisos de usuario
-</code></pre>
+</code>  </p>
 
-<pre><code>
-  # otro bloque con permisos &lt;-- '#' usuario root o administrador
-</code>  </pre>
+<p><code>
+  # otro bloque con permisos '#' usuario root o administrador
+</code>  </p>
 
 <h4>Redimensionar una imagen</h4>
 
@@ -97,7 +97,7 @@ imagen, previamente creada.
 El tamaño de una imagen, únicamente puede ser alterada, cuando la própia imagen fue creada en
 formato <em>raw</em> o crudo en inglés.</p>
 
-<p>Sobre la distribución <em>Fedora</em>(reseña al final del artículo), ha sido añadida otra característica
+<p>Sobre la distribución <em>fedora</em>(reseña al final del artículo), ha sido añadida otra característica
 para esta opción <code>resize</code>. Pueden modificarse tamaños de imagen, creados en formato qcow2, 
 para aumentar su tamaño, unicamente. Es decir, no podrá disminuir su espacio o hacerla más
 pequeña.</p>
@@ -106,21 +106,21 @@ pequeña.</p>
   <p>qcow2 -- qemu copy on write, version 2.</p>
 </blockquote>
 
-<pre><code>
+<p><code>
   # qemu-img resize imagen tamaño
-</code>  </pre>
+</code>  </p>
 
 <p>De esta forma añadimos espacio a la imagen ya creada, pero ojo, es un valor <em>absoluto</em>. Con
 esto quiero decir, que si la imagen tenía 10 Gigas, utilizando este anterior comando:
-<pre><code>
+<code>
   # qemu-img resize miImagen.raw 10G
-</code></pre><br />
+</code> <br />
 ... la imagen pasará a tener 20 Gigas !!!</p>
 
 <p>Para un efecto más granulado, puden usarse los operadores <code>+</code> y <code>-</code>, así: <br />
-<pre><code>
+<code>
   # qemu-img resize miImagen.raw +2G
-</code></pre><br />
+</code> <br />
 Ahora nuestra imagen tendrá el tamaño deseado; 12 Gigas.</p>
 
 <blockquote>
@@ -133,13 +133,43 @@ G -- gigabytes <br />
 T -- terabytes  </p>
 </blockquote>
 
-<p><strong>Reseña:</strong> en Territorio Linux, hemos encontrado que una de las librerías más importantes
-de Qemu <em>libvirt</em>, no está completamente <em>integrada</em> en otras distribuciones fuera 
+
+<div class='alert alert-success' role='alert'>
+<p>PRECAUCION:</p>
+
+<p>Un aspecto importante que debe tenerse en cuenta, es ajustar el dispositivo acorde al 
+nuevo tamaño asignado a la imagen. De otra forma, es posible corromper los datos de la
+imagen:</p>
+
+<h3>Aumentar su tamaño:</h3>
+
+<p>Si el tamaño es aumentado, <em>después</em> de asignar el espacio a la imagen, con el comando 
+descrito líneas arriba, debe ajustarse el tamaño del dispositivo, con las herramientas 
+propias de particionado de disco.</p>
+
+<h3>Disminuir el tamaño:</h3>
+
+<p>Para reducir el tamaño, primero es obligatorio el uso de estas herramientas de particionado.
+Es decir, hay que lanzar la <em>Supuesta(VM)</em> y reducir el espacio de disco <em>antes</em> de 
+redimensionar con qemu.</p>
+
+<blockquote>
+  <blockquote>
+  <p>Vemos que el orden del proceso es opuesto en cada caso!!</p>
+</blockquote>
+
+<p></blockquote></p>
+
+<p><strong>Reseña:</strong> en Territorio Linux, hemos encontrado que una de la librerías más importantes
+de Qemu <em>libvirt</em>, no están completamente <em>integradas</em> en otras distribuciones fuera 
 de <em>Fedora</em>. 
-Nuestro equipo utiliza generalmente máquinas <em>Debian</em>, y es verdad que las librerías están, 
+Nuestro equipo utiliza generalmente máquinas <em>Debian</em>, y es verdad que las sibrerías están, 
 pero nosotros no hemos sido capaces de instalarlas, <em>'sin romper el sistema'</em>.
-Aconsejamos el uso de <em>Fedora</em>, que por otro lado, tiene un entorno de usuario sencillamente
-glorioso!. Perfecto para un usario medio.</p>
+Aconsejamos el uso de <em>Fedora</em>, que por otro lado tiene un entorno de usuario que, sencillamente
+es glorioso!. Perfecto para un usario medio.</p>
+
+</div>
+
 
 
     <!-- ####################  Google Adsense ####################### -->

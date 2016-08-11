@@ -68,6 +68,25 @@ Ahora nuestra imagen tendrá el tamaño deseado; 12 Gigas.
 > T -- terabytes  
 
 
+PRECAUCION:
+
+Un aspecto importante que debe tenerse en cuenta, es ajustar el dispositivo acorde al 
+nuevo tamaño asignado a la imagen. De otra forma, es posible corromper los datos de la
+imagen:
+
+### Aumentar su tamaño:
+Si el tamaño es aumentado, _después_ de asignar el espacio a la imagen, con el comando 
+descrito líneas arriba, debe ajustarse el tamaño del dispositivo, con las herramientas 
+propias de particionado de disco.
+
+### Disminuir el tamaño:
+Para reducir el tamaño, primero es obligatorio el uso de estas herramientas de particionado.
+Es decir, hay que lanzar la _Supuesta(VM)_ y reducir el espacio de disco _antes_ de 
+redimensionar con qemu.
+
+>> Vemos que el orden del proceso es opuesto en cada caso!!
+
+
 __Reseña:__ en Territorio Linux, hemos encontrado que una de la librerías más importantes
 de Qemu _libvirt_, no están completamente _integradas_ en otras distribuciones fuera 
 de _Fedora_. 
