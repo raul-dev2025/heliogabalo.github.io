@@ -78,13 +78,13 @@ comandos.</p>
 <em>cónsola</em>. Probablemente muchas personas habituadas a leer código, no encontrarán mayor
 problema, siendo éstas instrucciones, encapsuladas en bloques de código:</p>
 
-<p><code>
+<pre><code>
   $ bloque de código &lt;-- '$' denota permisos de usuario
-</code>  </p>
+</code>  </pre>
 
-<p><code>
+<pre><code>
   # otro bloque con permisos '#' usuario root o administrador
-</code>  </p>
+</code>  </pre>
 
 <h4>Redimensionar una imagen</h4>
 
@@ -106,21 +106,21 @@ pequeña.</p>
   <p>qcow2 -- qemu copy on write, version 2.</p>
 </blockquote>
 
-<p><code>
+<pre><code>
   # qemu-img resize imagen tamaño
-</code>  </p>
+</code>  </pre>
 
 <p>De esta forma añadimos espacio a la imagen ya creada, pero ojo, es un valor <em>absoluto</em>. Con
 esto quiero decir, que si la imagen tenía 10 Gigas, utilizando este anterior comando:
-<code>
+<pre><code>
   # qemu-img resize miImagen.raw 10G
-</code> <br />
+</code> </pre>
 ... la imagen pasará a tener 20 Gigas !!!</p>
 
 <p>Para un efecto más granulado, puden usarse los operadores <code>+</code> y <code>-</code>, así: <br />
-<code>
+<pre><code>
   # qemu-img resize miImagen.raw +2G
-</code> <br />
+</code> </pre>
 Ahora nuestra imagen tendrá el tamaño deseado; 12 Gigas.</p>
 
 <blockquote>
@@ -134,7 +134,7 @@ T -- terabytes  </p>
 </blockquote>
 
 
-<div class='alert alert-success' role='alert'>
+<div class='alert alert-danger' role='alert'>
 <p>PRECAUCION:</p>
 
 <p>Un aspecto importante que debe tenerse en cuenta, es ajustar el dispositivo acorde al 
@@ -159,6 +159,7 @@ redimensionar con qemu.</p>
 </blockquote>
 
 <p></blockquote></p>
+</div>
 
 <p><strong>Reseña:</strong> en Territorio Linux, hemos encontrado que una de la librerías más importantes
 de Qemu <em>libvirt</em>, no están completamente <em>integradas</em> en otras distribuciones fuera 
@@ -168,7 +169,7 @@ pero nosotros no hemos sido capaces de instalarlas, <em>'sin romper el sistema'<
 Aconsejamos el uso de <em>Fedora</em>, que por otro lado tiene un entorno de usuario que, sencillamente
 es glorioso!. Perfecto para un usario medio.</p>
 
-</div>
+
 
 
 
