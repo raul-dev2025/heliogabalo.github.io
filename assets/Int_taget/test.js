@@ -1,6 +1,6 @@
- /*   <!-- Tarjeta enriquecidad de Google -->
+ /*   <!-- Tarjeta enriquecidad de Google --> */
     <script type="application/ld+json">
-*/
+
 {
   "@context": "http://schema.org/",
   "@type": "Recipe",
@@ -49,4 +49,4 @@
     "3 Bake 40 to 45 minutes or until apples are tender and crust is golden brown. Cover edge of crust with 2- to 3-inch wide strips of foil after first 15 to 20 minutes of baking to prevent excessive browning. Cool on cooling rack at least 2 hours before serving."
    ]
 }
-//    </script>
+    </script>
