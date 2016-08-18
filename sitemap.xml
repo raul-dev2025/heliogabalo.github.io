@@ -17,6 +17,9 @@
   </url>
   <url>
     <loc>http://heliogabalo.github.io/index.html</loc>
+    <image:image>
+      <image:loc>http://heliogabalo.github.io/images/corei7.jpg</image:loc>
+    </image:image>
   </url>
   <url>
    <loc>http://heliogabalo.github.io/steam.html</loc>
