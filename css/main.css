@@ -8,4 +8,13 @@ body { /* aleja al menu statico */
 .features .glyphicon {
 	font-size: 32px;	
 }
-
+/*
+Place an image with responsive design
+body { 
+  background: url(images/bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+*/
