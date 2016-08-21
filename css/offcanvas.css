@@ -9,6 +9,18 @@ body {
 body {
   padding-top: 70px;
 }
+
+/* texto descentrado sobre imagen 
+body .overlaytext{
+  position: absolute;
+  color: #FFF;
+  font-size: 12px;
+  display: block;
+}
+*/
+
+
+
 footer {
   padding: 30px 0;
 }
