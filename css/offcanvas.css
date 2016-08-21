@@ -12,6 +12,8 @@ body {
 
 /* texto descentrado sobre imagen */
 body .overlaytext{
+  padding-top: 18px;
+  padding-left: 43px;
   position: absolute;
   color: #FFF;
   font-size: 12px;
