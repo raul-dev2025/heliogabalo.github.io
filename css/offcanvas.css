@@ -14,7 +14,7 @@ body {
 body .overlaytext{
   padding-top: 18px;
   padding-left: 43px;
-  position: absolute;
+  position: center;
   color: #FFF;
   font-size: 12px;
   display: block;
