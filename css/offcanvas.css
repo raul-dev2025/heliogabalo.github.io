@@ -10,8 +10,30 @@ body {
   padding-top: 70px;
   background-color: #e6ffff;  
 }
+#img-head {
+  position: absolute;
+  z-index: 0;
+  width: 85%;
+  height: 25%;  
+}
+#title-head{
+  position: relative;
+  color: #FFF;
+  font-size: 45px;
+  z-index: 1;
+}
+#text-head {
+  margin-left: 10px;
+  position: relative;
+  top: 20px;
+  /*font-size: 20px;*/
+  color: #FFF;
+  z-index: 1;
+}
 
-/* texto sobre imagen */
+
+
+/* texto sobre imagen-redonda */
 .overlaytext{
   padding-top: 20px;
 /*  padding-left: 43px;*/
