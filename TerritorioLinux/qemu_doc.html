@@ -1,0 +1,1368 @@
+<ol>
+<li><p><a href="#i1">PROCESO DE INSTALACION DE UNA IMAGEN</a> </p>
+
+<ol>
+<li><a href="#i1">Crear imagen</a>  </li>
+<li><a href="#1i2">Convertir imagen</a></li>
+</ol></li>
+<li><p><a href="#2i">TRABAJAR CON UNA COPIA DE IMAGEN</a></p>
+
+<ol>
+<li><a href="#2i">Backing-files/overlays</a></li>
+<li><a href="#2i2">Snapshots</a> <br />
+<ul>
+<li><a href="#2i2a">Captura interna</a>  </li>
+<li><a href="#2i2b">Captura externa</a>  </li>
+<li><a href="#2i2c">Estado de la VM</a></li>
+</ul></li>
+<li><a href="#2i3">Creando capturas</a>  </li>
+<li>Proceso de reversión  </li>
+<li>Confluencia en las capturas  </li>
+<li>Aprovado de bloque  </li>
+<li>Aceptación o emisión de bloque  </li>
+<li>Flujo de línea?  </li>
+<li>Borrado de capturas  </li>
+<li>Notas de autor </li>
+</ol></li>
+<li><a href="#3i">CON O SIN CONEXION A INTERNET</a>
+<ol>
+<li><a href="#3i1">Modo usuario</a> <br />
+<ul>
+<li><a href="#3i1a">Configurar una MAC específica</a>  </li>
+</ul></li>
+<li>Modo Tap</li>
+</ol></li>
+<li><a href="#4i">EL LOOPBACK</a>
+<ol>
+<li><a href="#4i1">MONTAR UN LOOPBACK PARA COMUNICARNOS CON LA VM SIN CONEXION</a>  </li>
+<li><a href="#4i2">LOOPBACK PARA UNA IMGEN (USANDO MODULOS EN EL KERNEL)</a> <br />
+<ul>
+<li>Lanzar la VM apuntando al servidor NBD</li>
+</ul></li>
+</ol></li>
+<li>EXPERIMENTAL</li>
+<li>ATAJOS DEL TECLADO <br />
+<ol>
+<li>Comandos del monitor qemu </li>
+<li>Redefinir teclas</li>
+</ol></li>
+<li><a href="#ai">AGRADECIMIENTOS</a></li>
+</ol>
+
+<hr />
+
+<h2>1. <a name="i1">PROCESO DE INSTALACION DE UNA IMAGEN</a></h2>
+
+<h4>Crear imagen</h4>
+
+<p>Bien sea porque tenemos el disco original (en este caso un SO windows) <br />
+o bien porque lo hayamos descargado, deberemos antes CREAR una imagen GUEST <br />
+con la que  QEMU, pueda trabajar.</p>
+
+<ul>
+<li><p>Para esto primero creamos la imagen. Una "caja" vacía. </p>
+
+<p>~~~
+qemu-img create -f qcow2 mi_imagen.img 1G
+~~~</p>
+
+<p>Aquí el flag "-f" indica el tipo de formato con el que será creada nuestra imagen (aún vacia). <br />
+También indicamos el archivo imagen y el tamaño en Gigabytes.</p></li>
+<li><p>Instalación de SUPUESTO OS en la imágen previamente creada: <br />
+<code>bash <br />
+qemu -m 256 -hda mi_imagen.img -cdrom winxpsp2.iso -boot d
+</code>
+Este comando anterior es un poco confuso.</p></li>
+<li>Habrá que sustituir "qemu" con el comando apropiado, en relación a la arquitectura <br />
+del sistema operativo GUEST con el que se vaya a trabajar. En este caso sería: <br />
+<em>qemu-system-i386</em></li>
+<li>Nuevamente el flag -m indica la memoria RAM para el SUPUESTO SO.</li>
+<li>La siguiente opción -hda indica el archivo imagen donde vamos a instalar la imagen <br />
+del SO.</li>
+<li>Sigue la opción -cdrom. Parece indicar el dispositivo físico un 'CD', pero todo <br />
+apunta a que se trata de una denominación para diferenciarlo de la partición GUEST <br />
+que acabamos de crear. Es decir, que utilizaremos el mismo flag '-cdrom' para tratar <br />
+con una imagen descargada en el disco duro, o una imagen que previamente hayamos <br />
+'quemado' en un 'CD'. <br />
+La diferencia es que para utilizar un 'CD' a la hora de hacer la instalación en <br />
+nuestra 'caja vacía' habrá que indicar la ruta hacia el dispositivo ejem. /dev/cdrom <br />
+La opción -boot d indica como 'cadena' la letra que será usada en el arranque del sistema. <br />
+Es exactamente igual a como interpreta la BIOS el 'orden' de arranque de sistema de <br />
+nuestro HOST. <br />
+<ul>
+<li>'a' y 'b' para la floppy</li>
+<li>'c' para el disco duro</li>
+<li>'d' para el CD-ROM</li>
+<li>'n-p' arranque desde RED. Opcion muy interesente para un GUEST. Investigar!!! <br />
+Desde Linux, la cadena que representa el dispositivo de arranque, está muy claro, <br />
+(pues nosotros no usamos letras para esto). Así que 'c' claramente representa al <br />
+disco duro y 'd' a un CD-ROM. <br />
+Desde una perspectiva Windows, habrá que asegurarse. Pués windows utiliza letras para <br />
+denominar los dispositivos de almacenamiento.</li>
+</ul></li>
+</ul>
+
+<h4><a name="1i2">Convertir imagen</a></h4>
+
+<p>Por qué convertir imágenes antes de instalarlas:  </p>
+
+<p>~~~
+  # qemu-img convert -f vhd -O qcow2 source.vhd destination.qcow2 <br />
+  ~~~</p>
+
+<blockquote>
+  <p>Es posible que la instrucción no funcione correctamente debido a algún <br />
+cambio en la version utilizada con <em>qemu</em>. Este otro comando debería funcionar.  </p>
+</blockquote>
+
+<p>~~~
+  qemu-img convert -O qcow2 filename file_output  (autodetectada??) <br />
+  ~~~</p>
+
+<p>Qemu tiene el conversor de imagenes mas versatil, en relación a otros emuladores. <br />
+Esto lo convierte en una herramienta indispensable a la hora de trabajar con VMs. <br />
+Así como otros emuladores, presentan limitaciones a la hora de trabajar con imagenes <br />
+específicas, qemu es capaz de interpretar una gran variedad de éstas, además de <br />
+poseer un tipo genérico 'raw' donde converge con otras 'versiones'.</p>
+
+<hr />
+
+<h2><a name="2i">TRABAJAR CON UNA COPIA DE IMAGEN</a></h2>
+
+<h4>Backing_files/overlays</h4>
+
+<p>La principal idea aquí, es la 'copia de seguridad'. Una vez se ha instalado el sistema <br />
+operativo, puede trabajarse sobre un archivo de 'prueba/efecto'. Al que llamamos <br />
+<em>Overlay</em>. <br />
+Esto permite probar extensivamente un determinado GUEST, sin importar los cambios que <br />
+hagamos, pues no serán aplicados al GUEST original, sino a la copia. <br />
+La imagen del archivo que contiene la instalación original, o en un estado básico, <br />
+la llamamos <em>BackingFile</em>.  </p>
+
+<p>Para preparar este <em>entorno de prueba</em>, primero se crea una imagen en crudo, asignando un <br />
+tamaño a la misma.</p>
+
+<p>~~~ <br />
+  $ qemu-img create -f raw image_file.raw 10G <br />
+  ~~~  </p>
+
+<p>A continuación creamos el backing<em>file. Realmente no lo estamos creando, estamos formando <br />
+la imágen en crudo, para que reconozca nuestro entorno de prueba, asociando ambos <br />
+archivos: _raw/qcow2</em> en este caso. <br />
+Lo hacemos con la siguiente línea:</p>
+
+<p>~~~ <br />
+  $ qemu-img create -o backing<em>file=image</em>file.raw,backing_fmt=raw \ <br />
+    -f qcow2 overlay.cow <br />
+  ~~~  </p>
+
+<p>Lo mas importante en este proceso, es asegurarnos de que el 'overlay' apunta al <br />
+backing<em>file. Podemos comprobarlo con la aplicación _file</em></p>
+
+<p>~~~ <br />
+  $ file overlay.cow <br />
+  ~~~  </p>
+
+<blockquote>
+  <p>Tip: Cuando trabajamos con procedimientos de este tipo, es habitual separar los <br />
+archivos, en distintos directorios. Una forma sencilla y eficaz de hacerlo <br />
+sin tener que estar escribiendo una y otra vez rutas largas, es asignar <br />
+la ruta a una variable ejem: crear_backing.sh</p>
+</blockquote>
+
+<p>~~~ <br />
+  #!/bin/sh  </p>
+
+<p>my_path=/ruta/a/directorio/respaldo <br />
+  ~~~</p>
+
+<p>Se que algunos me tacharán de novato, pero escribiendo las rutas directamente en la línea <br />
+de comando, no conseguí de ninguna manera, que el vínculo entre ambos: backing-overlay, <br />
+no se rompiese.  </p>
+
+<blockquote>
+  <p>CAZADO:
+Al llamar al 'backing_file' en el proceso de instalación de la imagen, qemu, parece <br />
+no reconocer direcciones fuera del directorio que contiene la imagen 'base'. Esto <br />
+quiere decir que para instalar la imagen en el backing file es necesario encontrarse <br />
+en el directorio contenedor: mezcla las rutas absolutas/relativas.  </p>
+</blockquote>
+
+<ul>
+<li><p>La VM arranca con:  </p>
+
+<p>~~~ 
+qemu overlay.cow -m 128 
+~~~  </p></li>
+</ul>
+
+<h4><a name="2i2">SnapShots</a></h4>
+
+<p>Snapshot es la captura de <em>estado</em> de una determinada máquina virtual, en un momento <br />
+concreto. Esto incluye al sistema operativo y todas las aplicaciones. Es como <br />
+una fotografía instantánea: <em>en ella aparecerá todo lo que hay delante del objetivo de <br />
+la cámara</em>.</p>
+
+<p>Aquí hablamos de instancias, como lo haríamos sobre una <em>clase</em>, por que en realidad <br />
+es un concepto similar: definimos un <em>proceso</em>, que ya ha sido implementado en otro <br />
+<em>escenario</em>. Configurándolo para cumplir una <em>tarea específica</em>.  </p>
+
+<p>Esto evita tener que modificar el proceso original, y trabajar directamente en él, con <br />
+todas, o muchas, de sus características.</p>
+
+<p>La casualidad no existe. Qcow2(copy-on-write)podría traducirse como: <br />
+"escritura sobre la copia", que es exáctamente lo que se pretende en este <em>proceso</em>. </p>
+
+<p>Esta ténica puede ser tan complicada o simple como la necesidad a cubrir, pero siempre <br />
+guarda la misma idea: mantener a salvo el archivo original, y realizar cambios, sobre <br />
+una <em>copia</em>.</p>
+
+<p>Al realizar los cambios, modificaciones, pruebas, etc. aparece la alternativa de guardar <br />
+ese <em>estado</em> en la imagen origanl, o tal vez descartarlo, por que  ha sido un <em>horrible <br />
+desastre</em>.</p>
+
+<p>Empezamos crenado una relación BackingFile/Overlay:</p>
+
+<p>~~~ <br />
+  $ qemu-img create -b $mi<em>Ruta/base.img -f qcow2 \ <br />
+    $mi</em>ruta/Overlays/overlay1.qcow2 <br />
+  $ qemu.img create -o backing<em>file=$mi</em>ruta/base.img,backing<em>fmt=raw \ <br />
+    -f qcow2 $mi</em>ruta/Overlays/overlay2.qcow2 <br />
+  ~~~  </p>
+
+<p>El flag <em>-b</em>, parece referirse a la <em>base</em>, pero ha queado obsoleto desde la version <br />
+<em>qemu</em> actual. Es utilizado junto al comando <em>commit</em> que será visto, mas adelante.</p>
+
+<blockquote>
+  <p><strong>man page:</strong> <br />
+  ~~~ <br />
+    commit [--object objectdef] [--image-opts] [-q] [-f fmt] [-t cache] [-b base] [-d] [-p] <br />
+  ~~~</p>
+
+<p>La bandera(flag):  <strong>-o</strong> significa opciones. Cuando la imagen de disco, es creada con la <br />
+<em>opción</em> <em>backing_file</em>, la imagen(overlay), sólo guardará la diferencia respecto a la base. <br />
+El tamaño del archivo, puede ser omitido. <br />
+<strong>-f</strong> hace referencia al formato de archivo, para el <strong>overlay</strong>. Puesto que es habitual <br />
+guardar la <em>base</em> en <em>crudo</em>. <br />
+<strong>$mi_ruta:</strong> no es más que una varible, que he utilizado para simplificar la línea.  </p>
+</blockquote>
+
+<p>Es importante comprobar que el <em>vínculo</em> entre ambos archivos, es el <em>adecuado:</em> <br />
+  ~~~ <br />
+  $ file <em>archivo</em> <br />
+  $ qemu-img info --backing-chain $mi_ruta/Overlays/overlay2.qcow2 <br />
+  ~~~  </p>
+
+<p><strong>file</strong> ofrece una versión resumida si únicamente buscamos comprabar el vínculo. <br />
+<strong>qemu-img info --backing-chain</strong> aporta información más detallada: <br />
+  ~~~ <br />
+    image: /path/to/BF/Overlays/img1.cow
+    file format: qcow2
+    virtual size: 3.0G (3221225472 bytes)
+    disk size: 1.5G
+    cluster<em>size: 65536
+    backing file: /path/to/BF/image</em>file.raw
+    backing file format: raw
+    Format specific information:
+        compat: 1.1
+        lazy refcounts: false
+        refcount bits: 16
+        corrupt: false</p>
+
+<pre><code>image: /path/to/BF/image_file.raw
+file format: raw
+virtual size: 3.0G (3221225472 bytes)
+disk size: 1.4G
+</code></pre>
+
+<p>~~~  </p>
+
+<p>Otro usuario <strong>Linux</strong>, desde la distribución <em>Fedora</em>, ha querido incluir en su documentación, <br />
+un conjunto de términos utilizados junto a estas <em>capturas de estado</em>. Intentaré <br />
+traducirlos sin cambiar su contenido...  </p>
+
+<h4><a name="2i2a"><strong>Captura interna:</strong></a></h4>
+
+<p>Un archivo qcow2 que sostiene la captura y "delta" hasta el punto de guardado. Delta hace <br />
+referencia al "direncial" escrito en la imagen, aquellas partes del disco que han sufrido <br />
+modificación.</p>
+
+<p>~~~ <br />
+    $ ls -sh $my<em>path &amp;&amp; ls -sh $my</em>path/Overlays
+    1,5G image<em>file.raw  2,1G test01.img 
+       0 Overlays           0 Unsafe <br />
+    total 1,7G
+    1,6G img1.cow  134M test</em>over.qcow2
+  ~~~  </p>
+
+<blockquote>
+  <p>En la última línea del siguiente bloque de código, puede verse como al archivo img1.cow, <br />
+ se han aplicando diferentes actualizaciones, quedando reflejadas en el tamaño de disco. <br />
+ El archivo test-over, represanta otra imagen, a la que se han aplicado "pocos" cambios.  </p>
+</blockquote>
+
+<p><strong>Captura interna de disco:</strong> <br />
+El estado del disco virtual dado en un punto del tiempo. Tanto la captura, como <em>delta</em> <br />
+son almacenados en el mismo archivo qcow2. Pueden ser tomados igualmente, cuando el <br />
+SUPUESTO esta 'vivo/encendido' u 'offline/apagado'.  </p>
+
+<ul>
+<li>libvirt: esta librería, usa el comando 'qemu-img' cuando el SUPUESTO está <em>apagado</em>.</li>
+<li>libvirt: usa el comando 'savevm' cuando el SUPUESTO está <em>encendido</em>.</li>
+</ul>
+
+<p><strong>Punto de guardado interno del sistema:</strong>  </p>
+
+<p>Estado de la <em>RAM</em>, estdo del dispositivo y el estado del disco de un SUPUESTO en carrera. <br />
+Todos son guardados en el mismo archivo original qcow2. Puede ser tomado durante la <br />
+carrera.  </p>
+
+<ul>
+<li>libvirt: usa el comando 'savevm' cuando el SUPUESTO está <em>encendido</em>.  </li>
+</ul>
+
+<blockquote>
+  <p>AVISO: savevm(captura en vivo), es un comando accedido a través del monitor qemu. <br />
+<strong>ctrl+alt+2</strong> abre el monitor. El comando  <em>help</em> lista la ayuda. <br />
+<strong>ctrl+alt+1</strong> para volver al modo en el que hayamos lanzado la VM(gráfico/texto). <br />
+<strong>q|quit</strong>cierra qemu en modo monitor.  </p>
+</blockquote>
+
+<p>~~~ <br />
+  $ qemu-img info /path/to/img.qcow2 
+  ~~~  </p>
+
+<blockquote>
+  <p>Éste comando lista las capturas que hayamos tomado. Si no establecemos Id o tag <br />
+durante la captura con <code>(qemu )savevm id/tag</code>, es creado un nuevo archivo.</p>
+</blockquote>
+
+<h4><a name="2i2b"><strong>Captura externa:</strong></a></h4>
+
+<p>Al tomar la captura se almacena el estado de disco en un archivo. En ese punto, la imagen <br />
+se convierte a sólo lectura(<em>base</em>) y, un nuevo archivo(<em>overlay</em>) recogerá los <em>deltas</em> del <br />
+<em>estado</em> guardado.  </p>
+
+<p><strong>Captura externa de disco:</strong> <br />
+La captura de disco, es guardada en un archivo y, <em>delta</em> hasta la captura, <em>seguido</em> en uno <br />
+nuevo, con formato qcow2. Puede ser tomada en <em>vivo</em> o con la máquina apagada.  </p>
+
+<ul>
+<li>libvirt: esta librería, usa el comando de shell 'transaction', durante la carrera del <br />
+SUPUESTO.  </li>
+<li>libvirt: usa el comando de cónsola 'qemu-img' cuando el SUPUESTO está apagado.  </li>
+</ul>
+
+<p><strong>Punto de guardado externo del sistema:</strong> <br />
+Aquí, el estado de disco del SUPUESTO será guardado en un archivo, su RAM y el estado <br />
+del dispositivo serán almacenados en un nuevo archivo.</p>
+
+<h4><a name="2i2c"><strong>Estado de la VM</strong></a></h4>
+
+<p>Guarda la RAM y el estado del dispositivo de un supuesto en carrera, sin embargo, no el <br />
+estado de disco; a un archivo. Así, podrá ser restaurado más tarde. <br />
+El proceso es similar a la hibernación de sistema.  </p>
+
+<blockquote>
+  <p><em>nota:</em> el estado de disco, debería permanecer sin modificar, durante el tiempo de <br />
+restauración.  </p>
+</blockquote>
+
+<h4><a name="2i3">Creando capturas</a></h4>
+
+<p>Mediante el uso de una <em>captura externa</em>, una nueva imagen(<strong>overlay</strong>), es creada para <br />
+facilitar la escritura del supuesto. La imagen previa se convierte en <em>captura</em>.</p>
+
+<p><strong>Crear capturas internas de disco</strong>
+Dada la máquina <code>myVm</code>, es posible crear una captura con el siguiente comando de línea:  </p>
+
+<p>~~~ <br />
+  # virsh snapshot-create-as <code>myVm</code> capt1 <code>descripción-deCaptura</code> <br />
+  ~~~ <br />
+Funciona de la misma forma con o sin la <em>VM</em> encendida. Se añade una breve descripción. <br />
+Ahora sería oportuno listar y revisar los datos: <br />
+  ~~~ <br />
+  # virsh snapshot-list myVm <br />
+  # qemu-img info /far/beyondThe/su/myVm.qcow2 <br />
+  ~~~  </p>
+
+<blockquote>
+  <p><em>qemu-img info</em> arroja información con detalle, sobre la captura interna.  </p>
+</blockquote>
+
+<p><strong>Crear capturas externas de  disco</strong> <br />
+Primero es listado el dispositivo de bloque asociado a la supuesta.  </p>
+
+<p>~~~ <br />
+  # virsh domblklist myVm-base   &lt;- domain block list <br />
+  ~~~  </p>
+
+<p>A continuación es creada la captura, con la supuesta en carrera.  </p>
+
+<p>~~~ <br />
+  # virsh snapshot-create-as --domain myVm-base capt1 capt1-desc \
+  --disk-only --diskspec vda,snapshot=external,file=/path/to/capt-de-myVm-base.qcow2 \
+  --atomic <br />
+  ~~~  </p>
+
+<p>La shell devuelve algo parecido a: <code>Domain snapshot capt1 created</code> <br />
+Es entonces cuando la imagen de disco original myVm-base es convertida a un <code>backing_file</code>  </p>
+
+<h4>Borrado de capturas</h4>
+
+<p>Borrar <strong>capturas internas</strong> sea en vivo o con la máquina apagada, no es complicado:  </p>
+
+<p>~~~ <br />
+  # virsh snapshot-delete --domain myVm --snapshotname snap6 <br />
+  ~~~ <br />
+...alternativamente <br />
+  ~~~ <br />
+  # virsh snapshot-delete myVm snap6 <br />
+  ~~~  </p>
+
+<p>Mencionar aquí, que se está borrando la última captura, por lo que el vínculo con la <br />
+<em>base</em> no se rompe. Es de suponer, que si varias capturas han sido creadas, el orden <br />
+en que borramos éstas, es importante. Alternativamente podemos corromper tranquilamente <br />
+la imagen y pasar a otra cosa ...  </p>
+
+<p>Libvirt aún no tiene la capacidad de borrar capturas externas, pero pueden llevarse a <br />
+cabo con <code>qemu-img</code>.  </p>
+
+<p>Supongamos; para no perder la costumbre, que se han tomado un par de capturas, sin <br />
+aplicarse aún ningúna aceptación de cambio(commit):  </p>
+
+<p>~~~ <br />
+  $ qemu-img info /path/to/somewereIn/Overlays/test<em>over.qcow2
+  image: /path/to/somewereIn/Overlays/test</em>over.qcow2
+  file format: qcow2
+  virtual size: 3.0G (3221225472 bytes)
+  disk size: 808M
+  cluster<em>size: 65536
+  backing file: /path/to/image</em>file.raw
+  Snapshot list:
+  ID        TAG                 VM SIZE                DATE       VM CLOCK
+  1         tagtag                 273M 2016-07-30 11:51:54   00:03:51.796
+  2         idid                   273M 2016-07-30 11:52:10   00:04:01.967
+  Format specific information:
+      compat: 1.1
+      lazy refcounts: false
+      refcount bits: 16
+      corrupt: false
+  ~~~  </p>
+
+<blockquote>
+  <p>La línea importante es la que dice <code>backing file</code>, hacia mitad de párrafo.  </p>
+</blockquote>
+
+<p>Así que aquí no hay <em>problema</em>, podrían borarse ambas capturas, en cualquier orden. <br />
+Pero son capturas internas y; sencillamente, no puden ser borradas. Fin de la historia. <br />
+Sin la capacidad de usar virsh, es como cuando pica la oreja y uno se rasca la <br />
+rodilla...</p>
+
+<p>Borrar <strong>capturas externas</strong>  </p>
+
+<p>Con la máquina apagada, de dos formas, puede realizarse la tarea: <br />
+    <code>base &lt;- capt1 &lt;- capt2 &lt;- capt3</code>  </p>
+
+<blockquote>
+  <blockquote>
+  <p>La flecha se lee ...capt3 tiene su base en capt2 (capt==snapshot)  </p>
+</blockquote>
+
+<p></blockquote></p>
+
+<ol>
+<li><code>base &lt;- sn1 &lt;- sn3</code>(copiando sn2 en sn1)  </li>
+<li><code>base &lt;- sn1 &lt;- sn3</code>(copiando sn2 en sn3)</li>
+</ol>
+
+<h4>Metodo 1</h4>
+
+<p>El diagrama muestra la intención de hacer <em>desaparecer</em> la captura 2, pero no sin antes <br />
+<em>aceptar</em> los cambios en alguna de las capturas contiguas. <br />
+Igualmente, es necesario que sn1 no sea la <em>base</em> de ninguna otra captura, de lo contrario <br />
+tendríamos una base a la que han sido aplicados cambios, donde otras capturas esperan <br />
+encontrarla sin esos cambios, consecuentemente los datos se malograían.  </p>
+
+<hr />
+
+<blockquote>
+  <p>La implentación de la librería <em>libvirt</em> está aún en desarrollo, por lo que parte <br />
+de su funcionalidad no se encuentra disponible, al menos en la rama estable. En <br />
+Debian los paquetes necesarios son libvirt-bin y libvirt-daemon, pero es probable <br />
+romper el sistema si se instalan desde ésta rama(alternativa <em>filo sangrante?</em>). <br />
+Actualizaré la sección, cuando el problema con estos paquetes sea resuelto. <br />
+Puede pasar mucho tiempo. 28-07-16. <br />
+Herramientas como <em>transaction</em> <em>virsh</em> no están disponibles.
+<a href="https://kashyapc.fedorapeople.org/virt/lc-2012/snapshots-handout.html">Manual snapShots</a> -- en inglés.  </p>
+</blockquote>
+
+<hr />
+
+<h2><a name="3i">CON O SIN CONEXION A INTERNET !!</a></h2>
+
+<blockquote>
+  <p><strong>nota:</strong>
+     Si se trabaja con el <em>overlay</em>, habrá que recordar actualizar el <em>backing</em>file_, de otra <br />
+     manera, estaremos escribiendo una y otra vez, las opciones necesarias para que la <br />
+     GUEST inicie a nuestro gusto. vínculo a trabajar con una copia de imagen  </p>
+</blockquote>
+
+<p>Seguramente no seré la única persona que esté tratando de instalar un windows en una GUEST, <br />
+a mi me dió algunos problemas con los dispositivos y drivers para la NIC. Que he solucionado <br />
+añadiendo como apendice, la opción que detalla la línea de comando un poco más abajo.  </p>
+
+<p>Da la casualidad que mi tarjeta de red es exactamente la que instala qemu, una Realtek, <br />
+así que desconozco si a otras personas les será esto de ayuda.  </p>
+
+<p>Pero para que conste el dato: cuando instalamos el sistema operativo en la guest, no hay <br />
+que indicar ningún comando especial para tener acceso a internet. Por defecto, qemu <br />
+establece el modo usuario.  </p>
+
+<p>Mas bien el problema intuyo que viene dado desde el GUEST, cacawin(windrop in english) <br />
+Es decir, que si estais buscando desde:  </p>
+
+<blockquote>
+  <blockquote>
+  <p>Panel de contro>>herramientas administrativas>>computer managament>>device manager <br />
+network adapter(dispositivo) <br />
+La forma de instalar un dispositivo y su draiver, mejor quitaoslo de la cabeza. <br />
+Porque hay chorrocientas alternativas y hay que pensar que qemu está instalando un dispositivo <br />
+'virtual'.  </p>
+</blockquote>
+
+<p></blockquote></p>
+
+<p>El dispositivo que ha quedado instalado en mi GUEST: <br />
+  <em>Realtec RTL8139 family PCI Fast ethernet NIC</em> (y su draiver con nombre similar/igual).  </p>
+
+<p>En caso de que este dispositivo no funcione lo mejor es echar mano del manual de <br />
+qemu-system-tu-<em>arquitectura-de-maquina</em> y mirar que alternativas hay:  </p>
+
+<blockquote>
+<pre><code>  -net nic[,vlan=n][,macaddr=mac][,model=type] [,name=name][,addr=addr][,vectors=v]  
+    Create a new Network Interface Card and connect it to VLAN n (n = 0 is the default). The  
+    NIC is an e1000 by default on the PC target. Optionally, the MAC address can be changed  
+    to mac, the device address set to addr (PCI cards only), and a name can be assigned for  
+    use in monitor commands.  Optionally, for PCI cards, you can specify the number v of  
+    MSI-X vectors that the card should have; this option currently only affects virtio  
+    cards; set v = 0 to disable MSI-X. If no -net option is specified, a single NIC is  
+    created.  QEMU can emulate several different models of network card.  Valid values for  
+    type are "virtio", "i82551", "i82557b", "i82559er", "ne2k_pci", "ne2k_isa", "pcnet",  
+    "rtl8139", "e1000", "smc91c111", "lance" and "mcf_fec".  Not all devices are supported  
+    on all targets.  Use "-net nic,model=help" for a list of available devices for your  
+    target.
+</code></pre>
+
+<blockquote>
+  <p>Solo he podido probar esta teoría en mis máquinas!   </p>
+</blockquote>
+
+<p></blockquote></p>
+
+<p>Añadiendo la opcion -net parametro <em>nic</em>, qemu instala una targeta virtual de red genérica. <br />
+De hecho, el manual que sugiere gentoo, es el que me ha funcionado a mi. La versión de qemu <br />
+que corre mi máquina es la 2.6, es posible que en sucesivas actualizaciones vemamos otros <br />
+cambios.  </p>
+
+<p>El comando quedaría algo así:  </p>
+
+<p>~~~ <br />
+qemu-system-(arch) -net nic,model8139 ... <br />
+  ~~~  </p>
+
+<p>Hay dos formas básicas de dotar a la VM con conexión a internet:</p>
+
+<ul>
+<li>Modo usuario (slirp)</li>
+<li>Modo Tap</li>
+</ul>
+
+<h4><a name="3i1">Modo usuario:</a></h4>
+
+<p>Un problema con el que nos encontraremos, es que la tarjeta virtual que estamos creando <br />
+tiene asociado otro compenente, una especie de CTR o conector que debe ser único para <br />
+cada GEST.</p>
+
+<p>Esto puede resolverse asociando el dispositivo al conector, mediante un ID único. <br />
+Habrá que constituir una nueva interfase de red, sobre la que se realizarán las <br />
+conexiones, tanto del Host como del Guest, una <em>Vlan</em>.  </p>
+
+<p><em>vinculo a VLAN .</em>  </p>
+
+<blockquote>
+  <p><em>nota:</em> <br />
+      ...Los administradores de red configuran las VLAN mediante software en lugar <br />
+      de hardware, lo que las hace extremadamente fuertes.  </p>
+
+<blockquote>
+  <blockquote>
+  <p>Wikia - Vlan.</p>
+</blockquote>
+
+<p></blockquote></p>
+
+<p></blockquote></p>
+
+<p>~~~ <br />
+  $ qemu-<arch> -net nic,vlan=id -net user,vlan=id <br />
+  ~~~  </p>
+
+<blockquote>
+  <p>Cada uno de los dispositivos de red debe asociarse a su conector único!! <br />
+-net nic,vlan=id1 -net user,vlan=id2 <strong>NO FUNCIONARÁ</strong>  </p>
+
+<p>PROBLEMA: despúes de hacer la instalación via CTR/interface, sigue siendo <br />
+un requisito lanzar la app con tal asociación. De otro modo, el dispositivo <br />
+sigue instalado, pero la Vm no tiene acceso a la interface virtual(vlan).  </p>
+</blockquote>
+
+<h4><a name="3i1a">Configurar una MAC específica</a></h4>
+
+<p>~~~
+-netdev user,id=mynet0,net=192.168.76.0/24,dhcpstart=192.168.76.9 <br />
+  ~~~</p>
+
+<p>De esta forma la MAC de la VM tendrá un identificador por defecto. <br />
+Esto puede ser un inconveniente, si corremos mas de una máquina, y queremos tener acceso <br />
+a internet en todas ellas, puesto que la aplicación genera siempre la misma MAC.  </p>
+
+<p>~~~
+$ qemu-system-i386 -net nic,macaddr=52:54:XX:XX:XX:XX -net vde disk_image
+  ~~~</p>
+
+<p>Para que esto no ocurra debe indicarse un identificador. Reempaza las "X" con números <br />
+hexadecimales arbitrarios, pero recuerda conservar las primeras dos cifras, que hacen <br />
+referencia al <em>id</em> de fabricante(qemu).  </p>
+
+<blockquote>
+  <p><em>Notas:</em> </p>
+
+<p>Otra idea es probar qemu-ga. Éste es un demonio que funciona desde dentro de la <br />
+  SUPUESTA, así que en teoría, el host via injection/algo puede gestionar la particion <br />
+  de la VM, pero habrá que averiguar que tipo de operaciones puede hacer GUEST-AGENT.  </p>
+</blockquote>
+
+<h4>Modo Tap</h4>
+
+<blockquote>
+  <p>to be continued...</p>
+</blockquote>
+
+<hr />
+
+<h2><a name="4i">EL LOOPBACK</a></h2>
+
+<p>La traducción de loopback significa: bucle hacia atrás(ma o meno), o 'camino de <br />
+regreso'. La idea es utilizar una partición o disco, que se encuentra fuera de la <br />
+imagen de la VM.  </p>
+
+<p>Antes de seguir, debo recordar que las operaciones con particiones y sobre módulos <br />
+que afectan directamente al <em>kernel</em>, hay que hacerlas con permisos de administrador. <br />
+Por precaución, siempre es recomendable hacer este tipo de opereaciones con la <br />
+VM apagada. De otra forma, se corre el riesgo de corromper los datos de la imagen.  </p>
+
+<p>En determidas ocasiones, la máquina virtual no tiene conexión a internet. Es el caso <br />
+de una instalación con Qemu. Así que la mejor forma de comunicarnos con la VM es <br />
+mediante la técnica del <em>loopback</em>.</p>
+
+<p>Las técnicas que describiré a continuación, pueden llevarse a cabo sobre particiones con <br />
+formato de disco usease formateadas: ejem Ext3, NTFS, FAT32 etc. o sobre una imagén sin <br />
+una partición en concreto.</p>
+
+<p>Esto quiere decir, que puede montarse una copia de "respaldo" de <em>old-games</em>, en una imagen <br />
+lo suficientemente grande, sin necesidad de crear una partición dentro de la imagen. <br />
+En realidad lo que ocurre, es que la partición abarca todo el disco, no significa que no <br />
+haya partición, significa que todo el disco está ocupado por una única partición. <br />
+En este "marco" qemu no tiene problema para leer la tabla de nodos de partición, porque <br />
+solo hay una, con un formato determinado!!</p>
+
+<p>Así que antes de describir las dos alternativas, quiero dejar anotado un concepto que puede <br />
+ser aplicado a ambas técnicas: <em>montaje simple</em>.</p>
+
+<p>Si <em>no</em> se crea una partición en la imagen(la VM), los datos podrán ser montados sobre <br />
+cualquier formato. Sin embargo, si tenemos alojadas particiones dentro de la imagen, <br />
+únicamente podremos montarlas en formato raw(crudo en inglés). <br />
+Esto es para que qemu pueda manejar las particiones alojadas.  </p>
+
+<p>En este caso como trabajaremos sobre una imagen ISO, parece apropiado seguir los pasos <br />
+descritos al principio del artículo. Crear la caja vaía, y escribirla en el formato <br />
+apropiado. Pero como problamente no queramos lanzar otra GUEST, sino únicamente acceder <br />
+al contenido del la imagem. La operación de calcular el offset de la partición, puede <br />
+ser omitida <em>-ver mas adelante</em>. </p>
+
+<p>Esto es de lo que hablaba: el <em>montaje simple</em>. Puede determinarse mirando el contenido de <br />
+la imagen:</p>
+
+<p>~~~ <br />
+ $ file imagen.iso <br />
+    imagen.iso: ISO 9660 CD-ROM filesystem data 'GRTMPVOL_EN' (bootable) <br />
+  ~~~</p>
+
+<p>Vemos que únicamente contiene una partición. A continuación, tan sólo queda montar la <br />
+imagen. Para esto utilizamos la aplicación <em>losetup:</em>  </p>
+
+<p>~~~ <br />
+    $ losetup /dev/loop0 /path/to/imagen.iso
+  ~~~  </p>
+
+<p>En caso de utilizar este método <em>montaje simple</em>, para evitar que el sistema nos devuelva <br />
+algún mensaje de aviso, acerca de los permisos con los que se monta la unidad, podemos <br />
+especificar que lo haga en modo solo lectura.</p>
+
+<p>~~~ <br />
+    # mount -o ro,loop /path/to/image.iso /mnt/point
+  ~~~</p>
+
+<blockquote>
+  <p><strong>nota:</strong> aquí va otra nota sobre el uso de los shasum y file, sobre la importancia <br />
+de hacer las comprobaciones oportunas en cuanto a imágenes descargadas. Y un <br />
+especial comentario acerca del cambio que se produce en un sha, cuando queremos montar <br />
+una imagen con permisos de escritura. IMPORTANTE INVESTIGAR!  </p>
+</blockquote>
+
+<h4><a name="4i1">MONTAR UN LOOPBACK PARA COMUNICARNOS CON LA VM SIN CONEXION</a></h4>
+
+<p>Este método es útil cuando necesitamos averiguar donde empieza la partición con la 
+que vamos a trabajar. En el punto dos, puede verse en la última columna <em>System</em>
+el tipo de partición que contiene la imagen de disco. La primera es una swap, la 
+segunda debe ser una tipo EXT. </p>
+
+<p>Qemu-img no formatea la imagen de disco, crea una imagen de disco vacía, con una formato
+de archivo, pero aún no tiene partición. Esto se ve claro cuando instalamos un sistema 
+operativo dentro de la imagen creada con qemu-img. Es el propio sistema operativo que
+vamos a instalar, quien crea la partición y le da formato. </p>
+
+<p>Solo quiero aclarar, que si creamos una imagen con qemu-img y, tratamos de copiar un
+archivo dentro, NUNCA FUNCIONARÁ. Por que es como si antes de instalar el sistema operativo
+en nuestro host, normal(no hablo de VMs), tratásemos de meter algo en el disco
+duro, No chutaría nada, ni siquiera se encendería la pantalla.</p>
+
+<p>Link aquí a fdisk dd gpart crear imagenes.</p>
+
+<p>Calcular el <em>offset</em> antes de montar la imagen de disco.  </p>
+
+<ol>
+<li><p>Asociar el dispositivo de imagen de disco, a la partición que vayamos a montar.
+~~~
+tux@venus:~> losetup /dev/loop0 /images/sles11sp1_base.raw <br />
+~~~</p></li>
+<li><p>Tamaño de sector y número de inicio de sector, de la partición a montar.
+~~~
+tux@venus:~> fdisk -lu /dev/loop0  </p>
+
+<p>Disk /dev/loop0: 4294 MB, 4294967296 bytes <br />
+255 heads, 63 sectors/track, 522 cylinders, total 8388608 sectors <br />
+Units = sectors of 1 * 512 = 512[1] bytes <br />
+Disk identifier: 0x000ceca8  </p>
+
+<pre><code>   Device Boot      Start         End      Blocks   Id  System
+</code></pre>
+
+<p>/dev/loop0p1              63     1542239      771088+  82  Linux swap <br />
+/dev/loop0p2   *     1542240[2]    8385929     3421845   83  Linux <br />
+~~~</p>
+
+<p>[1] Tamaño del sector.</p>
+
+<p>[2] Sector de inicio de la partición.</p></li>
+<li><p>Calcular el <em>offset</em> de inicio, de la partición.</p>
+
+<p>sector<em>size * sector</em>start = 512 * 1542240 = 789626880</p></li>
+<li><p>Borrar el loop y montar la partición, dentro de la imagen de disco. Con el cálculo del <br />
+offset dentro del directorio ya preparado. <br />
+~~~
+tux@venus:~> losetup -d /dev/loop0 <br />
+tux@venus:~> mount -o loop,offset=789626880 \ <br />
+/images/sles11sp1_base.raw /mnt/sles11sp1/ <br />
+tux@venus:~> ls -l /mnt/sles11sp1/ <br />
+total 112 <br />
+drwxr-xr-x   2 root root  4096 Nov 16 10:02 bin <br />
+drwxr-xr-x   3 root root  4096 Nov 16 10:27 boot <br />
+drwxr-xr-x   5 root root  4096 Nov 16 09:11 dev
+[...] <br />
+drwxrwxrwt  14 root root  4096 Nov 24 09:50 tmp <br />
+drwxr-xr-x  12 root root  4096 Nov 16 09:16 usr <br />
+drwxr-xr-x  15 root root  4096 Nov 16 09:22 var <br />
+~~~  </p></li>
+<li><p>Copiar uno o mas archivos dentro de la partición montada y desmontar al terminar.</p>
+
+<p>tux@venus:~> cp /etc/X11/xorg.conf /mnt/sles11sp1/root/tmp <br />
+tux@venus:~> ls -l /mnt/sles11sp1/root/tmp <br />
+tux@venus:~> umount /mnt/sles11sp1/  </p></li>
+</ol>
+
+<h4><a name="4i2">LOOPBACK PARA UNA IMAGEN (USANDO MODUOS EN EL KERNEL)</a></h4>
+
+<p>Aquí primero preparamos el dispositivo que será leído por el módulo de kernel NBD. <br />
+Para ello debemos tener cargado dicho módulo o cargarlo en todo caso. Recuerda que <br />
+para llevar a cabo este tipo de operaciones, debemos escalar privilegios.</p>
+
+<p>Primero comprobamos si tenemos instalados los módulos que vamos <br />
+a usar  ... normalmente en /lib/... (editar) <br />
+Comprobar si el módulo está cargado o no, en el sistema. Puede determinarse con:</p>
+
+<p>~~~ <br />
+    $ lsmod |cat -n |grep modulo-en-cuestion <br />
+  ~~~</p>
+
+<ul>
+<li>La primera instrucción lista los módulos cargados en el kernel.</li>
+<li>Através de tubería cuantificamos su número, por razones de stress!!</li>
+<li>y le pasamos un filtro grep, para concretar la salida.</li>
+</ul>
+
+<p>Si el modulo no está cargado, lo cargamos dándole un parámetro <code>max_part</code> <br />
+para poder acceder a los nodos de cada una de las particiones. <br />
+En caso de no iniciar la variable, como el valor por defecto es 0(cero) <br />
+podrá accederse al disco, pero no a los nodos de ninguna de las particiones <br />
+ ...</p>
+
+<p>Esto puede hacerse en una misma línea(root): <br />
+  ~~~ <br />
+    # modprobe nbd max_part=N <br />
+  ~~~</p>
+
+<ul>
+<li>'N' representa el número de particiones que tiene la imagen que vamos a montar <br />
+Por lo que teniendo esto en cuenta, debe ajustarse con criterio!! <br />
+Si se trata de una imagen, sin una partición especifica, puede omitirse el <br />
+parametro.  </li>
+</ul>
+
+<blockquote>
+  <p>Dato sin verificar!</p>
+</blockquote>
+
+<p>Si el módulo está cargado, lo mejor es descargarlo y cargarlo de nuevo, iniciando la <br />
+variable. En Debian esto parece que tiene un bug. Cuando comprobamos la información <br />
+del módulo(antes y despues de la asignación):
+  ~~~ <br />
+    # modinfo nbd <br />
+  ~~~</p>
+
+<p>Si está cargado, lo descargamos: <br />
+  ~~~ <br />
+  # rmmod nbd <br />
+  ~~~  </p>
+
+<p>...vemos que aparece la ĺinea, pero no el entero! parece un bug. Es la segunda línea <br />
+empezando por abajo. </p>
+
+<blockquote>
+  <p><em>nota:</em> deberías comprobar si en el mailing de Debian se ha escrito el 'report'.  </p>
+</blockquote>
+
+<p><strong>antes:</strong>
+  ~~~
+filename:       /lib/modules/algo<em>aqui/kernel/drivers/block/nbd.ko <br />
+license:        GPL <br />
+description:    Network Block Device <br />
+depends: <br />
+intree:         Y <br />
+vermagic:       algo</em>aqui-tete SMP mod<em>unload modversions 086 <br />
+parm:           nbds</em>max:number of network block devices to initialize (default: 16) (int) <br />
+parm:           max_part:number of partitions per device (default: 0) (int) <br />
+parm:           debugflags:flags for controlling debug output (int) <br />
+  ~~~</p>
+
+<p><strong>después:</strong>
+  ~~~
+    # modprobe nbd max_part=8 <br />
+  ~~~  </p>
+
+<p>~~~ <br />
+  # modinfo nbd
+filename:    /lib/modules/algo-aqui/kernel/drivers/block/nbd.ko <br />
+license:     GPL <br />
+description: Network Block Device <br />
+depends: <br />
+intree:      Y <br />
+vermagic:    algo-aqui SMP mod<em>unload modversions 086 <br />
+parm:        nbds</em>max:number of network block devices to initialize(default:16)(int) <br />
+parm:        max_part:number of partitions per device (default: 0) (int) <br />
+parm:        debugflags:flags for controlling debug output (int) <br />
+  ~~~</p>
+
+<p>Este comando identifica la imagen, como un dispositivo de bloque llamado <br />
+/dev/nbd0, y la partición dentro de éste, como sub-dispositivo, que sería: <br />
+/dev/nbd0p1
+  ~~~ <br />
+    qemu-nbd -c /dev/nbd0 <em>vdi-file</em> <br />
+  ~~~</p>
+
+<ol>
+<li><p>CARGAMOS EL MÓDULO <br />
+~~~  </p>
+
+<h1>modprobe nbd -- Esto carga el módulo de no estar cargado.</h1>
+
+<h1>modprobe nbd max_part=16</h1>
+
+<p>~~~  </p></li>
+<li><p>A continuación preparamos el dispositivo donde montaremos la unidad. <br />
+Este proceso inicia una especie de servidor. Realmente la carga en memoria es <br />
+mínima, es decir, no es como si lanzásemos Apache!!! <br />
+~~~  </p>
+
+<h1>qemu-nbd -c /dev/nbd0/ /path/to/vhd_file -- Esto conecta el dispositivo.</h1>
+
+<h1>partprobe /dev/nbd0  -- indica al SO los cambios que se han llevado</h1>
+
+<pre><code>                    a cabo en la tabla de particiones.
+</code></pre>
+
+<p>~~~  </p></li>
+<li><p>Este último paso, es el que realmente monta la unidad virtual en el sistema. <br />
+~~~  </p>
+
+<h1>mount /dev/nbd0p1 /imagen/a/montar(vhd en este caso!!)</h1>
+
+<p>~~~  </p></li>
+</ol>
+
+<blockquote>
+  <p>RECUERDA DESMONTAR LA UNIDAD Y EL DISPOSITIVO CUANDO TERMINES. <br />
+  ~~~ <br />
+  $ umount /imagen/montada(vhd) -- Desmontamos imagen. <br />
+  # qemu-nbd -d /dev/nbd0 -- desconectamos dispositivo. <br />
+  ~~~  </p>
+</blockquote>
+
+<h2>LANZAR LA VM APUNTANDO AL SERVIDOR NBD</h2>
+
+<p>~~~ <br />
+   $ QEMU -object tls-creds-x509,id=tls0,dir=$HOME/.pki/qemutls,endpoint=client \ <br />
+       -drive driver=nbd,host=localhost,port=10809,tls-creds=tls0 \ <br />
+       /path/to/img <br />
+  ~~~  </p>
+
+<h4>http://bethesignal.org/blog/2011/01/05/how-to-mount-virtualbox-vdi-image/</h4>
+
+<p>Ahora podríamos ejecutar cfdisk en el dispositivo de bloque, y montarlo
+como partición individual. <br />
+  ~~~ <br />
+  # mount /dev/nbd0p1 /mnt -- "/mnt" es el punto de montaje. <br />
+  ~~~  </p>
+
+<p>Al terminar podemos desmontar la unidad y el dispositivo, así. <br />
+  ~~~ <br />
+  $ unmount /mnt <br />
+  # qemu-nbd -d /dev/nbd0 <br />
+  ~~~  </p>
+
+<p>You can use qemu-nbd in Linux to access a disk image as if it were a block device. <br />
+Here are some examples of operations that can be performed from a live Knoppix terminal. <br />
+  ~~~ <br />
+  $ su <br />
+  # modprobe nbd <br />
+  # qemu-nbd --read-only --connect=/dev/nbd0 --format=vpc <em>vhd-file-name</em> <br />
+  ~~~  </p>
+
+<h6>If VHDX format:</h6>
+
+<p>~~~ <br />
+  # qemu-nbd --connect=/dev/nbd0 --format=VHDX <em>hdx-file-name</em> <br />
+  # ddrescue --verbose --force /dev/nbd0 /dev/sda  # write image to /dev/sda <br />
+  ~~~  </p>
+
+<h6>Write one partition:</h6>
+
+<p>~~~ <br />
+  # nbd --partition=2 --read-only --connect=/dev/nbd2 --format=vpc vhd-file-name <br />
+  # ddrescue --verbose --force /dev/nbd2 /dev/sda2 # write partition 2 of image to /dev/sda2 <br />
+  ~~~  </p>
+
+<h6>Mount partition:</h6>
+
+<p>~~~ <br />
+  # qemu-nbd --partition=2 --read-only --connect=/dev/nbd2 --format=vpc vhd-file-name <br />
+  # mount /dev/nbd2 /mnt <br />
+  ~~~  </p>
+
+<h6>Unmount and disconnect image file:</h6>
+
+<p>~~~ <br />
+  $ umount /mnt <br />
+  # qemu-nbd --disconnect /dev/nbd2 <br />
+  ~~~  </p>
+
+<h6>To convert a vhd image to raw (less usable)</h6>
+
+<p>~~~ <br />
+  $ qemu-img convert -f raw -O vpc something.img something.vhd <br />
+  ~~~  </p>
+
+<h6>To convert a vhd image to cow2 (the up to date qemu format)</h6>
+
+<p>~~~ <br />
+  $ qemu-img convert -f qcow2 -O vpc something.img something.vhd <br />
+  ~~~  </p>
+
+<hr />
+
+<h2>E X P E R I M E N T A L</h2>
+
+<h3>test 1</h3>
+
+<blockquote>
+  <p>CAZADO!!
+EXPERIMENTAL: Debo probar hacer una copia de una instalación normal y una vez <br />
+terminada la  instalación, formar el 'backing' sobre una copia de la imagen que ya <br />
+contiene el sistema operativo instalado. <br />
+En este caso, se conseguiría una imagen sin 'tocar' o como backup, sobre la cual hacemos <br />
+una copia, es decir, copiamos el archivo renombrándolo, antes de formar el 'backing'. <br />
+Una vez hecho esto, lo creamos. Al crear el backing de esta forma, conseguimos <br />
+una imagen que no está tocada. <br />
+Esto puede ser interesante si por algún motivo, no queremos crear una imagen en crudo, <br />
+o si queremos conservar una copia de una determinada instalación en un estado inicial. <br />
+También puede resultar útil, cuando hemos aplicado muchas actualizaciones a nuestra <br />
+imagen, y resulta mas complicado volver a un estado anterior, que comezar desde el <br />
+principio. <br />
+Efectivamente es interesante -- pero no pasa de ahí, por que si haces eso... después <br />
+no puedes trabajar con el modelo Snapshot. Qemu dice algo así como: la imagen <br />
+fue creada sin esa característica. Asi que no es viable. No podrás aplicar esa <br />
+funcionalidad al overlay, que por cierto se crea sin problema!!! Lo mejor es un <br />
+copy simple. Recuerda que al hacer esto, conviertes la imagen en crudo en el <br />
+'backing' desmadrando tu buena intención. La idea era hacer la copia al final, pero 
+una vez creado el overlay, desconozco como añadir esa funcionalidad.</p>
+</blockquote>
+
+<h3>test 2</h3>
+
+<p>Ahora, vamos a probar hacer la instalación sobre el overlay, a ver que pasa!</p>
+
+<h3>test 3</h3>
+
+<p>Aprovechando una coexion ssh sobre otro host, hay dos formas de interactuar sobre la VM</p>
+
+<ul>
+<li>1 Aquí la comunicación es a 'pelo', es decir, directamente a través de la conexión 
+encriptada.</li>
+<li>2 Aquí avanzamos el servidor de las Xs(Xorg). Para ello iniciamos una nueva instancia
+del dispositivo
+~~~ <br />
+$ xinit -- :1 <br />
+~~~ <br />
+Conectamos al host, via ssh y explicitamos que vamos a pasar gnome a través de la
+conexión:
+~~~ <br />
+$ ssh -XY user@host <br />
+~~~  </li>
+</ul>
+
+<p>Ventajas de la primera opción: en una máquina lenta, como el cacharro que yo uso,
+es la mejor alternativa, porque evidentemente no se hace uso del host para procresar
+gnome. Es qemu quien emula la gráfica y, por tonto ahorramos recursos. Es aaalgo mas
+rápido así.
+Otra ventaja es que qemu corre instanciado en nuestro host y podemos recolocar la ventana
+como si fuera cualquier otra. También he comprobado que las teclas de 'foco' falla menos.
+Pero es un desastre igualmente. A veces funciona, a veces no.</p>
+
+<p>Ventajas de la segunda opción: En una máquina tan desesperádamente lenta como la mía,
+la verdad es que la diferencia es tan microscópica, que de todas formas irá lenta. Así
+que es una opción tan buena como la primera.
+La tecla de foco, aquí, definitivamente no chuta ni a ostias. Lo bueno es que no hace falta
+por que como corremos la guest en otra instancia, le des como le des, las teclas son las del
+target!!. </p>
+
+<p>En ambos escenarios es recomendable ajustar los procesos 'bonitamente'. Se nota, que es findus!
+pruebas hechas con prioridad sobre libvirt y, qemu! y ajuste feoto sobre gnome y otros procesos
+chorras que no he desinstalado por falta de ganas!</p>
+
+<p>La super idea guay que lo flipas es exterminar gnome del SO, y cargar un only text full. El
+problema es que sin WM decente qemu sólo lanza guests en texto. La existencia de Windows aquí
+es sólo a título informativo.</p>
+
+<p>Ah, otra cosa que he podido comprobar, es que si queremos adquirir el escritorio remoto, a la
+primera no funciona nunca. Hay que --replace el dispositivo o no funcionará. </p>
+
+<h3>test 4</h3>
+
+<p>Pruebas sobre el loopback. Una forma rápida y sencilla de montarnos un loopback es la 
+siguiente:</p>
+
+<ul>
+<li>1 Creamos una imagen en crudo como se explica en este mismo artículo -crear imagen.</li>
+<li>2 Creamos la particion con Fdisk
+<ul>
+<li>m - muestra el menu de opciones.</li>
+<li>n - nueva particion. 
+Nos piden que escojamos el tipo de partición. Como provablemente ya sabemos...
+Una partición primaria, es una partición generalmente usada para cargar un sistema
+de arranque. Esto ha cambiado notoriamente en nuestros días. Actualmente la antigua
+Bios, ha sido reemplazada en máquinas mas modernas por otro sistema de carga, llamado
+UEFI, capaz de arrancar un sistema operativo en qualquier tipo de partición.
+Anotado esto, continuo explicando: en nuestro caso no tiene mucho sentido esta primera
+elección, una primaria, por que vamos a utilizar la imagen como loopback, así que 
+la elección es una partición lógica. Pero como ya sabemos, para crear una lógica el 
+sistema por defecto crea una extendida, desde la que cuelga las sucesivas lógicas. 
+la 'extendida', no es más que un par de bytes donde el SO guarda el própio ID de 
+partición, o número denominativo de partición. 
+<strong>nota:</strong> aquí hay una gran controversia, sobre la gran cagadota que metió Sir Windows
+en cuanto a la interpretación del código hexadecimal utilizado para identificar este
+ID de partición. Algún día nos reiremos de windows todos juntos, por que pienso traducir
+el artículo original. No veo el momento!!!
+Aquí seguimos los pasos generalmente aceptando los valores por
+defecto para el sector de inicio y fin.</li>
+<li>t para escoger el tipo de partición deseada. Si es windows NTFS el 87.</li>
+<li>w escribimos la tabla de particiones a disco y salimos.</li>
+</ul></li>
+</ul>
+
+<p>Aquí hay una técnica avanzda, que consiste en crear una partición de intercambio en primer
+lugar(o swap en linux). A continuación crear nestra partición. Esta técnica se merece un 
+análisis más extenso!!!
+    - 3 Y ahora lo montamos y fracasa estrepitosamente nuestro proyecto. Por que se nos olvida
+    algo. Efectivamente, formatear el dispositivo. Si miramos el man del comando </p>
+
+<h3>test del 5 al 237</h3>
+
+<p>Los valores sobre particiones son erroneos desde distintas aplicaciones. Por ejemplo:
+Fdisk muestra una tabla de particiones de cuatro particiones creadas, despues de formatear
+con objeto de conseguir un sistema de fichero sobre el que trabajar.</p>
+
+<p>Arroja datos tan desorvitadamente estúpidos, que es dificil entender el por qué.
+sobre un archivo se pretende montar un dispositivo de bloque, llamémoslo virtual!.
+Creamos el archivo con límite a 3G. Montamos el dispositivo sobre el loop0. A continuación,
+formateamos la partición tipo extended con etiqueta ntfs( logical) con gparted.
+Volvemos a comprovar con fdisk -lu sobre el /dev/loop0 y vuala. Encontramos cuatro particiones
+de 914.5G 867,2G 5k y 25,3M respectivamente. Esto parece el milagro de los peces y el pan.</p>
+
+<p>La única idea que justificaría algo tan brutalmente ABSURDO es la velocidad-absurda con la que
+formatea el disco, también el hecho de que mi otro ordenador, con el que NO estoy haciendo 
+todas estas operaciones, después de restar algo parecido al 5% de espacio reservado en un 
+sistema de archivos, se parece a eso, un Terabyte. </p>
+
+<p>Vuelvo a mirar con gparted y /dev/loop0/ tiene un tamaño de 3G,
+con fdisk -lu sobre fichero, lo mismo, pero fdisk cuelga 4 ...pNº respectivamente contando
+de 1 a 4. con los valores de tamaño de disco descritos anteriormente. ejem:
+ /dev/loop0p2 ... 867,2G. No tiene sentido!.  </p>
+
+<p>He montado el loopback sin calcular el offset, por que en principio sólo había una partición.
+Esperando encontrar otros datos, entre ellos el límite de inicio para el sector de disco,
+que debería ser algo así como 2097Kb y sale una burrada como 657974 para la primera partición
+y 2642463409 para el final de la última. </p>
+
+<p>El formateo se realiza con mkfs.ntfs sobre el dispositivo -F forzando el formato pues de
+otra forma es imposible efectuar operación sobre archivo.</p>
+
+<h3>test desde el 238 ...</h3>
+
+<p>Intentamos generar un dispositivo con el que trabajar desde la VM, esto es generalmente
+un dispositivo de bloque. En este caso será utilizado un <em>disco duro virtual</em>. </p>
+
+<ul>
+<li>1 Metodo cp instalation source file.</li>
+<li><p>2 Metodo crear dispositivo de bloque, 'disco virtual'.</p>
+
+<ol>
+<li>Lo pimero es crear el archivo con el tamaño deseado por ejemplo 100MegaBytes.</li>
+</ol>
+
+<p>~~~ <br />
+$ dd if=/dev/zero of=VHD-file bs=1M count=100 <br />
+~~~  </p></li>
+</ul>
+
+<p>Aquí creamos un archivo de 100Megas de 100 sectores de 1Mega cada uno. Si damos un tamaño
+mayor por sector, corremos el risgo de perder datos en la escritura. 512 sería lo mejor.</p>
+
+<p>Normalmente el sistema operativo tiene asociados al menos un dispositivo loopback por <br />
+defecto, pero en todo caso crear uno para hacer pruebas, puede realizarse así:
+Con un simple <code>ls -l</code> sobre <code>/dev/loop*</code> comprovar de que estamos hablando.</p>
+
+<p>~~~ <br />
+  # mknod /dev/fake-dev0 -b 7 200 <br />
+  ~~~  </p>
+
+<p>Independientemente de si usamos un dispositivo de loopback ya creado por el sistema, o el
+que acabamos de crear nosotros, antes de particionarlo y darle formato de archivo, habrá
+que montarlo:</p>
+
+<p>Existen varias opciones para hacer esto. Estamos trabajando con loopbacks(recordatorio),
+por ejemplo losetup o kpartx. Debian y derivados, disponen de losetup, Fedora tiene ambos!
+Por compatibilidad usaremos <code>losetup</code>:</p>
+
+<p>~~~ <br />
+  $ losetup /dev/loop0 VHD-file <br />
+  ~~~  </p>
+
+<p>A continuación, creamos la partición/s del VHD sobre el dispositivo de loopback sobre el que
+hemos montado nuestro 'futuro' dispositivo de bloque virtual, o VHD.
+También encontramos varias herramientas para hacer esto cfdisk, fdisk. Utilizaremos fdisk, 
+que viene en la mayoría de sistemas Linux.</p>
+
+<p>~~~ <br />
+  # fdisk /dev/loop200 <br />
+  ~~~ </p>
+
+<p>He variado el dispositivo, para mostrar que esta operación puede realizarse igualmente sobre
+cualquiera de ellos tanto en /dev/loop0 como /dev/loop200.</p>
+
+<p>Dentro de fdisk <code>m</code> lista el menú de opciones.</p>
+
+<p>Comprobamos la particion con -- <code>p</code>
+Comprovamos el espacio libre para crear la/las partion/es -- <code>F</code>.
+Crear una partición, en este caso primaria, con <code>n</code>. A continuación comprobamos que los
+valores por defecto se ajustan a los valores que hemos visto cuando hicimos <code>F</code>. Si son
+corectos(si no lo son es que algo va mal), podemos aceptar con simple <code>return</code> el valor
+sugerido.</p>
+
+<p>Ahora queda detinir en la tabla de particiones el tipo de sistema de archivo con el que 
+será formateada la 'unidad virtual'. Para esto podemos listar todas las alternativas con
+<code>l</code>, aún dentro de <code>fdisk</code>. Vemos que hay un número de dos cifras, seguido por una breve
+descripción.</p>
+
+<p>Para ntfs, es habitual seleccionar el 87. Ya sólo queda escribir los datos a disco y salir.
+Ambas acciones con <code>w</code>.</p>
+
+<p>Para comprobar que los datos se han escrito correctamente no hace falta entrar a fdisk otra
+vez, tan sólo hacemos un <code>fdisk -l /dev/loop0</code>.</p>
+
+<p>En este punto, recalco que aún no tenemos un punto de montaje -lo que está montado es el 
+dispositivo loopback, asociado a nuestro fichero 'proto VHD', sobre el que hemos hecho
+las anteriores operaciones.</p>
+
+<p>Lo siguiente es formatear el 'proto-disco'. Con <code>mkfs</code> puede llevarse a cabo de la siguiente <br />
+manera. Advertencia, este proceso está aún bajo revisión. </p>
+
+<p>~~~ <br />
+ # mkfs -t ntfs /dev/loop200 <br />
+  ~~~  </p>
+
+<p>Después de llevar a cabo esta última acción, se consigue un disco completamente operativo.
+Sin embargo, he encontrado ciertos errores que aún no tengo muy claro como solventar: </p>
+
+<ul>
+<li>sector de inicio de la partición. </li>
+<li>sectores por pista.</li>
+<li>número de cabezas o cabezales.</li>
+<li>el cluster es ajustado automáticamente.</li>
+</ul>
+
+<p>Mkfs advierte que el sector de inicio no fué especificado, y que al no poder determinarlo 
+automáticamente, se establece a valor 0. Lo mismo con los sectores por pista y el número 
+de cabezales. El tamaño de cluster es ajustado automáticamente 4096 bytes.</p>
+
+<hr />
+
+<p>VIRTIO -- https://wiki.archlinux.org/index.php/QEMU#qxl</p>
+
+<p>virtio-vga / virtio-gpu is a paravirtual 3D graphics driver based on virgl. Currently <br />
+a work in progress, supporting only very recent (>= 4.4) Linux guests.  </p>
+
+<p>QEMU offers guests the ability to use paravirtualized block and network devices using <br />
+the virtio drivers, which provide better performance and lower overhead.  </p>
+
+<blockquote>
+  <p>A virtio block device requires the option <br />
+-drive instead of the simple -hdX plus if=virtio: <br />
+~~~ <br />
+$ qemu-system-i386 -boot order=c -drive file=disk_image,if=virtio  </p>
+
+<h2>> ~~~  </h2>
+</blockquote>
+
+<p>Indicio DFB </p>
+
+<p>(qemu) dump-guest-memory gdbserver getfd getfd name <br />
+qemu-io: shell type?</p>
+
+<hr />
+
+<p>Note: -boot order=c is absolutely necessary when you want to boot from it. There is no <br />
+auto-detection as with -hdX  </p>
+
+<p>Almost the same goes for the network: <br />
+  ~~~ <br />
+  $ qemu-system-i386 -net nic,model=virtio <br />
+  ~~~  </p>
+
+<blockquote>
+  <p><em>Note:</em> This will only work if the guest machinethas drivers for virtio devices. Linux does, <br />
+and the required drivers are included in Arch Linux, but there is no guarantee that virtio <br />
+devices will work with other operating systems.  </p>
+</blockquote>
+
+<hr />
+
+<h2>ATAJOS DEL TECLADO</h2>
+
+<p>Son combinaciones de teclas, para acceder a funcionalidades própias de Qemu. Generalmaente: <br />
+<strong>ctrl + alt + tecla</strong>:  </p>
+
+<ul>
+<li>ctrl+alt: acopla el ratón a la ventanta donde corremos qemu. Pero también las <br />
+funciones de acceso rápido(teclas vinculadas). Éstas, toman los valores de la máquina <br />
+en carrera. ejem: <br />
+  VM linux: ctrl+alt+suprimir, cierra sessión. <br />
+  VM windows: ctrl+alt+surpimir, lanza el administrador de procesos. <br />
+Es decir, hereda las funciones relacionadas con dispositivos de entrada, del proceso <br />
+emulado/virtualizado.  </li>
+<li>ctrl+alt+f: maximiza/desmaximiza ventana de la VM.</li>
+<li>ctrl+alt+u: Recupera el tamaño de la ventana a su dimensión original.</li>
+<li>ctrl+alt+1: volver al modo en el que hayamos lanzado la VM(gráfico/texto).</li>
+<li>ctrl+alt+2: Monitor de qemu.</li>
+<li>ctrl+alt+3: Cónsola en serie.</li>
+<li>ctrl+alt+4: Cónsola en paralelo. </li>
+<li>ctrl+alt+avance página: control de panatalla en qemu monitor y cónsolas.</li>
+<li>ctrl+alt+retroceso página: control de panatalla en qemu monitor y cónsolas.</li>
+<li>ctrl+alt+arriba: control de panatalla en qemu monitor y cónsolas.</li>
+<li>ctrl+alt+abajo: control de panatalla en qemu monitor y cónsolas.</li>
+</ul>
+
+<h4>Comandos del monitor <strong>Qemu</strong></h4>
+
+<ul>
+<li>commit device|all: Aplica cambios en imagenes de disco (capturas).</li>
+<li>info subcommand: información de la VM.  </li>
+<li>q| quit: cierra qemu.  </li>
+<li>eject[-f] dispositivo: expulsa un soportes en la supuesta, cd/flopy(probar HD?)</li>
+<li>change device filename: cambia uno de los soportes de la VM. CD y floppy (HD?)</li>
+<li>screendump filename: captura de pantalla.</li>
+<li>savevm ta|id: guarda recupera y borra instantáneas de la supuesta.</li>
+<li>loadvm tag|id: guarda recupera y borra instantáneas de la supuesta.</li>
+<li>delvm tag|id: guarda recupera y borra instantáneas de la supuesta.</li>
+<li>stop / c| cont: detiene y reanuda la emulación.  </li>
+<li>sendkey keys: envía secuencia de teclas a la VM. Ejem. inicio sesion Windows.</li>
+<li><code>system_reset</code>: equivale a reset(reboot).</li>
+<li><code>system_powerdown</code>: equivale a apagado(shutdown).</li>
+</ul>
+
+<h4>Redefinir teclas:</h4>
+
+<h2><a name="ai">AGRADECIMIENTOS</a></h2>
+
+<p>Documentation/Networking --<a href="http://wiki.qemu.org/Documentation/Networking">QEMU</a> <br />
+Virtualization Api --<a href="http://libvirt.org/index.html">Libvirt</a>
+Manual Capturas(inglés) --<a href="https://kashyapc.fedorapeople.org/virt/lc-2012/snapshots-handout.html">snapshots-handout</a> <br />
+ArchWiki --<a href="https://wiki.archlinux.org/index.php/QEMU#qxl">QEMU</a> <br />
+Departamento de informática de IPC -<a href="http://elpuig.xeill.net/Members/vcarceler/articulos/qemu">IPC</a> <br />
+Suse --<a href="https://www.suse.com/documentation/sles11/book_kvm/data/cha_qemu_guest_inst_qemu-img.html">QEMU</a> <br />
+Debian --<a href="https://wiki.debian.org/es/NetworkConfiguration#C.2BAPM-mo_utilizar_VLAN_.28dot1q.2C_802.1q.2C_trunk.29_.28Etch.2C_Lenny.29">VLAN</a> <br />
+IEEE 802.1Q --<a href="https://es.wikipedia.org/wiki/IEEE_802.1Q">Wikia</a> <br />
+Javier Cristóbal -- <a href="http://markdown.es/sintaxis-markdown/">Markdowns y otras recomendaciones</a> - <a href="http://limni.net/blog/">productividad mac</a> <br />
+HeavyMetalRadio <a href="http://stream.kazancity.net:8000/14-heavymetalradio">hmr</a></p>
+
+<hr />
+
+<h2>1. <a href="#referencia">Titulo de algo aqui</a>  </h2>
+
+<ol>
+<li><a name="referencia">Titulo de algo</a>  </li>
+</ol>
+
+<hr />
+
+<p>man qemu-system:</p>
+
+<p>-net nic
+Create a new Network Interface Card and connect it to VLAN n (n = 0 is the default). The
+           NIC is an e1000 by default on the PC target.</p>
+
+<p>Esto es | una prueba
+--- | ---
+ctr+alt+ | afecta a <code>todas</code>
+ctrl+alt+
+ctrl+alt+</p>
