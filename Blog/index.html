@@ -103,8 +103,8 @@ Terminal=false
 es un desastre de proporciones cósmicas. Por lo general, cualquier aplicación de cónsola,
 por muy pequeña que sea, guarda un pequeño resumen de comandos, accedido desde la cónsola 
 con <code>-h</code> o <code>--help</code>. Por lo que si no sale nada o no funciona esto, hay
-que sospechar. De la aplicación, del lanzador y, del sitio web desde fue descargado.
-En nuestro caso la aplicación parece ser que guarda la clabe, en una caché que no se borra 
+que sospechar. De la aplicación, del lanzador y, del sitio web desde donde fue descargado.
+En nuestro caso, parece que la aplicación, guarda la clave, en una caché que no se borra 
 ni siquiera reiniciando sistema. </p>
 </blockquote>
 
@@ -125,19 +125,19 @@ un directorio temporal! Continuamos habilitando permisos de ejecución:</p>
 
 <p>Como es lógico, es innecesario correr según que aplicaciones con permisos de administrador.
 En función de esto, colocaremos el archivo donde toque. 
-Hay dos directorios donde podrá colocarse nuestro archivo:
-1. <code>/usr/sahre/applications</code>. Esta nunca es la primera opción, porque hay que ser un poco mas 
-meticuloso, ya que habrá que escribir sobre el directorio, con los permisos oportunos. Y
-Después, comprobar que tanto los permisos de operación, como los usuarios vinculados al archivo,
-son los correctos.
-Así que lo ideal, es hacerlo en el directorio de usuario: <code>$HOME/.local/share/applications</code></p>
+Hay dos directorios donde podrá colocarse nuestro archivo:<br>
+1. <code>/usr/sahre/applications</code>. Esta nunca es la primera opción, porque hay que ser 
+un poco mas meticuloso, ya que habrá que escribir sobre el directorio, con los permisos 
+oportunos. Y Después, comprobar que tanto los permisos de operación, como los usuarios 
+vinculados al archivo, son los correctos.<br>
+2. Así que lo ideal, es hacerlo en el directorio de usuario: <code>$HOME/.local/share/applications</code></p>
 
 <pre><code>$ mv mozilla.desktop $HOME/.local/share/applications
 </code></pre>
 
 <h4>Tabla de categorias usuales:</h4>
 
-<table><thead>
+<table class="table "><thead class="thead-inverse">
     <tr>
       <th>Categorias</th>
       <th align="left">Variable</th>
