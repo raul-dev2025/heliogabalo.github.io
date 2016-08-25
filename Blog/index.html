@@ -64,8 +64,165 @@
        <div class="jumbotron">
          <div class="container">
           <div class="blog-post">
+            <h2 class="blog-post-title">Links Gnome</h2><g:plusone></g:plusone>
+            <p class="blog-post-meta">Agosto 24, 2016 by <a href="#">Heliogabalo</a></p>
+
+
+<p>Hace varios años, leí un artículo sobre como crear enlaces de escritorio, para una
+aplicación que al instalarla, no lo crea. Dado que el mérito no es mio, he decidido
+colgar al final del <em>post</em>, el enlace a mi fuente.</p>
+
+<p>Como de costumbre, aquí en Territorio Linux, tomamos un enfoque de cónsola, para 
+resolver problemas; aunque leyendo el artículo original, aquellos que sólo usen
+<em>ratón</em> también podrán conseguir lo mismo.</p>
+
+<p>Lo primero es abrir una terminal. Típico <code>alt + F2</code>para llamar al lanzador de <strong>gnome</strong>
+y el comando <code>gnome-terminal</code>, a continuación pulsamos <em>retorno de carro</em>. </p>
+
+<p>Aquí el que prefiera Gedit, desde la ventana que acaba de abrirse pude lanzarlo igualmente.
+De cualquier otra forma, <code>nano</code> es una alternativa disponible en cualquier máquina <em>Linux</em>.</p>
+
+<p>Empezamos creando un archivo al que llamaremos por el nombre del binario y, añadiendo el 
+<code>.desktop</code>:</p>
+
+<pre><code>$nano mozilla.desktop
+</code></pre>
+
+<p>Las siguientes líneas deben escribirse tal cuál. No es necesario modificar ninguna.
+Obviamente para la versión del binario habrá que comprovarla antes. Con la bandera
+de ayuda, obtendremos el formato adecuado para el comando que buscamos, habitualmente <code>-h</code>.</p>
+
+<pre><code>[Desktop Entry]
+Version=1.0
+Type=Aplication
+Terminal=false
+</code></pre>
+
+<blockquote>
+  <p>n.d.e: si lo intentais com Mega(el directorio de 50Gb gratis en la nube), el lanzador 
+es un desastre de proporciones cósmicas. Por lo general, cualquier aplicación de cónsola,
+por muy pequeña que sea, guarda un pequeño resumen de comandos, accedido desde la cónsola 
+con <code>-h</code> o <code>--help</code>. Por lo que si no sale nada o no funciona esto, hay
+que sospechar. De la aplicación, del lanzador y, del sitio web desde fue descargado.
+En nuestro caso la aplicación parece ser que guarda la clabe, en una caché que no se borra 
+ni siquiera reiniciando sistema. </p>
+</blockquote>
+
+<p>...Continuamos con el archivo:</p>
+
+<pre><code>Name=mozilla
+Categories=Network;
+Exec=/path/to/binary-file
+Comment=Este es mi comentario/algo
+Icon=/path/to/imagen.ico
+</code></pre>
+
+<p>Habrá que guardar el archivo. Las buenas prácticas, dictan hacer estas operaciones sobre
+un directorio temporal! Continuamos habilitando permisos de ejecución:</p>
+
+<pre><code>$ chmod +x mozilla.desktop
+</code></pre>
+
+<p>Como es lógico, es innecesario correr según que aplicaciones con permisos de administrador.
+En función de esto, colocaremos el archivo donde toque. 
+Hay dos directorios donde podrá colocarse nuestro archivo:
+1. <code>/usr/sahre/applications</code>. Esta nunca es la primera opción, porque hay que ser un poco mas 
+meticuloso, ya que habrá que escribir sobre el directorio, con los permisos oportunos. Y
+Después, comprobar que tanto los permisos de operación, como los usuarios vinculados al archivo,
+son los correctos.
+Así que lo ideal, es hacerlo en el directorio de usuario: <code>$HOME/.local/share/applications</code></p>
+
+<pre><code>$ mv mozilla.desktop $HOME/.local/share/applications
+</code></pre>
+
+<h4>Tabla de categorias usuales:</h4>
+
+<table><thead>
+    <tr>
+      <th>Categorias</th>
+      <th align="left">Variable</th>
+    </tr>
+  </thead><tbody>
+    <tr>
+      <td>Accesorios</td>
+      <td align="left"><code>Categoria=Utility;</code></td>
+    </tr>
+    <tr>
+      <td>Gráficos</td>
+      <td align="left"><code>Categoria=Graphics;</code></td>
+    </tr>
+    <tr>
+      <td>Herramientas de sistema</td>
+      <td align="left"><code>Categoria=System;</code></td>
+    </tr>
+    <tr>
+      <td>Internet</td>
+      <td align="left"><code>Categoria=Network;</code></td>
+    </tr>
+    <tr>
+      <td>Juegos</td>
+      <td align="left"><code>Categoria=Game;</code></td>
+    </tr>
+    <tr>
+      <td>Oficina</td>
+      <td align="left"><code>Categoria=Office;</code></td>
+    </tr>
+    <tr>
+      <td>Sonido y video</td>
+      <td align="left"><code>Categoria=AudioVideo;</code></td>
+    </tr>
+  </tbody></table>
+
+
+<p>El archivo completo quedaría algo así:</p>
+
+<pre><code>[Desktop Entry]
+Version=1.0
+Type=Aplication
+Terminal=false
+Name=mozilla
+Categories=Network;
+Exec=/path/to/binary-file
+Comment=Este es mi comentario/algo
+Icon=/path/to/imagen.ico
+</code></pre>
+
+<p>Fuente: <a href="https://eldebiandepepe.wordpress.com/2011/12/19/crear-lanzadores-accesos-directos-en-el-menu-graficamente-o-con-el-terminal/">eldebiandepepe</a></p>
+
+            </div>
+          </div>
+        </div><!--/.blog-post -->
+
+
+
+    <!-- ####################  Google Adsense ####################### -->
+        <div class='container adsense'>
+          <div class='row'>
+           <div class='col-md-10 col-md-offset-1'>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- io_campaña -->
+    <ins class="adsbygoogle"
+           style="display:inline-block;width:728px;height:90px"
+                data-ad-client="ca-pub-0997574766527072"
+                     data-ad-slot="6821125786"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+           </div>
+          </div>
+        </div>
+    <!-- #################### End Google Adsense ##################### -->
+
+
+
+    <!--AQUI EMPIEZA LA SEGUNDA ENTRADA -->
+      <div class="jumbotron">
+        <div class="container">
+          <div class="blog-post">
             <h2 class="blog-post-title">Emcon</h2><g:plusone></g:plusone>
             <p class="blog-post-meta">Agosto 16, 2016 by <a href="#">Heliogabalo</a></p>
+
 
 
 <p>Desarrollo, especialiczación, anvance tecnológico, videojuegos.</p>
@@ -126,158 +283,7 @@ el entretenimiento.  </p>
 
             </div>
           </div>
-        </div><!--/.blog-post -->
-
-
-
-    <!-- ####################  Google Adsense ####################### -->
-        <div class='container adsense'>
-          <div class='row'>
-           <div class='col-md-10 col-md-offset-1'>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- io_campaña -->
-    <ins class="adsbygoogle"
-           style="display:inline-block;width:728px;height:90px"
-                data-ad-client="ca-pub-0997574766527072"
-                     data-ad-slot="6821125786"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-
-           </div>
-          </div>
-        </div>
-    <!-- #################### End Google Adsense ##################### -->
-
-
-
-    <!--AQUI EMPIEZA LA SEGUNDA ENTRADA -->
-      <div class="jumbotron">
-        <div class="container">
-          <div class="blog-post">
-            <h2 class="blog-post-title">Qemu - resize</h2><g:plusone></g:plusone>
-            <p class="blog-post-meta">Agosto 10, 2016 by <a href="#">Heliogabalo</a></p>
-
-
-<p>Desde la redacción de Territorio Linux, queremos presentaros una serie de artículos,
-dirigidos a virtualizar o para-virtualizar una máquina, corriendo desde un servidor
-Linux.</p>
-
-<p>Vamos a empezar casi por el final, pués mientras escribo estas líneas, el equipo de
-desarrolladores, trabaja en ésta serie de artículos, realizando las comprobaciones 
-oportunas, para evitar que la información sea erronea o desactualizada...</p>
-
-<p>Presentamos <strong>Qemu</strong>. Se trata de un <em>emulador</em>, que cuenta con una ámplia gama de 
-utilidades y <em>accesorios</em> útiles tanto en entorno gráfico, como sobre la línea de 
-comandos.</p>
-
-<p>Aquí, vamos a centrarnos en una aproximación a sus funciones, siempre sobre la 
-<em>cónsola</em>. Probablemente muchas personas habituadas a leer código, no encontrarán mayor
-problema, siendo éstas instrucciones, encapsuladas en bloques de código:</p>
-
-<pre><code>
-  $ bloque de código &lt;-- '$' denota permisos de usuario
-</code>  </pre>
-
-<pre><code>
-  # otro bloque con permisos '#' usuario root o administrador
-</code>  </pre>
-
-<h4>Redimensionar una imagen</h4>
-
-<p>En Qemu hablamos de imágen, para referirnos a un dispositivo virtual, que hará las veces
-de disco duro. Dejamos para otro momento, el cómo, crear y administrar imágenes. Partiremos
-desde este concepto principal, que es la <em>imagen</em>.</p>
-
-<p>Bajo el comando <code>qemu-img</code> tenemos la opción <code>resize</code>, utilizada para alterar el tamaño de una
-imagen, previamente creada.
-El tamaño de una imagen, únicamente puede ser alterada, cuando la própia imagen fue creada en
-formato <em>raw</em> o crudo en inglés.</p>
-
-<p>Sobre la distribución <em>fedora</em>(reseña al final del artículo), ha sido añadida otra característica
-para esta opción <code>resize</code>. Pueden modificarse tamaños de imagen, creados en formato qcow2, 
-para aumentar su tamaño, unicamente. Es decir, no podrá disminuir su espacio o hacerla más
-pequeña.</p>
-
-<blockquote>
-  <p>qcow2 -- qemu copy on write, version 2.</p>
-</blockquote>
-
-<pre><code>
-  # qemu-img resize imagen tamaño
-</code>  </pre>
-
-<p>De esta forma añadimos espacio a la imagen ya creada, pero ojo, es un valor <em>absoluto</em>. Con
-esto quiero decir, que si la imagen tenía 10 Gigas, utilizando este anterior comando:
-<pre><code>
-  # qemu-img resize miImagen.raw 10G
-</code> </pre>
-<p>... la imagen pasará a tener 20 Gigas !!!</p>
-
-<p>Para un efecto más granulado, puden usarse los operadores <code>+</code> y <code>-</code>, así: <br />
-<pre><code>
-  # qemu-img resize miImagen.raw +2G
-</code> </pre>
-<p>Ahora nuestra imagen tendrá el tamaño deseado; 12 Gigas.</p>
-
-<blockquote>
-  <p>man page: <br />
-qemu-img resize filename [+|-]size[K|M|G|T] <br />
-Los sufijos que pueden ser usados son: <br />
-K -- kilobytes <br />
-M -- megabytes <br />
-G -- gigabytes <br />
-T -- terabytes  </p>
-</blockquote>
-
-
-<div class='panel panel-danger' role='alert'>
-  <div class='panel-heading'>
-     <span class='glyphicon glyphicon-warning-sign' aria-hidden='true'></span>
-     <span class='panel-title'>PRECAUCION</span>
-  </div >
-  <div class='panel-body'>
-    <p>Un aspecto importante que debe tenerse en cuenta, es ajustar el dispositivo acorde al 
-    nuevo tamaño asignado a la imagen. De otra forma, es posible corromper los datos de la
-    imagen:</p>
-    
-    <h4>Aumentar su tamaño:</h4>
-    
-    <p>Si el tamaño es aumentado, <em>después</em> de asignar el espacio a la imagen, con el comando 
-    descrito líneas arriba, debe ajustarse el tamaño del dispositivo, con las herramientas 
-    propias de particionado de disco.</p>
-    
-    <h4>Disminuir el tamaño:</h4>
-    
-    <p>Para reducir el tamaño, primero es obligatorio el uso de estas herramientas de particionado.
-    Es decir, hay que lanzar la <em>Supuesta(VM)</em> y reducir el espacio de disco <em>antes</em> de 
-    redimensionar con qemu.</p>
-  </div>
-</div>
-
-<blockquote>
-  <blockquote>
-  <p>Vemos que el orden del proceso es opuesto en cada caso!!</p>
-</blockquote>
-
-<p></blockquote></p>
-
-<p><strong>Reseña:</strong> en Territorio Linux, hemos encontrado que una de la librerías más importantes
-de Qemu <em>libvirt</em>, no está completamente <em>integrada</em> en otras distribuciones fuera 
-de <em>Fedora</em>. 
-Nuestro equipo utiliza generalmente máquinas <em>Debian</em>, y es verdad que la librería está, 
-pero nosotros no hemos sido capaces de instalarlas, <em>'sin romper el sistema'</em>.
-Aconsejamos el uso de <em>Fedora</em>, que por otro lado tiene un entorno de usuario que, sencillamente
-es glorioso!. Perfecto para un usario medio.</p>
-
-
-            </div>
-          </div>
-
-
-
-         
-          </div><!-- AQUI EMPIEZA LA ENTRADA DE FEATURES/.blog-post -->
+        </div><!-- AQUI EMPIEZA LA ENTRADA DE FEATURES/.blog-post -->
 
       <div class="jumbotron">
         <div class="container">

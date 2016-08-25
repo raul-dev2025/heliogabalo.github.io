@@ -1,0 +1,95 @@
+<h4>Links Gnome</h4>
+
+<p>Hace varios años, leí un artículo sobre como crear enlaces de escritorio, para una
+aplicación que al instalarla, no lo crea. Dado que el mérito no es mio, he decidido
+colgar al final del <em>post</em>, el enlace a mi fuente.</p>
+
+<p>Como de costumbre, aquí en Territorio Linux, tomamos un enfoque de cónsola, para 
+resolver problemas; aunque leyendo el artículo original, aquellos que sólo usen
+<em>ratón</em> también podrán conseguir lo mismo.</p>
+
+<p>Lo primero es abrir una terminal. Típico <code>alt + F2</code>para llamar al lanzador de <strong>gnome</strong>
+y el comando <code>gnome-terminal</code>, a continuación pulsamos <em>retorno de carro</em>. </p>
+
+<p>Aquí el que prefiera Gedit, desde la ventana que acaba de abrirse pude lanzarlo igualmente.
+De cualquier otra forma, <code>nano</code> es una alternativa disponible en cualquier máquina <em>Linux</em>.</p>
+
+<p>Empezamos creando un archivo al que llamaremos por el nombre del binario y, añadiendo el 
+<code>.desktop</code>:</p>
+
+<pre><code>$nano mozilla.desktop
+</code></pre>
+
+<p>Las siguientes líneas deben escribirse tal cuál. No es necesario modificar ninguna.
+Obviamente para la versión del binario habrá que comprovarla antes. Con la bandera
+de ayuda, obtendremos el formato adecuado para el comando que buscamos, habitualmente <code>-h</code>.</p>
+
+<pre><code>[Desktop Entry]
+Version=1.0
+Type=Aplication
+Terminal=false
+</code></pre>
+
+<blockquote>
+  <p>n.d.e: si lo intentais com Mega(el directorio de 50Gb gratis en la nube), el lanzador 
+es un desastre de proporciones cósmicas. Por lo general, cualquier aplicación de cónsola,
+por muy pequeña que sea, guarda un pequeño resumen de comandos, accedido desde la cónsola 
+con <code>-h</code> o <code>--help</code>. Por lo que si no sale nada o no funciona esto, hay
+que sospechar. De la aplicación, del lanzador y, del sitio web desde fue descargado.
+En nuestro caso la aplicación parece ser que guarda la clabe, en una caché que no se borra 
+ni siquiera reiniciando sistema. </p>
+</blockquote>
+
+<p>...Continuamos con el archivo:</p>
+
+<pre><code>Name=mozilla
+Categories=Network;
+Exec=/path/to/binary-file
+Comment=Este es mi comentario/algo
+Icon=/path/to/imagen.ico
+</code></pre>
+
+<p>Habrá que guardar el archivo. Las buenas prácticas, dictan hacer estas operaciones sobre
+un directorio temporal! Continuamos habilitando permisos de ejecución:</p>
+
+<pre><code>$ chmod +x mozilla.desktop
+</code></pre>
+
+<p>Como es lógico, es innecesario correr según que aplicaciones con permisos de administrador.
+En función de esto, colocaremos el archivo donde toque. 
+Hay dos directorios donde podrá colocarse nuestro archivo:
+1. <code>/usr/sahre/applications</code>. Esta nunca es la primera opción, porque hay que ser un poco mas 
+meticuloso, ya que habrá que escribir sobre el directorio, con los permisos oportunos. Y
+Después, comprobar que tanto los permisos de operación, como los usuarios vinculados al archivo,
+son los correctos.
+Así que lo ideal, es hacerlo en el directorio de usuario: <code>$HOME/.local/share/applications</code></p>
+
+<pre><code>$ mv mozilla.desktop $HOME/.local/share/applications
+</code></pre>
+
+<h4>Tabla de categorias usuales:</h4>
+
+<p>| Categorias | Variable |
+|------------|:---------|
+| Accesorios | <code>Categoria=Utility;</code>|
+| Gráficos   | <code>Categoria=Graphics;|</code>
+| Herramientas de sistema | <code>Categoria=System;</code>|
+| Internet   | <code>Categoria=Network;</code>|
+| Juegos     | <code>Categoria=Game;</code>   |
+| Oficina    | <code>Categoria=Office;</code> |
+| Sonido y video | <code>Categoria=AudioVideo;</code>|</p>
+
+<p>El archivo completo quedaría algo así:</p>
+
+<pre><code>[Desktop Entry]
+Version=1.0
+Type=Aplication
+Terminal=false
+Name=mozilla
+Categories=Network;
+Exec=/path/to/binary-file
+Comment=Este es mi comentario/algo
+Icon=/path/to/imagen.ico
+</code></pre>
+
+<p>Fuente: <a href="https://eldebiandepepe.wordpress.com/2011/12/19/crear-lanzadores-accesos-directos-en-el-menu-graficamente-o-con-el-terminal/">eldebiandepepe</a></p>
