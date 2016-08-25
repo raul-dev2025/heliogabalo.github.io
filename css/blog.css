@@ -22,7 +22,12 @@ h6, .h6 {
   font-family: Dejavu Sans;
   font-weight: normal;
   font-style: italic;
-  font-size: 80% !important;
+}
+#pkg-app p {
+  font-size: 80%;
+} 
+#pkg-app ul {
+  line-height: 80%;
 }
 
 /*
