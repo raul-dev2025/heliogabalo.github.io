@@ -18,7 +18,12 @@ h6, .h6 {
   font-weight: normal;
   color: #333;
 }
-
+#pkg-app {
+  font-family: Dejavu Sans;
+  font-weight: normal;
+  font-style: italic;
+  font-size: 80% !important;
+}
 
 /*
  * Override Bootstrap's default container.
