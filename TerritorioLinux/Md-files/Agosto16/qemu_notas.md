@@ -103,7 +103,7 @@ poseer un tipo genérico 'raw' donde converge con otras 'versiones'.
 
 
 En Qemu hablamos de imágen, para referirnos a un dispositivo virtual, que hará las veces
-de disco duro. Ver sección ## Crear imagen.
+de disco duro. Ver sección [Crear imagen](#i1).
 Partiremos desde este concepto principal, que es la _imagen_.
 
 Bajo el comando `qemu-img` tenemos la opción `resize`, utilizada para alterar el tamaño de una
@@ -970,4 +970,3 @@ HeavyMetalRadio [hmr][HMR]
 [HMR]:http://stream.kazancity.net:8000/14-heavymetalradio
 [bethesignal]:http://bethesignal.org/blog/2011/01/05/how-to-mount-virtualbox-vdi-image
 [Vlan]:[https://es.wikipedia.org/wiki/VLAN]
-{: id="Crear imagen"}
