@@ -18,15 +18,15 @@ como __git__ es habitual encontrar archivos que hacen referencia a éstas modifi
     +### esto es una prueba
     $
 
-    ```bash
-    $ git diff test.md
-    diff --git a/Trash/test.md b/Trash/test.md
-    index d9aaaea..3122702 100644
-    --- a/Trash/test.md
-    +++ b/Trash/test.md
-    @@ -1 +1 @@
-    -#esto es una prueba
-    +### esto es una prueba
-    $
+  ```bash
+  $ git diff test.md
+  diff --git a/Trash/test.md b/Trash/test.md
+  index d9aaaea..3122702 100644
+  --- a/Trash/test.md
+  +++ b/Trash/test.md
+  @@ -1 +1 @@
+  -#esto es una prueba
+  +### esto es una prueba
+  $
     ```
     
