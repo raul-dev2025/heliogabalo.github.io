@@ -927,18 +927,18 @@ parm:        debugflags:flags for controlling debug output (int)
 <ol>
 <li><p>CARGAMOS EL MÓDULO  </p>
 
-<p># modprobe nbd -- Esto carga el módulo de no estar cargado. <br />
- # modprobe nbd max_part=16  </p></li>
+<p><code># modprobe nbd</code> -- Esto carga el módulo de no estar cargado. <br />
+ <code># modprobe nbd max_part=16</code>  </p></li>
 <li><p>A continuación preparamos el dispositivo donde montaremos la unidad. <br />
 Este proceso inicia una especie de servidor. Realmente la carga en memoria es <br />
 mínima, es decir, no es como si lanzásemos Apache!!!  </p>
 
-<p># qemu-nbd -c /dev/nbd0/ /path/to/vhd_file -- Esto conecta el dispositivo. <br />
-   # partprobe /dev/nbd0  -- indica al SO los cambios que se han llevado <br />
+<p><code># qemu-nbd -c /dev/nbd0/ /path/to/vhd_file</code> -- Esto conecta el dispositivo. <br />
+   <code># partprobe /dev/nbd0</code>  -- indica al SO los cambios que se han llevado <br />
                        a cabo en la tabla de particiones.  </p></li>
 <li><p>Este último paso, es el que realmente monta la unidad virtual en el sistema.  </p>
 
-<p># mount /dev/nbd0p1 /imagen/a/montar(vhd en este caso!!)  </p></li>
+<p><code># mount /dev/nbd0p1 /imagen/a/montar</code>(vhd en este caso!!)  </p></li>
 </ol>
 
 <blockquote>
