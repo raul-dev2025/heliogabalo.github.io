@@ -811,18 +811,20 @@ Este comando identifica la imagen, como un dispositivo de bloque llamado
 
     qemu-nbd -c /dev/nbd0 _vdi-file_  
 
-1. CARGAMOS EL MÓDULO
+1. CARGAMOS EL MÓDULO  
+
        # modprobe nbd -- Esto carga el módulo de no estar cargado.  
      # modprobe nbd max_part=16  
 
 2. A continuación preparamos el dispositivo donde montaremos la unidad.  
    Este proceso inicia una especie de servidor. Realmente la carga en memoria es  
-   mínima, es decir, no es como si lanzásemos Apache!!!
+   mínima, es decir, no es como si lanzásemos Apache!!!  
+
        # qemu-nbd -c /dev/nbd0/ /path/to/vhd_file -- Esto conecta el dispositivo.  
        # partprobe /dev/nbd0  -- indica al SO los cambios que se han llevado  
                            a cabo en la tabla de particiones.  
 
-3. Este último paso, es el que realmente monta la unidad virtual en el sistema.
+3. Este último paso, es el que realmente monta la unidad virtual en el sistema.  
 
        # mount /dev/nbd0p1 /imagen/a/montar(vhd en este caso!!)  
 
@@ -899,7 +901,9 @@ To convert a vhd image to cow2 (the up to date qemu format)
 
 ## <a name="6i">ATAJOS DEL TECLADO</a>
 Son combinaciones de teclas, para acceder a funcionalidades própias de Qemu. Generalmaente:  
-__ctrl + alt + tecla__:  
+<kbd>
+  <kbd>ctrl +</kbd><kbd> alt + </kbd><kbd>tecla</kbd>
+</kbd>
 
   - ctrl+alt: acopla el ratón a la ventanta donde corremos qemu. Pero también las  
     funciones de acceso rápido(teclas vinculadas). Éstas, toman los valores de la máquina  
