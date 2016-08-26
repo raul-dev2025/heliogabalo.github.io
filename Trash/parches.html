@@ -1,0 +1,20 @@
+<p>Todo el mundo habla de los <em>parches</em>, los <em>mods</em>, <em>plugins</em> y, <em>addons</em>. ¿Pero qué son?</p>
+
+<p>Hoy nos ocuparemos de los <em>parches</em> y cómo aplicarlos sobre un código existente. 
+Los parches son modificaciones que se han hecho sobre archivos de código, para cambiar
+el comportamiento de la aplicación. Consiste en una variación del código original, 
+guardada en un archivo a parte.</p>
+
+<p>Cuando se trabaja con aplicaciones del tipo DVCS(sistema de control de versión distribuido)
+como <strong>git</strong> es habitual encontrar archivos que hacen referencia a éstas modificaciones:</p>
+
+<pre><code>$ git diff test.md
+diff --git a/Trash/test.md b/Trash/test.md
+index d9aaaea..3122702 100644
+--- a/Trash/test.md
++++ b/Trash/test.md
+@@ -1 +1 @@
+-#esto es una prueba
++### esto es una prueba
+$
+</code></pre>
