@@ -18,7 +18,7 @@ como __git__ es habitual encontrar archivos que hacen referencia a éstas modifi
     +### esto es una prueba
     $
 
-  ```bash
+  ```git
   $ git diff test.md
   diff --git a/Trash/test.md b/Trash/test.md
   index d9aaaea..3122702 100644
