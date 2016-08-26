@@ -194,7 +194,7 @@ poseer un tipo genérico 'raw' donde converge con otras 'versiones'.</p>
 <h2><a name="1i3">Redimensionar imagen</a></h2>
 
 <p>En Qemu hablamos de imágen, para referirnos a un dispositivo virtual, que hará las veces
-de disco duro. Ver sección [Crear imagen][i1].
+de disco duro. Ver sección ## Crear imagen.
 Partiremos desde este concepto principal, que es la <em>imagen</em>.</p>
 
 <p>Bajo el comando <code>qemu-img</code> tenemos la opción <code>resize</code>, utilizada para alterar el tamaño de una
@@ -353,10 +353,10 @@ guarda la misma idea: mantener a salvo el archivo original, y realizar cambios, 
 una <em>copia</em>.</p>
 
 <p>Al realizar los cambios, modificaciones, pruebas, etc. aparece la alternativa de guardar <br />
-ese <em>estado</em> en la imagen origanl, o tal vez descartarlo, por que  ha sido un <em>horrible <br />
+ese <em>estado</em> en la imagen orignal, o tal vez descartarlo, por que  ha sido un <em>horrible <br />
 desastre</em>.</p>
 
-<p>Empezamos crenado una relación BackingFile/Overlay:</p>
+<p>Empezamos creando una relación BackingFile/Overlay:</p>
 
 <pre><code>$ qemu-img create -b $mi_Ruta/base.img -f qcow2 \  
   $mi_ruta/Overlays/overlay1.qcow2  
@@ -1150,6 +1150,8 @@ Javier Cristóbal -- <a href="http://markdown.es/sintaxis-markdown/">Markdowns y
 HeavyMetalRadio <a href="http://stream.kazancity.net:8000/14-heavymetalradio">hmr</a></p>
 
 <hr />
+
+<p>{: id="Crear imagen"}</p>
 
 
             <!-- Fin documento  -->   

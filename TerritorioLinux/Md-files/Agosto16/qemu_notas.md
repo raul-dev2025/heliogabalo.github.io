@@ -103,7 +103,7 @@ poseer un tipo genérico 'raw' donde converge con otras 'versiones'.
 
 
 En Qemu hablamos de imágen, para referirnos a un dispositivo virtual, que hará las veces
-de disco duro. Ver sección [Crear imagen][i1].
+de disco duro. Ver sección ## Crear imagen.
 Partiremos desde este concepto principal, que es la _imagen_.
 
 Bajo el comando `qemu-img` tenemos la opción `resize`, utilizada para alterar el tamaño de una
@@ -252,10 +252,10 @@ guarda la misma idea: mantener a salvo el archivo original, y realizar cambios, 
 una _copia_.
 
 Al realizar los cambios, modificaciones, pruebas, etc. aparece la alternativa de guardar  
-ese _estado_ en la imagen origanl, o tal vez descartarlo, por que  ha sido un _horrible  
+ese _estado_ en la imagen orignal, o tal vez descartarlo, por que  ha sido un _horrible  
 desastre_.
 
-Empezamos crenado una relación BackingFile/Overlay:
+Empezamos creando una relación BackingFile/Overlay:
 
     $ qemu-img create -b $mi_Ruta/base.img -f qcow2 \  
       $mi_ruta/Overlays/overlay1.qcow2  
@@ -970,3 +970,4 @@ HeavyMetalRadio [hmr][HMR]
 [HMR]:http://stream.kazancity.net:8000/14-heavymetalradio
 [bethesignal]:http://bethesignal.org/blog/2011/01/05/how-to-mount-virtualbox-vdi-image
 [Vlan]:[https://es.wikipedia.org/wiki/VLAN]
+{: id="Crear imagen"}
