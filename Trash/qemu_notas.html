@@ -4,6 +4,7 @@
 <ol>
 <li><a href="#i1">Crear imagen</a>  </li>
 <li><a href="#1i2">Convertir imagen</a></li>
+<li><a href="#1i3">Redimensionar imagen</a></li>
 </ol></li>
 <li><p><a href="#2i">TRABAJAR CON UNA COPIA DE IMAGEN</a></p>
 
@@ -41,10 +42,10 @@
 </ul></li>
 </ol></li>
 <li>EXPERIMENTAL</li>
-<li>ATAJOS DEL TECLADO <br />
+<li><a href="#6i">ATAJOS DEL TECLADO</a> 
 <ol>
-<li>Comandos del monitor qemu </li>
-<li>Redefinir teclas</li>
+<li><a href="#6i1">Comandos del monitor qemu</a> </li>
+<li><a href="#6i2">Redefinir teclas</a></li>
 </ol></li>
 <li><a href="#ai">AGRADECIMIENTOS</a></li>
 </ol>
@@ -121,9 +122,87 @@ poseer un tipo genérico 'raw' donde converge con otras 'versiones'.</p>
 
 <hr />
 
+<h2><a name="1i3">Redimensionar imagen</a></h2>
+
+<p>En Qemu hablamos de imágen, para referirnos a un dispositivo virtual, que hará las veces
+de disco duro. Ver sección <em>Crear imagen</em>.
+Partiremos desde este concepto principal, que es la <em>imagen</em>.</p>
+
+<p>Bajo el comando <code>qemu-img</code> tenemos la opción <code>resize</code>, utilizada para alterar el tamaño de una
+imagen, previamente creada.
+El tamaño de una imagen, únicamente puede ser alterada, cuando la própia imagen fue creada en
+formato <em>raw</em> o crudo en inglés.</p>
+
+<p>Sobre la distribución <em>fedora</em>(reseña al final del artículo), ha sido añadida otra característica
+para esta opción <code>resize</code>. Pueden modificarse tamaños de imagen, creados en formato qcow2, 
+para aumentar su tamaño, unicamente. Es decir, no podrá disminuir su espacio o hacerla más
+pequeña.</p>
+
+<blockquote>
+  <p>qcow2 -- qemu copy on write, version 2.</p>
+</blockquote>
+
+<pre><code># qemu-img resize imagen tamaño
+</code></pre>
+
+<p>De esta forma añadimos espacio a la imagen ya creada, pero ojo, es un valor <em>absoluto</em>. Con
+esto quiero decir, que si la imagen tenía 10 Gigas, utilizando este anterior comando:</p>
+
+<pre><code>_#_ qemu-img resize miImagen.raw 10G
+</code></pre>
+
+<p>... la imagen pasará a tener 20 Gigas !!!</p>
+
+<p>Para un efecto más granulado, puden usarse los operadores <code>+</code> y <code>-</code>, así:  </p>
+
+<pre><code>_#_ qemu-img resize miImagen.raw +2G
+</code></pre>
+
+<p>Ahora nuestra imagen tendrá el tamaño deseado; 12 Gigas.</p>
+
+<blockquote>
+  <p>man page: <br />
+qemu-img resize filename [+|-]size[K|M|G|T] <br />
+Los sufijos que pueden ser usados son: <br />
+K -- kilobytes <br />
+M -- megabytes <br />
+G -- gigabytes <br />
+T -- terabytes  </p>
+</blockquote>
+
+<p>PRECAUCION:</p>
+
+<p>Un aspecto importante que debe tenerse en cuenta, es ajustar el dispositivo acorde al 
+nuevo tamaño asignado a la imagen. De otra forma, es posible corromper los datos de la
+imagen:</p>
+
+<h4>Aumentar su tamaño:</h4>
+
+<p>Si el tamaño es aumentado, <em>después</em> de asignar el espacio a la imagen, con el comando 
+descrito líneas arriba, debe ajustarse el tamaño del dispositivo, con las herramientas 
+propias de particionado de disco.</p>
+
+<h4>Disminuir el tamaño:</h4>
+
+<p>Para reducir el tamaño, primero es obligatorio el uso de estas herramientas de particionado.
+Es decir, hay que lanzar la <em>Supuesta(VM)</em> y reducir el espacio de disco <em>antes</em> de 
+redimensionar con qemu.</p>
+
+<blockquote>
+  <p>Vemos que el orden del proceso es opuesto en cada caso!!</p>
+</blockquote>
+
+<p><strong>Reseña:</strong> en Territorio Linux, hemos encontrado que una de la librerías más importantes
+de Qemu <em>libvirt</em>, no están completamente <em>integradas</em> en otras distribuciones fuera 
+de <em>Fedora</em>. 
+Nuestro equipo utiliza generalmente máquinas <em>Debian</em>, y es verdad que las sibrerías están, 
+pero nosotros no hemos sido capaces de instalarlas, <em>'sin romper el sistema'</em>.
+Aconsejamos el uso de <em>Fedora</em>, que por otro lado tiene un entorno de usuario que, sencillamente
+es glorioso!. Perfecto para un usario medio.</p>
+
 <h2><a name="2i">TRABAJAR CON UNA COPIA DE IMAGEN</a></h2>
 
-<h4>Backing_files/overlays</h4>
+<h4>Backing-files/overlays</h4>
 
 <p>La principal idea aquí, es la 'copia de seguridad'. Una vez se ha instalado el sistema <br />
 operativo, puede trabajarse sobre un archivo de 'prueba/efecto'. Al que llamamos <br />
@@ -139,9 +218,9 @@ tamaño a la misma.</p>
 <pre><code>$ qemu-img create -f raw image_file.raw 10G
 </code></pre>
 
-<p>A continuación creamos el backing<em>file. Realmente no lo estamos creando, estamos formando <br />
+<p>A continuación creamos el backing-file. Realmente no lo estamos creando, estamos formando <br />
 la imágen en crudo, para que reconozca nuestro entorno de prueba, asociando ambos <br />
-archivos: _raw/qcow2</em> en este caso. <br />
+archivos: <em>raw/qcow2</em> en este caso. <br />
 Lo hacemos con la siguiente línea:</p>
 
 <pre><code>$ qemu-img create -o backing_file=image_file.raw,backing_fmt=raw \  
@@ -149,7 +228,7 @@ Lo hacemos con la siguiente línea:</p>
 </code></pre>
 
 <p>Lo mas importante en este proceso, es asegurarnos de que el 'overlay' apunta al <br />
-backing<em>file. Podemos comprobarlo con la aplicación _file</em></p>
+backing-file. Podemos comprobarlo con la aplicación <em>file</em></p>
 
 <pre><code>$ file overlay.cow
 </code></pre>
@@ -158,7 +237,7 @@ backing<em>file. Podemos comprobarlo con la aplicación _file</em></p>
   <p>Tip: Cuando trabajamos con procedimientos de este tipo, es habitual separar los <br />
 archivos, en distintos directorios. Una forma sencilla y eficaz de hacerlo <br />
 sin tener que estar escribiendo una y otra vez rutas largas, es asignar <br />
-la ruta a una variable ejem: crear_backing.sh</p>
+la ruta a una variable ejem: crear-backing.sh</p>
 </blockquote>
 
 <pre><code>#!/bin/sh  
@@ -172,7 +251,7 @@ no se rompiese.  </p>
 
 <blockquote>
   <p>CAZADO:
-Al llamar al 'backing_file' en el proceso de instalación de la imagen, qemu, parece <br />
+Al llamar al 'backing-file' en el proceso de instalación de la imagen, qemu, parece <br />
 no reconocer direcciones fuera del directorio que contiene la imagen 'base'. Esto <br />
 quiere decir que para instalar la imagen en el backing file es necesario encontrarse <br />
 en el directorio contenedor: mezcla las rutas absolutas/relativas.  </p>
@@ -824,14 +903,14 @@ empezando por abajo. </p>
 
 <p><strong>antes:</strong>  </p>
 
-<p>filename:       /lib/modules/algo<em>aqui/kernel/drivers/block/nbd.ko <br />
+<p>filename:       /lib/modules/algo-aqui/kernel/drivers/block/nbd.ko <br />
 license:        GPL <br />
 description:    Network Block Device <br />
 depends: <br />
 intree:         Y <br />
-vermagic:       algo</em>aqui-tete SMP mod<em>unload modversions 086 <br />
-parm:           nbds</em>max:number of network block devices to initialize (default: 16) (int) <br />
-parm:           max_part:number of partitions per device (default: 0) (int) <br />
+vermagic:       algo-aqui-tete SMP mod-unload modversions 086 <br />
+parm:           nbds-max:number of network block devices to initialize (default: 16) (int) <br />
+parm:           max-part:number of partitions per device (default: 0) (int) <br />
 parm:           debugflags:flags for controlling debug output (int)  </p>
 
 <p><strong>después:</strong></p>
@@ -871,7 +950,7 @@ mínima, es decir, no es como si lanzásemos Apache!!!  </p>
 
 <h1>partprobe /dev/nbd0  -- indica al SO los cambios que se han llevado</h1>
 
-<pre><code>                    a cabo en la tabla de particiones.
+<pre><code>                   a cabo en la tabla de particiones.
 </code></pre></li>
 <li><p>Este último paso, es el que realmente monta la unidad virtual en el sistema.  </p>
 
@@ -879,7 +958,7 @@ mínima, es decir, no es como si lanzásemos Apache!!!  </p>
 </ol>
 
 <blockquote>
-  <p>RECUERDA DESMONTAR LA UNIDAD Y EL DISPOSITIVO CUANDO TERMINES.  </p>
+  <p>recuerda desmontar la unidad y el dispositivo cuando termines!  </p>
 </blockquote>
 
 <pre><code>$ umount /imagen/montada(vhd) -- Desmontamos imagen.  
@@ -888,12 +967,18 @@ mínima, es decir, no es como si lanzásemos Apache!!!  </p>
 
 <h2>LANZAR LA VM APUNTANDO AL SERVIDOR NBD</h2>
 
+<p>El <em>animal</em> parece un poco forzado, pero después de las comprovaciones oportunas
+es fácil decir que <em>se lo carga todo</em>, Qemu puede con todo!. Incluso imagenes
+de otros gestores virtuales, como <em>VirtualBox</em>.</p>
+
+<blockquote>
+  <p>En España decimos que <em>del cerdo no se tira nada:</em> <a href="http://bethesignal.org/blog/2011/01/05/how-to-mount-virtualbox-vdi-image">Animal</a></p>
+</blockquote>
+
 <pre><code>$ QEMU -object tls-creds-x509,id=tls0,dir=$HOME/.pki/qemutls,endpoint=client \  
     -drive driver=nbd,host=localhost,port=10809,tls-creds=tls0 \  
     /path/to/img
 </code></pre>
-
-<h4>http://bethesignal.org/blog/2011/01/05/how-to-mount-virtualbox-vdi-image/</h4>
 
 <p>Ahora podríamos ejecutar cfdisk en el dispositivo de bloque, y montarlo
 como partición individual.  </p>
@@ -915,36 +1000,36 @@ Here are some examples of operations that can be performed from a live Knoppix t
 # qemu-nbd --read-only --connect=/dev/nbd0 --format=vpc _vhd-file-name_
 </code></pre>
 
-<h6>If VHDX format:</h6>
+<p>If VHDX format:  </p>
 
 <pre><code># qemu-nbd --connect=/dev/nbd0 --format=VHDX _hdx-file-name_  
 # ddrescue --verbose --force /dev/nbd0 /dev/sda  # write image to /dev/sda
 </code></pre>
 
-<h6>Write one partition:</h6>
+<p>Write one partition:  </p>
 
 <pre><code># nbd --partition=2 --read-only --connect=/dev/nbd2 --format=vpc vhd-file-name  
 # ddrescue --verbose --force /dev/nbd2 /dev/sda2 # write partition 2 of image to /dev/sda2
 </code></pre>
 
-<h6>Mount partition:</h6>
+<p>Mount partition:  </p>
 
 <pre><code># qemu-nbd --partition=2 --read-only --connect=/dev/nbd2 --format=vpc vhd-file-name  
 # mount /dev/nbd2 /mnt
 </code></pre>
 
-<h6>Unmount and disconnect image file:</h6>
+<p>Unmount and disconnect image file:  </p>
 
 <pre><code>$ umount /mnt  
 # qemu-nbd --disconnect /dev/nbd2
 </code></pre>
 
-<h6>To convert a vhd image to raw (less usable)</h6>
+<p>To convert a vhd image to raw (less usable)  </p>
 
 <pre><code>$ qemu-img convert -f raw -O vpc something.img something.vhd
 </code></pre>
 
-<h6>To convert a vhd image to cow2 (the up to date qemu format)</h6>
+<p>To convert a vhd image to cow2 (the up to date qemu format)  </p>
 
 <pre><code>$ qemu-img convert -f qcow2 -O vpc something.img something.vhd
 </code></pre>
@@ -955,7 +1040,7 @@ Here are some examples of operations that can be performed from a live Knoppix t
 
 <hr />
 
-<h2>ATAJOS DEL TECLADO</h2>
+<h2><a name="6i">ATAJOS DEL TECLADO</a></h2>
 
 <p>Son combinaciones de teclas, para acceder a funcionalidades própias de Qemu. Generalmaente: <br />
 <strong>ctrl + alt + tecla</strong>:  </p>
@@ -980,7 +1065,7 @@ emulado/virtualizado.  </li>
 <li>ctrl+alt+abajo: control de panatalla en qemu monitor y cónsolas.</li>
 </ul>
 
-<h4>Comandos del monitor <strong>Qemu</strong></h4>
+<h4><a name="6i1"> Comandos del monitor <strong>Qemu</strong></a></h4>
 
 <ul>
 <li>commit device|all: Aplica cambios en imagenes de disco (capturas).</li>

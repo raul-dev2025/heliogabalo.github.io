@@ -172,7 +172,7 @@ es glorioso!. Perfecto para un usario medio.
 
 ## <a name="2i">TRABAJAR CON UNA COPIA DE IMAGEN</a>  
 
-#### Backing_files/overlays
+#### Backing-files/overlays
 
 La principal idea aquí, es la 'copia de seguridad'. Una vez se ha instalado el sistema  
 operativo, puede trabajarse sobre un archivo de 'prueba/efecto'. Al que llamamos  
@@ -187,7 +187,7 @@ tamaño a la misma.
 
     $ qemu-img create -f raw image_file.raw 10G
 
-A continuación creamos el backing_file. Realmente no lo estamos creando, estamos formando  
+A continuación creamos el backing-file. Realmente no lo estamos creando, estamos formando  
 la imágen en crudo, para que reconozca nuestro entorno de prueba, asociando ambos  
 archivos: _raw/qcow2_ en este caso.  
 Lo hacemos con la siguiente línea:
@@ -196,14 +196,14 @@ Lo hacemos con la siguiente línea:
       -f qcow2 overlay.cow   
 
 Lo mas importante en este proceso, es asegurarnos de que el 'overlay' apunta al  
-backing_file. Podemos comprobarlo con la aplicación _file_
+backing-file. Podemos comprobarlo con la aplicación _file_
 
     $ file overlay.cow  
 
 > Tip: Cuando trabajamos con procedimientos de este tipo, es habitual separar los  
 > archivos, en distintos directorios. Una forma sencilla y eficaz de hacerlo  
 > sin tener que estar escribiendo una y otra vez rutas largas, es asignar  
-> la ruta a una variable ejem: crear_backing.sh
+> la ruta a una variable ejem: crear-backing.sh
 
     #!/bin/sh  
     
@@ -214,7 +214,7 @@ de comando, no conseguí de ninguna manera, que el vínculo entre ambos: backing
 no se rompiese.  
 
 > CAZADO:
-> Al llamar al 'backing_file' en el proceso de instalación de la imagen, qemu, parece  
+> Al llamar al 'backing-file' en el proceso de instalación de la imagen, qemu, parece  
 > no reconocer direcciones fuera del directorio que contiene la imagen 'base'. Esto  
 > quiere decir que para instalar la imagen en el backing file es necesario encontrarse  
 > en el directorio contenedor: mezcla las rutas absolutas/relativas.  
@@ -780,14 +780,14 @@ empezando por abajo.
 
 __antes:__  
 
-filename:       /lib/modules/algo_aqui/kernel/drivers/block/nbd.ko  
+filename:       /lib/modules/algo-aqui/kernel/drivers/block/nbd.ko  
 license:        GPL  
 description:    Network Block Device  
 depends:  
 intree:         Y  
-vermagic:       algo_aqui-tete SMP mod_unload modversions 086  
-parm:           nbds_max:number of network block devices to initialize (default: 16) (int)  
-parm:           max_part:number of partitions per device (default: 0) (int)  
+vermagic:       algo-aqui-tete SMP mod-unload modversions 086  
+parm:           nbds-max:number of network block devices to initialize (default: 16) (int)  
+parm:           max-part:number of partitions per device (default: 0) (int)  
 parm:           debugflags:flags for controlling debug output (int)  
 
 __después:__
