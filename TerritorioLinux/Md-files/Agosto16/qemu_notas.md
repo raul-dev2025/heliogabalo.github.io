@@ -51,13 +51,14 @@ Instalación de SUPUESTO OS en la imágen previamente creada:
  
     qemu -m 256 -hda mi_imagen.img -cdrom winxpsp2.iso -boot d  
   
-Este comando anterior es un poco confuso.
+Este comando anterior es un poco confuso.  
+
   - Habrá que sustituir "qemu" con el comando apropiado, en relación a la arquitectura  
 del sistema operativo GUEST con el que se vaya a trabajar. En este caso sería:  
-_qemu-system-i386_
-  - Nuevamente el flag -m indica la memoria RAM para el SUPUESTO SO.
+_qemu-system-i386_  
+  - Nuevamente el flag -m indica la memoria RAM para el SUPUESTO SO.  
   - La siguiente opción -hda indica el archivo imagen donde vamos a instalar la imagen  
-del SO.
+del SO.  
   - Sigue la opción -cdrom. Parece indicar el dispositivo físico un 'CD', pero todo  
 apunta a que se trata de una denominación para diferenciarlo de la partición GUEST  
 que acabamos de crear. Es decir, que utilizaremos el mismo flag '-cdrom' para tratar  
@@ -68,6 +69,7 @@ nuestra 'caja vacía' habrá que indicar la ruta hacia el dispositivo ejem. /dev
 La opción -boot d indica como 'cadena' la letra que será usada en el arranque del sistema.  
 Es exactamente igual a como interpreta la BIOS el 'orden' de arranque de sistema de  
 nuestro HOST.  
+
   - 'a' y 'b' para la floppy
   - 'c' para el disco duro
   - 'd' para el CD-ROM
@@ -810,21 +812,19 @@ Este comando identifica la imagen, como un dispositivo de bloque llamado
     qemu-nbd -c /dev/nbd0 _vdi-file_  
 
 1. CARGAMOS EL MÓDULO
-
-    # modprobe nbd -- Esto carga el módulo de no estar cargado.  
-    # modprobe nbd max_part=16  
+       # modprobe nbd -- Esto carga el módulo de no estar cargado.  
+     # modprobe nbd max_part=16  
 
 2. A continuación preparamos el dispositivo donde montaremos la unidad.  
    Este proceso inicia una especie de servidor. Realmente la carga en memoria es  
    mínima, es decir, no es como si lanzásemos Apache!!!
-
-    # qemu-nbd -c /dev/nbd0/ /path/to/vhd_file -- Esto conecta el dispositivo.  
-    # partprobe /dev/nbd0  -- indica al SO los cambios que se han llevado  
+       # qemu-nbd -c /dev/nbd0/ /path/to/vhd_file -- Esto conecta el dispositivo.  
+       # partprobe /dev/nbd0  -- indica al SO los cambios que se han llevado  
                            a cabo en la tabla de particiones.  
 
 3. Este último paso, es el que realmente monta la unidad virtual en el sistema.
 
-    # mount /dev/nbd0p1 /imagen/a/montar(vhd en este caso!!)  
+       # mount /dev/nbd0p1 /imagen/a/montar(vhd en este caso!!)  
 
 > recuerda desmontar la unidad y el dispositivo cuando termines!  
 
