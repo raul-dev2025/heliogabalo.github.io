@@ -139,13 +139,13 @@ También indicamos el archivo imagen y el tamaño en Gigabytes.</p>
 </code></pre>
 
 <p>Este comando anterior es un poco confuso.
-- Habrá que sustituir "qemu" con el comando apropiado, en relación a la arquitectura <br />
+  - Habrá que sustituir "qemu" con el comando apropiado, en relación a la arquitectura <br />
 del sistema operativo GUEST con el que se vaya a trabajar. En este caso sería: <br />
 <em>qemu-system-i386</em>
-- Nuevamente el flag -m indica la memoria RAM para el SUPUESTO SO.
-- La siguiente opción -hda indica el archivo imagen donde vamos a instalar la imagen <br />
+  - Nuevamente el flag -m indica la memoria RAM para el SUPUESTO SO.
+  - La siguiente opción -hda indica el archivo imagen donde vamos a instalar la imagen <br />
 del SO.
-- Sigue la opción -cdrom. Parece indicar el dispositivo físico un 'CD', pero todo <br />
+  - Sigue la opción -cdrom. Parece indicar el dispositivo físico un 'CD', pero todo <br />
 apunta a que se trata de una denominación para diferenciarlo de la partición GUEST <br />
 que acabamos de crear. Es decir, que utilizaremos el mismo flag '-cdrom' para tratar <br />
 con una imagen descargada en el disco duro, o una imagen que previamente hayamos <br />
@@ -155,10 +155,10 @@ nuestra 'caja vacía' habrá que indicar la ruta hacia el dispositivo ejem. /dev
 La opción -boot d indica como 'cadena' la letra que será usada en el arranque del sistema. <br />
 Es exactamente igual a como interpreta la BIOS el 'orden' de arranque de sistema de <br />
 nuestro HOST. <br />
-    - 'a' y 'b' para la floppy
-    - 'c' para el disco duro
-    - 'd' para el CD-ROM
-    - 'n-p' arranque desde RED. Opcion muy interesente para un GUEST. Investigar!!! <br />
+  - 'a' y 'b' para la floppy
+  - 'c' para el disco duro
+  - 'd' para el CD-ROM
+  - 'n-p' arranque desde RED. Opcion muy interesente para un GUEST. Investigar!!! <br />
 Desde Linux, la cadena que representa el dispositivo de arranque, está muy claro, <br />
 (pues nosotros no usamos letras para esto). Así que 'c' claramente representa al <br />
 disco duro y 'd' a un CD-ROM. <br />
@@ -169,14 +169,15 @@ denominar los dispositivos de almacenamiento.</p>
 
 <p>Por qué convertir imágenes antes de instalarlas:  </p>
 
-<p># qemu-img convert -f vhd -O qcow2 source.vhd destination.qcow2</p>
+<pre><code># qemu-img convert -f vhd -O qcow2 source.vhd destination.qcow2
+</code></pre>
 
 <blockquote>
   <p>Es posible que la instrucción no funcione correctamente debido a algún
 cambio en la version utilizada con <em>qemu</em>. Este otro comando debería funcionar.</p>
 </blockquote>
 
-<pre><code>qemu-img convert -O qcow2 filename file_output  (autodetectada??)
+<pre><code># qemu-img convert -O qcow2 filename file_output  (autodetectada??)
 </code></pre>
 
 <p>Qemu tiene el conversor de imagenes mas versatil, en relación a otros emuladores. <br />
@@ -190,7 +191,7 @@ poseer un tipo genérico 'raw' donde converge con otras 'versiones'.</p>
 <h2><a name="1i3">Redimensionar imagen</a></h2>
 
 <p>En Qemu hablamos de imágen, para referirnos a un dispositivo virtual, que hará las veces
-de disco duro. Ver sección <em>Crear imagen</em>.
+de disco duro. Ver sección [Crear imagen][i1].
 Partiremos desde este concepto principal, que es la <em>imagen</em>.</p>
 
 <p>Bajo el comando <code>qemu-img</code> tenemos la opción <code>resize</code>, utilizada para alterar el tamaño de una
@@ -213,20 +214,20 @@ pequeña.</p>
 <p>De esta forma añadimos espacio a la imagen ya creada, pero ojo, es un valor <em>absoluto</em>. Con
 esto quiero decir, que si la imagen tenía 10 Gigas, utilizando este anterior comando:</p>
 
-<pre><code>_#_ qemu-img resize miImagen.raw 10G
+<pre><code># qemu-img resize miImagen.raw 10G
 </code></pre>
 
 <p>... la imagen pasará a tener 20 Gigas !!!</p>
 
 <p>Para un efecto más granulado, puden usarse los operadores <code>+</code> y <code>-</code>, así:  </p>
 
-<pre><code>_#_ qemu-img resize miImagen.raw +2G
+<pre><code># qemu-img resize miImagen.raw +2G
 </code></pre>
 
 <p>Ahora nuestra imagen tendrá el tamaño deseado; 12 Gigas.</p>
 
 <blockquote>
-  <p>man page: <br />
+  <p><strong>man page:</strong> <br />
 qemu-img resize filename [+|-]size[K|M|G|T] <br />
 Los sufijos que pueden ser usados son: <br />
 K -- kilobytes <br />
@@ -364,14 +365,10 @@ $ qemu.img create -o backing_file=$mi_ruta/base.img,backing_fmt=raw \
 <em>qemu</em> actual. Es utilizado junto al comando <em>commit</em> que será visto, mas adelante.</p>
 
 <blockquote>
-  <p><strong>man page:</strong>  </p>
-</blockquote>
+  <p><strong>man page:</strong> <br />
+   commit [--object objectdef] [--image-opts] [-q] [-f fmt] [-t cache] [-b base] [-d] [-p]  </p>
 
-<pre><code>commit [--object objectdef] [--image-opts] [-q] [-f fmt] [-t cache] [-b base] [-d] [-p]
-</code></pre>
-
-<blockquote>
-  <p>La bandera(flag):  <strong>-o</strong> significa opciones. Cuando la imagen de disco, es creada con la <br />
+<p>La bandera(flag):  <strong>-o</strong> significa opciones. Cuando la imagen de disco, es creada con la <br />
 <em>opción</em> <em>backing_file</em>, la imagen(overlay), sólo guardará la diferencia respecto a la base. <br />
 El tamaño del archivo, puede ser omitido. <br />
 <strong>-f</strong> hace referencia al formato de archivo, para el <strong>overlay</strong>. Puesto que es habitual <br />
@@ -648,15 +645,12 @@ establece el modo usuario.  </p>
 Es decir, que si estais buscando desde:  </p>
 
 <blockquote>
-  <blockquote>
-  <p>Panel de contro>>herramientas administrativas>>computer managament>>device manager <br />
+  <p>Panel de contro/herramientas administrativas/computer managament/device manager <br />
 network adapter(dispositivo) <br />
 La forma de instalar un dispositivo y su draiver, mejor quitaoslo de la cabeza. <br />
 Porque hay chorrocientas alternativas y hay que pensar que qemu está instalando un dispositivo <br />
 'virtual'.  </p>
 </blockquote>
-
-<p></blockquote></p>
 
 <p>El dispositivo que ha quedado instalado en mi GUEST: <br />
   <em>Realtec RTL8139 family PCI Fast ethernet NIC</em> (y su draiver con nombre similar/igual).  </p>
@@ -714,18 +708,9 @@ conexiones, tanto del Host como del Guest, una <em>Vlan</em>.  </p>
 <p><em>vinculo a VLAN .</em>  </p>
 
 <blockquote>
-  <p><em>nota:</em> <br />
-      ...Los administradores de red configuran las VLAN mediante software en lugar <br />
-      de hardware, lo que las hace extremadamente fuertes.  </p>
-
-<blockquote>
-  <blockquote>
-  <p>Wikia - Vlan.</p>
+  <p>...Los administradores de red configuran las VLAN mediante software en lugar <br />
+   de hardware, lo que las hace extremadamente fuertes. <a href="[https://es.wikipedia.org/wiki/VLAN]">Vlan-Wikia</a>.</p>
 </blockquote>
-
-<p></blockquote></p>
-
-<p></blockquote></p>
 
 <pre><code>$ qemu-&lt;arch&gt; -net nic,vlan=id -net user,vlan=id
 </code></pre>
@@ -1002,14 +987,14 @@ parm:        debugflags:flags for controlling debug output (int)
 </code></pre>
 
 <ol>
-<li><p>CARGAMOS EL MÓDULO  </p>
+<li><p>CARGAMOS EL MÓDULO</p>
 
 <h1>modprobe nbd -- Esto carga el módulo de no estar cargado.</h1>
 
 <h1>modprobe nbd max_part=16</h1></li>
 <li><p>A continuación preparamos el dispositivo donde montaremos la unidad. <br />
 Este proceso inicia una especie de servidor. Realmente la carga en memoria es <br />
-mínima, es decir, no es como si lanzásemos Apache!!!  </p>
+mínima, es decir, no es como si lanzásemos Apache!!!</p>
 
 <h1>qemu-nbd -c /dev/nbd0/ /path/to/vhd_file -- Esto conecta el dispositivo.</h1>
 
@@ -1017,7 +1002,7 @@ mínima, es decir, no es como si lanzásemos Apache!!!  </p>
 
 <pre><code>                   a cabo en la tabla de particiones.
 </code></pre></li>
-<li><p>Este último paso, es el que realmente monta la unidad virtual en el sistema.  </p>
+<li><p>Este último paso, es el que realmente monta la unidad virtual en el sistema.</p>
 
 <h1>mount /dev/nbd0p1 /imagen/a/montar(vhd en este caso!!)</h1></li>
 </ol>
@@ -1164,6 +1149,7 @@ Javier Cristóbal -- <a href="http://markdown.es/sintaxis-markdown/">Markdowns y
 HeavyMetalRadio <a href="http://stream.kazancity.net:8000/14-heavymetalradio">hmr</a></p>
 
 <hr />
+
 
             <!-- Fin documento  -->   
             </p>

@@ -52,13 +52,13 @@ Instalación de SUPUESTO OS en la imágen previamente creada:
     qemu -m 256 -hda mi_imagen.img -cdrom winxpsp2.iso -boot d  
   
 Este comando anterior es un poco confuso.
-- Habrá que sustituir "qemu" con el comando apropiado, en relación a la arquitectura  
+  - Habrá que sustituir "qemu" con el comando apropiado, en relación a la arquitectura  
 del sistema operativo GUEST con el que se vaya a trabajar. En este caso sería:  
 _qemu-system-i386_
-- Nuevamente el flag -m indica la memoria RAM para el SUPUESTO SO.
-- La siguiente opción -hda indica el archivo imagen donde vamos a instalar la imagen  
+  - Nuevamente el flag -m indica la memoria RAM para el SUPUESTO SO.
+  - La siguiente opción -hda indica el archivo imagen donde vamos a instalar la imagen  
 del SO.
-- Sigue la opción -cdrom. Parece indicar el dispositivo físico un 'CD', pero todo  
+  - Sigue la opción -cdrom. Parece indicar el dispositivo físico un 'CD', pero todo  
 apunta a que se trata de una denominación para diferenciarlo de la partición GUEST  
 que acabamos de crear. Es decir, que utilizaremos el mismo flag '-cdrom' para tratar  
 con una imagen descargada en el disco duro, o una imagen que previamente hayamos  
@@ -68,10 +68,10 @@ nuestra 'caja vacía' habrá que indicar la ruta hacia el dispositivo ejem. /dev
 La opción -boot d indica como 'cadena' la letra que será usada en el arranque del sistema.  
 Es exactamente igual a como interpreta la BIOS el 'orden' de arranque de sistema de  
 nuestro HOST.  
-    - 'a' y 'b' para la floppy
-    - 'c' para el disco duro
-    - 'd' para el CD-ROM
-    - 'n-p' arranque desde RED. Opcion muy interesente para un GUEST. Investigar!!!  
+  - 'a' y 'b' para la floppy
+  - 'c' para el disco duro
+  - 'd' para el CD-ROM
+  - 'n-p' arranque desde RED. Opcion muy interesente para un GUEST. Investigar!!!  
 Desde Linux, la cadena que representa el dispositivo de arranque, está muy claro,  
 (pues nosotros no usamos letras para esto). Así que 'c' claramente representa al  
 disco duro y 'd' a un CD-ROM.  
@@ -82,12 +82,12 @@ denominar los dispositivos de almacenamiento.
 
 Por qué convertir imágenes antes de instalarlas:  
     
-  # qemu-img convert -f vhd -O qcow2 source.vhd destination.qcow2
+    # qemu-img convert -f vhd -O qcow2 source.vhd destination.qcow2
     
 > Es posible que la instrucción no funcione correctamente debido a algún
 > cambio en la version utilizada con _qemu_. Este otro comando debería funcionar.
 
-    qemu-img convert -O qcow2 filename file_output  (autodetectada??)
+    # qemu-img convert -O qcow2 filename file_output  (autodetectada??)
 
 
 Qemu tiene el conversor de imagenes mas versatil, en relación a otros emuladores.  
@@ -101,7 +101,7 @@ poseer un tipo genérico 'raw' donde converge con otras 'versiones'.
 
 
 En Qemu hablamos de imágen, para referirnos a un dispositivo virtual, que hará las veces
-de disco duro. Ver sección _Crear imagen_.
+de disco duro. Ver sección [Crear imagen][i1].
 Partiremos desde este concepto principal, que es la _imagen_.
 
 Bajo el comando `qemu-img` tenemos la opción `resize`, utilizada para alterar el tamaño de una
@@ -123,17 +123,17 @@ pequeña.
 De esta forma añadimos espacio a la imagen ya creada, pero ojo, es un valor _absoluto_. Con
 esto quiero decir, que si la imagen tenía 10 Gigas, utilizando este anterior comando:
   
-    _#_ qemu-img resize miImagen.raw 10G  
+    # qemu-img resize miImagen.raw 10G  
   
 ... la imagen pasará a tener 20 Gigas !!!
 
 Para un efecto más granulado, puden usarse los operadores `+` y `-`, así:  
   
-    _#_ qemu-img resize miImagen.raw +2G  
+    # qemu-img resize miImagen.raw +2G  
   
 Ahora nuestra imagen tendrá el tamaño deseado; 12 Gigas.
 
-> man page:  
+> __man page:__  
 > qemu-img resize filename [+|-]size[K|M|G|T]  
 > Los sufijos que pueden ser usados son:  
 > K -- kilobytes  
@@ -263,9 +263,8 @@ Empezamos crenado una relación BackingFile/Overlay:
 El flag *-b*, parece referirse a la *base*, pero ha queado obsoleto desde la version  
 _qemu_ actual. Es utilizado junto al comando _commit_ que será visto, mas adelante.
 
-> __man page:__  
-
-    commit [--object objectdef] [--image-opts] [-q] [-f fmt] [-t cache] [-b base] [-d] [-p]  
+>  __man page:__  
+>    commit [--object objectdef] [--image-opts] [-q] [-f fmt] [-t cache] [-b base] [-d] [-p]  
 
 > La bandera(flag):  __-o__ significa opciones. Cuando la imagen de disco, es creada con la  
 > _opción_ *backing_file*, la imagen(overlay), sólo guardará la diferencia respecto a la base.  
@@ -502,8 +501,8 @@ establece el modo usuario.
 
 Mas bien el problema intuyo que viene dado desde el GUEST, cacawin(windrop in english)  
 Es decir, que si estais buscando desde:  
-     >>Panel de contro>>herramientas administrativas>>computer managament>>device manager  
-     >>network adapter(dispositivo)  
+> Panel de contro/herramientas administrativas/computer managament/device manager  
+> network adapter(dispositivo)  
 La forma de instalar un dispositivo y su draiver, mejor quitaoslo de la cabeza.  
 Porque hay chorrocientas alternativas y hay que pensar que qemu está instalando un dispositivo  
 'virtual'.  
@@ -555,10 +554,8 @@ conexiones, tanto del Host como del Guest, una _Vlan_.
 
 _vinculo a VLAN ._  
 
-> _nota:_  
->       ...Los administradores de red configuran las VLAN mediante software en lugar  
->       de hardware, lo que las hace extremadamente fuertes.  
->>> Wikia - Vlan.
+>    ...Los administradores de red configuran las VLAN mediante software en lugar  
+>    de hardware, lo que las hace extremadamente fuertes. [Vlan-Wikia][Vlan].
 
     $ qemu-<arch> -net nic,vlan=id -net user,vlan=id  
 
@@ -812,20 +809,20 @@ Este comando identifica la imagen, como un dispositivo de bloque llamado
 
     qemu-nbd -c /dev/nbd0 _vdi-file_  
 
-1. CARGAMOS EL MÓDULO  
+1. CARGAMOS EL MÓDULO
 
     # modprobe nbd -- Esto carga el módulo de no estar cargado.  
     # modprobe nbd max_part=16  
 
 2. A continuación preparamos el dispositivo donde montaremos la unidad.  
    Este proceso inicia una especie de servidor. Realmente la carga en memoria es  
-   mínima, es decir, no es como si lanzásemos Apache!!!  
+   mínima, es decir, no es como si lanzásemos Apache!!!
 
     # qemu-nbd -c /dev/nbd0/ /path/to/vhd_file -- Esto conecta el dispositivo.  
     # partprobe /dev/nbd0  -- indica al SO los cambios que se han llevado  
                            a cabo en la tabla de particiones.  
 
-3. Este último paso, es el que realmente monta la unidad virtual en el sistema.  
+3. Este último paso, es el que realmente monta la unidad virtual en el sistema.
 
     # mount /dev/nbd0p1 /imagen/a/montar(vhd en este caso!!)  
 
@@ -968,3 +965,4 @@ HeavyMetalRadio [hmr][HMR]
 [limni]: http://limni.net/blog/
 [HMR]:http://stream.kazancity.net:8000/14-heavymetalradio
 [bethesignal]:http://bethesignal.org/blog/2011/01/05/how-to-mount-virtualbox-vdi-image
+[Vlan]:[https://es.wikipedia.org/wiki/VLAN]
