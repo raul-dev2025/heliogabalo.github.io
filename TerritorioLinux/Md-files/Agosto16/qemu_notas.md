@@ -176,8 +176,8 @@ es glorioso!. Perfecto para un usario medio.
 
 #### Backing-files/overlays
 
-La principal idea aquí, es la 'copia de seguridad'. Una vez se ha instalado el sistema  
-operativo, puede trabajarse sobre un archivo de 'prueba/efecto'. Al que llamamos  
+La principal idea aquí, es la _copia de seguridad_. Una vez se ha instalado el sistema  
+operativo, puede trabajarse sobre un archivo de _prueba/efecto_. Al que llamamos  
 _Overlay_.  
 Esto permite probar extensivamente un determinado GUEST, sin importar los cambios que  
 hagamos, pues no serán aplicados al GUEST original, sino a la copia.  
@@ -197,7 +197,7 @@ Lo hacemos con la siguiente línea:
     $ qemu-img create -o backing_file=image_file.raw,backing_fmt=raw \  
       -f qcow2 overlay.cow   
 
-Lo mas importante en este proceso, es asegurarnos de que el 'overlay' apunta al  
+Lo mas importante en este proceso, es asegurarnos de que el _overlay_ apunta al  
 backing-file. Podemos comprobarlo con la aplicación _file_
 
     $ file overlay.cow  
@@ -245,7 +245,7 @@ Esto evita tener que modificar el proceso original, y trabajar directamente en �
 todas, o muchas, de sus características.
 
 La casualidad no existe. Qcow2(copy-on-write)podría traducirse como:  
-"escritura sobre la copia", que es exáctamente lo que se pretende en este _proceso_. 
+_escritura sobre la copia_, que es exáctamente lo que se pretende en este _proceso_. 
 
 Esta ténica puede ser tan complicada o simple como la necesidad a cubrir, pero siempre  
 guarda la misma idea: mantener a salvo el archivo original, y realizar cambios, sobre  
@@ -277,7 +277,7 @@ _qemu_ actual. Es utilizado junto al comando _commit_ que será visto, mas adela
 
 Es importante comprobar que el _vínculo_ entre ambos archivos, es el _adecuado:_  
 
-    $ file _archivo_  
+    $ file archivo  
     $ qemu-img info --backing-chain $mi_ruta/Overlays/overlay2.qcow2  
 
 __file__ ofrece una versión resumida si únicamente buscamos comprabar el vínculo.  
@@ -357,17 +357,17 @@ _estado_ guardado.
 La captura de disco, es guardada en un archivo y, _delta_ hasta la captura, _seguido_ en uno  
 nuevo, con formato qcow2. Puede ser tomada en _vivo_ o con la máquina apagada.  
 
-  - libvirt: esta librería, usa el comando de shell 'transaction', durante la carrera del  
+  - libvirt: esta librería, usa el comando de shell _transaction_, durante la carrera del  
     SUPUESTO.  
-  - libvirt: usa el comando de cónsola 'qemu-img' cuando el SUPUESTO está apagado.  
+  - libvirt: usa el comando de cónsola `qemu-img` cuando el SUPUESTO está apagado.  
     
 
 **Punto de guardado externo del sistema:**  
-Aquí, el estado de disco del SUPUESTO será guardado en un archivo, su RAM y el estado  
+Aquí, el estado de disco del SUPUESTO será guardado en un archivo, su _RAM_ y el estado  
 del dispositivo serán almacenados en un nuevo archivo.
 
 #### <a name="2i2c">**Estado de la VM**</a>
-Guarda la RAM y el estado del dispositivo de un supuesto en carrera, sin embargo, no el  
+Guarda la _RAM_ y el estado del dispositivo de un supuesto en carrera, sin embargo, no el  
 estado de disco; a un archivo. Así, podrá ser restaurado más tarde.  
 El proceso es similar a la hibernación de sistema.  
 > _nota:_ el estado de disco, debería permanecer sin modificar, durante el tiempo de  
@@ -375,13 +375,13 @@ restauración.
 
 #### <a name="2i3">Creando capturas</a>  
 Mediante el uso de una _captura externa_, una nueva imagen(**overlay**), es creada para  
-facilitar la escritura del supuesto. La imagen previa se convierte en _captura_.
+facilitar la escritura del _supuesto_. La imagen previa se convierte en _captura_.
 
 
-__Crear capturas internas de disco__
-Dada la máquina `myVm`, es posible crear una captura con el siguiente comando de línea:  
+__Crear capturas internas de disco__  
+Dada la máquina `myVm.file`, es posible crear una captura con el siguiente comando de línea:  
 
-    # virsh snapshot-create-as `myVm` capt1 `descripción-deCaptura`  
+    # virsh snapshot-create-as myVm.file capt1 descripción-deCaptura  
 
 Funciona de la misma forma con o sin la _VM_ encendida. Se añade una breve descripción.  
 Ahora sería oportuno listar y revisar los datos:  

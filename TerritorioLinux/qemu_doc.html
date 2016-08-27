@@ -273,8 +273,8 @@ es glorioso!. Perfecto para un usario medio.</p>
 
 <h4>Backing-files/overlays</h4>
 
-<p>La principal idea aquí, es la 'copia de seguridad'. Una vez se ha instalado el sistema <br />
-operativo, puede trabajarse sobre un archivo de 'prueba/efecto'. Al que llamamos <br />
+<p>La principal idea aquí, es la <em>copia de seguridad</em>. Una vez se ha instalado el sistema <br />
+operativo, puede trabajarse sobre un archivo de <em>prueba/efecto</em>. Al que llamamos <br />
 <em>Overlay</em>. <br />
 Esto permite probar extensivamente un determinado GUEST, sin importar los cambios que <br />
 hagamos, pues no serán aplicados al GUEST original, sino a la copia. <br />
@@ -296,7 +296,7 @@ Lo hacemos con la siguiente línea:</p>
   -f qcow2 overlay.cow
 </code></pre>
 
-<p>Lo mas importante en este proceso, es asegurarnos de que el 'overlay' apunta al <br />
+<p>Lo mas importante en este proceso, es asegurarnos de que el <em>overlay</em> apunta al <br />
 backing-file. Podemos comprobarlo con la aplicación <em>file</em></p>
 
 <pre><code>$ file overlay.cow
@@ -346,7 +346,7 @@ es un concepto similar: definimos un <em>proceso</em>, que ya ha sido implementa
 todas, o muchas, de sus características.</p>
 
 <p>La casualidad no existe. Qcow2(copy-on-write)podría traducirse como: <br />
-"escritura sobre la copia", que es exáctamente lo que se pretende en este <em>proceso</em>. </p>
+<em>escritura sobre la copia</em>, que es exáctamente lo que se pretende en este <em>proceso</em>. </p>
 
 <p>Esta ténica puede ser tan complicada o simple como la necesidad a cubrir, pero siempre <br />
 guarda la misma idea: mantener a salvo el archivo original, y realizar cambios, sobre <br />
@@ -381,7 +381,7 @@ guardar la <em>base</em> en <em>crudo</em>. <br />
 
 <p>Es importante comprobar que el <em>vínculo</em> entre ambos archivos, es el <em>adecuado:</em>  </p>
 
-<pre><code>$ file _archivo_  
+<pre><code>$ file archivo  
 $ qemu-img info --backing-chain $mi_ruta/Overlays/overlay2.qcow2
 </code></pre>
 
@@ -476,18 +476,18 @@ La captura de disco, es guardada en un archivo y, <em>delta</em> hasta la captur
 nuevo, con formato qcow2. Puede ser tomada en <em>vivo</em> o con la máquina apagada.  </p>
 
 <ul>
-<li>libvirt: esta librería, usa el comando de shell 'transaction', durante la carrera del <br />
+<li>libvirt: esta librería, usa el comando de shell <em>transaction</em>, durante la carrera del <br />
 SUPUESTO.  </li>
-<li>libvirt: usa el comando de cónsola 'qemu-img' cuando el SUPUESTO está apagado.  </li>
+<li>libvirt: usa el comando de cónsola <code>qemu-img</code> cuando el SUPUESTO está apagado.  </li>
 </ul>
 
 <p><strong>Punto de guardado externo del sistema:</strong> <br />
-Aquí, el estado de disco del SUPUESTO será guardado en un archivo, su RAM y el estado <br />
+Aquí, el estado de disco del SUPUESTO será guardado en un archivo, su <em>RAM</em> y el estado <br />
 del dispositivo serán almacenados en un nuevo archivo.</p>
 
 <h4><a name="2i2c"><strong>Estado de la VM</strong></a></h4>
 
-<p>Guarda la RAM y el estado del dispositivo de un supuesto en carrera, sin embargo, no el <br />
+<p>Guarda la <em>RAM</em> y el estado del dispositivo de un supuesto en carrera, sin embargo, no el <br />
 estado de disco; a un archivo. Así, podrá ser restaurado más tarde. <br />
 El proceso es similar a la hibernación de sistema.  </p>
 
@@ -499,12 +499,12 @@ restauración.  </p>
 <h4><a name="2i3">Creando capturas</a></h4>
 
 <p>Mediante el uso de una <em>captura externa</em>, una nueva imagen(<strong>overlay</strong>), es creada para <br />
-facilitar la escritura del supuesto. La imagen previa se convierte en <em>captura</em>.</p>
+facilitar la escritura del <em>supuesto</em>. La imagen previa se convierte en <em>captura</em>.</p>
 
-<p><strong>Crear capturas internas de disco</strong>
-Dada la máquina <code>myVm</code>, es posible crear una captura con el siguiente comando de línea:  </p>
+<p><strong>Crear capturas internas de disco</strong> <br />
+Dada la máquina <code>myVm.file</code>, es posible crear una captura con el siguiente comando de línea:  </p>
 
-<pre><code># virsh snapshot-create-as `myVm` capt1 `descripción-deCaptura`
+<pre><code># virsh snapshot-create-as myVm.file capt1 descripción-deCaptura
 </code></pre>
 
 <p>Funciona de la misma forma con o sin la <em>VM</em> encendida. Se añade una breve descripción. <br />
@@ -1150,6 +1150,7 @@ Javier Cristóbal -- <a href="http://markdown.es/sintaxis-markdown/">Markdowns y
 HeavyMetalRadio <a href="http://stream.kazancity.net:8000/14-heavymetalradio">hmr</a></p>
 
 <hr />
+
 
 
             <!-- Fin documento  -->   
