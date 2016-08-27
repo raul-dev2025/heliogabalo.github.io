@@ -1036,7 +1036,7 @@ Son combinaciones de teclas, para acceder a funcionalidades própias de Qemu. Ge
 ## <a name="ai">AGRADECIMIENTOS</a>  
 
 Documentation/Networking --[QEMU][QEM]  
-Virtualization Api --[Libvirt][lib]
+Virtualization Api --[Libvirt][lib]  
 Manual Capturas(inglés) --[snapshots-handout][fedora]  
 ArchWiki --[QEMU][archi]  
 Departamento de informática de IPC -[IPC][elpuig]  
