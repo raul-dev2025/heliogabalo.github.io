@@ -17,13 +17,13 @@
 <li><a href="#2i2c">Estado de la VM</a></li>
 </ul></li>
 <li><a href="#2i3">Creando capturas</a>  </li>
-<li>Proceso de reversión  </li>
-<li>Confluencia en las capturas  </li>
-<li>Aprovado de bloque  </li>
-<li>Aceptación o emisión de bloque  </li>
-<li>Flujo de línea?  </li>
-<li>Borrado de capturas  </li>
-<li>Notas de autor </li>
+<li><a href="#2i4">Proceso de reversión</a>  </li>
+<li><a href="#2i5">Confluencia en las capturas</a>  </li>
+<li><a href="#2i6">Aprovado de bloque</a>  </li>
+<li>[Aceptación o emisión de bloque]  </li>
+<li>[Flujo de línea?]  </li>
+<li><a href="#2i9">Borrado de capturas</a>  </li>
+<li>[Notas de autor] </li>
 </ol></li>
 <li><a href="#3i">CON O SIN CONEXION A INTERNET</a>
 <ol>
@@ -377,7 +377,7 @@ SUPUESTO esta 'vivo/encendido' u 'offline/apagado'.  </p>
 
 <p><strong>Punto de guardado interno del sistema:</strong>  </p>
 
-<p>Estado de la <em>RAM</em>, estdo del dispositivo y el estado del disco de un SUPUESTO en carrera. <br />
+<p>Estado de la <em>RAM</em>, estaado del dispositivo y el estado del disco de un SUPUESTO en carrera. <br />
 Todos son guardados en el mismo archivo original qcow2. Puede ser tomado durante la <br />
 carrera.  </p>
 
@@ -469,7 +469,112 @@ Primero es listado el dispositivo de bloque asociado a la supuesta.  </p>
 <p>La shell devuelve algo parecido a: <code>Domain snapshot capt1 created</code> <br />
 Es entonces cuando la imagen de disco original myVm-base es convertida a un <code>backing_file</code>  </p>
 
-<h4>Borrado de capturas</h4>
+<p>Por último. volvemos a listar el dispositivo de bloque, mediante la instrucción:</p>
+
+<pre><code># virsh domblklist myVM-base
+</code></pre>
+
+<h4><a name="2i4">Proceso de reversión </a></h4>
+
+<p>Revertir a un estado de <em>captura interna</em>, es posible; ya sea sobre un punto de guardado
+o disco. </p>
+
+<blockquote>
+  <p>Esta característica podría sufrir cambios en sucesivas versiones de la aplicación.</p>
+</blockquote>
+
+<p>Para revertir a una cpatura llamada capt1 de myVm1:</p>
+
+<pre><code># virsh snapshot-revert --domain myVm1 capt1
+</code></pre>
+
+<p>Revertir a un estado de <em>captura de disco externa</em>, mediante <code>snapshot-revert</code> es algo
+más complicado, pués envuelve procesos algo complicados, como la negociación entre 
+archivos de captura adicionales. Esto sería mezclar la <em>imagen base</em> con la última caprura,
+o al contrario, mezclar la última captura en la <em>imagen base</em>.</p>
+
+<p>Dicho esto, existen un par de formas de tratar con archivos de capturas externas. 
+Mezclándolas, reduciríamos la <em>cadena</em> de capturas de imagen de disco, esto podŕia realizarse
+con comandos como <code>blockpull</code> o <code>blockcommit</code>, explicado a continuación.</p>
+
+<blockquote>
+  <p>Cabe mencionar, que el equipo de desarrollo de <strong>Qemu</strong> continua trabajando en el desarrollo de
+estas y otras características de la aplicación.</p>
+</blockquote>
+
+<p><kbd>
+<kbd>base </kbd>
+<kbd>-- </kbd>
+<kbd>capt1 </kbd>
+<kbd>-- </kbd>
+<kbd>capt2</kbd>
+</kbd>  </p>
+
+<blockquote>
+  <p>Esta figura expresa qué es la cadena de capturas. Habrá que dar formato.!!!</p>
+</blockquote>
+
+<h4><a name="2i5">Confluencia en las capturas</a></h4>
+
+<p>Las capturas externas, son icreiblemente útiles. Pero cuando tenemos un puñado de ellas,
+llegan los problemas, al tratar de gestionar todos estos archivos individuales. 
+Más tarde, podríamos querer mezclar, algunos de estos archivos de captura(tanto _backing-files
+con overlays, o al contrario _), para reducir la distancia de la cadena de imagenes.
+Para conseguir esto, hay dos mecanismos:</p>
+
+<ul>
+<li><code>blockcommit</code>: mezcla los datos desde la última captura <em>dentro</em> la base. En otras palabras;
+mezcla los <em>overlays</em> dentro de los <em>backing-files</em>. </li>
+<li><code>blockpull</code>: llena una imagen de disco con datos desde su <em>backing-file</em>, o mezcla los 
+datos desde la base a la última captura. Esto es, mezcla el <em>backing</em> con el <em>overlay</em>. </li>
+</ul>
+
+<h4><a name="2i6">Aprovado de bloque</a></h4>
+
+<p>La aceptación de bloque, permite mezclar desde la última captura de imagen, a una imagen
+<em>base</em>, situada en un lugar anterior de la cadena. Es decir, permite mezclar los 
+<em>overlays</em> dentro de los <em>backing-files</em>. 
+Una vez la operación de bloque ha terminado, cualquier otra parte, apuntado a la última
+captura; apuntará ahora a la <em>base</em>.</p>
+
+<p>Esto resulta útil para disminuir(colapsar o reducir) la longitud de la cadena, depués de
+que tomen efecto, distintas capturas externas.</p>
+
+<p>Sirva la siguiente figura, para su comprensión:</p>
+
+<p>Tenemos la imagen base llamada <em>base-raíz</em>; la cúal despliega una cadena de imagen de 
+disco, con cuatro capturas externas. 
+Con <em>activa</em> o <em>capa-activa</em>, nos refierimos a la captura, donde sucede la escritura 
+de la <em>supuesta</em>... 
+Hay unas pocas alternativas donde la resultante cadena de imágenes, lleven a usar el 
+<em>aprovado de bloque</em>:</p>
+
+<ol>
+<li>Los datos de <code>capt-1, capt-2,</code> y <code>capt-3</code>, pueden ser mezclados con <code>base-raíz</code>.
+Resultando en que la <code>base-raíz</code> se convierte en el <em>backing-file</em> de la imagen <em>activa</em>,
+y por tanto, invalidando <code>capt-1,capt-2</code> y <code>capt-3</code>.</li>
+<li>Los datos de <code>capt-1, y</code>capt-2<code>pueden ser mezclados en</code>base-raíz<code>; resolviendo a
+</code>base-raíz<code>como el _backing-file_ de</code>capt-3<code>, e invalidando al mismo tiempo</code>capt-1<code>y
+</code>capt-2.</li>
+<li>Los datos de <code>capt-1</code> son mezclados con <code>base-raíz</code>; resultando en que <code>base-raíz</code> se
+convierte en el <em>backing-file</em> de <code>capt-2</code>, e invalidando igualmente <code>capt-1</code>.</li>
+<li>Los datos de <code>capt-2</code> son mezclados con <code>capt-1</code>; dando como resultado que el 
+<em>backing-file</em>, es ahora <code>capt-3</code>, e invalidando <code>capt-2</code>.</li>
+<li>Los datos de <code>capt-3</code>se mezclan con <code>capt-2</code>; resultando que <code>capt-2</code> advierte al
+<em>backing-file</em>, como la imagen activa, e invalida <code>capt-3</code>.</li>
+<li>Los datos de <code>capt-2</code> y <code>capt-3</code> son mezclados dentro de <code>capt-1</code> convirtiéndose en el 
+<em>backing-file</em> de la <em>capa activa</em>, anulando <code>capt-2</code> y <code>capt-3</code>.</li>
+</ol>
+
+<blockquote>
+  <p>También es posible mezclar los datos de la <em>capa activa(último overlay)</em>, en su 
+<em>backing-file</em>. Ésta funcionalidad será incorporada a <strong>Qemu</strong>, en versiones posteriores,
+posibilitando el uso de la opción <code>top</code> como capa activa por defecto.</p>
+</blockquote>
+
+<hr />
+
+<h4><a name="2i9">Borrado de capturas</a></h4>
 
 <p>Borrar <strong>capturas internas</strong> sea en vivo o con la máquina apagada, no es complicado:  </p>
 

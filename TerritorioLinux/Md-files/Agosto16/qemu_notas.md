@@ -10,13 +10,13 @@
         - [Captura externa](#2i2b)  
         - [Estado de la VM](#2i2c)
     3. [Creando capturas](#2i3)  
-    4. Proceso de reversión  
-    5. Confluencia en las capturas  
-    6. Aprovado de bloque  
-    7. Aceptación o emisión de bloque  
-    8. Flujo de línea?  
-    9. Borrado de capturas  
-    10. Notas de autor 
+    4. [Proceso de reversión](#2i4)  
+    5. [Confluencia en las capturas](#2i5)  
+    6. [Aprovado de bloque](#2i6)  
+    7. [Aceptación o emisión de bloque]  
+    8. [Flujo de línea?]  
+    9. [Borrado de capturas](#2i9)  
+    10. [Notas de autor] 
 3. [CON O SIN CONEXION A INTERNET](#3i)
     1. [Modo usuario](#3i1)  
        - [Configurar una MAC específica](#3i1a)  
@@ -332,7 +332,7 @@ SUPUESTO esta 'vivo/encendido' u 'offline/apagado'.
 
 **Punto de guardado interno del sistema:**  
 
-Estado de la _RAM_, estdo del dispositivo y el estado del disco de un SUPUESTO en carrera.  
+Estado de la _RAM_, estaado del dispositivo y el estado del disco de un SUPUESTO en carrera.  
 Todos son guardados en el mismo archivo original qcow2. Puede ser tomado durante la  
 carrera.  
 
@@ -406,8 +406,93 @@ A continuación es creada la captura, con la supuesta en carrera.
 La shell devuelve algo parecido a: `Domain snapshot capt1 created`  
 Es entonces cuando la imagen de disco original myVm-base es convertida a un `backing_file`  
 
+Por último. volvemos a listar el dispositivo de bloque, mediante la instrucción:
 
-#### Borrado de capturas
+    # virsh domblklist myVM-base
+
+#### <a name="2i4">Proceso de reversión </a>
+Revertir a un estado de _captura interna_, es posible; ya sea sobre un punto de guardado
+o disco. 
+> Esta característica podría sufrir cambios en sucesivas versiones de la aplicación.
+
+Para revertir a una cpatura llamada capt1 de myVm1:
+
+    # virsh snapshot-revert --domain myVm1 capt1
+
+Revertir a un estado de _captura de disco externa_, mediante `snapshot-revert` es algo
+más complicado, pués envuelve procesos algo complicados, como la negociación entre 
+archivos de captura adicionales. Esto sería mezclar la _imagen base_ con la última caprura,
+o al contrario, mezclar la última captura en la _imagen base_.
+
+Dicho esto, existen un par de formas de tratar con archivos de capturas externas. 
+Mezclándolas, reduciríamos la _cadena_ de capturas de imagen de disco, esto podŕia realizarse
+con comandos como `blockpull` o `blockcommit`, explicado a continuación.
+> Cabe mencionar, que el equipo de desarrollo de __Qemu__ continua trabajando en el desarrollo de
+> estas y otras características de la aplicación.
+  
+<kbd>
+<kbd>base </kbd>
+<kbd>-- </kbd>
+<kbd>capt1 </kbd>
+<kbd>-- </kbd>
+<kbd>capt2</kbd>
+</kbd>  
+> Esta figura expresa qué es la cadena de capturas. Habrá que dar formato.!!!
+
+#### <a name="2i5">Confluencia en las capturas</a>
+Las capturas externas, son icreiblemente útiles. Pero cuando tenemos un puñado de ellas,
+llegan los problemas, al tratar de gestionar todos estos archivos individuales. 
+Más tarde, podríamos querer mezclar, algunos de estos archivos de captura(tanto _backing-files
+con overlays, o al contrario _), para reducir la distancia de la cadena de imagenes.
+Para conseguir esto, hay dos mecanismos:
+
+  - `blockcommit`: mezcla los datos desde la última captura _dentro_ la base. En otras palabras;
+mezcla los _overlays_ dentro de los _backing-files_. 
+  - `blockpull`: llena una imagen de disco con datos desde su _backing-file_, o mezcla los 
+datos desde la base a la última captura. Esto es, mezcla el _backing_ con el _overlay_. 
+
+#### <a name="2i6">Aprovado de bloque</a>
+
+La aceptación de bloque, permite mezclar desde la última captura de imagen, a una imagen
+_base_, situada en un lugar anterior de la cadena. Es decir, permite mezclar los 
+_overlays_ dentro de los _backing-files_. 
+Una vez la operación de bloque ha terminado, cualquier otra parte, apuntado a la última
+captura; apuntará ahora a la _base_.
+
+Esto resulta útil para disminuir(colapsar o reducir) la longitud de la cadena, depués de
+que tomen efecto, distintas capturas externas.
+
+Sirva la siguiente figura, para su comprensión:
+
+Tenemos la imagen base llamada _base-raíz_; la cúal despliega una cadena de imagen de 
+disco, con cuatro capturas externas. 
+Con _activa_ o _capa-activa_, nos refierimos a la captura, donde sucede la escritura 
+de la _supuesta_... 
+Hay unas pocas alternativas donde la resultante cadena de imágenes, lleven a usar el 
+_aprovado de bloque_:
+
+1. Los datos de `capt-1, capt-2,` y `capt-3`, pueden ser mezclados con `base-raíz`.
+Resultando en que la `base-raíz` se convierte en el _backing-file_ de la imagen _activa_,
+y por tanto, invalidando `capt-1,capt-2` y `capt-3`.
+2. Los datos de `capt-1, y `capt-2` pueden ser mezclados en `base-raíz`; resolviendo a
+`base-raíz` como el _backing-file_ de `capt-3`, e invalidando al mismo tiempo `capt-1` y
+`capt-2.
+3. Los datos de `capt-1` son mezclados con `base-raíz`; resultando en que `base-raíz` se
+convierte en el _backing-file_ de `capt-2`, e invalidando igualmente `capt-1`.
+4. Los datos de `capt-2` son mezclados con `capt-1`; dando como resultado que el 
+_backing-file_, es ahora `capt-3`, e invalidando `capt-2`.
+5. Los datos de `capt-3`se mezclan con `capt-2`; resultando que `capt-2` advierte al
+_backing-file_, como la imagen activa, e invalida `capt-3`.
+6. Los datos de `capt-2` y `capt-3` son mezclados dentro de `capt-1` convirtiéndose en el 
+_backing-file_ de la _capa activa_, anulando `capt-2` y `capt-3`.
+
+> También es posible mezclar los datos de la _capa activa(último overlay)_, en su 
+_backing-file_. Ésta funcionalidad será incorporada a __Qemu__, en versiones posteriores,
+posibilitando el uso de la opción `top` como capa activa por defecto.
+
+
+---
+#### <a name="2i9">Borrado de capturas</a>
 Borrar __capturas internas__ sea en vivo o con la máquina apagada, no es complicado:  
 
     # virsh snapshot-delete --domain myVm --snapshotname snap6  
@@ -481,7 +566,12 @@ encontrarla sin esos cambios, consecuentemente los datos se malograían.
 > Herramientas como _transaction_ _virsh_ no están disponibles.
 > [Manual snapShots][fedora] -- en inglés.  
 
----  
+--- 
+
+
+
+
+ 
 ## <a name="3i">CON O SIN CONEXION A INTERNET !!</a>
 
 > __nota:__
