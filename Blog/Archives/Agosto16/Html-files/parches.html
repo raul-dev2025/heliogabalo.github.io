@@ -1,0 +1,172 @@
+<p>Todo el mundo habla de los <em>parches</em>, los <em>mods</em>, <em>plugins</em> y, <em>addons</em>. ¿Pero qué son?
+Hoy nos ocuparemos de los <em>parches</em> y cómo aplicarlos sobre un código existente. </p>
+
+<p>Los parches son modificaciones que se han hecho sobre archivos de código, para cambiar
+el comportamiento de una aplicación. Consiste en una variación del código original, 
+guardada en un archivo a parte.</p>
+
+<p>Es habitual encontrar en sistemas tipo <em>Unix</em>, aplicaciones para gestionar estos <em>parches</em>.
+Comandos como <code>patch</code> y <code>diff</code> resultan útiles para un uso generalizado, sobre aplicaciones de
+todo tipo, escritas en multitud de lenguajes de código.</p>
+
+<blockquote>
+  <p>nota: un DVCS(sistema de control de versión distribuido) como <em>git</em>, es otro ejemplo 
+de aplicacion, que usa sus própios comandos, para llevar a cabo estas mismas tareas!</p>
+</blockquote>
+
+<p>El comando <code>patch</code> toma un archivo de parche <kbd>patchfile</kbd> conteniendo una lista de
+diferencias producidas por el comando <code>diff</code>, aplicando estas diferencias sobre uno o más
+archivos originales, produciendo las <em>versiones de parche</em>. Normalmente estas versiones de
+parche, reemplazan a los archivos originales.</p>
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">$ git diff test.md
+<span style="color: #000080; font-weight: bold">diff --git a/Trash/test.md b/Trash/test.md</span>
+<span style="color: #000080; font-weight: bold">index d9aaaea..3122702 100644</span>
+<span style="color: #A00000">--- a/Trash/test.md</span>
+<span style="color: #00A000">+++ b/Trash/test.md</span>
+<span style="color: #800080; font-weight: bold">@@ -1 +1 @@</span>
+<span style="color: #A00000">-#esto es una prueba</span>
+<span style="color: #00A000">+### esto es una prueba</span>
+</pre></div>
+<!-- END HTML generated using hilite.me -->
+
+<h4>Nomenclatura</h4>
+
+<p>Son ejemplos escritos sobre una <em>shell</em>, en nuetro caso una <kbd>bash</kbd>:</p>
+
+<pre><code>$ patch &lt; patch.file
+$ patch foo.c &lt; patch.diff
+$ patch -pNum &lt; /ruta/al/archivo
+</code></pre>
+
+<p>En el primer ejemplo es aplicado el parche <code>patch.file</code>, escribiendo la instrucción tal cual,
+sobre la cónsola. El segundo ejemplo muestra como aplicar una  diferencias anteriormente 
+creada, sobre el código original; en este <code>caso foo.c</code>.
+La última línea de ejemplo determina la ruta que seguirá el comando <code>patch</code> para llegar hasta
+el archivo <em>objetivo</em>. </p>
+
+<blockquote>
+  <p><strong>nota:</strong> ver página de manual.</p>
+</blockquote>
+
+<p>Igualmente, los cambios pueden revertirse. Aunque será necesario en todo caso, ambos archivos.
+Esto es: <em>archivo original</em> y <em>parche</em>.</p>
+
+<pre><code>$ patch -R &lt; /ruta/a/mi_archivo
+</code></pre>
+
+<p>En esta línea, nos encontramos dentro del directorio que contiene el parche que se ha aplicado
+a <code>mi_archivo</code> y explicitando la ruta que seguirá el comando hasta <code>mi_archivo</code>, se deshacen
+los cambios realizados con la <em>bandera</em> <code>-R</code>.</p>
+
+<h4>Crear parches</h4>
+
+<p>Para crear un parche puede utilizarse el siguiente comando:</p>
+
+<pre><code>$ diff -u archivo-original nuevo &gt; patch.diff
+</code></pre>
+
+<h4>Aplicar parche a Hola-mundo.c</h4>
+
+<p>Comenzamos creando el archivo hola.c</p>
+
+<!-- HTML generated using hilite.me --><div style="background: #f0f0f0; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007020">#include&lt;stdio.h&gt;</span>
+
+main(){
+  printf(<span style="color: #4070a0">&quot;Hello, world!</span><span style="color: #4070a0; font-weight: bold">\n</span><span style="color: #4070a0">&quot;</span>);
+}
+</pre></div>
+<!-- END HTML generated using hilite.me -->
+
+<p>A continuación se copia el archivo, con el comado <code>cp</code> situaremos ésta copia del archivo
+en el lugar conveniente, puede ser cualquier directorio -siempre que lo tengamos en cuenta. </p>
+
+<pre><code>$ cp hola.c hola-nuevo.c
+</code></pre>
+
+<p>Editando el archivo <code>hola-nuevo.c</code> y añadiendo la línea <code>return 0</code>, evitaremos algunas
+advertencias por parte del compilador.</p>
+
+<!-- HTML generated using hilite.me --><div style="background: #f0f0f0; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007020">#include&lt;stdio.h&gt;</span>
+
+<span style="color: #902000">int</span> <span style="color: #06287e">main</span>(<span style="color: #902000">void</span>){
+  printf(<span style="color: #4070a0">&quot;Hello, world!</span><span style="color: #4070a0; font-weight: bold">\n</span><span style="color: #4070a0">&quot;</span>);
+  <span style="color: #007020; font-weight: bold">return</span> <span style="color: #40a070">0</span>;
+}
+</pre></div>
+<!-- END HTML generated using hilite.me -->
+
+<p>Ahora mediante la siguiente línea, será creado el archivo de parche, unificando las diferencias
+entre ambos archivos:</p>
+
+<pre><code>$ diff -u hola.c hola-nuevo.c &gt; hola.patch
+$ cat hola.patch
+</code></pre>
+
+<p>Volcamos el contenido del archivo con <code>cat</code> sobre <em>fd1</em>, o lo que es lo mismo: <em>por pantalla!</em>
+La salida es algo así:</p>
+
+<!-- HTML generated using hilite.me --><div style="background: #f0f0f0; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #A00000">--- hello.c  2014-04-29 17:59:49.000000000 +0530</span>
+<span style="color: #00A000">+++ hello-new.c  2014-04-29 18:00:43.000000000 +0530</span>
+<span style="color: #800080; font-weight: bold">@@ -1,5 +1,6 @@</span>
+ #include&lt;stdio.h&gt;
+
+<span style="color: #A00000">-main(){</span>
+<span style="color: #00A000">+int main(void){</span>
+  printf(&quot;Hello, world!\n&quot;);
+<span style="color: #00A000">+  return 0;</span>
+ }
+</pre></div>
+<!-- END HTML generated using hilite.me -->
+
+<p>... y aplicamos el parche:</p>
+
+<pre><code>### el archivo hola.patch conoce el nombre del archivo a ser parcheado ##
+$ patch &lt; hola.patch
+</code></pre>
+
+<p>La salida es algo así:</p>
+
+<pre><code>patching file hola.c
+</code></pre>
+
+<p>Nuevamente con un <code>cat hola.c</code> imprimimos por <em>pantalla</em>, el contenido del archivo:</p>
+
+<!-- HTML generated using hilite.me --><div style="background: #f0f0f0; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007020">#include&lt;stdio.h&gt;</span>
+
+<span style="color: #902000">int</span> <span style="color: #06287e">main</span>(<span style="color: #902000">void</span>){
+  printf(<span style="color: #4070a0">&quot;Hello, world!</span><span style="color: #4070a0; font-weight: bold">\n</span><span style="color: #4070a0">&quot;</span>);
+  <span style="color: #007020; font-weight: bold">return</span> <span style="color: #40a070">0</span>;
+}
+</pre></div>
+<!-- END HTML generated using hilite.me -->
+
+<h4>Trabajo sobre directorios</h4>
+
+<p>Conviene hacer una copia del directorio, antes de realizar ningún cambio. </p>
+
+<pre><code>$ cp -R mi-dir/ mi-nuevo-dir/
+</code></pre>
+
+<p>Una vez hecha la copia recursiva del directorio...</p>
+
+<!-- HTML generated using hilite.me --><div style="background: #f0f0f0; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #bb60d5">$ </span><span style="color: #007020">pwd</span>
+yes, this is: mi-nuevo-dir, the directory you  
+are searching <span style="color: #007020; font-weight: bold">for</span>, but <span style="color: #007020; font-weight: bold">if </span>not! -&gt; <span style="color: #007020">cd</span> /to/it
+</pre></div>
+<!-- END HTML generated using hilite.me -->
+
+<p>Finalmente creamos el parche para <em>todo eldirectorio</em>, de la siguiente manera:</p>
+
+<pre><code>$ diff -rupN mi-dir/ mi-nuevo-dir/ &gt; my-dir.patch
+</code></pre>
+
+<p>Listo para parchear el directorio original sobre la misma máquina, o sobre cualquier otra que
+contenga <code>mi-dir</code>:</p>
+
+<pre><code>patch -p1 &lt; my-dir.patch
+</code></pre>
+
+<hr />
+
+<p><strong>Fuente:</strong><a href="[http://www.cyberciti.biz/faq/appy-patch-file-using-patch-command/]">Vivek Gite</a></p>

@@ -25,6 +25,7 @@
     1. [MONTAR UN LOOPBACK PARA COMUNICARNOS CON LA VM SIN CONEXION](#4i1)  
     2. [LOOPBACK PARA UNA IMGEN (USANDO MODULOS EN EL KERNEL)](#4i2)  
       - Lanzar la VM apuntando al servidor NBD
+5. KVM - Visrtualización por hardware
 5. EXPERIMENTAL
 6. [ATAJOS DEL TECLADO](#6i) 
     1. [Comandos del monitor qemu](#6i1) 
