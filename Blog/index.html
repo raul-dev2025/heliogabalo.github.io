@@ -59,14 +59,226 @@
         <div class="col-sm-9 blog-main">
           
 
-          <!--AQUI EMPIEZA LA PRIMERA ENTRADA -->
-
        <div class="jumbotron">
          <div class="container">
+          <div class="blog-post">
+            <h2 class="blog-post-title">Aplicar parches</h2><g:plusone></g:plusone>
+            <p class="blog-post-meta">Agosto 29, 2016 by <a href="#">Heliogabalo</a></p>
+            <!-- COLOCAR AQUI LA PRIMERA ENTRADA -->
+
+
+
+<p>Todo el mundo habla de los <em>parches</em>, los <em>mods</em>, <em>plugins</em> y, <em>addons</em>. ¿Pero qué son?
+Hoy nos ocuparemos de los <em>parches</em> y cómo aplicarlos sobre un código existente. </p>
+
+<p>Los parches son modificaciones que se han hecho sobre archivos de código, para cambiar
+el comportamiento de una aplicación. Consiste en una variación del código original, 
+guardada en un archivo a parte.</p>
+
+<p>Es habitual encontrar en sistemas tipo <em>Unix</em>, aplicaciones para gestionar estos <em>parches</em>.
+Comandos como <code>patch</code> y <code>diff</code> resultan útiles para un uso generalizado, sobre aplicaciones de
+todo tipo, escritas en multitud de lenguajes de código.</p>
+
+<blockquote>
+  <p>nota: un DVCS(sistema de control de versión distribuido) como <em>git</em>, es otro ejemplo 
+de aplicacion, que usa sus própios comandos, para llevar a cabo estas mismas tareas!</p>
+</blockquote>
+
+<p>El comando <code>patch</code> toma un archivo de parche <kbd>patchfile</kbd> conteniendo una lista de
+diferencias producidas por el comando <code>diff</code>, aplicando estas diferencias sobre uno o más
+archivos originales, produciendo las <em>versiones de parche</em>. Normalmente estas versiones de
+parche, reemplazan a los archivos originales.</p>
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">$ git diff test.md
+<span style="color: #000080; font-weight: bold">diff --git a/Trash/test.md b/Trash/test.md</span>
+<span style="color: #000080; font-weight: bold">index d9aaaea..3122702 100644</span>
+<span style="color: #A00000">--- a/Trash/test.md</span>
+<span style="color: #00A000">+++ b/Trash/test.md</span>
+<span style="color: #800080; font-weight: bold">@@ -1 +1 @@</span>
+<span style="color: #A00000">-#esto es una prueba</span>
+<span style="color: #00A000">+### esto es una prueba</span>
+</pre></div>
+<!-- END HTML generated using hilite.me -->
+
+<h4>Nomenclatura</h4>
+
+<p>Son ejemplos escritos sobre una <em>shell</em>, en nuetro caso una <kbd>bash</kbd>:</p>
+
+<pre><code>$ patch &lt; patch.file
+$ patch foo.c &lt; patch.diff
+$ patch -pNum &lt; /ruta/al/archivo
+</code></pre>
+
+<p>En el primer ejemplo es aplicado el parche <code>patch.file</code>, escribiendo la instrucción tal cual,
+sobre la cónsola. El segundo ejemplo muestra como aplicar una  diferencias anteriormente 
+creada, sobre el código original; en este <code>caso foo.c</code>.
+La última línea de ejemplo determina la ruta que seguirá el comando <code>patch</code> para llegar hasta
+el archivo <em>objetivo</em>. </p>
+
+<blockquote>
+  <p><strong>nota:</strong> ver página de manual.</p>
+</blockquote>
+
+<p>Igualmente, los cambios pueden revertirse. Aunque será necesario en todo caso, ambos archivos.
+Esto es: <em>archivo original</em> y <em>parche</em>.</p>
+
+<pre><code>$ patch -R &lt; /ruta/a/mi_archivo
+</code></pre>
+
+<p>En esta línea, nos encontramos dentro del directorio que contiene el parche que se ha aplicado
+a <code>mi_archivo</code> y explicitando la ruta que seguirá el comando hasta <code>mi_archivo</code>, se deshacen
+los cambios realizados con la <em>bandera</em> <code>-R</code>.</p>
+
+<h4>Crear parches</h4>
+
+<p>Para crear un parche puede utilizarse el siguiente comando:</p>
+
+<pre><code>$ diff -u archivo-original nuevo &gt; patch.diff
+</code></pre>
+
+<h4>Aplicar parche a Hola-mundo.c</h4>
+
+<p>Comenzamos creando el archivo hola.c</p>
+
+<!-- HTML generated using hilite.me --><div style="background: #f0f0f0; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007020">#include&lt;stdio.h&gt;</span>
+
+main(){
+  printf(<span style="color: #4070a0">&quot;Hello, world!</span><span style="color: #4070a0; font-weight: bold">\n</span><span style="color: #4070a0">&quot;</span>);
+}
+</pre></div>
+<!-- END HTML generated using hilite.me -->
+
+<p>A continuación se copia el archivo, con el comado <code>cp</code> situaremos ésta copia del archivo
+en el lugar conveniente, puede ser cualquier directorio -siempre que lo tengamos en cuenta. </p>
+
+<pre><code>$ cp hola.c hola-nuevo.c
+</code></pre>
+
+<p>Editando el archivo <code>hola-nuevo.c</code> y añadiendo la línea <code>return 0</code>, evitaremos algunas
+advertencias por parte del compilador.</p>
+
+<!-- HTML generated using hilite.me --><div style="background: #f0f0f0; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007020">#include&lt;stdio.h&gt;</span>
+
+<span style="color: #902000">int</span> <span style="color: #06287e">main</span>(<span style="color: #902000">void</span>){
+  printf(<span style="color: #4070a0">&quot;Hello, world!</span><span style="color: #4070a0; font-weight: bold">\n</span><span style="color: #4070a0">&quot;</span>);
+  <span style="color: #007020; font-weight: bold">return</span> <span style="color: #40a070">0</span>;
+}
+</pre></div>
+<!-- END HTML generated using hilite.me -->
+
+<p>Ahora mediante la siguiente línea, será creado el archivo de parche, unificando las diferencias
+entre ambos archivos:</p>
+
+<pre><code>$ diff -u hola.c hola-nuevo.c &gt; hola.patch
+$ cat hola.patch
+</code></pre>
+
+<p>Volcamos el contenido del archivo con <code>cat</code> sobre <em>fd1</em>, o lo que es lo mismo: <em>por pantalla!</em>
+La salida es algo así:</p>
+
+<!-- HTML generated using hilite.me --><div style="background: #f0f0f0; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #A00000">--- hello.c  2014-04-29 17:59:49.000000000 +0530</span>
+<span style="color: #00A000">+++ hello-new.c  2014-04-29 18:00:43.000000000 +0530</span>
+<span style="color: #800080; font-weight: bold">@@ -1,5 +1,6 @@</span>
+ #include&lt;stdio.h&gt;
+
+<span style="color: #A00000">-main(){</span>
+<span style="color: #00A000">+int main(void){</span>
+  printf(&quot;Hello, world!\n&quot;);
+<span style="color: #00A000">+  return 0;</span>
+ }
+</pre></div>
+<!-- END HTML generated using hilite.me -->
+
+<p>... y aplicamos el parche:</p>
+
+<pre><code>### el archivo hola.patch conoce el nombre del archivo a ser parcheado ##
+$ patch &lt; hola.patch
+</code></pre>
+
+<p>La salida es algo así:</p>
+
+<pre><code>patching file hola.c
+</code></pre>
+
+<p>Nuevamente con un <code>cat hola.c</code> imprimimos por <em>pantalla</em>, el contenido del archivo:</p>
+
+<!-- HTML generated using hilite.me --><div style="background: #f0f0f0; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007020">#include&lt;stdio.h&gt;</span>
+
+<span style="color: #902000">int</span> <span style="color: #06287e">main</span>(<span style="color: #902000">void</span>){
+  printf(<span style="color: #4070a0">&quot;Hello, world!</span><span style="color: #4070a0; font-weight: bold">\n</span><span style="color: #4070a0">&quot;</span>);
+  <span style="color: #007020; font-weight: bold">return</span> <span style="color: #40a070">0</span>;
+}
+</pre></div>
+<!-- END HTML generated using hilite.me -->
+
+<h4>Trabajo sobre directorios</h4>
+
+<p>Conviene hacer una copia del directorio, antes de realizar ningún cambio. </p>
+
+<pre><code>$ cp -R mi-dir/ mi-nuevo-dir/
+</code></pre>
+
+<p>Una vez hecha la copia recursiva del directorio...</p>
+
+<!-- HTML generated using hilite.me --><div style="background: #f0f0f0; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #bb60d5">$ </span><span style="color: #007020">pwd</span>
+yes, this is: mi-nuevo-dir, the directory you  
+are searching <span style="color: #007020; font-weight: bold">for</span>, but <span style="color: #007020; font-weight: bold">if </span>not! -&gt; <span style="color: #007020">cd</span> /to/it
+</pre></div>
+<!-- END HTML generated using hilite.me -->
+
+<p>Finalmente creamos el parche para <em>todo eldirectorio</em>, de la siguiente manera:</p>
+
+<pre><code>$ diff -rupN mi-dir/ mi-nuevo-dir/ &gt; my-dir.patch
+</code></pre>
+
+<p>Listo para parchear el directorio original sobre la misma máquina, o sobre cualquier otra que
+contenga <code>mi-dir</code>:</p>
+
+<pre><code>patch -p1 &lt; my-dir.patch
+</code></pre>
+
+<hr />
+
+<p><strong>Fuente:</strong><a href="[http://www.cyberciti.biz/faq/appy-patch-file-using-patch-command/]">Vivek Gite</a></p>
+
+            <!-- TERMINAR LA PRIMERA ENTRADA REGEX1-->
+            </div>
+          </div>
+        </div><!--/.blog-post -->
+
+
+
+    <!-- ####################  Google Adsense ####################### -->
+        <div class='container adsense'>
+          <div class='row'>
+           <div class='col-md-10 col-md-offset-1'>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- io_campaña -->
+    <ins class="adsbygoogle"
+           style="display:inline-block;width:728px;height:90px"
+                data-ad-client="ca-pub-0997574766527072"
+                     data-ad-slot="6821125786"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+           </div>
+          </div>
+        </div>
+    <!-- #################### End Google Adsense ##################### -->
+
+
+
+    <!--AQUI EMPIEZA LA SEGUNDA ENTRADA -->
+      <div class="jumbotron">
+        <div class="container">
           <div class="blog-post">
             <h2 class="blog-post-title">Links Gnome</h2><g:plusone></g:plusone>
             <p class="blog-post-meta">Agosto 24, 2016 by <a href="#">Heliogabalo</a></p>
 
+
+
+<h4>Links Gnome</h4>
 
 <p>Hace varios años, leí un artículo sobre como crear enlaces de escritorio, para una
 aplicación que al instalarla, no lo crea. Dado que el mérito no es mio, he decidido
@@ -89,7 +301,7 @@ De cualquier otra forma, <code>nano</code> es una alternativa disponible en cual
 </code></pre>
 
 <p>Las siguientes líneas deben escribirse tal cuál. No es necesario modificar ninguna.
-Obviamente para la versión del binario habrá que comprobarla antes. Con la bandera
+Obviamente para la versión del binario habrá que comprovarla antes. Con la bandera
 de ayuda, obtendremos el formato adecuado para el comando que buscamos, habitualmente <code>-h</code>.</p>
 
 <pre><code>[Desktop Entry]
@@ -103,8 +315,8 @@ Terminal=false
 es un desastre de proporciones cósmicas. Por lo general, cualquier aplicación de cónsola,
 por muy pequeña que sea, guarda un pequeño resumen de comandos, accedido desde la cónsola 
 con <code>-h</code> o <code>--help</code>. Por lo que si no sale nada o no funciona esto, hay
-que sospechar. De la aplicación, del lanzador y, del sitio web desde donde fue descargado.
-En nuestro caso, parece que la aplicación, guarda la clave, en una caché que no se borra 
+que sospechar. De la aplicación, del lanzador y, del sitio web desde fue descargado.
+En nuestro caso la aplicación parece ser que guarda la clabe, en una caché que no se borra 
 ni siquiera reiniciando sistema. </p>
 </blockquote>
 
@@ -125,18 +337,15 @@ un directorio temporal! Continuamos habilitando permisos de ejecución:</p>
 
 <p>Como es lógico, es innecesario correr según que aplicaciones con permisos de administrador.
 En función de esto, colocaremos el archivo donde toque. 
-Hay dos directorios donde podrá colocarse nuestro archivo:<br>
-1. <code>/usr/sahre/applications</code>. Esta nunca es la primera opción, porque hay que ser 
-un poco mas meticuloso, ya que habrá que escribir sobre el directorio, con los permisos 
-oportunos. Y Después, comprobar que tanto los permisos de operación, como los usuarios 
-vinculados al archivo, son los correctos.<br>
-2. Así que lo ideal, es hacerlo en el directorio de usuario: <code>$HOME/.local/share/applications</code></p>
+Hay dos directorios donde podrá colocarse nuestro archivo:
+1. <code>/usr/sahre/applications</code>. Esta nunca es la primera opción, porque hay que ser un poco mas 
+meticuloso, ya que habrá que escribir sobre el directorio, con los permisos oportunos. Y
+Después, comprobar que tanto los permisos de operación, como los usuarios vinculados al archivo,
+son los correctos.
+Así que lo ideal, es hacerlo en el directorio de usuario: <code>$HOME/.local/share/applications</code></p>
 
 <pre><code>$ mv mozilla.desktop $HOME/.local/share/applications
 </code></pre>
-<br>
-<br>
-<br>
 
 <h4>Tabla de categorias usuales:</h4>
 
@@ -176,7 +385,6 @@ vinculados al archivo, son los correctos.<br>
     </tr>
   </tbody></table>
 
-
 <p>El archivo completo quedaría algo así:</p>
 
 <pre><code>[Desktop Entry]
@@ -192,97 +400,6 @@ Icon=/path/to/imagen.ico
 
 <p>Fuente: <a href="https://eldebiandepepe.wordpress.com/2011/12/19/crear-lanzadores-accesos-directos-en-el-menu-graficamente-o-con-el-terminal/">eldebiandepepe</a></p>
 
-            </div>
-          </div>
-        </div><!--/.blog-post -->
-
-
-
-    <!-- ####################  Google Adsense ####################### -->
-        <div class='container adsense'>
-          <div class='row'>
-           <div class='col-md-10 col-md-offset-1'>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- io_campaña -->
-    <ins class="adsbygoogle"
-           style="display:inline-block;width:728px;height:90px"
-                data-ad-client="ca-pub-0997574766527072"
-                     data-ad-slot="6821125786"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-
-           </div>
-          </div>
-        </div>
-    <!-- #################### End Google Adsense ##################### -->
-
-
-
-    <!--AQUI EMPIEZA LA SEGUNDA ENTRADA -->
-      <div class="jumbotron">
-        <div class="container">
-          <div class="blog-post">
-            <h2 class="blog-post-title">Emcon</h2><g:plusone></g:plusone>
-            <p class="blog-post-meta">Agosto 16, 2016 by <a href="#">Heliogabalo</a></p>
-
-
-
-<p>Desarrollo, especialiczación, anvance tecnológico, videojuegos.</p>
-
-<p>Sin lugar a dudas, los videojuegos, no sólamente han creado una potente industria millonaria. 
-Han aportado un desarrollo tecnológico necesario, que otras aplicaciones han incorporado 
-rápidamenete en su código.</p>
-
-<p>Estoy hablando de los dibujitos, de las florecitas. De una infraestructura de software que
-es capaz de llevar hasta nuestros monitores, la calidad de imagen que ostentan aplicaciones
-como Exel, un ejemplo de aplicación, claramente orientada al tratamiento de datos, bases de
-datos!.</p>
-
-<p>¿Quién ostenta el mayor y mejor motor gráfico -en términos de Sistema Operativo? No por casualidad,
-tampoco por hardware. Si nos paramos a pensar un momento, Windows está construido sobre 
-componentes mediocres: ni mucho menos, encontraremos una máquina Windows corriendo con los 
-mejores componentes, la excepción confirma la regla...</p>
-
-<p>Buscando la oportuna analogía, pienso en la <em>gran pantalla</em>, las películas <em>made in Holliwood</em>. 
-Los cinéfilos saben perfectamente, que a lo largo de la historía del <em>cine</em>, han habido y habrán
-sorprendentes actores y directores, que están muy por encima en cuanto a la calidad visual del
-producto final. La película.</p>
-
-<p>Exactamente esto es lo que sucede con los videojuegos. <em>El que tiene la pasta parte la pana.</em> 
-Las grandes productoras de mediasoftware o software de entretenimiento, aseguran muy bien 
-<em>el tiro</em>, para que sus productos, abarquen el máximo número de plataformas sobre las 
-que <em>salir a escena!!</em>. </p>
-
-<p>Sería contraproducente, a fectos de este artículo, defender a las grandes insdustrias de 
-componentes electrónicos -el hardware-, obviando el hecho de que los grandes aliados en la 
-carrera por obtener un mayor beneficio, en un mercado globalizado, son ellos. </p>
-
-<p><em>El mercado</em>, se ha convertido en un gran tablero de ajedrez, donde sólo hay fichas <em>blancas</em> o
-<em>negras</em>; un hombre con dinero, llega a los piés de una montaña y dice: <em>la montaña es mía</em> y, la
-montaña es suya!. Si se pretende sobrevir, que no vivir, o son aceptadas las reglas o se está
-fuera de <em>juego.</em> </p>
-
-<p>Es decir, estas grandes compañías, han creado una dependencia <em>virtual</em> sobre los fabricantes 
-de componentes de hardware, que en realidad no existe. Obligando a pequeños y medianos 
-fabricantes, a vender en <em>exclusividad</em> sus productos.</p>
-
-<p>Ésta es la guerra. El gobierno mira a otro lado, los fabricantes agachan la cabeza y, los 
-desarrolladores, suficiente tienen con descifrar como desarrollar el <em>método</em>, para que el
-<em>driver</em> sea capaz de comunicarse con la máquina!. </p>
-
-<p>Es cosa de todos, nada cambiará si no entendemos, que la ambición debe ser proporcionada. El
-<em>humano</em>, es un ser finito, con límite y, Windows, no es el mejor sistema operativo. </p>
-
-<p>Aquí es donde entra la especialización. Poniendo como ejemplo a Steam: no es el ada madrina
-bondadosa, que pone el regalo bajo la almohada, cuando se cae el diente de leche, al niño.
-Pero es un comienzo... en esa dirección es donde debe mirarse. </p>
-
-<p>¿No sería <em>precioso</em>, dejar que los profesionales demostrasen su valía, sobre motores orientados
-a llevar a cabo tareas concretas? Hablo de los videojuegos, de máquinas, pensadas por y para
-el entretenimiento.  </p>
-
-<p>fuentes: <a href="https://es.wikipedia.org/wiki/Emulador_de_videoconsola">wiki</a></p>
 
             </div>
           </div>
