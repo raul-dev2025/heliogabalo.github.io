@@ -2,6 +2,7 @@
     1. [Crear imagen](#i1)  
     2. [Convertir imagen](#1i2)
     3. [Redimensionar imagen](#1i3)
+    4. [Imágenes VHD](#1i4)
 
 2. [TRABAJAR CON UNA COPIA DE IMAGEN](#2i)
     1. [Backing-files/overlays](#2i)
@@ -80,6 +81,8 @@ Desde Linux, la cadena que representa el dispositivo de arranque, está muy clar
 disco duro y 'd' a un CD-ROM.  
 Desde una perspectiva Windows, habrá que asegurarse. Pués windows utiliza letras para  
 denominar los dispositivos de almacenamiento.
+
+
 
 #### <a name="1i2">Convertir imagen</a> 
 
@@ -172,7 +175,110 @@ pero nosotros no hemos sido capaces de instalarlas, _'sin romper el sistema'_.
 Aconsejamos el uso de _Fedora_, que por otro lado tiene un entorno de usuario que, sencillamente
 es glorioso!. Perfecto para un usario medio.
 
+#### <a name="2i">Imágenes VHD</a> 
+Virtual hard drive o disco duro virtual, de sus siglas en inglés. Es relatívamente sencillo
+encontrarse con imágenes de este tipo, sobre todo si buscamos en alguno de los sitios 
+oficiales u organismos gubernamentales. 
 
+    $ qemu-system-i386 -hda mi-imagen.vhd
+
+> Con esta línea arranca la máquina virtual.
+
+Lo bueno es que siempre están disponibles, imágenes de los sistemas operativos 
+más comunes; esto es Windows y Linux, tambén imágenes OS X. 
+
+Lo malo es que sulen ser imágenes con fecha de caducidad(unos 6 meses), después habrá
+que borrar el sistema operativo y volverlo a instalar...
+
+Debe tenerse en cuenta que si van a ser usadas imágenes de este tipo, la opción
+`cdrom` no funciona. Suelen ser imágenes pre-instaladas, por lo que no será necesaria su 
+instalación en el disco duro virtual; basta con iniciarla con el hipervisor o gestor de
+arranque de imágenes.
+
+Es una opción muy interesante para hacer pruebas rápidas con un sistema operativo. 
+
+Aquí es donde surge la gran pregunta: ¿Cómo hacerlo para que la instalación sea 
+permanente? Correcto, éstas imagenes pueden ser instaladas en el disco duro igual que
+cualquier otra aplicación, que no requira un gestor de imágenes virtuales; pero habrá 
+que llevar a cabo ciertas medidas, antes de alcanzar el objetivo:
+
+__Primero:__ habrá que comprobar que la imágen de la _supuesta_ que va a ser instalada
+en el disco duro -_dispositivo físico_-, no estará contenida en ninguna partición en 
+uso. Es decir, el distino de la imágen __no__ debe ser un dispositivo usado por el
+sistema en activo: la imagen será instalada en un _usb_, en un _disco duro externo_, 
+en un _cdrom_ o en una _partición sin formato_!!.
+
+__Segundo:__ la intalación puede ser _contigua_ a otro/s sistema operativo existente,   
+o puede ser _única_; donde serán reescritos todos los datos del disco duro
+e instalado el nuevo sistema operativo.
+
+Un sistema operativo, sea Windows, Linux o cualquier otro, para que pueda ser arrancado, 
+debe instalarse sobre una partición primaria. Esto no es del todo cierto, ver 
+documentacion Disco Duro. Para no complicar las cosas más de lo necesario, aquí se 
+llevarán a cabo estas operaciones sobre particiónes _primarias_.
+
+En cualquier caso, más que copiar la imagen directamente desde el formato descrito 
+por el fabricante del virtualizador, Qemu, Vm-ware, Virtual-box, etc. es conveniente
+traducir la imagen a un formato estandar. 
+
+    $ qemu-img convert -O raw mi-imagen.vhd mi-imagen.raw
+
+#### Instalación única
+En este caso, no importa que existan particiones descritas por el/los sistemas ya 
+instalados, por que vamos a reescribir _todo el disco_. Pero si importa, que la 
+`imagen.raw` esté fuera del disco duro. _Debe_ estar fuera del diso, en otro dispositivo.
+
+Si la instalación es _única_, hay que arrancar el sistema operativo desde un disco
+_en vivo_ o _live-CD_. Despúés debe ser montada la imagen y, una vez hecho esto, los
+datos serán volcados sobre el dispositivo:
+
+1. Introducimos el CD y, reiniciamos sistema.
+2. Montamos la imágen. La imagén debe estar fuera del disco duro donde se hará la 
+instalación; en otro disco duro, usb, etc.
+
+    $ sudo mount -o ro,loop /camino/a/la/imagen.raw /media/CDROM/o/USB/destino 
+
+Como arracamos desde _CDROM_, cuando el sistema pregunte por `sudo`, dejaremos la 
+clave en blanco: <kbd>return</kbd>.
+
+3. Copiamos los datos de la imagen, sobre el disco:
+
+    $ sudo dd if=/camino/a/la/imagen.raw of=/dev/sdaX bs=1M
+
+Volvemos a dejar en blanco la pregunta `sudo`, <kbd>return</kbd>, y especificamos
+que la copia sobre el dispositivo, sea realizada en bloques de 1 Megabyte. 
+La denominación _sda_, se refiere al primer disco duro. _X_ se refiere a la partición
+número. _Ejemplo:_ la partición 2 del disco duro 3, seria `/dev/sdc2`.
+En este caso concreto, la instalación toma todo el disco, por tanto: `/dev/sda`.
+
+Un dato importante, es que la imagen, debe ser menor o igual, al tamaño del disco
+donde va ser instalado el _SO_. Una vez hecho esto, con una herramienta de particionado,
+como _gparted_, se comprueba que el sistema ha sido instalado correctamente y puede
+expandirse la partición para que ocupe todo el espacio de _disco duro_.
+
+> En Windows, desde herramientas administrativas, gestor de particiones, deberíamos 
+> poder reubicar la partición.
+
+#### Instalación contigua
+Como estamos escribiendo datos sobre un dispositivo físico, ésta es la forma más segura de
+realizar este tipo de operaciones, pués no implica borrar datos de sistema ni de usuario.
+
+> CAZADO: Windows sólo puede ser instalado en la primera partición. Aunque es cierto, no
+es completamente exacto. Puede instalarse Windows en qualquier partición primaria ver: 
+documentación disco duro, siempre y cuando el gestor de arranque apunte al dispositivo que
+lo aloja.
+
+Al margen de la anterior anotación, cuando los sistemas operativos que conviven en el 
+disco duro fueron instalados; en primer lugar se hizo la instalazión de Windows, más tarde 
+se instaló Fedora. Habrá que tener en cuenta las siguientes consideraciones:
+
+1. La versión del sistema operativo que constrituye la imagen: `mi-imagen.raw`, debe
+ser la misma que la del disco _en vivo_. 
+    - Creamos ina imagen `ISO` a partir de la imagen  
+
+
+
+Fuente: [oli-Ubuntu Forum][ubuntu-forum]
 ## <a name="2i">TRABAJAR CON UNA COPIA DE IMAGEN</a>  
 
 #### Backing-files/overlays
@@ -1061,3 +1167,4 @@ HeavyMetalRadio [hmr][HMR]
 [HMR]:http://stream.kazancity.net:8000/14-heavymetalradio
 [bethesignal]:http://bethesignal.org/blog/2011/01/05/how-to-mount-virtualbox-vdi-image
 [Vlan]:[https://es.wikipedia.org/wiki/VLAN]
+[ubuntu-forum]: http://askubuntu.com/questions/32499/migrate-from-a-virtual-machine-vm-to-a-physical-system
