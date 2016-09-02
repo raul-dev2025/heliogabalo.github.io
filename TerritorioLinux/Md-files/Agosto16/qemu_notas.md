@@ -272,7 +272,7 @@ Al margen de la anterior anotación, cuando los sistemas operativos que conviven
 disco duro fueron instalados; en primer lugar se hizo la instalazión de Windows, más tarde 
 se instaló Fedora. Habrá que tener en cuenta las siguientes consideraciones:
 
-1. La versión del sistema operativo que constrituye la imagen: `mi-imagen.raw`, debe
+1. La versión del sistema operativo que constituye la imagen: `mi-imagen.raw`, debe
 ser la misma que la del disco _en vivo_. 
     - Creamos ina imagen `ISO` a partir de la imagen  
 
