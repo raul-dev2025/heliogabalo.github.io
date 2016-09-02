@@ -202,7 +202,7 @@ permanente? Correcto, éstas imagenes pueden ser instaladas en el disco duro igu
 cualquier otra aplicación, que no requira un gestor de imágenes virtuales; pero habrá 
 que llevar a cabo ciertas medidas, antes de alcanzar el objetivo:
 
-__Primero:__ habrá que comprobar que la imágen de la _supuesta_ que va a ser instalada
+__Primero:__ habrá que comprobar que la imagen de la _supuesta_ que va a ser instalada
 en el disco duro -_dispositivo físico_-, no estará contenida en ninguna partición en 
 uso. Es decir, el distino de la imágen __no__ debe ser un dispositivo usado por el
 sistema en activo: la imagen será instalada en un _usb_, en un _disco duro externo_, 
@@ -238,7 +238,7 @@ instalación; en otro disco duro, usb, etc.
 
     $ sudo mount -o ro,loop /camino/a/la/imagen.raw /media/CDROM/o/USB/destino 
 
-Como arracamos desde _CDROM_, cuando el sistema pregunte por `sudo`, dejaremos la 
+Como arrancamos desde _CDROM_, cuando el sistema pregunte por `sudo`, dejaremos la 
 clave en blanco: <kbd>return</kbd>.
 
 3. Copiamos los datos de la imagen, sobre el disco:
@@ -273,8 +273,36 @@ disco duro fueron instalados; en primer lugar se hizo la instalazión de Windows
 se instaló Fedora. Habrá que tener en cuenta las siguientes consideraciones:
 
 1. La versión del sistema operativo que constituye la imagen: `mi-imagen.raw`, debe
-ser la misma que la del disco _en vivo_. 
-    - Creamos ina imagen `ISO` a partir de la imagen  
+ser la misma que la del disco _en vivo_.
+
+2. Si la imagen ya fué _quemada_ en el _CD_, habrá que recuperarla, crear una nueva imagen 
+a partir de éste, u obtener una nueva.
+
+Con esta técnica, lo que estamos haciendo es algo parecido a crear un `backup` de nuestro 
+sistema, y después restaurarlo. Sólo que esta vez, en lugar de trabajar sobre el `backup`
+trabajaremos con los datos de una `VM`.
+
+Así que, a menos que tengamos el disco con el que los técnicos crearon el `file.vhd`, este
+tipo de instalación será completamente inútil, por que está pensado para que el sistema sea
+una `VM`. Pero sí, es posible crear el nuestro própio, teniendo la ISO original.
+
+Alguno se estará preguntando ... ¿Por qué tanto royo, si puedo hacer la instalación 
+directamente desde la ISO? claro que sí, pero ¿verdad que no es posible trabjar con dos 
+sistemas operativos a la vez? de esta forma podemos trabajar desde nuestro sistema, crear
+un entorno de desarrolo <kbd>dentro</kbd> de la `VM` y, cuando todo funciona, volcar los
+datos sobre nuestro sistema. Es mucho mejor que un `backup` por que no se corren riesgos!!.
+
+Dicho de otra forma; es posible desarrollar algo _muy dirigido_, a una tarea concreta, 
+aislando nuestro trabajo, y poder disponer de las _capacidades_ de una `VM` al mismo tiempo.
+
+Empezamos por crear la imagen:
+
+    $ dd if=/dev/cdrom of=/destino/de/imagen.iso
+    $ mkisofs -o /destino/mi-imagen.iso /directiorio/o/archivo/fuente
+
+En la primera línea copiamos el contenido de un disco `/dev/sr0`(en éste caso) y lo convertimos
+en un archivo de imagen <kbd>ISO</kbd>. 
+La segunda línea demuestra como crear otra imagen `ISO` desde un directorio o archivo.
 
 
 
