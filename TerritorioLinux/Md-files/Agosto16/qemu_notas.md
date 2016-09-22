@@ -57,7 +57,7 @@ Este comando anterior es un poco confuso.
 
   - Habrá que sustituir "qemu" con el comando apropiado, en relación a la arquitectura  
 del sistema operativo GUEST con el que se vaya a trabajar. En este caso sería:  
-_qemu-system-i386_  
+`qemu-system-i386`  
   - Nuevamente el flag -m indica la memoria RAM para el SUPUESTO SO.  
   - La siguiente opción -hda indica el archivo imagen donde vamos a instalar la imagen  
 del SO.  
@@ -199,14 +199,14 @@ Es una opción muy interesante para hacer pruebas rápidas con un sistema operat
 
 Aquí es donde surge la gran pregunta: ¿Cómo hacerlo para que la instalación sea 
 permanente? Correcto, éstas imagenes pueden ser instaladas en el disco duro igual que
-cualquier otra aplicación, que no requira un gestor de imágenes virtuales; pero habrá 
-que llevar a cabo ciertas medidas, antes de alcanzar el objetivo:
+cualquier otra aplicación, que no requira un gestor de imágenes virtuales; pero antes habrá 
+que llevar a cabo ciertas medidas:
 
-__Primero:__ habrá que comprobar que la imagen de la _supuesta_ que va a ser instalada
-en el disco duro -_dispositivo físico_-, no estará contenida en ninguna partición en 
-uso. Es decir, el distino de la imágen __no__ debe ser un dispositivo usado por el
-sistema en activo: la imagen será instalada en un _usb_, en un _disco duro externo_, 
-en un _cdrom_ o en una _partición sin formato_!!.
+__Primero:__ comprobar que la imagen de la _supuesta_ que va a ser instalada en el disco duro 
+-_dispositivo físico_-, no estará contenida en ninguna partición en uso. Es decir, el distino 
+de la imágen __no__ debe ser un dispositivo usado por el sistema en activo: la imagen será 
+instalada en un _usb_, en un _disco duro externo_, en un _cdrom_ o en una _partición sin 
+formato_!!.
 
 __Segundo:__ la intalación puede ser _contigua_ a otro/s sistema operativo existente,   
 o puede ser _única_; donde serán reescritos todos los datos del disco duro
@@ -304,7 +304,9 @@ En la primera línea copiamos el contenido de un disco `/dev/sr0`(en éste caso)
 en un archivo de imagen <kbd>ISO</kbd>. 
 La segunda línea demuestra como crear otra imagen `ISO` desde un directorio o archivo.
 
-
+Hay que recordar que en función del dispositivo de entrada, deberemos modificar la línea
+que arranca la instalación de la `VM` con _Qemu_: `-hda` o `cdrom` descrito en la sección
+[Crear imagen](#i1)
 
 Fuente: [oli-Ubuntu Forum][ubuntu-forum]
 ## <a name="2i">TRABAJAR CON UNA COPIA DE IMAGEN</a>  
