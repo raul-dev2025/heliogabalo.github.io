@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../images/tmr15.png">
+
+    <title>Libvirt - protocolo TLS</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/basic.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">Territorio Linux</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="../offcanvas.html">Indice</a></li>
+            <li><a href="../About.html">About</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row well well-lg">
+        <div class="col-md-10 col-md-offset-1">
+          <div class="starter-template">
+            <h1>Bootstrap starter template</h1>
+            <p class="text-left">        
+            <!-- Inserta aquí el documento --> 
+    
+<h2>Contenido</h2>
+
+<ol>
+<li><a href="#1c">Cestificados</a></li>
+<li><a href="#2c">Configurando <strong>libvirt</strong> para TLS</a>
+
+<ol>
+<li><a href="#2c1">Lista completa del proceso</a></li>
+<li><a href="#2c2">Concepto central</a></li>
+<li><a href="#2c3">Nuestro escenario</a></li>
+<li><a href="#2c4">Llaves privadas</a></li>
+<li><a href="#2c5">Firmando otros certificados</a></li>
+<li><a href="#2c6">Certificado de autoridad</a></li>
+</ol>
+</li>
+</ol>
+
+
+<hr />
+
+<h2><a name ='1c'> Certificados</a></h2>
+
+<p>Los certificados son una <em>forma</em> segura de comunicarnos entre computadoras. A esta <em>forma</em> de
+establecer la comunicación la llamamos <em>protocolo</em>. Hoy en día existen dos tipos de protocolos
+ampliamente utilizados; protocolos SSl y TLS.</p>
+
+<p>En esta documentación se hablará exclusivamente del protocolo TLS, que es una versión mas
+moderna o actualizada del protocolo SSL(capa de sockets seguros).
+Algunos desarrolladores siguen llamándolos: certificado SSL; aunque en realidad se trata
+igualmente del protocolo TLS(seguridad de la capa de transporte), con opciones ECC,RSA o DSA.</p>
+
+<blockquote><p>Estos últimos son <em>algoritmos de cifrado</em>.</p></blockquote>
+
+<h2><a name = '2c'>Configurando <strong>libvirt</strong> para TLS</a></h2>
+
+<p>Establecer la infraestructura de virtualización a través de la <strong>Capa segura de transporte</strong>,
+es relatívamente sencillo; aunque puede resultar confuso, cuando aún no se está familiarizado
+con ciertos detalles.</p>
+
+<p>Mediante este documento, se tratará de explicar los pasos involucrados, en el proceso de
+configuración de <strong>libvirt</strong> con <strong>TLS</strong>. Se utilizarán conceptos avanzados y ejemplos.
+Adaptando los ejemplos directamente, sobre la intraestructura de virtualización, se atenderá el
+caso en particular.</p>
+
+<h4><a name = '2c1'>Lista completa del proceso </a></h4>
+
+<ol>
+<li>Crear certificado de <strong>Autiridad de certificados</strong>(CA en adelante).</li>
+<li>Crear certificado de servidor.</li>
+<li>Crear certificado de cliente.</li>
+<li>Configuración de <em>demonio</em> <strong>libvirt</strong>.</li>
+<li>Otras referencias.</li>
+</ol>
+
+
+<h4><a name = '2c2'>Concepto central</a></h4>
+
+<p>En esencia, <em>la capa segura de transporte</em> es una forma de comunicarnos entre dos máquina,
+donde será utilizada una aproximación llamada <strong>PKI</strong>; infraestructura de llave pública.Es un concepto bastante simple, el cuál involucra siempre a dos computadoras; un <em>cliente</em>
+establece conexión con otra máquina llamada <em>servidor</em>.</p>
+
+<p><img src="/images/Tls_concepts_basic_client_to_server.png" alt="alt text" /></p>
+
+<p>Para la comunicación, TLS usa archivos llamados <em>Certificados</em>; el cliente establece la comunicación
+con un <em>Certificado de cliente</em>. La computadora que recibe la conexión, hace uso del <em>Certificado
+de servidor</em>.</p>
+
+  <div class='jumbotron'>
+    <img id='img-head' class='img-responsive' src="../images/connection.png" alt="imagen conexión" />
+  </div>
+
+<p>Si la necesidad, es comunicar dos computadoras en ambos sentidos, para poder hacer uso del protocolo
+TLS, habrá que instalar los dos tipos de certificados en los dos equipos.</p>
+
+<p><img src="/images/cruzado.png" alt="alt text" /></p>
+
+<blockquote><p>Es éste ejemplo, nuestro escenario.</p></blockquote>
+
+<h4><a name='2c3'>Nuestro escenario</a></h4>
+
+<p>Aquí subyacen dos servidores virtualizados. El primer servidor; <em>sistema 1</em>, será llamado <strong>host1</strong>.
+El segundo; recibe el nombre <strong>host2</strong>.</p>
+
+<p><img src="/images/hosts.png" alt="alt text" /></p>
+
+<p>En éste escenario, los servidores necesitarán comunicarse puntualmente, el uno con el otro. Por
+ejemplo, cuando movemos un <em>supuesto</em>, desde el <em>host1</em> al <em>host2</em> o <em>vice versa</em>.
+Para que esto funcione, ambos servidores deben poseer su própio certificado cliente/servidor.</p>
+
+<blockquote><p>&hellip; término inglés para referirse a una máquina virtualizada(guest).</p></blockquote>
+
+<p><img src="/images/ser-crs.png" alt="alt text" /></p>
+
+<p>En éste punto, será introducido el concepto <em>servidor administrativo</em>. Desde el <em>servidor
+administrativo</em>, se llevarán a cabo tareas de administración; como crear nuevos <em>supestos</em>,
+moverlos entre servidores y reconfigurarlos o borrarlos.</p>
+
+<p>A partir de ahora, su nombre será <strong>admindesktop</strong>. Únicamente se conectará a los servidores,
+es decir, no recibirá conexiones desde ellos. Por lo tanto, sólo necesitará el <em>certificado de
+cliente</em>, o lo que es lo mismo; no contará con el <em>certifidcado de servidor</em>.</p>
+
+<p><img src="/images/admindesktop.png" alt="alt text" /></p>
+
+<h4><a name = '2c4'>Llaves privadas</a></h4>
+
+<p>Como parte de la aproximación <strong>PKI</strong>, usada en <strong>TLS</strong> (infraestructura de llave pública), cabe
+mencionar, que cada certificado de contar con dos entidades: <em>llave pública</em> y <em>llave privada</em>.</p>
+
+<p><img src="/images/key-par.png" alt="alt text" /></p>
+
+<p>Los archivos de llave privada, son de especial importancia y, deben ser guardados en lugar seguro.
+Estas <em>llaves</em> permiten a cualquier computadora -con el correspondiente certificado; representarse
+a sí misma, como la descrita <em>en el própio certificado!!</em>.</p>
+
+<p>Por ejemplo, el servidor <em>host1</em>, tiene ambos certificados: <em>certificado de cliente y servidor</em>.
+Estos certificados, indican su pertenencia al <em>host1</em>. Por que sólo el <em>host1</em> tiene la llave
+privada del par de certificados(cliente/servidor); es el único que muede decir: <em>&ldquo;yo soy el host1&rdquo;</em>.</p>
+
+<p>En caso de que una persona no autorizada obtenga el archivo de <em>llave</em>, podría generar su própio
+certificado y, reclamar la posesión del servidor <em>host1</em> en su lugar, por lo que potencialmente
+podría darle acceso al servidor virtualizzado. <em>No es lo que queremos!</em>.</p>
+
+<h4><a name = '2c5'>Frimando otros certificados</a></h4>
+
+<p>La posesión de los certificados y sus respectivas <em>llaves privadas</em>, también proporciona un
+beneficio adicional; de esta forma, se podrán firmar otros certificados. Esto añade una pequeña
+pieza segura de información criptográfica, indicando la autenticidad, del certificado que está
+siendo firmado.</p>
+
+<p>Es importante, por que condiciona si una <em>web</em> es de confianza o no. Donde todos los certificados
+han sido firmados por los otros, o por un certificado central -<strong>admindesktop</strong>, que
+se sabe es seguro.</p>
+
+<h4><a name = '2c6'>Certificado de autoridad</a></h4>
+            <!-- Fin de inserción --> 
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../js/jquery.min.js"><\/script>')</script>
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
