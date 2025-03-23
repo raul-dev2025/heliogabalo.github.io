@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patch review &mdash; Linux Test Project 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/js/pathTruncator.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Release process" href="ltp_release_procedure.html" />
+    <link rel="prev" title="Documentation" href="../developers/documentation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Linux Test Project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">For users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../users/quick_start.html">Installation and tests execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/setup_tests.html">Tests setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/supported_systems.html">Supported systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/stats.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/test_catalog.html">Test catalog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developers/setup_mailinglist.html">Setting up the Mailing list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/writing_tests.html">Writing tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/test_case_tutorial.html">Test case tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/api_c_tests.html">LTP C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/api_shell_tests.html">LTP shell API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/api_network_tests.html">Developing using network API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/api_kvm_tests.html">Developing using KVM API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/ltp_library.html">LTP Library guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/build_system.html">Build system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/debugging.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/documentation.html">Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For maintainers</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Patch review</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#goals-of-patch-review">Goals of patch review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-find-clear-errors">How to find clear errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-find-subtle-errors">How to find subtle errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-get-patches-merged">How to get patches merged</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#maintainers-checklist">Maintainers Checklist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#new-tests">New tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#c-tests">C tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shell-tests">Shell tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ltp-library">LTP library</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ltp_release_procedure.html">Release process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Custom Documents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../my-docs/index.html">Welcome to the Project Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Linux Test Project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Patch review</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/maintainers/patch_review.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="patch-review">
+<h1>Patch review<a class="headerlink" href="#patch-review" title="Permalink to this heading"></a></h1>
+<p>Anyone can and should review patches. It’s the only way to get good at patch
+review and for the project to scale. For this reason, we have a short guide on
+what to do during the review process.</p>
+<section id="goals-of-patch-review">
+<h2>Goals of patch review<a class="headerlink" href="#goals-of-patch-review" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Prevent false positive test results</p></li>
+<li><p>Prevent false negative test results</p></li>
+<li><p>Keep the code as simple as possible, but no simpler</p></li>
+</ol>
+</section>
+<section id="how-to-find-clear-errors">
+<h2>How to find clear errors<a class="headerlink" href="#how-to-find-clear-errors" title="Permalink to this heading"></a></h2>
+<p>A clear error is one where there is unlikely to be any argument if you
+provide evidence of it. Evidence being an error trace or logical proof
+that an error will occur in a common situation.</p>
+<p>The following are examples and may not be appropriate for all tests.</p>
+<ul class="simple">
+<li><p>Merge the patch locally. It should apply cleanly to master.</p></li>
+<li><p>Compile the patch with default and non-default configurations.</p>
+<ul>
+<li><p>Use sanitizers e.g. undefined behavior, address.</p></li>
+<li><p>Compile on non-x86</p></li>
+<li><p>Compile on x86 with <code class="docutils literal notranslate"><span class="pre">-m32</span></code></p></li>
+<li><p>Compile testing patches with GitHub Actions in LTP repo fork can cover
+various distros/architectures</p></li>
+</ul>
+</li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code></p></li>
+<li><p>Run effected tests in a VM</p>
+<ul>
+<li><p>Use single vCPU</p></li>
+<li><p>Use many vCPUs and enable NUMA</p></li>
+<li><p>Restrict RAM to &lt; 1GB.</p></li>
+</ul>
+</li>
+<li><p>Run effected tests on an embedded device</p></li>
+<li><p>Run effected tests on non-x86 machine in general</p></li>
+<li><p>Run reproducers on a kernel where the bug is present</p></li>
+<li><p>Run tests with <code class="docutils literal notranslate"><span class="pre">-i0</span></code> and <code class="docutils literal notranslate"><span class="pre">-i2</span></code></p></li>
+<li><p>Compare usage of system calls with man page descriptions</p></li>
+<li><p>Compare usage of system calls with kernel code</p></li>
+<li><p>Double check commit message</p></li>
+<li><p>Search the LTP library for existing helper functions</p></li>
+<li><p>Check doc formatting, see <a class="reference internal" href="../developers/documentation.html"><span class="doc">Documentation</span></a>.</p></li>
+</ul>
+</section>
+<section id="how-to-find-subtle-errors">
+<h2>How to find subtle errors<a class="headerlink" href="#how-to-find-subtle-errors" title="Permalink to this heading"></a></h2>
+<p>A subtle error is one where you can expect some argument because you
+do not have clear evidence of an error. It is best to state these as
+questions and not make assertions if possible.</p>
+<p>Although if it is a matter of style or “taste” then senior maintainers
+can assert what is correct to avoid bike shedding.</p>
+<ul class="simple">
+<li><p>Ask what happens if there is an error, could it be debugged just
+with the test output?</p></li>
+<li><p>Are we testing undefined behavior?</p>
+<ul>
+<li><p>Could future kernel behavior change without “breaking userland”?</p></li>
+<li><p>Does the kernel behave differently depending on hardware?</p></li>
+<li><p>Does it behave differently depending on kernel configuration?</p></li>
+<li><p>Does it behave differently depending on the compiler?</p></li>
+<li><p>Would it behave differently if the order of checks on syscall parameters
+changed in the kernel?</p></li>
+</ul>
+</li>
+<li><p>Will it scale to tiny and huge systems?</p>
+<ul>
+<li><p>What happens if there are 100+ CPUs?</p></li>
+<li><p>What happens if each CPU core is very slow?</p></li>
+<li><p>What happens if there are 2TB of RAM?</p></li>
+</ul>
+</li>
+<li><p>Are we repeating a pattern that can be turned into a library function?</p></li>
+<li><p>Is a single test trying to do too much?</p></li>
+<li><p>Could multiple similar tests be merged?</p></li>
+<li><p>Race conditions</p>
+<ul>
+<li><p>What happens if a process gets preempted?</p></li>
+<li><p>Could checkpoints or fuzzsync by used instead?</p></li>
+<li><p>Note, usually you can insert a sleep to prove a race condition
+exists however finding them is hard</p></li>
+</ul>
+</li>
+<li><p>Is there a simpler way to achieve the same kernel coverage?</p></li>
+</ul>
+</section>
+<section id="how-to-get-patches-merged">
+<h2>How to get patches merged<a class="headerlink" href="#how-to-get-patches-merged" title="Permalink to this heading"></a></h2>
+<p>Once you think a patch is good enough you should add your <code class="docutils literal notranslate"><span class="pre">Reviewed-by</span></code>
+and/or <code class="docutils literal notranslate"><span class="pre">Tested-by</span></code> tags. This means you will get some credit for getting
+the patch merged. Also some blame if there are problems.</p>
+<p>If you ran the test you can add the <code class="docutils literal notranslate"><span class="pre">Tested-by</span></code> tag. If you read the
+code or used static analysis tools on it, you can add the Reviewed-by
+tag.</p>
+<p>In addition you can expect others to review your patches and add their
+tags. This will speed up the process of getting your patches merged.</p>
+</section>
+<section id="maintainers-checklist">
+<h2>Maintainers Checklist<a class="headerlink" href="#maintainers-checklist" title="Permalink to this heading"></a></h2>
+<p>Patchset should be tested locally and ideally also in maintainer’s fork in
+GitHub Actions on GitHub.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>GitHub Actions do only build testing, passing the CI means only that
+the test compiles fine on variety of different distributions and releases.</p>
+</div>
+<p>The test should be executed at least once locally and should PASS as well.</p>
+<p>Commit messages should have</p>
+<ul class="simple">
+<li><p>Author’s <code class="docutils literal notranslate"><span class="pre">Signed-off-by</span></code> tag</p></li>
+<li><p>Committer’s <code class="docutils literal notranslate"><span class="pre">Reviewed-by</span></code> or <code class="docutils literal notranslate"><span class="pre">Signed-off-by</span></code> tag</p></li>
+<li><p>Check also mailing lists for other reviewers / testers tags, notes and failure
+reports</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Fixes:</span> <span class="pre">hash</span></code> if it fixes particular LTP commit</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Fixes:</span> <span class="pre">#N</span></code> if it fixes github issue number N, so it’s automatically closed</p></li>
+<li><p>LTP documentation should be kept up to date.</p></li>
+</ul>
+<p>After patch is accepted or rejected, set correct state and archive in the
+<a class="reference external" href="https://patchwork.ozlabs.org/project/ltp/list/">LTP patchwork instance</a>.</p>
+</section>
+<section id="new-tests">
+<h2>New tests<a class="headerlink" href="#new-tests" title="Permalink to this heading"></a></h2>
+<p>New test should</p>
+<ul class="simple">
+<li><p>Have a record in runtest file</p></li>
+<li><p>Test should work fine with more than one iteration (e.g. run with <code class="docutils literal notranslate"><span class="pre">-i</span> <span class="pre">100</span></code>)</p></li>
+<li><p>Run with <code class="docutils literal notranslate"><span class="pre">-i</span> <span class="pre">0</span></code> to check that setup and cleanup are coded properly
+(no test is being run)</p></li>
+<li><p>Have a brief description</p></li>
+<li><p>License: the default license for new tests is GPL v2 or later, use
+<code class="docutils literal notranslate"><span class="pre">GPL-2.0-or-later</span></code>; the license for test (e.g. GPL-2.0) should not change
+unless test is completely rewritten</p></li>
+<li><p>Old copyrights should be kept unless test is completely rewritten</p></li>
+</ul>
+<section id="c-tests">
+<h3>C tests<a class="headerlink" href="#c-tests" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Use <a class="reference internal" href="../developers/api_c_tests.html"><span class="doc">LTP C API</span></a>, implementing <a class="reference internal" href="../developers/api_c_tests.html#struct-tst-test"><span class="std std-ref">struct tst_test</span></a></p></li>
+<li><p>Test binaries are added into corresponding <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> files</p></li>
+<li><p>Check coding style with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code></p></li>
+<li><p>Metadata documentation</p></li>
+<li><p>If a test is a regression test it should include <a class="reference internal" href="../developers/api_c_tests.html#struct-tst-tag"><span class="std std-ref">.tags</span></a> in the
+<a class="reference internal" href="../developers/api_c_tests.html#struct-tst-test"><span class="std std-ref">struct tst_test</span></a> definition</p></li>
+</ul>
+</section>
+<section id="shell-tests">
+<h3>Shell tests<a class="headerlink" href="#shell-tests" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Use <a class="reference internal" href="../developers/api_shell_tests.html"><span class="doc">LTP shell API</span></a></p></li>
+<li><p>Check coding style with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code></p></li>
+<li><p>If a test is a regression test it should include related kernel or glibc
+commits as a comment</p></li>
+</ul>
+</section>
+<section id="ltp-library">
+<h3>LTP library<a class="headerlink" href="#ltp-library" title="Permalink to this heading"></a></h3>
+<p>For patchset touching the LTP library, follow <a class="reference internal" href="../developers/ltp_library.html"><span class="doc">LTP Library guidelines</span></a>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../developers/documentation.html" class="btn btn-neutral float-left" title="Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ltp_release_procedure.html" class="btn btn-neutral float-right" title="Release process" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Linux Test Project.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

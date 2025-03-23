@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build system &mdash; Linux Test Project 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/js/pathTruncator.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Debugging" href="debugging.html" />
+    <link rel="prev" title="LTP Library guidelines" href="ltp_library.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Linux Test Project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">For users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../users/quick_start.html">Installation and tests execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/setup_tests.html">Tests setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/supported_systems.html">Supported systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/stats.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/test_catalog.html">Test catalog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup_mailinglist.html">Setting up the Mailing list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_tests.html">Writing tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_case_tutorial.html">Test case tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_c_tests.html">LTP C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_shell_tests.html">LTP shell API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_network_tests.html">Developing using network API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_kvm_tests.html">Developing using KVM API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ltp_library.html">LTP Library guidelines</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Build system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-problem">The Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#design">Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#kernel-modules">Kernel Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#make-rules-and-make-variables">Make Rules and Make Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#make-system-variables">Make System Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#guidelines-and-recommendations">Guidelines and Recommendations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="debugging.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../maintainers/patch_review.html">Patch review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../maintainers/ltp_release_procedure.html">Release process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Custom Documents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../my-docs/index.html">Welcome to the Project Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Linux Test Project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Build system</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developers/build_system.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="build-system">
+<h1>Build system<a class="headerlink" href="#build-system" title="Permalink to this heading"></a></h1>
+<p>The following document briefly describes the steps and methodologies used for
+the new and improved Makefile system.</p>
+<section id="the-problem">
+<h2>The Problem<a class="headerlink" href="#the-problem" title="Permalink to this heading"></a></h2>
+<p>The problem with the old Makefile system is that it was very difficult to
+maintain and it lacked any sense of formal structure, thus developing for LTP
+and including new targets was more difficult than it should have been
+(maintenance). Furthermore, proper option-based cross-compilation was
+impossible due to the fact that the Makefiles didn’t support a prefixing
+system, and the appropriate implicit / static rules hadn’t been configured to
+compile into multiple object directories for out-of-tree build support (ease of
+use / functionality). Finally, there wasn’t a means to setup dependencies
+between components, such that if a component required <code class="docutils literal notranslate"><span class="pre">libltp.a</span></code> in order to
+compile, it would go off and compile <code class="docutils literal notranslate"><span class="pre">libltp.a</span></code> first (ease of use).</p>
+<p>These items needed to be fixed to reduce maintenance nightmares for the
+development community contributing to LTP, and the project maintainers.</p>
+</section>
+<section id="design">
+<h2>Design<a class="headerlink" href="#design" title="Permalink to this heading"></a></h2>
+<p>The system was designed such that including a single GNU Makefile compatible
+set in each new directory component is all that’s essentially required to
+build the system.</p>
+<p>Say you had a directory like the following (with <code class="docutils literal notranslate"><span class="pre">.c</span></code> files in them which
+directly tie into applications, e.g. baz.c -&gt; baz):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.../</span><span class="n">foo</span><span class="o">/</span>
+    <span class="o">|--&gt;</span> <span class="n">Makefile</span>
+    <span class="o">|</span>
+    <span class="o">--&gt;</span> <span class="n">bar</span><span class="o">/</span>
+        <span class="o">|</span>
+        <span class="o">--&gt;</span> <span class="n">Makefile</span>
+        <span class="o">|</span>
+        <span class="o">--&gt;</span> <span class="n">baz</span><span class="o">.</span><span class="n">c</span>
+</pre></div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">…/foo/Makefile</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="c"># SPDX-License-Identifier: GPL-2.0-or-later</span>
+
+<span class="nv">top_srcdir</span><span class="w">          </span><span class="o">?=</span><span class="w"> </span>..
+
+<span class="cp">include $(top_srcdir)/include/mk/env_pre.mk</span>
+<span class="cp">include $(top_srcdir)/include/mk/generic_trunk_target.mk</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">…/foo/bar/Makefile</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="c"># SPDX-License-Identifier: GPL-2.0-or-later</span>
+
+<span class="nv">top_srcdir</span><span class="w">          </span><span class="o">?=</span><span class="w"> </span>../..
+
+<span class="cp">include $(top_srcdir)/include/mk/env_pre.mk</span>
+<span class="cp">include $(top_srcdir)/include/mk/generic_leaf_target.mk</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="kernel-modules">
+<h2>Kernel Modules<a class="headerlink" href="#kernel-modules" title="Permalink to this heading"></a></h2>
+<p>Some of the tests need to build kernel modules, happily LTP has
+infrastructure for this.</p>
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="cp">ifneq ($(KERNELRELEASE),)</span>
+
+<span class="nv">obj-m</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>module01.o
+
+<span class="cp">else</span>
+
+<span class="nv">top_srcdir</span><span class="w">  </span><span class="o">?=</span><span class="w"> </span>../../../..
+<span class="cp">include $(top_srcdir)/include/mk/testcases.mk</span>
+
+<span class="nv">REQ_VERSION_MAJOR</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="m">2</span>
+<span class="nv">REQ_VERSION_PATCH</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="m">6</span>
+<span class="nv">MAKE_TARGETS</span><span class="w">                </span><span class="o">:=</span><span class="w"> </span>test01<span class="w"> </span>test02<span class="w"> </span>module01.ko
+
+<span class="cp">include $(top_srcdir)/include/mk/module.mk</span>
+<span class="cp">include $(top_srcdir)/include/mk/generic_leaf_target.mk</span>
+
+<span class="cp">endif</span>
+</pre></div>
+</div>
+<p>This is a Makefile example that allows you to build kernel modules inside LTP.
+The prerequisites for the build are detected by the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">REQ_VERSION_MAJOR</span></code> and <code class="docutils literal notranslate"><span class="pre">REQ_VERSION_PATCH</span></code> describe minimal kernel
+version for which the build system tries to build the module.</p>
+<p>The build system is also forward compatible with changes in Linux kernel
+internal API so that, if module fails to build, the failure is ignored both on
+build and installation. If the userspace counterpart of the test fails to load
+the module because the file does not exists, the test is skipped.</p>
+<p>Note the <code class="docutils literal notranslate"><span class="pre">ifneq($(KERNELRELEASE),)</span></code>. The reason it exists, it is that the
+Makefile is executed twice: once by LTP build system and once by kernel kbuild,
+see <a class="reference external" href="https://docs.kernel.org/kbuild/modules.html">https://docs.kernel.org/kbuild/modules.html</a> in the Linux kernel documentation for details
+on external module build.</p>
+</section>
+<section id="make-rules-and-make-variables">
+<h2>Make Rules and Make Variables<a class="headerlink" href="#make-rules-and-make-variables" title="Permalink to this heading"></a></h2>
+<p>When using make rules, avoid writing ad hoc rules like:</p>
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nf">[prog]</span><span class="o">:</span><span class="w"> </span>[<span class="n">dependencies</span>]
+<span class="w">    </span>cc<span class="w"> </span>-I../../include<span class="w"> </span><span class="k">$(</span>CFLAGS<span class="k">)</span><span class="w"> </span><span class="k">$(</span>CPPFLAGS<span class="k">)</span><span class="w"> </span><span class="k">$(</span>LDFLAGS<span class="k">)</span><span class="w"> </span><span class="k">$(</span>LDLIBS<span class="k">)</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-o<span class="w"> </span><span class="o">[</span>prog<span class="o">]</span><span class="w"> </span><span class="o">[</span>dependencies<span class="o">]</span>
+</pre></div>
+</div>
+<p>This makes cross-compilation and determinism difficult, if not impossible.
+Besides, implicit rules are your friends and as long as you use <code class="docutils literal notranslate"><span class="pre">MAKEOPTS=;</span></code>
+in the top-level caller (or do <code class="docutils literal notranslate"><span class="pre">$(subst</span> <span class="pre">r,$(MAKEOPTS)</span></code>) to remove <code class="docutils literal notranslate"><span class="pre">-r</span></code>),
+the compile will complete successfully, assuming all other prerequisites have
+been fulfilled (libraries, headers, etc).</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>$(AR)</p></td>
+<td><p>The library archiver</p></td>
+</tr>
+<tr class="row-odd"><td><p>$(CC)</p></td>
+<td><p>The system C compiler</p></td>
+</tr>
+<tr class="row-even"><td><p>$(CCP)</p></td>
+<td><p>The system C preprocessor</p></td>
+</tr>
+<tr class="row-odd"><td><p>$(CFLAGS)</p></td>
+<td><p>C compiler flags</p></td>
+</tr>
+<tr class="row-even"><td><p>$(CPPFLAGS)</p></td>
+<td><p>Preprocessor flags, e.g. <code class="docutils literal notranslate"><span class="pre">-I</span></code> arguments</p></td>
+</tr>
+<tr class="row-odd"><td><p>$(DEBUG_CFLAGS)</p></td>
+<td><p>Debug flags to pass to <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code>, <code class="docutils literal notranslate"><span class="pre">-g</span></code>, etc</p></td>
+</tr>
+<tr class="row-even"><td><p>$(KVM_LD)</p></td>
+<td><p>Special linker for wrapping KVM payload binaries into linkable object
+files. Defaults to <code class="docutils literal notranslate"><span class="pre">$(LD)</span></code>. Change this variable if the KVM Makefile
+fails to build files named <code class="docutils literal notranslate"><span class="pre">*-payload.o</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>$(LD)</p></td>
+<td><p>The system linker (typically <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code>, but not necessarily)</p></td>
+</tr>
+<tr class="row-even"><td><p>$(LDFLAGS)</p></td>
+<td><p>What to pass in to the linker, including <code class="docutils literal notranslate"><span class="pre">-L</span></code> arguments and other ld
+arguments, apart from <code class="docutils literal notranslate"><span class="pre">-l</span></code> library includes (see <code class="docutils literal notranslate"><span class="pre">$(LDLIBS)</span></code>).
+This should be done in the <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code> args passing style when
+<code class="docutils literal notranslate"><span class="pre">LD</span> <span class="pre">:=</span> <span class="pre">$(CC)</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">-Wl,-foo</span></code>, as opposed to <code class="docutils literal notranslate"><span class="pre">-foo</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>$(LDLIBS)</p></td>
+<td><p>Libraries to pass to the linker (e.g. <code class="docutils literal notranslate"><span class="pre">-lltp</span></code>, etc)</p></td>
+</tr>
+<tr class="row-even"><td><p>$(LTPLDLIBS)</p></td>
+<td><p>LTP internal libraries i.e. these in libs/ directory</p></td>
+</tr>
+<tr class="row-odd"><td><p>$(OPT_CFLAGS)</p></td>
+<td><p>Optimization flags to pass into the C compiler, <code class="docutils literal notranslate"><span class="pre">-O2</span></code>, etc. If you
+specify <code class="docutils literal notranslate"><span class="pre">-O2</span></code> or higher, you should also specify
+<code class="docutils literal notranslate"><span class="pre">-fno-strict-aliasing</span></code>, because of gcc fstrict-aliasing optimization
+bugs in the tree optimizer. Search for <strong>fstrict-aliasing optimization
+bug</strong> with your favorite search engine.</p>
+<p>Examples of more recent bugs: tree-optimization/17510
+and tree-optimization/39100.</p>
+<p>Various bugs have occurred in the past due to buggy logic in the
+tree-optimization portion of the gcc compiler, from 3.3.x to 4.4.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>$(RANLIB)</p></td>
+<td><p>What to run after archiving a library</p></td>
+</tr>
+<tr class="row-odd"><td><p>$(WCFLAGS)</p></td>
+<td><p>Warning flags to pass to <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">-Werror</span></code>, <code class="docutils literal notranslate"><span class="pre">-Wall</span></code>, etc.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="make-system-variables">
+<h2>Make System Variables<a class="headerlink" href="#make-system-variables" title="Permalink to this heading"></a></h2>
+<p>A series of variables are used within the make system that direct what actions
+need to be taken. Rather than listing the variables here, please refer to the
+comments contained in <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/include/mk/env_pre.mk">include/mk/env_pre.mk</a>.</p>
+</section>
+<section id="guidelines-and-recommendations">
+<h2>Guidelines and Recommendations<a class="headerlink" href="#guidelines-and-recommendations" title="Permalink to this heading"></a></h2>
+<p>Of course, GNU Make manual is the key to understand the Make system, but
+following manuals are probably the most important:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.gnu.org/software/make/manual/make.html#Implicit-Rules">Implicit Rules</a></p></li>
+<li><p><a class="reference external" href="http://www.gnu.org/software/make/manual/make.html#Using-Variables">Variables and Expansion</a></p></li>
+<li><p><a class="reference external" href="http://www.gnu.org/software/make/manual/make.html#Origin-Function">Origin Use</a></p></li>
+<li><p><a class="reference external" href="http://www.gnu.org/software/make/manual/make.html#Directory-Search">VPath Use</a></p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Rebuild from scratch before committing anything in the build system.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ltp_library.html" class="btn btn-neutral float-left" title="LTP Library guidelines" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="debugging.html" class="btn btn-neutral float-right" title="Debugging" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Linux Test Project.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

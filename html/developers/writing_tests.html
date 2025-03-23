@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing tests &mdash; Linux Test Project 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/js/pathTruncator.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Test case tutorial" href="test_case_tutorial.html" />
+    <link rel="prev" title="Setting up the Mailing list" href="setup_mailinglist.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Linux Test Project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">For users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../users/quick_start.html">Installation and tests execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/setup_tests.html">Tests setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/supported_systems.html">Supported systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/stats.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/test_catalog.html">Test catalog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup_mailinglist.html">Setting up the Mailing list</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Writing tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#guide-to-clean-and-understandable-code">Guide to clean and understandable code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#keep-things-simple">Keep things simple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keep-functions-and-variable-names-short">Keep functions and variable names short</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#do-not-over-comment">Do not over-comment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dry-code-duplication">DRY (Code duplication)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#c-coding-style">C coding style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shell-coding-style">Shell coding style</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#backwards-compatibility">3 Backwards compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dealing-with-messed-up-legacy-code">Dealing with messed up legacy code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ltp-structure">LTP Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#runtest-files">Runtest Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#datafiles">Datafiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sub-executables">Sub-executables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#test-contribution-checklist">Test Contribution Checklist</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#about-gitignore-files">About .gitignore files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-pre-release-kernel-features">Testing pre-release kernel features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-builds-with-github-actions">Testing builds with GitHub Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ltp-c-and-shell-test-api-comparison">LTP C And Shell Test API Comparison</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test_case_tutorial.html">Test case tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_c_tests.html">LTP C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_shell_tests.html">LTP shell API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_network_tests.html">Developing using network API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_kvm_tests.html">Developing using KVM API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ltp_library.html">LTP Library guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_system.html">Build system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../maintainers/patch_review.html">Patch review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../maintainers/ltp_release_procedure.html">Release process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Custom Documents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../my-docs/index.html">Welcome to the Project Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Linux Test Project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Writing tests</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developers/writing_tests.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="writing-tests">
+<h1>Writing tests<a class="headerlink" href="#writing-tests" title="Permalink to this heading"></a></h1>
+<p>This document describes LTP guidelines and it’s intended for anybody who wants
+to write or to modify a LTP testcase. It’s not a definitive guide and it’s not,
+by any means, a substitute for common sense.</p>
+<section id="guide-to-clean-and-understandable-code">
+<h2>Guide to clean and understandable code<a class="headerlink" href="#guide-to-clean-and-understandable-code" title="Permalink to this heading"></a></h2>
+<p>Testcases require that the source code is easy to follow. When a test starts to
+fail, the failure has to be analyzed and clean test codebase makes this task
+much easier and quicker.</p>
+<section id="keep-things-simple">
+<h3>Keep things simple<a class="headerlink" href="#keep-things-simple" title="Permalink to this heading"></a></h3>
+<p>It’s worth to keep testcases simple or, better, as simple as possible.</p>
+<p>The kernel and libc are tricky beasts and the complexity imposed by their
+interfaces is quite high. Concentrate on the interface you want to test and
+follow the UNIX philosophy.</p>
+<p>It’s a good idea to make the test as self-contained as possible too, ideally
+tests should not depend on tools or libraries that are not widely available.</p>
+<p>Do not reinvent the wheel!</p>
+<ul class="simple">
+<li><p>Use LTP standard interface</p></li>
+<li><p>Do not add custom PASS/FAIL reporting functions</p></li>
+<li><p>Do not write Makefiles from scratch, use LTP build system instead</p></li>
+<li><p>Etc.</p></li>
+</ul>
+</section>
+<section id="keep-functions-and-variable-names-short">
+<h3>Keep functions and variable names short<a class="headerlink" href="#keep-functions-and-variable-names-short" title="Permalink to this heading"></a></h3>
+<p>Choosing a good name for an API functions or even variables is a difficult
+task do not underestimate it.</p>
+<p>There are a couple of customary names for different things that help people to
+understand code, for example:</p>
+<ul class="simple">
+<li><p>For loop variables are usually named with a single letter <code class="docutils literal notranslate"><span class="pre">i</span></code>, <code class="docutils literal notranslate"><span class="pre">j</span></code>, …</p></li>
+<li><p>File descriptors <code class="docutils literal notranslate"><span class="pre">fd</span></code> or <code class="docutils literal notranslate"><span class="pre">fd_foo</span></code>.</p></li>
+<li><p>Number of bytes stored in file are usually named as <code class="docutils literal notranslate"><span class="pre">size</span></code> or <code class="docutils literal notranslate"><span class="pre">len</span></code></p></li>
+<li><p>Etc.</p></li>
+</ul>
+</section>
+<section id="do-not-over-comment">
+<h3>Do not over-comment<a class="headerlink" href="#do-not-over-comment" title="Permalink to this heading"></a></h3>
+<p>Comments can sometimes save your day, but they can easily do more harm than
+good. There has been several cases where comments and actual implementation
+drifted slowly apart which yielded into API misuses and hard to find bugs.
+Remember there is only one thing worse than no documentation: wrong
+documentation.</p>
+<p>Ideally, everybody should write code that is obvious, which unfortunately isn’t
+always possible. If there is a code that requires to be commented, keep it
+short and to the point. These comments should explain <em>why</em> and not <em>how</em>
+things are done.</p>
+<p>Never ever comment the obvious.</p>
+<p>In case of LTP testcases, it’s customary to add an <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html">RST</a>
+formatted comment paragraph with high-level test description at the beginning
+of the file right under the GPL SPDX header. This helps other people to
+understand the overall goal of the test before they dive into the technical
+details. It’s also exported into generated documentation hence it should mostly
+explain what is tested.</p>
+</section>
+<section id="dry-code-duplication">
+<h3>DRY (Code duplication)<a class="headerlink" href="#dry-code-duplication" title="Permalink to this heading"></a></h3>
+<p>Copy &amp; paste is a good servant but very poor master. If you are about to copy a
+large part of the code from one testcase to another, think what would happen if
+you find bug in the code that has been copied all around the tree. What about
+moving it to a library instead?</p>
+<p>The same goes for short but complicated parts, whenever you are about to copy &amp;
+paste a syscall wrapper that packs arguments accordingly to machine
+architecture or similarly complicated code, put it into a header instead.</p>
+</section>
+</section>
+<section id="c-coding-style">
+<h2>C coding style<a class="headerlink" href="#c-coding-style" title="Permalink to this heading"></a></h2>
+<p>LTP adopted <a class="reference external" href="https://www.kernel.org/doc/html/latest/process/coding-style.html">Linux kernel coding style</a>.
+Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code> in the test’s directory and/or use <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check-$TCID</span></code>, it
+uses (among other checks) our vendoring version of
+<a class="reference external" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/plain/scripts/checkpatch.pl">checkpatch.pl</a>
+script from kernel git tree.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code> does not report any problems, the code still may be wrong
+as all tools used for checking only look for common mistakes.</p>
+</div>
+<p>The following linting code can be found when we run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code>:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Linting code</p></th>
+<th class="head"><p>Message</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>LTP-001</p></td>
+<td><p>Library source files have <code class="docutils literal notranslate"><span class="pre">tst_</span></code> prefix</p></td>
+<td><p>API source code is inside headers in <code class="docutils literal notranslate"><span class="pre">include/{empty}*.h</span></code>,
+<code class="docutils literal notranslate"><span class="pre">include/lapi/{empty}*.h</span></code> (backward compatibility for old kernel and
+libc) and C sources in <code class="docutils literal notranslate"><span class="pre">lib/{empty}*.c</span></code>. Files must have <code class="docutils literal notranslate"><span class="pre">tst_</span></code>
+prefix.</p></td>
+</tr>
+<tr class="row-odd"><td><p>LTP-002</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TST_RET</span></code> and <code class="docutils literal notranslate"><span class="pre">TST_ERR</span></code> are never modified by test library functions</p></td>
+<td><p>The test author is guaranteed that the test API will not modify these
+variables. This prevents silent errors where the return value and
+errno are overwritten before the test has chance to check them.</p>
+<p>The macros which are clearly intended to update these variables. That
+is <code class="docutils literal notranslate"><span class="pre">TEST</span></code> and those in <code class="docutils literal notranslate"><span class="pre">tst_test_macros.h</span></code>. Are of course allowed to
+update these variables.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>LTP-003</p></td>
+<td><p>Externally visible library symbols have the <code class="docutils literal notranslate"><span class="pre">tst_</span></code> prefix</p></td>
+<td><p>Functions, types and variables in the public test API should have the
+<code class="docutils literal notranslate"><span class="pre">tst_</span></code> prefix. With some exceptions for symbols already prefixed with
+<code class="docutils literal notranslate"><span class="pre">safe_</span></code> or <code class="docutils literal notranslate"><span class="pre">ltp_</span></code>.</p>
+<p>Static (private) symbols should not have the prefix.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>LTP-004</p></td>
+<td><p>Test executable symbols are marked <code class="docutils literal notranslate"><span class="pre">static</span></code></p></td>
+<td><p>Test executables should not export symbols unnecessarily. This means
+that all top-level variables and functions should be marked with the
+<code class="docutils literal notranslate"><span class="pre">static</span></code> keyword. The only visible symbols should be those included
+from shared object files.</p></td>
+</tr>
+<tr class="row-even"><td><p>LTP-005</p></td>
+<td><p>Array must terminate with a sentinel value (i.e. <code class="docutils literal notranslate"><span class="pre">NULL</span></code> or <code class="docutils literal notranslate"><span class="pre">{}</span></code>)</p></td>
+<td><p>When defining arrays in the <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">tst_test</span></code> structure, we need to
+end the array items with a sentinel <code class="docutils literal notranslate"><span class="pre">NULL</span></code> value.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="shell-coding-style">
+<h2>Shell coding style<a class="headerlink" href="#shell-coding-style" title="Permalink to this heading"></a></h2>
+<p>When writing testcases in shell, write in <em>portable shell</em> only, it’s a good
+idea to try to run the test using alternative shell (alternative to bash, for
+example dash) too.</p>
+<p><em>Portable shell</em> means Shell Command Language as defined by POSIX with an
+exception of few widely used extensions, namely <strong>local</strong> keyword used inside of
+functions and <code class="docutils literal notranslate"><span class="pre">-o</span></code> and <code class="docutils literal notranslate"><span class="pre">-a</span></code> test parameters (that are marked as obsolete in
+POSIX).</p>
+<p>You can either try to run the testcases in Debian which has <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code> pointing
+to <code class="docutils literal notranslate"><span class="pre">dash</span></code> by default, or to install <code class="docutils literal notranslate"><span class="pre">dash</span></code> on your favorite distribution,
+then use it to run tests. If your distribution lacks <code class="docutils literal notranslate"><span class="pre">dash</span></code> package, you can
+always compile it from <a class="reference external" href="http://gondor.apana.org.au/~herbert/dash/files/">sources</a>.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code> in the test’s directory and/or use <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check-$TCID.sh</span></code>.
+It uses (among other checks) our vendoring version of
+<a class="reference external" href="https://salsa.debian.org/debian/devscripts/raw/master/scripts/checkbashisms.pl">checkbashism.pl</a>
+from Debian that is used to check for non-portable shell code.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code> does not report any problems the code still may be wrong,
+as <code class="docutils literal notranslate"><span class="pre">checkbashisms.pl</span></code> is used for checking only common mistakes.</p>
+</div>
+<p>Here there are some common sense style rules for shell</p>
+<ul class="simple">
+<li><p>Keep lines under 80 chars</p></li>
+<li><p>Use tabs for indentation</p></li>
+<li><p>Keep things simple, avoid unnecessary subshells</p></li>
+<li><p>Don’t do confusing things (i.e. don’t name your functions like common shell
+commands, etc.)</p></li>
+<li><p>Quote variables</p></li>
+<li><p>Be consistent</p></li>
+</ul>
+<section id="backwards-compatibility">
+<h3>3 Backwards compatibility<a class="headerlink" href="#backwards-compatibility" title="Permalink to this heading"></a></h3>
+<p>LTP test should be as backward compatible as possible. Think of an enterprise
+distributions with long term support (more than five years since the initial
+release) or of an embedded platform that needs to use several years old
+toolchain supplied by the manufacturer.</p>
+<p>Therefore LTP test for more current features should be able to cope with older
+systems. It should at least compile fine and if it’s not appropriate for the
+configuration it should return <code class="docutils literal notranslate"><span class="pre">TCONF</span></code>.</p>
+<p>There are several types of checks we use:</p>
+<ul class="simple">
+<li><p>The <em>configure script</em> is usually used to detect availability of a function
+declarations in system headers. It’s used to disable tests at compile time or
+to enable fallback definitions.</p></li>
+<li><p>Checking the <code class="docutils literal notranslate"><span class="pre">errno</span></code> value is another type of runtime check. Most of the
+syscalls returns either <code class="docutils literal notranslate"><span class="pre">EINVAL</span></code> or <code class="docutils literal notranslate"><span class="pre">ENOSYS</span></code> when syscall was not
+implemented or was disabled upon kernel compilation.</p></li>
+<li><p>LTP has kernel version detection that can be used to disable tests at runtime.
+Unfortunately, the kernel version does not always corresponds to a well
+defined feature set, as distributions tend to backport hundreds of patches
+while the kernel version stays the same. Use with caution.</p></li>
+<li><p>Lately, we added a kernel <code class="docutils literal notranslate"><span class="pre">.config</span></code> parser. A test can define a boolean
+expression of kernel config variables that has to be satisfied in order to run
+a test. At the moment, this is mostly used for kernel namespaces.</p></li>
+<li><p>Sometimes it makes sense to define a few macros instead of creating a
+configure test. One example is Linux specific POSIX clock ids in
+<a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/include/lapi/posix_clocks.h">include/lapi/posix_clocks.h</a>.</p></li>
+</ul>
+</section>
+<section id="dealing-with-messed-up-legacy-code">
+<h3>Dealing with messed up legacy code<a class="headerlink" href="#dealing-with-messed-up-legacy-code" title="Permalink to this heading"></a></h3>
+<p>LTP still contains a lot of old and messy code and we are cleaning it up as
+fast as we can but, despite the decade of efforts, there is still a lot of it.
+If you start modifying old or a messy testcase and your changes are more
+complicated than simple typo fixes, you should convert the test into a new
+library first.</p>
+<p>It’s also much easier to review the changes if you split them into a smaller
+logical groups. The same goes for moving files: if you need to rename or to move
+files, do it in a separate patch.</p>
+</section>
+<section id="license">
+<h3>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h3>
+<p>Code contributed to LTP should be licensed under GPLv2+ (GNU GPL version 2 or
+any later version).</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">SPDX-License-Identifier:</span> <span class="pre">GPL-2.0-or-later</span></code></p>
+</section>
+</section>
+<section id="ltp-structure">
+<h2>LTP Structure<a class="headerlink" href="#ltp-structure" title="Permalink to this heading"></a></h2>
+<p>The structure of LTP is quite simple. Each test is a binary written either in
+portable shell or C. The test gets a configuration via environment variables
+and/or command line parameters, it prints additional information into the
+stdout and reports overall success/failure via the exit value.</p>
+<p>Tests are generally placed under the <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/testcases">testcases</a> directory. Everything that
+is a syscall or (slightly confusingly) libc syscall wrapper, goes under
+<a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/testcases/kernel/syscalls/">testcases/kernel/syscalls/</a>.</p>
+<p>There is also <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/testcases/open_posix_testsuite/">testcases/open_posix_testsuite/</a> which is a well maintained
+fork of the Open POSIX testsuite project, that has been dead since 2005.</p>
+<p>We also have a number of directories with tests for more specific features, such
+as containers, etc.</p>
+<section id="runtest-files">
+<h3>Runtest Files<a class="headerlink" href="#runtest-files" title="Permalink to this heading"></a></h3>
+<p>The list of tests to be executed is stored in runtest files under the
+<a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/runtest">runtest</a> directory. The default set of runtest files to be executed is
+stored in <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/scenario_groups/default">scenario_groups/default</a>. When you add a test, you should add
+corresponding entries into some runtest file(s) as well.</p>
+<p>Each line of runtest file contains one test. The first item is the test name.
+All other items, separated by space will be executed as a command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>shell_test01<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;SUCCESS&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>shell_pipe01.sh
+splice02<span class="w"> </span>splice02<span class="w"> </span>-s<span class="w"> </span><span class="m">20</span>
+</pre></div>
+</div>
+<p>Blank lines and lines starting with a <code class="docutils literal notranslate"><span class="pre">#</span></code> (comments) are ignored.</p>
+<p>Syscalls tests, placed under <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/testcases/kernel/syscalls/">testcases/kernel/syscalls/</a>, use
+<a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/runtest/syscalls">runtest/syscalls</a> file. For kernel related tests for memory management we
+have <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/runtest/mm">runtest/mm</a>, etc.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>runtest files should have one entry per a test. Creating a
+wrapper that runs all your tests and adding it as a single test
+into runtest file is strongly discouraged.</p>
+</div>
+</section>
+</section>
+<section id="datafiles">
+<h2>Datafiles<a class="headerlink" href="#datafiles" title="Permalink to this heading"></a></h2>
+<p>If your test needs data files, these should be put into a subdirectory
+named <code class="docutils literal notranslate"><span class="pre">datafiles</span></code> and installed into the <code class="docutils literal notranslate"><span class="pre">testcases/data/$TCID</span></code> directory.
+This will require to add <code class="docutils literal notranslate"><span class="pre">INSTALL_DIR</span> <span class="pre">:=</span> <span class="pre">testcases/data/TCID</span></code> into
+correspondent <code class="docutils literal notranslate"><span class="pre">datafiles/Makefile</span></code>.</p>
+<p>You can obtain path to datafiles via <code class="docutils literal notranslate"><span class="pre">$TST_DATAROOT</span></code> provided by <code class="docutils literal notranslate"><span class="pre">test.sh</span></code>
+or via C function <code class="docutils literal notranslate"><span class="pre">tst_dataroot()</span></code> provided by libltp:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">dataroot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tst_dataroot</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Datafiles can also be accessed as <code class="docutils literal notranslate"><span class="pre">$LTPROOT/testcases/data/$TCID/...</span></code>,
+but <code class="docutils literal notranslate"><span class="pre">$TST_DATAROOT</span></code> and <code class="docutils literal notranslate"><span class="pre">tst_dataroot()</span></code> are preferred, as these can be used
+when running testcases directly in git tree as well as from install location.</p>
+<section id="sub-executables">
+<h3>Sub-executables<a class="headerlink" href="#sub-executables" title="Permalink to this heading"></a></h3>
+<p>If your test needs to execute a binary, place it in the same directory of the
+testcase and name the binary with <code class="docutils literal notranslate"><span class="pre">$TESTNAME_</span></code> prefix, where <code class="docutils literal notranslate"><span class="pre">$TESTNAME</span></code> is
+the name of the test binary. Once the test is executed by the framework, the
+path to the directory with all LTP binaries is added to the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> and you
+can execute it via its name.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you need to execute a test from the LTP tree, you can add <code class="docutils literal notranslate"><span class="pre">PATH</span></code> to
+the current directory with <code class="docutils literal notranslate"><span class="pre">PATH=&quot;$PATH:$PWD&quot;</span> <span class="pre">./foo01</span></code>.</p>
+</div>
+</section>
+</section>
+<section id="test-contribution-checklist">
+<h2>Test Contribution Checklist<a class="headerlink" href="#test-contribution-checklist" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Test compiles and it runs fine (check with <code class="docutils literal notranslate"><span class="pre">-i</span> <span class="pre">10</span></code> and <code class="docutils literal notranslate"><span class="pre">-i</span> <span class="pre">0</span></code> too)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code> should not emit any warnings for the test you are working on
+(hint: run it in the test’s directory and/or use <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check-$TCID</span></code>)</p></li>
+<li><p>The runtest entries are in place</p></li>
+<li><p>New test binaries are added into the corresponding <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> files</p></li>
+<li><p>Patches apply over the latest git</p></li>
+</ol>
+<section id="about-gitignore-files">
+<h3>About .gitignore files<a class="headerlink" href="#about-gitignore-files" title="Permalink to this heading"></a></h3>
+<p>There are numerous <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> files in the LTP tree. Usually, there is a
+<code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file for a group of tests. The reason of this setup is simple:
+it’s easier to maintain a <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file per tests’ directory, rather
+than having a single file in the project root directory. In this way, we don’t
+have to update all the gitignore files when moving directories, and they get
+deleted automatically when a directory with tests is removed.</p>
+</section>
+</section>
+<section id="testing-pre-release-kernel-features">
+<h2>Testing pre-release kernel features<a class="headerlink" href="#testing-pre-release-kernel-features" title="Permalink to this heading"></a></h2>
+<p>Tests for features not yet in the mainline kernel release are accepted. However,
+they must be added only to <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/runtest/staging">runtest/staging</a>. Once a feature is part
+of the stable kernel ABI, the associated test must be moved out of staging.</p>
+</section>
+<section id="testing-builds-with-github-actions">
+<h2>Testing builds with GitHub Actions<a class="headerlink" href="#testing-builds-with-github-actions" title="Permalink to this heading"></a></h2>
+<p>Master branch is tested in GitHub <a class="reference external" href="https://github.com/linux-test-project/ltp/actions">actions</a>
+to ensure LTP builds in various distributions, including old, current and
+bleeding edge. <code class="docutils literal notranslate"><span class="pre">gcc</span></code> and <code class="docutils literal notranslate"><span class="pre">clang</span></code> toolchains are also tested for various
+architectures using cross-compilation. For a full list of tested distros, please
+check <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/.github/workflows/ci-docker-build.yml">.github/workflows/ci-docker-build.yml</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Passing the GitHub Actions CI means that LTP compiles in a variety of
+different distributions on their <strong>newest releases</strong>.
+The CI also checks for code linting, running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code> in the whole
+LTP project.</p>
+</div>
+</section>
+<section id="ltp-c-and-shell-test-api-comparison">
+<h2>LTP C And Shell Test API Comparison<a class="headerlink" href="#ltp-c-and-shell-test-api-comparison" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>C API <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">tst_test</span></code> members</p></th>
+<th class="head"><p>Shell API <code class="docutils literal notranslate"><span class="pre">$TST_*</span></code> variables</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>.all_filesystems</p></td>
+<td><p>TST_ALL_FILESYSTEMS</p></td>
+</tr>
+<tr class="row-odd"><td><p>.bufs</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>.caps</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>.child_needs_reinit</p></td>
+<td><p>not applicable</p></td>
+</tr>
+<tr class="row-even"><td><p>.cleanup</p></td>
+<td><p>TST_CLEANUP</p></td>
+</tr>
+<tr class="row-odd"><td><p>.dev_extra_opts</p></td>
+<td><p>TST_DEV_EXTRA_OPTS</p></td>
+</tr>
+<tr class="row-even"><td><p>.dev_fs_opts</p></td>
+<td><p>TST_DEV_FS_OPTS</p></td>
+</tr>
+<tr class="row-odd"><td><p>.dev_fs_type</p></td>
+<td><p>TST_FS_TYPE</p></td>
+</tr>
+<tr class="row-even"><td><p>.dev_min_size</p></td>
+<td><p>TST_DEVICE_SIZE</p></td>
+</tr>
+<tr class="row-odd"><td><p>.format_device</p></td>
+<td><p>TST_FORMAT_DEVICE</p></td>
+</tr>
+<tr class="row-even"><td><p>.max_runtime</p></td>
+<td><p>TST_TIMEOUT (not exactly the same, a real timeout based on old .timeout
+concept. .max_runtime has also an extra 30 sec safety margin for
+teardown of the test.)</p></td>
+</tr>
+<tr class="row-odd"><td><p>.min_cpus</p></td>
+<td><p>not applicable</p></td>
+</tr>
+<tr class="row-even"><td><p>.min_kver</p></td>
+<td><p>TST_MIN_KVER</p></td>
+</tr>
+<tr class="row-odd"><td><p>.min_mem_avail</p></td>
+<td><p>not applicable</p></td>
+</tr>
+<tr class="row-even"><td><p>.mnt_flags</p></td>
+<td><p>TST_MNT_PARAMS</p></td>
+</tr>
+<tr class="row-odd"><td><p>.min_swap_avail</p></td>
+<td><p>not applicable</p></td>
+</tr>
+<tr class="row-even"><td><p>.mntpoint | .mnt_data</p></td>
+<td><p>TST_MNTPOINT</p></td>
+</tr>
+<tr class="row-odd"><td><p>.mount_device</p></td>
+<td><p>TST_MOUNT_DEVICE</p></td>
+</tr>
+<tr class="row-even"><td><p>.needs_cgroup_ctrls</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>.needs_checkpoints</p></td>
+<td><p>TST_NEEDS_CHECKPOINTS</p></td>
+</tr>
+<tr class="row-even"><td><p>.needs_cmds</p></td>
+<td><p>TST_NEEDS_CMDS</p></td>
+</tr>
+<tr class="row-odd"><td><p>.needs_devfs</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>.needs_device</p></td>
+<td><p>TST_NEEDS_DEVICE</p></td>
+</tr>
+<tr class="row-odd"><td><p>.needs_drivers</p></td>
+<td><p>TST_NEEDS_DRIVERS</p></td>
+</tr>
+<tr class="row-even"><td><p>.needs_kconfigs</p></td>
+<td><p>TST_NEEDS_KCONFIGS</p></td>
+</tr>
+<tr class="row-odd"><td><p>.needs_overlay</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>.needs_rofs</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>.needs_root</p></td>
+<td><p>TST_NEEDS_ROOT</p></td>
+</tr>
+<tr class="row-even"><td><p>.needs_tmpdir</p></td>
+<td><p>TST_NEEDS_TMPDIR</p></td>
+</tr>
+<tr class="row-odd"><td><p>.options</p></td>
+<td><p>TST_PARSE_ARGS | TST_OPTS</p></td>
+</tr>
+<tr class="row-even"><td><p>.resource_files</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>.restore_wallclock</p></td>
+<td><p>not applicable</p></td>
+</tr>
+<tr class="row-even"><td><p>.sample</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>.save_restore</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>.scall</p></td>
+<td><p>not applicable</p></td>
+</tr>
+<tr class="row-odd"><td><p>.setup</p></td>
+<td><p>TST_SETUP</p></td>
+</tr>
+<tr class="row-even"><td><p>.skip_filesystems</p></td>
+<td><p>TST_SKIP_FILESYSTEMS</p></td>
+</tr>
+<tr class="row-odd"><td><p>.skip_in_compat</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>.skip_in_lockdown</p></td>
+<td><p>TST_SKIP_IN_LOCKDOWN</p></td>
+</tr>
+<tr class="row-odd"><td><p>.skip_in_secureboot</p></td>
+<td><p>TST_SKIP_IN_SECUREBOOT</p></td>
+</tr>
+<tr class="row-even"><td><p>.supported_archs</p></td>
+<td><p>not applicable</p></td>
+</tr>
+<tr class="row-odd"><td><p>.tags</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>.taint_check</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>.tcnt</p></td>
+<td><p>TST_CNT</p></td>
+</tr>
+<tr class="row-even"><td><p>.tconf_msg</p></td>
+<td><p>not applicable</p></td>
+</tr>
+<tr class="row-odd"><td><p>.test | .test_all</p></td>
+<td><p>TST_TESTFUNC</p></td>
+</tr>
+<tr class="row-even"><td><p>.test_variants</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>.tst_hugepage</p></td>
+<td><p>not applicable</p></td>
+</tr>
+<tr class="row-even"><td><p>.ulimit</p></td>
+<td><p>not applicable</p></td>
+</tr>
+<tr class="row-odd"><td><p>not applicable</p></td>
+<td><p>TST_NEEDS_KCONFIGS_IFS</p></td>
+</tr>
+<tr class="row-even"><td><p>not applicable</p></td>
+<td><p>TST_NEEDS_MODULE</p></td>
+</tr>
+<tr class="row-odd"><td><p>not applicable</p></td>
+<td><p>TST_POS_ARGS</p></td>
+</tr>
+<tr class="row-even"><td><p>not applicable</p></td>
+<td><p>TST_USAGE</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>C API other structs</p></th>
+<th class="head"><p>Shell API <code class="docutils literal notranslate"><span class="pre">$TST_*</span></code> variables</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>struct tst_device</p></td>
+<td><p>TST_DEVICE</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="setup_mailinglist.html" class="btn btn-neutral float-left" title="Setting up the Mailing list" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="test_case_tutorial.html" class="btn btn-neutral float-right" title="Test case tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Linux Test Project.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

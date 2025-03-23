@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LTP build log &mdash; Linux Test Project 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/js/pathTruncator.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Linux Test Project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">For users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../users/quick_start.html">Installation and tests execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/setup_tests.html">Tests setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/supported_systems.html">Supported systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/stats.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/test_catalog.html">Test catalog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developers/setup_mailinglist.html">Setting up the Mailing list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/writing_tests.html">Writing tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/test_case_tutorial.html">Test case tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/api_c_tests.html">LTP C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/api_shell_tests.html">LTP shell API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/api_network_tests.html">Developing using network API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/api_kvm_tests.html">Developing using KVM API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/ltp_library.html">LTP Library guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/build_system.html">Build system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/debugging.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/documentation.html">Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../maintainers/patch_review.html">Patch review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../maintainers/ltp_release_procedure.html">Release process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Custom Documents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome to the Project Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Linux Test Project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">LTP build log</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/my-docs/weakness_config.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ltp-build-log">
+<h1>LTP build log<a class="headerlink" href="#ltp-build-log" title="Permalink to this heading"></a></h1>
+<p>While the <code class="docutils literal notranslate"><span class="pre">configure</span></code> log indicates a successful configuration process, there are a few _weak <a href="#id2"><span class="problematic" id="id3">points_</span></a> or potential areas of concern that could be improved or might cause issues later in the build process. These are not critical failures, but they are worth noting for future reference or troubleshooting:</p>
+<hr class="docutils" />
+<section id="missing-headers">
+<h2>1. Missing Headers<a class="headerlink" href="#missing-headers" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dmapi.h</span></code>: Not found. This header is related to Data Management API (DMAPI), which is used for hierarchical storage management (HSM) in some filesystems (e.g., XFS). If the software relies on DMAPI functionality, this could cause issues.
+- <strong>Action</strong>: If DMAPI functionality is required, ensure the <cite>dmapi</cite> development package is installed (e.g., <cite>libdmapi-dev</cite> or similar).</p></li>
+<li><p><strong>mm.h</strong>: Not found. This header is related to memory management. Its absence might limit certain low-level memory operations.
+- <strong>Action</strong>: Investigate if this header is required for specific features. If so, ensure the appropriate kernel headers are installed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">linux/module.h</span></code>: Not found. This header is related to kernel module development. Its absence suggests that kernel module-related functionality might not be available.
+- <strong>Action</strong>: If kernel module support is needed, ensure the kernel headers are installed (e.g., <cite>linux-headers</cite> package).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sys/jfsdmapi.h</span></code>: Not found. This header is related to JFS (Journaled File System) DMAPI. If JFS-specific functionality is required, this could be a problem.
+- <strong>Action</strong>: Ensure the JFS development package is installed if needed.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="missing-structs">
+<h2>2. Missing Structs<a class="headerlink" href="#missing-structs" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">**code:``**</span></code>: Not found. This struct is used for low-level process tracing and debugging (e.g., with <cite>ptrace</cite>). Its absence might limit certain debugging or tracing features.
+- <strong>Action</strong>: Ensure the correct kernel headers are installed. This struct is typically defined in <cite>&lt;sys/user.h&gt;</cite> or <cite>&lt;sys/reg.h&gt;</cite>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">ptrace_peeksiginfo_args</span></code>: Not found. This struct is used for advanced signal handling with <cite>ptrace</cite>. Its absence might limit signal-related debugging features.
+- <strong>Action</strong>: Investigate if this struct is required for specific functionality. If so, ensure the kernel headers are up to date.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">signalfd_siginfo.signo</span></code>: Not found. The script found <cite>ssi_signo</cite> instead, which is a similar field. This might cause issues if the software expects the <cite>signo</cite> field specifically.
+- <strong>Action</strong>: Verify the software’s compatibility with the available <cite>signalfd_siginfo</cite> struct.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="xfs-quota-support">
+<h2>3. XFS Quota Support<a class="headerlink" href="#xfs-quota-support" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">xfs/xqm.h</span></code>: Not found. This header is related to XFS quota management. If the software relies on XFS quota functionality, this could cause issues.
+- <strong>Action</strong>: Ensure the XFS development package is installed (e.g., <code class="docutils literal notranslate"><span class="pre">xfsprogs-devel</span></code> or similar).</p></li>
+</ul>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="weak-or-missing-kernel-features">
+<h2>4. Weak or Missing Kernel Features<a class="headerlink" href="#weak-or-missing-kernel-features" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">clone()</span></code> with 7 arguments: Supported. However, if the system or kernel is updated, this might change. The <cite>clone()</cite> system call is used for creating lightweight processes (threads), and its behavior can vary across kernel versions.
+- <strong>Action</strong>: Ensure the kernel is up to date and supports the required <cite>clone()</cite> functionality.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MREMAP_FIXED</span></code>: Found. This is a kernel feature for memory remapping. While it is present, its availability depends on the kernel version.
+- <strong>Action</strong>: Verify that the kernel version supports this feature if it is critical for the software.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="potential-library-issues">
+<h2>5. Potential Library Issues<a class="headerlink" href="#potential-library-issues" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">libaio</span></code>: While <code class="docutils literal notranslate"><span class="pre">libaio.h</span></code> and <code class="docutils literal notranslate"><span class="pre">io_setup</span></code> are found, the script checks for <code class="docutils literal notranslate"><span class="pre">io_set_eventfd</span></code>, which is defined. However, if the library version is outdated, this could cause issues.</p></li>
+<li><p><strong>Action</strong>: Ensure the <cite>libaio</cite> library is up to date.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">libnuma</span></code>: While <code class="docutils literal notranslate"><span class="pre">numa_alloc_onnode</span></code>, <code class="docutils literal notranslate"><span class="pre">numa_move_pages</span></code>, and <code class="docutils literal notranslate"><span class="pre">numa_available</span></code> are found, NUMA functionality depends on the system’s hardware and kernel support.</p></li>
+<li><p><strong>Action</strong>: Verify that the system has NUMA-enabled hardware and that the kernel supports NUMA operations.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="selinux-and-capabilities">
+<h2>6. SELinux and Capabilities<a class="headerlink" href="#selinux-and-capabilities" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>SELinux</strong>: The script confirms that <code class="docutils literal notranslate"><span class="pre">is_selinux_enabled</span></code> is available in <code class="docutils literal notranslate"><span class="pre">libselinux</span></code>. However, if SELinux is not properly configured on the system, this could cause runtime issues.
+- <strong>Action</strong>: Ensure SELinux is properly configured and enabled if the software relies on it.</p></li>
+<li><p><strong>Capabilities</strong>: The script checks for <code class="docutils literal notranslate"><span class="pre">PR_CAPBSET_DROP</span></code> and <code class="docutils literal notranslate"><span class="pre">PR_CAPBSET_READ</span></code>, which are found. However, if the system’s capability model is restrictive, this could limit functionality.
+- <strong>Action</strong>: Verify that the system’s capability model aligns with the software’s requirements.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id1">
+<h2>1<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+</section>
+<section id="weak-points-in-subdirectory-configuration-utils-ffsb-6-0-rc2">
+<h2>7. Weak Points in Subdirectory Configuration (<code class="docutils literal notranslate"><span class="pre">utils/ffsb-6.0-rc2</span></code>)<a class="headerlink" href="#weak-points-in-subdirectory-configuration-utils-ffsb-6-0-rc2" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sys/limits.h</span></code>: Not found. This header is related to system limits. Its absence might limit certain system resource checks.
+- <strong>Action</strong>: Ensure the correct system headers are installed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lrand48_r</span></code> and <code class="docutils literal notranslate"><span class="pre">srand48_r</span></code>: Found, but these functions are not thread-safe on all systems. If the software relies on thread-safe random number generation, this could cause issues.
+- <strong>Action</strong>: Consider using alternative thread-safe random number generators if needed.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="general-recommendations">
+<h2>8. General Recommendations<a class="headerlink" href="#general-recommendations" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Kernel Headers</strong>: Several missing headers (<code class="docutils literal notranslate"><span class="pre">dmapi.h</span></code>, <code class="docutils literal notranslate"><span class="pre">mm.h</span></code>, <code class="docutils literal notranslate"><span class="pre">linux/module.h</span></code>) suggest that the kernel headers might not be fully installed. Ensure the correct kernel headers are installed for your system.</p></li>
+<li><p><strong>Library Versions</strong>: While the required libraries are found, their versions might not be optimal. Ensure all libraries (e.g., <code class="docutils literal notranslate"><span class="pre">libaio</span></code>, <code class="docutils literal notranslate"><span class="pre">libnuma</span></code>, <code class="docutils literal notranslate"><span class="pre">libselinux</span></code>) are up to date.</p></li>
+<li><p><strong>System Configuration</strong>: Some features (e.g., NUMA, SELinux, XFS quotas) depend on system configuration. Verify that the system is properly configured for these features.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="summary-of-actions">
+<h2>Summary of Actions:<a class="headerlink" href="#summary-of-actions" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Install Missing Headers</strong>: Ensure <code class="docutils literal notranslate"><span class="pre">dmapi.h</span></code>, <cite>mm.h</cite>, <code class="docutils literal notranslate"><span class="pre">linux/module.h</span></code>, and <code class="docutils literal notranslate"><span class="pre">xfs/xqm.h</span></code> are available if needed.</p></li>
+<li><p><strong>Verify Kernel Support</strong>: Ensure the kernel supports required features like <code class="docutils literal notranslate"><span class="pre">clone()</span></code>, <code class="docutils literal notranslate"><span class="pre">MREMAP_FIXED</span></code>, and <code class="docutils literal notranslate"><span class="pre">ptrace</span></code>-related structs.</p></li>
+<li><p><strong>Update Libraries</strong>: Ensure <code class="docutils literal notranslate"><span class="pre">libaio</span></code>, <code class="docutils literal notranslate"><span class="pre">libnuma</span></code>, and <code class="docutils literal notranslate"><span class="pre">libselinux</span></code> are up to date.</p></li>
+<li><p><strong>Check System Configuration</strong>: Verify that SELinux, NUMA, and XFS quotas are properly configured if required.</p></li>
+</ol>
+<p>By addressing these weak points, you can ensure a smoother build process and avoid potential runtime issues.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Linux Test Project.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

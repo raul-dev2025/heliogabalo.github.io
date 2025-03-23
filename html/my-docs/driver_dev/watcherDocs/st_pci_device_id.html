@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>struct pci_device_id &mdash; Linux Test Project 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/js/pathTruncator.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Concurrent ltp build with system tasks" href="../../hw_resources/sysTasks.html" />
+    <link rel="prev" title="PCI Functions Reference" href="../drv_refs/quick-ref-pci.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Linux Test Project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">For users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../users/quick_start.html">Installation and tests execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../users/setup_tests.html">Tests setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../users/supported_systems.html">Supported systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../users/stats.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../users/test_catalog.html">Test catalog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/setup_mailinglist.html">Setting up the Mailing list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/writing_tests.html">Writing tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/test_case_tutorial.html">Test case tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/api_c_tests.html">LTP C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/api_shell_tests.html">LTP shell API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/api_network_tests.html">Developing using network API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/api_kvm_tests.html">Developing using KVM API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/ltp_library.html">LTP Library guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/build_system.html">Build system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/debugging.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/documentation.html">Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../maintainers/patch_review.html">Patch review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../maintainers/ltp_release_procedure.html">Release process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Custom Documents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Topic Index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/vm_config/cxt4testing.html">Setting Up LTP Test Cases on a Linux VM Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/vm_config/vm-setup.html">Setting Up a VM to Boot with a Copied Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/vm_config/enableBootMenu.html">Enabling the Boot Menu During Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/vm_config/bootloader-dirs.html">Understanding Bootloader Directories and Customizing GRUB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/vm_config/bootloader-mode.html">Determine Boot Mode and Bootloader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/vm_config/queringXML.html">Querying XML File Configuration with libvirt Shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/vm_config/identifyBootloader.html">Inspecting the MBR to Identify the Bootloader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/vm_config/bootloaderDebug.html">Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/vm_config/vmCxtBootLoad.html">Focusing on the VM Context: How the Kernel and Initramfs Are Loaded</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/ltp_setup/weakness_config.html">LTP build log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/ltp_setup/documents-build.html">Building the Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/ltp_setup/rst_symbols.html">List of Symbols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/ltp_setup/autoConfHd.html">Using Autoconf Macros to Check for Headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/ltp_setup/checkHeaders.html">Check Headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/ltp_setup/build_workflow.html">Using Autotools in the LTP Build Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/ltp_setup/deugHeaders.html">Debuggin Kernel Headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/ltp_setup/directoryPermissions.html">Understanding Directory Permission Strings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../testenv_setup/Debugging/bootloaderChecks.html">Confirming Bootloader and Kernel Loading with UUID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drv_refs/driverBrief.html">Briefing on LTP (Linux Test Project) and Device Driver Test Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drv_refs/mmioVsIOports.html">Briefing: Memory-Mapped I/O vs. I/O Ports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drv_refs/pcie-symobls.html">PCIe Symobls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drv_refs/deadline-iosched.html">Deadline IO scheduler tunables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drv_refs/quick-ref-pci.html">PCI Functions Reference</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">struct pci_device_id</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#key-points">Key Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../hw_resources/sysTasks.html">Concurrent ltp build with system tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hw_resources/bus-map.html">Bus Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hw_resources/pci-exp-tests-HOWTO.html">HOWTO –&gt;       PCI-Express test scripts for LTP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hw_resources/compCPU.html">How to Limit CPU Computation Consumption for Builds and Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hw_resources/hw_specs/workFlow-strace.html">Workflow for Using <code class="docutils literal notranslate"><span class="pre">strace</span></code> to Trap System Calls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sys_config/sys_files/dummy-build.html">Safe Dry-Run for Sphinx Builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sys_config/sys_files/save_rmdir.html">Involuntary Directory Removal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sys_config/kernel_conf/environ-kconf.html">Kernel Configuration for KUnit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Unordered/pathTruncator.html">Integrating Path Truncation into Read the Docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Unordered/regexNotation.html">REGEX notation</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Linux Test Project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Topic Index</a></li>
+      <li class="breadcrumb-item active">struct pci_device_id</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/my-docs/driver_dev/watcherDocs/st_pci_device_id.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="struct-pci-device-id">
+<h1>struct pci_device_id<a class="headerlink" href="#struct-pci-device-id" title="Permalink to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">pci_device_id</span></code> is a fundamental structure in Linux kernel programming, particularly for PCI device drivers. Its primary purpose is to hold PCI device identifiers, which are used to match the driver with specific PCI devices. This structure is essential for the kernel to determine which devices a particular driver can handle.</p>
+<section id="key-points">
+<h2>Key Points<a class="headerlink" href="#key-points" title="Permalink to this heading"></a></h2>
+<ul>
+<li><p><strong>Purpose</strong>:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">pci_device_id</span></code> is used to define a table of PCI device IDs that the driver supports. This table is used by the kernel to match the driver with the appropriate PCI devices.</p>
+</li>
+<li><p><strong>Fields</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">vendor</span></code>: The vendor ID of the PCI device.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">device</span></code>: The device ID of the PCI device.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">subvendor</span></code>, <code class="docutils literal notranslate"><span class="pre">subdevice</span></code>: Subsystem vendor and device IDs (optional).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">class</span></code>, <code class="docutils literal notranslate"><span class="pre">class_mask</span></code>: Class code and mask for class-based matching (optional).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">driver_data</span></code>: Private data for the driver (optional).</p></li>
+</ul>
+</li>
+<li><p><strong>Usage</strong>:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">pci_device_id</span></code> structure is typically used in conjunction with the <code class="docutils literal notranslate"><span class="pre">MODULE_DEVICE_TABLE</span></code> macro, which exports the device ID table to user space, allowing tools like <code class="docutils literal notranslate"><span class="pre">modprobe</span></code> to load the appropriate driver for a given device.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">id_table</span></code> field in the <code class="docutils literal notranslate"><span class="pre">pci_driver</span></code> structure points to this table, enabling the kernel to match the driver with the correct devices.</p></li>
+</ul>
+</li>
+<li><p><strong>Example</strong>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">pci_device_id</span><span class="w"> </span><span class="n">pci_watcher_ids</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">PCI_DEVICE</span><span class="p">(</span><span class="n">VENDOR_ID</span><span class="p">,</span><span class="w"> </span><span class="n">DEVICE_ID</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>In this example, <code class="docutils literal notranslate"><span class="pre">pci_watcher_ids</span></code> is an array of <code class="docutils literal notranslate"><span class="pre">pci_device_id</span></code> structures. The <code class="docutils literal notranslate"><span class="pre">PCI_DEVICE</span></code> macro is used to define a specific vendor and device ID pair. The array is terminated with an all-zero entry, which is a common practice to mark the end of the table.</p></li>
+</ul>
+</li>
+<li><p><strong>Macros</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PCI_DEVICE(vendor,</span> <span class="pre">device)</span></code>: A macro that simplifies the creation of a <code class="docutils literal notranslate"><span class="pre">pci_device_id</span></code> entry by specifying the vendor and device IDs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MODULE_DEVICE_TABLE(pci,</span> <span class="pre">pci_watcher_ids)</span></code>: This macro exports the device ID table to user space, allowing the kernel to associate the driver with the specified PCI devices.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">pci_device_id</span></code> is a crucial part of PCI device driver development. It allows the driver to declare which PCI devices it supports, enabling the kernel to match the driver with the appropriate hardware. The <code class="docutils literal notranslate"><span class="pre">pci_watcher_ids</span></code> array in the provided code is an example of how this structure is used to define a list of supported devices.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../drv_refs/quick-ref-pci.html" class="btn btn-neutral float-left" title="PCI Functions Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../hw_resources/sysTasks.html" class="btn btn-neutral float-right" title="Concurrent ltp build with system tasks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Linux Test Project.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

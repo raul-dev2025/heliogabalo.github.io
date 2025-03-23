@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Querying XML File Configuration with libvirt Shell &mdash; Linux Test Project 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/js/pathTruncator.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Inspecting the MBR to Identify the Bootloader" href="identifyBootloader.html" />
+    <link rel="prev" title="Determine Boot Mode and Bootloader" href="bootloader-mode.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Linux Test Project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">For users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../users/quick_start.html">Installation and tests execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../users/setup_tests.html">Tests setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../users/supported_systems.html">Supported systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../users/stats.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../users/test_catalog.html">Test catalog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/setup_mailinglist.html">Setting up the Mailing list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/writing_tests.html">Writing tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/test_case_tutorial.html">Test case tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/api_c_tests.html">LTP C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/api_shell_tests.html">LTP shell API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/api_network_tests.html">Developing using network API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/api_kvm_tests.html">Developing using KVM API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/ltp_library.html">LTP Library guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/build_system.html">Build system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/debugging.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/documentation.html">Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../maintainers/patch_review.html">Patch review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../maintainers/ltp_release_procedure.html">Release process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Custom Documents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Topic Index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cxt4testing.html">Setting Up LTP Test Cases on a Linux VM Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vm-setup.html">Setting Up a VM to Boot with a Copied Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enableBootMenu.html">Enabling the Boot Menu During Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bootloader-dirs.html">Understanding Bootloader Directories and Customizing GRUB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bootloader-mode.html">Determine Boot Mode and Bootloader</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Querying XML File Configuration with libvirt Shell</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dump-the-xml-configuration">1. Dump the XML Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#search-for-kernel-and-initrd-elements">2. Search for <code class="docutils literal notranslate"><span class="pre">&lt;kernel&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;initrd&gt;</span></code> Elements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-xml-configuration">3. Example XML Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#edit-the-xml-configuration-optional">4. Edit the XML Configuration (Optional)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-for-direct-kernel-boot">5. Check for Direct Kernel Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="identifyBootloader.html">Inspecting the MBR to Identify the Bootloader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bootloaderDebug.html">Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Debugging/bootloaderChecks.html">Confirming Bootloader and Kernel Loading with UUID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ltp_setup/weakness_config.html">LTP build log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ltp_setup/documents-build.html">Building the Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ltp_setup/rst_symbols.html">List of Symbols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ltp_setup/autoConfHd.html">Using Autoconf Macros to Check for Headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ltp_setup/checkHeaders.html">Check Headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ltp_setup/build_workflow.html">Using Autotools in the LTP Build Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ltp_setup/deugHeaders.html">Debuggin Kernel Headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ltp_setup/directoryPermissions.html">Understanding Directory Permission Strings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../driver_dev/drv_refs/driverBrief.html">Briefing on LTP (Linux Test Project) and Device Driver Test Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../driver_dev/drv_refs/mmioVsIOports.html">Briefing: Memory-Mapped I/O vs. I/O Ports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../driver_dev/drv_refs/pcie-symobls.html">PCIe Symobls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../driver_dev/drv_refs/deadline-iosched.html">Deadline IO scheduler tunables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../driver_dev/drv_refs/quick-ref-pci.html">PCI Functions Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hw_resources/sysTasks.html">Concurrent ltp build with system tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hw_resources/bus-map.html">Bus Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hw_resources/pci-exp-tests-HOWTO.html">HOWTO –&gt;       PCI-Express test scripts for LTP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hw_resources/compCPU.html">How to Limit CPU Computation Consumption for Builds and Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hw_resources/hw_specs/workFlow-strace.html">Workflow for Using <code class="docutils literal notranslate"><span class="pre">strace</span></code> to Trap System Calls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sys_config/sys_files/dummy-build.html">Safe Dry-Run for Sphinx Builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sys_config/kernel_conf/environ-kconf.html">Kernel Configuration for KUnit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Unordered/pathTruncator.html">Integrating Path Truncation into Read the Docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Unordered/regexNotation.html">REGEX notation</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Linux Test Project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Topic Index</a></li>
+      <li class="breadcrumb-item active">Querying XML File Configuration with libvirt Shell</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/my-docs/testenv_setup/vm_config/queringXML.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="querying-xml-file-configuration-with-libvirt-shell">
+<h1>Querying XML File Configuration with libvirt Shell<a class="headerlink" href="#querying-xml-file-configuration-with-libvirt-shell" title="Permalink to this heading"></a></h1>
+<p>Yes, you can query an XML configuration file for a libvirt domain (virtual machine) using the <code class="docutils literal notranslate"><span class="pre">virsh</span></code> command-line tool, which is the libvirt shell. Specifically, you can check for the presence of <code class="docutils literal notranslate"><span class="pre">&lt;kernel&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;initrd&gt;</span></code> elements in the domain’s XML configuration.</p>
+<section id="dump-the-xml-configuration">
+<h2>1. Dump the XML Configuration<a class="headerlink" href="#dump-the-xml-configuration" title="Permalink to this heading"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">virsh</span> <span class="pre">dumpxml</span></code> command to output the XML configuration of a specific domain. Replace <code class="docutils literal notranslate"><span class="pre">&lt;domain-name&gt;</span></code> with the name or UUID of your virtual machine.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>virsh<span class="w"> </span>dumpxml<span class="w"> </span>&lt;domain-name&gt;
+</pre></div>
+</div>
+<p>This will output the entire XML configuration of the domain to the terminal.</p>
+</section>
+<section id="search-for-kernel-and-initrd-elements">
+<h2>2. Search for <code class="docutils literal notranslate"><span class="pre">&lt;kernel&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;initrd&gt;</span></code> Elements<a class="headerlink" href="#search-for-kernel-and-initrd-elements" title="Permalink to this heading"></a></h2>
+<p>You can either manually inspect the output for the <code class="docutils literal notranslate"><span class="pre">&lt;kernel&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;initrd&gt;</span></code> elements, or you can use tools like <code class="docutils literal notranslate"><span class="pre">grep</span></code> to filter the output.</p>
+<p>For example, to check if <code class="docutils literal notranslate"><span class="pre">&lt;kernel&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;initrd&gt;</span></code> are defined:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>virsh<span class="w"> </span>dumpxml<span class="w"> </span>&lt;domain-name&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;&lt;kernel&gt;|&lt;initrd&gt;&#39;</span>
+</pre></div>
+</div>
+<p>This will display any lines containing <code class="docutils literal notranslate"><span class="pre">&lt;kernel&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;initrd&gt;</span></code> if they exist in the XML configuration.</p>
+</section>
+<section id="example-xml-configuration">
+<h2>3. Example XML Configuration<a class="headerlink" href="#example-xml-configuration" title="Permalink to this heading"></a></h2>
+<p>If the domain is configured to use a custom kernel and initrd, the relevant part of the XML might look like this:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;os&gt;</span>
+<span class="w">  </span><span class="nt">&lt;type</span><span class="w"> </span><span class="na">arch=</span><span class="s">&#39;x86_64&#39;</span><span class="w"> </span><span class="na">machine=</span><span class="s">&#39;pc-i440fx-2.9&#39;</span><span class="nt">&gt;</span>hvm<span class="nt">&lt;/type&gt;</span>
+<span class="w">  </span><span class="nt">&lt;kernel&gt;</span>/path/to/kernel<span class="nt">&lt;/kernel&gt;</span>
+<span class="w">  </span><span class="nt">&lt;initrd&gt;</span>/path/to/initrd<span class="nt">&lt;/initrd&gt;</span>
+<span class="w">  </span><span class="nt">&lt;cmdline&gt;</span>root=/dev/sda1<span class="w"> </span>console=ttyS0<span class="nt">&lt;/cmdline&gt;</span>
+<span class="nt">&lt;/os&gt;</span>
+</pre></div>
+</div>
+<p>In this example, the <code class="docutils literal notranslate"><span class="pre">&lt;kernel&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;initrd&gt;</span></code> elements are defined with paths to the kernel and initrd files.</p>
+</section>
+<section id="edit-the-xml-configuration-optional">
+<h2>4. Edit the XML Configuration (Optional)<a class="headerlink" href="#edit-the-xml-configuration-optional" title="Permalink to this heading"></a></h2>
+<p>If you need to modify the <code class="docutils literal notranslate"><span class="pre">&lt;kernel&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;initrd&gt;</span></code> elements, you can edit the XML configuration using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>virsh<span class="w"> </span>edit<span class="w"> </span>&lt;domain-name&gt;
+</pre></div>
+</div>
+<p>This will open the XML configuration in your default text editor, allowing you to make changes.</p>
+</section>
+<section id="check-for-direct-kernel-boot">
+<h2>5. Check for Direct Kernel Boot<a class="headerlink" href="#check-for-direct-kernel-boot" title="Permalink to this heading"></a></h2>
+<p>If the domain is configured for direct kernel boot, the <code class="docutils literal notranslate"><span class="pre">&lt;kernel&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;initrd&gt;</span></code> elements will be present. If not, these elements will be absent, and the domain will typically boot from a BIOS or UEFI configuration.</p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">virsh</span> <span class="pre">dumpxml</span> <span class="pre">&lt;domain-name&gt;</span></code> to view the XML configuration.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">grep</span></code> to filter for <code class="docutils literal notranslate"><span class="pre">&lt;kernel&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;initrd&gt;</span></code> elements.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">virsh</span> <span class="pre">edit</span> <span class="pre">&lt;domain-name&gt;</span></code> to modify the configuration if needed.</p></li>
+</ul>
+<p>This approach allows you to query and inspect the XML configuration of a libvirt domain to determine if <code class="docutils literal notranslate"><span class="pre">&lt;kernel&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;initrd&gt;</span></code> elements are defined.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bootloader-mode.html" class="btn btn-neutral float-left" title="Determine Boot Mode and Bootloader" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="identifyBootloader.html" class="btn btn-neutral float-right" title="Inspecting the MBR to Identify the Bootloader" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Linux Test Project.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

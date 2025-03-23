@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation and tests execution &mdash; Linux Test Project 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/js/pathTruncator.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tests setup" href="setup_tests.html" />
+    <link rel="prev" title="Linux Test Project" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Linux Test Project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">For users</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation and tests execution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#running-single-tests">Running single tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compiling-and-installing-all-testcases">Compiling and installing all testcases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-tests">Running tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#network-tests">Network tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="setup_tests.html">Tests setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supported_systems.html">Supported systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stats.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_catalog.html">Test catalog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developers/setup_mailinglist.html">Setting up the Mailing list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/writing_tests.html">Writing tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/test_case_tutorial.html">Test case tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/api_c_tests.html">LTP C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/api_shell_tests.html">LTP shell API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/api_network_tests.html">Developing using network API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/api_kvm_tests.html">Developing using KVM API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/ltp_library.html">LTP Library guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/build_system.html">Build system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/debugging.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/documentation.html">Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../maintainers/patch_review.html">Patch review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../maintainers/ltp_release_procedure.html">Release process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Custom Documents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../my-docs/index.html">Welcome to the Project Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Linux Test Project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installation and tests execution</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/users/quick_start.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation-and-tests-execution">
+<h1>Installation and tests execution<a class="headerlink" href="#installation-and-tests-execution" title="Permalink to this heading"></a></h1>
+<p>Basics requirements to build LTP are the following:</p>
+<ul class="simple">
+<li><p>git</p></li>
+<li><p>autoconf</p></li>
+<li><p>automake</p></li>
+<li><p>make</p></li>
+<li><p>gcc</p></li>
+<li><p>m4</p></li>
+<li><p>pkgconf / pkg-config</p></li>
+<li><p>libc headers</p></li>
+<li><p>linux headers</p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span>https://github.com/linux-test-project/ltp.git
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>ltp
+<span class="gp">$ </span>make<span class="w"> </span>autotools
+<span class="gp">$ </span>./configure
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For optional library dependencies, take a look at the scripts inside <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/ci/">ci/</a>
+directory.</p>
+</div>
+<section id="running-single-tests">
+<h2>Running single tests<a class="headerlink" href="#running-single-tests" title="Permalink to this heading"></a></h2>
+<p>LTP provides the possibility to build and run single tests:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>testcases/kernel/syscalls/foo
+<span class="gp">$ </span>make
+<span class="gp">$ </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$PWD</span><span class="w"> </span>./foo01
+</pre></div>
+</div>
+<p>Shell testcases are a bit more complicated, since they need to setup <code class="docutils literal notranslate"><span class="pre">PATH</span></code>
+as well as to compiled binary helpers:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>testcases/lib
+<span class="gp">$ </span>make
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>../commands/foo
+<span class="gp">$ </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$PWD</span>:<span class="nv">$PWD</span>/../../lib/<span class="w"> </span>./foo01.sh
+</pre></div>
+</div>
+<p>Open Posix Testsuite has it’s own build system which needs Makefiles to be
+generated first:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./configure<span class="w"> </span>--with-open-posix-testsuite
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>testcases/open_posix_testsuite/
+<span class="gp">$ </span>make<span class="w"> </span>generate-makefiles
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>conformance/interfaces/foo
+<span class="gp">$ </span>make
+<span class="gp">$ </span>./foo_1-1.run-test
+</pre></div>
+</div>
+</section>
+<section id="compiling-and-installing-all-testcases">
+<h2>Compiling and installing all testcases<a class="headerlink" href="#compiling-and-installing-all-testcases" title="Permalink to this heading"></a></h2>
+<p>To compile all tests is really simple:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>make
+
+<span class="gp">$ </span><span class="c1"># install LTP inside /opt/ltp by default</span>
+<span class="gp">$ </span>make<span class="w"> </span>install
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some tests will be disabled if <code class="docutils literal notranslate"><span class="pre">configure</span></code> script won’t find the build
+dependencies.</p>
+</div>
+</section>
+<section id="running-tests">
+<h2>Running tests<a class="headerlink" href="#running-tests" title="Permalink to this heading"></a></h2>
+<p>To run all the test suites</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>/opt/ltp
+
+<span class="gp">$ </span><span class="c1"># run syscalls testing suite</span>
+<span class="gp">$ </span>./kirk<span class="w"> </span>-f<span class="w"> </span>ltp<span class="w"> </span>-r<span class="w"> </span>syscalls
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Many test cases have to be executed as root.</p>
+</div>
+<p>Test suites (e.g. syscalls) are defined in the <code class="docutils literal notranslate"><span class="pre">runtest</span></code> directory. Each file
+contains a list of test cases in a simple format.</p>
+<p>Each test case has its own executable or script that can directly executed:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>testcases/bin/abort01
+
+<span class="gp">$ </span><span class="c1"># some tests have arguments</span>
+<span class="gp">$ </span>testcases/bin/mesgq_nstest<span class="w"> </span>-m<span class="w"> </span>none
+
+<span class="gp">$ </span><span class="c1"># vast majority of tests have a help</span>
+<span class="gp">$ </span>testcases/bin/ioctl01<span class="w"> </span>-h
+
+<span class="gp">$ </span><span class="c1"># Many require certain environment variables to be set</span>
+<span class="gp">$ </span><span class="nv">LTPROOT</span><span class="o">=</span>/opt/ltp<span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PATH</span><span class="s2">:</span><span class="nv">$LTPROOT</span><span class="s2">/testcases/bin&quot;</span><span class="w"> </span>testcases/bin/wc01.sh
+</pre></div>
+</div>
+<p>Most commonly, the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable needs to be set and also <code class="docutils literal notranslate"><span class="pre">LTPROOT</span></code>, but
+there are a number of other variables which usually <code class="docutils literal notranslate"><span class="pre">kirk</span></code> sets for you.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All shell scripts need the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> to be set. However, this is not limited
+to shell scripts and some C based tests need environment variables as well.
+They usually raise a configuration error when this is needed.</p>
+</div>
+</section>
+<section id="network-tests">
+<h2>Network tests<a class="headerlink" href="#network-tests" title="Permalink to this heading"></a></h2>
+<p>Network tests usually require a certain setup that is described in
+<a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/testcases/network/README.md">testcases/network/README.md</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Linux Test Project" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="setup_tests.html" class="btn btn-neutral float-right" title="Tests setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Linux Test Project.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

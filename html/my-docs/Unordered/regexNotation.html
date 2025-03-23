@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>REGEX notation &mdash; Linux Test Project 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/js/pathTruncator.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Integrating Path Truncation into Read the Docs" href="pathTruncator.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Linux Test Project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">For users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../users/quick_start.html">Installation and tests execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../users/setup_tests.html">Tests setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../users/supported_systems.html">Supported systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../users/stats.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../users/test_catalog.html">Test catalog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/setup_mailinglist.html">Setting up the Mailing list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/writing_tests.html">Writing tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/test_case_tutorial.html">Test case tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/api_c_tests.html">LTP C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/api_shell_tests.html">LTP shell API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/api_network_tests.html">Developing using network API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/api_kvm_tests.html">Developing using KVM API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/ltp_library.html">LTP Library guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/build_system.html">Build system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/debugging.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/documentation.html">Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../maintainers/patch_review.html">Patch review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../maintainers/ltp_release_procedure.html">Release process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Custom Documents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Topic Index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/vm_config/cxt4testing.html">Setting Up LTP Test Cases on a Linux VM Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/vm_config/vm-setup.html">Setting Up a VM to Boot with a Copied Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/vm_config/enableBootMenu.html">Enabling the Boot Menu During Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/vm_config/bootloader-dirs.html">Understanding Bootloader Directories and Customizing GRUB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/vm_config/bootloader-mode.html">Determine Boot Mode and Bootloader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/vm_config/queringXML.html">Querying XML File Configuration with libvirt Shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/vm_config/identifyBootloader.html">Inspecting the MBR to Identify the Bootloader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/vm_config/bootloaderDebug.html">Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/Debugging/bootloaderChecks.html">Confirming Bootloader and Kernel Loading with UUID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/ltp_setup/weakness_config.html">LTP build log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/ltp_setup/documents-build.html">Building the Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/ltp_setup/rst_symbols.html">List of Symbols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/ltp_setup/autoConfHd.html">Using Autoconf Macros to Check for Headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/ltp_setup/checkHeaders.html">Check Headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/ltp_setup/build_workflow.html">Using Autotools in the LTP Build Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/ltp_setup/deugHeaders.html">Debuggin Kernel Headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/ltp_setup/directoryPermissions.html">Understanding Directory Permission Strings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../driver_dev/drv_refs/driverBrief.html">Briefing on LTP (Linux Test Project) and Device Driver Test Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../driver_dev/drv_refs/mmioVsIOports.html">Briefing: Memory-Mapped I/O vs. I/O Ports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../driver_dev/drv_refs/pcie-symobls.html">PCIe Symobls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../driver_dev/drv_refs/deadline-iosched.html">Deadline IO scheduler tunables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../driver_dev/drv_refs/quick-ref-pci.html">PCI Functions Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hw_resources/sysTasks.html">Concurrent ltp build with system tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hw_resources/bus-map.html">Bus Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hw_resources/pci-exp-tests-HOWTO.html">HOWTO –&gt;       PCI-Express test scripts for LTP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hw_resources/compCPU.html">How to Limit CPU Computation Consumption for Builds and Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hw_resources/hw_specs/workFlow-strace.html">Workflow for Using <code class="docutils literal notranslate"><span class="pre">strace</span></code> to Trap System Calls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sys_config/sys_files/dummy-build.html">Safe Dry-Run for Sphinx Builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sys_config/kernel_conf/environ-kconf.html">Kernel Configuration for KUnit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pathTruncator.html">Integrating Path Truncation into Read the Docs</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">REGEX notation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#regex-pattern">REGEX Pattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#replacement">Replacement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#explanation">Explanation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage-in-different-environments">Usage in Different Environments</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Linux Test Project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Topic Index</a></li>
+      <li class="breadcrumb-item active">REGEX notation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/my-docs/Unordered/regexNotation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="regex-notation">
+<h1>REGEX notation<a class="headerlink" href="#regex-notation" title="Permalink to this heading"></a></h1>
+<p>Certainly! If you want to substitute <code class="docutils literal notranslate"><span class="pre">`anyString`</span></code> with <code class="docutils literal notranslate"><span class="pre">``anyString``</span></code> using a regular expression (REGEX), you can use the following pattern:</p>
+<section id="regex-pattern">
+<h2>REGEX Pattern<a class="headerlink" href="#regex-pattern" title="Permalink to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>`([^`]+)`
+</pre></div>
+</div>
+</section>
+<section id="replacement">
+<h2>Replacement<a class="headerlink" href="#replacement" title="Permalink to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>``$1``
+</pre></div>
+</div>
+</section>
+<section id="explanation">
+<h2>Explanation<a class="headerlink" href="#explanation" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">`([^`]+)`</span></code>: This pattern matches any string enclosed in backticks.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">`</span></code>: Matches the opening backtick.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">([^`]+)</span></code>: Captures any sequence of characters that are not backticks.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">`</span></code>: Matches the closing backtick.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">``$1``</span></code>: This replacement string wraps the captured group (<code class="docutils literal notranslate"><span class="pre">$1</span></code>) in double backticks.</p></li>
+</ul>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h2>
+<p>If you have the following text:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>This is a `test` string with `multiple` backtick-enclosed `words`.
+</pre></div>
+</div>
+<p>After applying the substitution, it will become:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>This is a ``test`` string with ``multiple`` backtick-enclosed ``words``.
+</pre></div>
+</div>
+</section>
+<section id="usage-in-different-environments">
+<h2>Usage in Different Environments<a class="headerlink" href="#usage-in-different-environments" title="Permalink to this heading"></a></h2>
+<ul>
+<li><p><strong>Python</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;This is a `test` string with `multiple` backtick-enclosed `words`.&quot;</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;`([^`]+)`&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;``\1``&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>JavaScript</strong>:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span><span class="w"> </span><span class="nx">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;This is a `test` string with `multiple` backtick-enclosed `words`.&quot;</span><span class="p">;</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">text</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/`([^`]+)`/g</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;``$1``&#39;</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>sed (Unix/Linux)</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;This is a `test` string with `multiple` backtick-enclosed `words`.&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/`\([^`]\+\)`/``\1``/g&#39;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>This REGEX will work in most environments where REGEX is supported.
+<strong>note</strong>: see python script <code class="docutils literal notranslate"><span class="pre">replacerTics.py</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pathTruncator.html" class="btn btn-neutral float-left" title="Integrating Path Truncation into Read the Docs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Linux Test Project.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

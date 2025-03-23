@@ -1,0 +1,18 @@
+.. SPDX-License-Identifier: GPL-2.0-or-later
+
+Unordered Topics
+================
+
+This section contains miscellaneous topics that do not fit into the other categories, including Git-related topics and path truncation.
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Miscellaneous:
+
+   pathTruncator.rst
+   regexNotation.rst
+   gitTrackNoStage.rst
+   gitSplitHunks.rst
+   stagedLogs.rst
+   a_diffCounter.rst
+   verticalS.rst

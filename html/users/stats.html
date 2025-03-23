@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Statistics &mdash; Linux Test Project 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/js/pathTruncator.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Test catalog" href="test_catalog.html" />
+    <link rel="prev" title="Supported systems" href="supported_systems.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Linux Test Project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">For users</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Installation and tests execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup_tests.html">Tests setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supported_systems.html">Supported systems</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Statistics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#syscalls">Syscalls</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tested-syscalls">Tested syscalls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#untested-syscalls">Untested syscalls</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test_catalog.html">Test catalog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developers/setup_mailinglist.html">Setting up the Mailing list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/writing_tests.html">Writing tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/test_case_tutorial.html">Test case tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/api_c_tests.html">LTP C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/api_shell_tests.html">LTP shell API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/api_network_tests.html">Developing using network API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/api_kvm_tests.html">Developing using KVM API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/ltp_library.html">LTP Library guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/build_system.html">Build system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/debugging.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/documentation.html">Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../maintainers/patch_review.html">Patch review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../maintainers/ltp_release_procedure.html">Release process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Custom Documents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../my-docs/index.html">Topic Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Linux Test Project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Statistics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/users/stats.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="statistics">
+<h1>Statistics<a class="headerlink" href="#statistics" title="Permalink to this heading"></a></h1>
+<p>In this section we collect some statistics related to the current state of
+LTP tests.</p>
+<section id="syscalls">
+<h2>Syscalls<a class="headerlink" href="#syscalls" title="Permalink to this heading"></a></h2>
+<p>syscalls which are tested under <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/testcases/kernel/syscalls">testcases/kernel/syscalls</a>:</p>
+<ul class="simple">
+<li><p>kernel syscalls: 369</p></li>
+<li><p>tested syscalls: 339</p></li>
+</ul>
+<section id="tested-syscalls">
+<h3>Tested syscalls<a class="headerlink" href="#tested-syscalls" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/read">read</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/write">write</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/open">open</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/close">close</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/stat">stat</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fstat">fstat</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/lstat">lstat</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/poll">poll</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/lseek">lseek</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mmap">mmap</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mprotect">mprotect</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/munmap">munmap</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/brk">brk</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/rt_sigaction">rt_sigaction</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/rt_sigprocmask">rt_sigprocmask</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ioctl">ioctl</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/pread">pread64</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/pwrite">pwrite64</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/readv">readv</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/writev">writev</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/access">access</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/pipe">pipe</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sched_yield">sched_yield</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mremap">mremap</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/msync">msync</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mincore">mincore</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/madvise">madvise</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ipc/shmget">shmget</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ipc/shmat">shmat</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ipc/shmctl">shmctl</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/dup">dup</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/dup2">dup2</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/pause">pause</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/nanosleep">nanosleep</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getitimer">getitimer</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setitimer">setitimer</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/alarm">alarm</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getpid">getpid</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sendfile">sendfile</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/socket">socket</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/connect">connect</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/accept">accept</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sendto">sendto</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/recvfrom">recvfrom</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sendmsg">sendmsg</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/recvmsg">recvmsg</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/shutdown">shutdown</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/bind">bind</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/listen">listen</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getsockname">getsockname</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getpeername">getpeername</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/socketpair">socketpair</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setsockopt">setsockopt</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getsockopt">getsockopt</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/clone">clone</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fork">fork</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/execve">execve</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/exit">exit</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/wait4">wait4</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/kill">kill</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/uname">uname</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ipc/semget">semget</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ipc/semop">semop</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ipc/semctl">semctl</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ipc/shmdt">shmdt</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ipc/msgget">msgget</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ipc/msgsnd">msgsnd</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ipc/msgrcv">msgrcv</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ipc/msgctl">msgctl</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fcntl">fcntl</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/flock">flock</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fsync">fsync</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fdatasync">fdatasync</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/truncate">truncate</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ftruncate">ftruncate</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getdents">getdents</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getcwd">getcwd</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/chdir">chdir</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fchdir">fchdir</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/rename">rename</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mkdir">mkdir</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/rmdir">rmdir</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/creat">creat</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/link">link</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/unlink">unlink</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/symlink">symlink</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/readlink">readlink</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/chmod">chmod</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fchmod">fchmod</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/chown">chown</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fchown">fchown</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/lchown">lchown</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/umask">umask</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/gettimeofday">gettimeofday</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getrlimit">getrlimit</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getrusage">getrusage</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sysinfo">sysinfo</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/times">times</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ptrace">ptrace</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getuid">getuid</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/syslog">syslog</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getgid">getgid</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setuid">setuid</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setgid">setgid</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/geteuid">geteuid</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getegid">getegid</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setpgid">setpgid</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getppid">getppid</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getpgrp">getpgrp</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setsid">setsid</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setreuid">setreuid</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setregid">setregid</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getgroups">getgroups</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setgroups">setgroups</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setresuid">setresuid</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getresuid">getresuid</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setresgid">setresgid</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getresgid">getresgid</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getpgid">getpgid</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setfsuid">setfsuid</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setfsgid">setfsgid</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getsid">getsid</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/capget">capget</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/capset">capset</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sigpending">rt_sigpending</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/rt_sigtimedwait">rt_sigtimedwait</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/rt_sigqueueinfo">rt_sigqueueinfo</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/rt_sigsuspend">rt_sigsuspend</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sigaltstack">sigaltstack</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/utime">utime</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mknod">mknod</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/personality">personality</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ustat">ustat</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/statfs">statfs</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fstatfs">fstatfs</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sysfs">sysfs</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getpriority">getpriority</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setpriority">setpriority</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sched_setparam">sched_setparam</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sched_getparam">sched_getparam</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sched_setscheduler">sched_setscheduler</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sched_getscheduler">sched_getscheduler</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sched_get_priority_max">sched_get_priority_max</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sched_get_priority_min">sched_get_priority_min</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sched_rr_get_interval">sched_rr_get_interval</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mlock">mlock</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/munlock">munlock</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mlockall">mlockall</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/munlockall">munlockall</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/vhangup">vhangup</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/pivot_root">pivot_root</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/prctl">prctl</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/adjtimex">adjtimex</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setrlimit">setrlimit</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/chroot">chroot</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sync">sync</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/acct">acct</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/settimeofday">settimeofday</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mount">mount</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/umount2">umount2</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/swapon">swapon</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/swapoff">swapoff</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/reboot">reboot</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sethostname">sethostname</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setdomainname">setdomainname</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/init_module">init_module</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/delete_module">delete_module</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/quotactl">quotactl</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/gettid">gettid</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/readahead">readahead</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setxattr">setxattr</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/lgetxattr">lsetxattr</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fsetxattr">fsetxattr</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getxattr">getxattr</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/lgetxattr">lgetxattr</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fgetxattr">fgetxattr</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/listxattr">listxattr</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/llistxattr">llistxattr</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/flistxattr">flistxattr</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/removexattr">removexattr</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/lremovexattr">lremovexattr</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fremovexattr">fremovexattr</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/tkill">tkill</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/futex">futex</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sched_setaffinity">sched_setaffinity</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sched_getaffinity">sched_getaffinity</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/cacheflush">cacheflush</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/io_setup">io_setup</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/io_destroy">io_destroy</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/io_getevents">io_getevents</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/io_submit">io_submit</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/io_cancel">io_cancel</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/exit_group">exit_group</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/epoll_create">epoll_create</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/epoll_ctl">epoll_ctl</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/epoll_wait">epoll_wait</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/remap_file_pages">remap_file_pages</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/set_tid_address">set_tid_address</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ipc/semop">semtimedop</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fadvise">fadvise64</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/timer_create">timer_create</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/timer_settime">timer_settime</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/timer_gettime">timer_gettime</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/timer_getoverrun">timer_getoverrun</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/timer_delete">timer_delete</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/clock_settime">clock_settime</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/clock_gettime">clock_gettime</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/clock_getres">clock_getres</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/clock_nanosleep">clock_nanosleep</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/tgkill">tgkill</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/utimes">utimes</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mbind">mbind</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/get_mempolicy">get_mempolicy</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/set_mempolicy">set_mempolicy</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mq_open">mq_open</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mq_unlink">mq_unlink</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mq_timedsend">mq_timedsend</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mq_timedreceive">mq_timedreceive</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mq_notify">mq_notify</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/waitid">waitid</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/add_key">add_key</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/request_key">request_key</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/keyctl">keyctl</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/set_thread_area">set_thread_area</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/inotify">inotify_init</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/inotify">inotify_add_watch</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/inotify">inotify_rm_watch</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/migrate_pages">migrate_pages</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/openat">openat</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mkdirat">mkdirat</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mknodat">mknodat</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fchownat">fchownat</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/futimesat">futimesat</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fstatat">newfstatat</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/unlinkat">unlinkat</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/renameat">renameat</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/linkat">linkat</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/symlinkat">symlinkat</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/readlinkat">readlinkat</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fchmodat">fchmodat</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/faccessat">faccessat</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/pselect">pselect6</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ppoll">ppoll</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/unshare">unshare</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/splice">splice</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sync_file_range">sync_file_range</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/tee">tee</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/vmsplice">vmsplice</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/move_pages">move_pages</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/set_robust_list">set_robust_list</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/get_robust_list">get_robust_list</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getcpu">getcpu</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/epoll_pwait">epoll_pwait</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ioprio">ioprio_set</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/ioprio">ioprio_get</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/utimensat">utimensat</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/signalfd">signalfd</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/timerfd">timerfd</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/eventfd">eventfd</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fallocate">fallocate</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/timerfd">timerfd_create</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/timerfd">timerfd_gettime</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/timerfd">timerfd_settime</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/signalfd4">signalfd4</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/eventfd2">eventfd2</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/epoll_create1">epoll_create1</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/dup3">dup3</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/pipe2">pipe2</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/inotify_init">inotify_init1</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/preadv">preadv</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/pwritev">pwritev</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/rt_tgsigqueueinfo">rt_tgsigqueueinfo</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/perf_event_open">perf_event_open</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/accept4">accept4</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/recvmmsg">recvmmsg</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fanotify">fanotify_init</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fanotify">fanotify_mark</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getrlimit">prlimit64</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/name_to_handle_at">name_to_handle_at</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/open_by_handle_at">open_by_handle_at</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/clock_adjtime">clock_adjtime</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/syncfs">syncfs</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sendmmsg">sendmmsg</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/setns">setns</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/cma">process_vm_readv</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/cma">process_vm_writev</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/kcmp">kcmp</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/finit_module">finit_module</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/gettdents">getdents64</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sched_setattr">sched_setattr</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/sched_getattr">sched_getattr</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/renameat2">renameat2</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/seccomp">seccomp</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/getrandom">getrandom</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/memfd_create">memfd_create</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/bpf">bpf</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/execveat">execveat</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/userfaultfd">userfaultfd</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/membarrier">membarrier</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mlock2">mlock2</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/copy_file_range">copy_file_range</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/preadv2">preadv2</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/pwritev2">pwritev2</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/pkeys">pkey_mprotect</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/pkeys">pkey_alloc</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/pkeys">pkey_free</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/statx">statx</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/io_pgetevents">io_pgetevents</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/pidfd_send_signal">pidfd_send_signal</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/io_uring">io_uring_setup</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/io_uring">io_uring_enter</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/io_uring">io_uring_register</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/open_tree">open_tree</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/move_mount">move_mount</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fsopen">fsopen</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fsconfig">fsconfig</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fsmount">fsmount</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fspick">fspick</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/pidfd_open">pidfd_open</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/clone3">clone3</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/close_range">close_range</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/openat2">openat2</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/pidfd_getfd">pidfd_getfd</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/faccessat2">faccessat2</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/process_madvise">process_madvise</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/epoll_pwait">epoll_pwait2</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mount_setattr">mount_setattr</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/quotactl">quotactl_fd</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/landlock">landlock_create_ruleset</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/landlock">landlock_add_rule</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/landlock">landlock_restrict_self</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/futex">futex_waitv</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/cachestat">cachestat</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/fchmodat2">fchmodat2</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/futex">futex_wake</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/futex">futex_wait</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/statmount">statmount</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/listmount">listmount</a></p></td>
+<td><p><a class="reference external" href="https://github.com/linux-test-project/ltp/tree/master/testcases/kernel/syscalls/mseal">mseal</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="untested-syscalls">
+<h3>Untested syscalls<a class="headerlink" href="#untested-syscalls" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>lookup_dcookie</p></td>
+<td><p>rt_sigreturn</p></td>
+<td><p>kexec_load</p></td>
+</tr>
+<tr class="row-even"><td><p>process_mrelease</p></td>
+<td><p>map_shadow_stack</p></td>
+<td><p>futex_requeue</p></td>
+</tr>
+<tr class="row-odd"><td><p>lsm_get_self_attr</p></td>
+<td><p>lsm_set_self_attr</p></td>
+<td><p>lsm_list_modules</p></td>
+</tr>
+<tr class="row-even"><td><p>setxattrat</p></td>
+<td><p>getxattrat</p></td>
+<td><p>listxattrat</p></td>
+</tr>
+<tr class="row-odd"><td><p>removexattrat</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="supported_systems.html" class="btn btn-neutral float-left" title="Supported systems" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="test_catalog.html" class="btn btn-neutral float-right" title="Test catalog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Linux Test Project.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

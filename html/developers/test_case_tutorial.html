@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test case tutorial &mdash; Linux Test Project 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/js/pathTruncator.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="LTP C API" href="api_c_tests.html" />
+    <link rel="prev" title="Writing tests" href="writing_tests.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Linux Test Project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">For users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../users/quick_start.html">Installation and tests execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/setup_tests.html">Tests setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/supported_systems.html">Supported systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/stats.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/test_catalog.html">Test catalog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup_mailinglist.html">Setting up the Mailing list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing_tests.html">Writing tests</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Test case tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#assumptions-feedback">Assumptions &amp; Feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#choose-a-system-call-to-test">Choose a System Call to test</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#find-an-untested-system-call">Find an untested System call</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#create-the-test-skeleton">Create the test skeleton</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#report-tconf-instead-of-tpass">Report TCONF instead of TPASS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-git-ignores-the-executable">Check Git ignores the executable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-make-check">Run make check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-the-ltp-and-run-the-test-with-runtest">Install the LTP and run the test with runtest</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#call-the-system-call">Call the system call</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-are-the-differences-between-tst-brk-and-tst-res">What are the differences between <code class="docutils literal notranslate"><span class="pre">tst_brk</span></code> and <code class="docutils literal notranslate"><span class="pre">tst_res</span></code>?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-happens-if-you-call-tst-res-tinfo-after-sys-statx">What happens if you call <code class="docutils literal notranslate"><span class="pre">tst_res(TINFO,</span> <span class="pre">...)</span></code> after <code class="docutils literal notranslate"><span class="pre">sys_statx</span></code>?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extend-the-test-to-handle-other-basic-error-conditions">Extend the test to handle other basic error conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#setup-cleanup-and-files">Setup, Cleanup and files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#check-statx-returns-the-correct-number-of-hard-links">Check <code class="docutils literal notranslate"><span class="pre">statx</span></code> returns the correct number of hard links</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#git-branch">Git-branch</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#split-the-test">Split the test</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-wrong-with-the-switch-statement">What is wrong with the switch statement?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-a-feature-unique-to-statx">Test a feature unique to statx</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#submitting-the-test-for-review">Submitting the test for review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#doing-code-review">Doing code review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#final-notes">Final notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api_c_tests.html">LTP C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_shell_tests.html">LTP shell API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_network_tests.html">Developing using network API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_kvm_tests.html">Developing using KVM API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ltp_library.html">LTP Library guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build_system.html">Build system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../maintainers/patch_review.html">Patch review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../maintainers/ltp_release_procedure.html">Release process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Custom Documents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../my-docs/index.html">Welcome to the Project Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Linux Test Project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Test case tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developers/test_case_tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="test-case-tutorial">
+<h1>Test case tutorial<a class="headerlink" href="#test-case-tutorial" title="Permalink to this heading"></a></h1>
+<p>This is a step-by-step tutorial on writing a simple C LTP test, where topics
+of the LTP and Linux kernel testing will be introduced gradually using a
+concrete example. Most sections will include exercises, some trivial and
+others not so much. If you find an exercise is leading you off at too much of
+a tangent, just leave it for later and move on.</p>
+<p>LTP tests can be written in C or Shell script. This tutorial is <strong>only for tests
+written in C</strong> using the new LTP test API. Note that while we go into some
+detail on using Git, this is not intended as a canonical or complete guide
+for Git.</p>
+<section id="assumptions-feedback">
+<h2>Assumptions &amp; Feedback<a class="headerlink" href="#assumptions-feedback" title="Permalink to this heading"></a></h2>
+<p>We assume the reader is familiar with C, Git and common Unix/Linux/GNU tools
+and has some general knowledge of Operating Systems. Experienced Linux
+developers may find it too verbose while people new to system level Linux
+development may find it overwhelming.</p>
+<p>Comments and feedback are welcome, please direct them to the Mailing list.</p>
+</section>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h2>
+<p>First of all, make sure you have a copy of LTP in the current folder
+and we recommended cloning the Linux kernel repository for reference, this
+guide will refer to files and directories.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+</pre></div>
+</div>
+<p>There are a number of other repositories which are useful for reference as
+well, including the GNU C library <code class="docutils literal notranslate"><span class="pre">glibc</span></code> and the alternative C library
+<code class="docutils literal notranslate"><span class="pre">musl</span></code>. Some system calls are partially or even entirely implemented in user
+land as part of the standard C library. So in these cases, the C library is an
+important reference. <code class="docutils literal notranslate"><span class="pre">glibc</span></code> is the most common C library for Linux, however
+<code class="docutils literal notranslate"><span class="pre">musl</span></code> is generally easier to understand.</p>
+<p>How system calls are implemented varies from one architecture to another and
+across kernel and C library versions. To find out whether a system call is
+actually accessing the kernel (whether it is actually a system call) on any
+given machine you can use the <code class="docutils literal notranslate"><span class="pre">strace</span></code> utility. This intercepts system calls
+made by an executable and prints them. We will use this later in the tutorial.</p>
+</section>
+<section id="choose-a-system-call-to-test">
+<h2>Choose a System Call to test<a class="headerlink" href="#choose-a-system-call-to-test" title="Permalink to this heading"></a></h2>
+<p>We will use the <code class="docutils literal notranslate"><span class="pre">statx()</span></code> system call, to provide a concrete example of a
+test. At the time of writing there is no test for this call which was
+introduced in Linux kernel version 4.11.</p>
+<p>Linux system call specific tests are primarily contained in
+<a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/testcases/kernel/syscalls">testcases/kernel/syscalls</a>, but you should also <a class="reference external" href="https://git-scm.com/docs/git-grep">git grep</a> the
+entire LTP repository to check for any existing usages of a system call.</p>
+<p>One way to find a system call which is not currently tested by the LTP is to
+look at <a class="reference external" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/linux/syscalls.h">include/linux/syscalls.h</a> in the Linux kernel tree.</p>
+<p>Something the LTP excels to ensure bug-fixes are back ported to
+maintenance releases, so targeting a specific regression is another
+option.</p>
+<section id="find-an-untested-system-call">
+<h3>Find an untested System call<a class="headerlink" href="#find-an-untested-system-call" title="Permalink to this heading"></a></h3>
+<p>Try to find an untested system call which has a manual page (i.e. <code class="docutils literal notranslate"><span class="pre">man</span>
+<span class="pre">syscall</span></code> produces a result). It is a good idea to Git-clone the latest kernel
+man-pages repository.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>git://git.kernel.org/pub/scm/docs/man-pages/man-pages.git
+</pre></div>
+</div>
+<p>At the time of writing, the difference between the latest man-pages release and
+the <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> of the repository (usually the latest commit) is well over 100
+commits. This represents about 9 weeks of changes. If you are using a stable
+Linux distribution, your man-pages package may well be years old. So as with
+the kernel, it is best to have the Git repository as a reference.</p>
+<p>You could also find a system call with untested parameters or use whatever it
+is you are planning to use the LTP for.</p>
+</section>
+</section>
+<section id="create-the-test-skeleton">
+<h2>Create the test skeleton<a class="headerlink" href="#create-the-test-skeleton" title="Permalink to this heading"></a></h2>
+<p>I shall call my test <code class="docutils literal notranslate"><span class="pre">statx01.c</span></code>, by the time you read this that file name
+will probably be taken, so increment the number in the file name as
+appropriate or replace <code class="docutils literal notranslate"><span class="pre">statx</span></code> with the system call in the chosen exercise.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>testcases/kernel/syscalls/statx
+<span class="nb">cd</span><span class="w"> </span>testcases/kernel/syscalls/statx
+<span class="nb">echo</span><span class="w"> </span>statx<span class="w"> </span>&gt;&gt;<span class="w"> </span>.gitignore
+</pre></div>
+</div>
+<p>Next open <code class="docutils literal notranslate"><span class="pre">statx01.c</span></code> and add the following boilerplate. Make sure to change
+the copyright notice to your name/company, correct the test name and minimum
+kernel version if necessary. I will explain what the code does below.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// SPDX-License-Identifier: GPL-2.0-or-later</span>
+<span class="cm">/*</span>
+<span class="cm"> * Copyright (c) 2017 Instruction Ignorer &lt;&quot;can&#39;t&quot;@be.bothered.com&gt;</span>
+<span class="cm"> */</span>
+
+<span class="cm">/*\</span>
+<span class="cm"> * All tests should start with a description of _what_ we are testing.</span>
+<span class="cm"> * Non-trivial explanations of _how_ the code works should also go here.</span>
+<span class="cm"> * Include relevant links, Git commit hashes and CVE numbers.</span>
+<span class="cm"> * Inline comments should be avoided.</span>
+<span class="cm"> */</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tst_test.h&quot;</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">tst_res</span><span class="p">(</span><span class="n">TPASS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Doing hardly anything is easy&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">tst_test</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">test_all</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">min_kver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;4.11&quot;</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Starting with the <code class="docutils literal notranslate"><span class="pre">#include</span></code> statement we copy in the main LTP test library
+headers. This includes the most common test API functions and the test harness
+initialization code. It is important to note that this is a completely
+ordinary, independent C program, however <code class="docutils literal notranslate"><span class="pre">main()</span></code> is missing because it is
+implemented in <code class="docutils literal notranslate"><span class="pre">tst_test.h</span></code>.</p>
+<p>We specify what code we want to run as part of the test using the <code class="docutils literal notranslate"><span class="pre">tst_test</span>
+<span class="pre">test</span></code> structure. Various callbacks can be set by the test writer, including
+<code class="docutils literal notranslate"><span class="pre">test.test_all</span></code>, which we have set to <code class="docutils literal notranslate"><span class="pre">run()</span></code>. The test harness will execute
+this callback in a separate process (using <code class="docutils literal notranslate"><span class="pre">fork()</span></code>), forcibly terminating it
+if it does not return after <code class="docutils literal notranslate"><span class="pre">test.timeout</span></code> seconds.</p>
+<p>We have also set <code class="docutils literal notranslate"><span class="pre">test.min_kver</span></code> to the kernel version where <code class="docutils literal notranslate"><span class="pre">statx</span></code> was
+introduced. The test library will determine the kernel version at runtime. If
+the version is less than 4.11 then the test harness will return <code class="docutils literal notranslate"><span class="pre">TCONF</span></code>,
+indicating that this test is not suitable for the current system
+configuration.</p>
+<p>Occasionally features are back ported to older kernel versions, so <code class="docutils literal notranslate"><span class="pre">statx</span></code> may
+exist on kernels with a lower version. However we don’t need to worry about
+that unless there is evidence of it happening.</p>
+<p>As mentioned in the code itself, you should specify what you are testing and
+the expected outcome, even if it is relatively simple. If your program flow is
+necessarily complex and difficult to understand (which is often the case when
+trying to manipulate the kernel into doing something bad), then a detailed
+explanation of how the code works is welcome.</p>
+<p>What you should not do, is use inline comments or include the same level of
+explanation which is written here. As a general rule, if something is easy to
+document, then the code should also be easy to read. So don’t document the easy
+stuff (except for the basic test specification).</p>
+<p>Before continuing we should compile this and check that the basics work. In
+order to compile the test we need a <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> in the same subdirectory. If
+one already exists, then nothing needs to be done, otherwise add one with the
+following contents.</p>
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="c"># SPDX-License-Identifier: GPL-2.0-or-later</span>
+<span class="c"># Copyright (c) 2019 Linux Test Project</span>
+
+<span class="nv">top_srcdir</span><span class="w">          </span><span class="o">?=</span><span class="w"> </span>../../../..
+
+<span class="cp">include $(top_srcdir)/include/mk/testcases.mk</span>
+
+<span class="cp">include $(top_srcdir)/include/mk/generic_leaf_target.mk</span>
+</pre></div>
+</div>
+<p>This will automatically add <code class="docutils literal notranslate"><span class="pre">statx01.c</span></code> as a build target producing a
+<code class="docutils literal notranslate"><span class="pre">statx01</span></code> executable. Unless you have heavily deviated from the tutorial, and
+probably need to change <code class="docutils literal notranslate"><span class="pre">top_srcdir</span></code>, nothing else needs to be done.</p>
+<p>Normally, if you were starting a Makefile from scratch, then you would need to
+add <code class="docutils literal notranslate"><span class="pre">statx01</span></code> as a build target. Specifying that you would like to run some
+program (e.g. <code class="docutils literal notranslate"><span class="pre">gcc</span></code> or <code class="docutils literal notranslate"><span class="pre">clang</span></code>) to transform <code class="docutils literal notranslate"><span class="pre">statx01.c</span></code> into <code class="docutils literal notranslate"><span class="pre">statx01</span></code>.
+Here we don’t need to do that, but sometimes it is still necessary. For example,
+if we needed to link to the POSIX threading library, then we could add the
+following line after <code class="docutils literal notranslate"><span class="pre">testcases.mk</span></code>.</p>
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nf">statx01</span><span class="o">:</span><span class="w"> </span><span class="n">CFLAGS</span> += -<span class="n">pthread</span>
+</pre></div>
+</div>
+<p>Assuming you are in the test’s subdirectory <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/testcases/kernel/syscalls/statx">testcases/kernel/syscalls/statx</a>,
+please do:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make
+./statx01
+</pre></div>
+</div>
+<p>This should build the test and then run it. However, even though the test is
+in <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/testcases/kernel/syscalls">testcases/kernel/syscalls</a> directory it won’t be automatically ran
+as part of the syscalls test group (e.g. not run via <code class="docutils literal notranslate"><span class="pre">kirk</span> <span class="pre">-r</span> <span class="pre">math</span></code> or
+<code class="docutils literal notranslate"><span class="pre">./runltp</span> <span class="pre">-f</span> <span class="pre">syscalls</span></code>). For this we need to add it to the runtest file. So
+open <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/runtest/syscalls">runtest/syscalls</a> and add the lines starting with a <code class="docutils literal notranslate"><span class="pre">+</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">statvfs01</span> <span class="n">statvfs01</span>
+<span class="n">statvfs02</span> <span class="n">statvfs02</span>
+
+<span class="o">+</span><span class="n">statx01</span> <span class="n">statx01</span>
+<span class="o">+</span>
+<span class="n">stime01</span> <span class="n">stime01</span>
+<span class="n">stime02</span> <span class="n">stime02</span>
+</pre></div>
+</div>
+<p>The <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/runtest">runtest</a> files are in a two column format. The first column is the
+test name, which is mainly used by test runners for reporting and filtering. It
+is just a single string of text with no spaces. The second column, which can
+contain spaces, is passed to the shell in order to execute the test. Often it
+is just the executable name, but some tests also take arguments (the LTP has a
+library for argument parsing, by the way).</p>
+<p>If you haven’t done so already, we should add all these new files to Git. It
+is vitally important that you do not make changes to the master branch. If you
+do then pulling changes from upstream becomes a major issue. So first of all
+create a new branch.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>statx01<span class="w"> </span>master
+</pre></div>
+</div>
+<p>Now we want to add the files we have created or modified, but before doing a
+commit make sure you have configured Git correctly. You need to at least set
+your Name and e-mail address in <code class="docutils literal notranslate"><span class="pre">~/.gitconfig</span></code>, but there are some other
+settings which come in handy too. My relatively simple configuration is similar
+to the below:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[user]</span>
+<span class="w">    </span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">Sarah Jane</span>
+<span class="w">    </span><span class="na">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">sjane@e-mail.address</span>
+<span class="k">[core]</span>
+<span class="w">    </span><span class="na">editor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">emacs</span>
+<span class="k">[sendemail]</span>
+<span class="w">    </span><span class="na">smtpServer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">smtp.server.address</span>
+</pre></div>
+</div>
+<p>Obviously you need to at least change your name and e-mail. The SMTP server is
+useful for <a class="reference external" href="https://git-scm.com/docs/git-send-email">git send-email</a>, which we will discuss later. The editor value is
+used for things like writing commits (without the <code class="docutils literal notranslate"><span class="pre">-m</span></code> option).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>-v<span class="w"> </span>:/testcases/kernel/syscalls/statx<span class="w"> </span>:/runtest/syscalls
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;statx01: Add new test for statx syscall&quot;</span>
+</pre></div>
+</div>
+<p>This should add all the new files in the <code class="docutils literal notranslate"><span class="pre">statx</span></code> directory and the <code class="docutils literal notranslate"><span class="pre">runtest</span></code>
+file. It is good practice to commit early and often. Later on we will do a
+Git-rebase, which allows us to clean up the commit history. So don’t worry
+about how presentable your commit log is for now. Also don’t hesitate to
+create a new branch when doing the exercises or experimenting. This will allow
+you to diverge from the tutorial and then easily come back again.</p>
+<p>I can’t emphasize enough that Git makes things easy through branching and that
+things quickly get complicated if you don’t do it. However if you do get into
+a mess, Git-reflog and Git-reset, will usually get you out of it. If you also
+mess that up then it may be possible to cherry pick ‘dangling’ commits out of
+the database into a branch.</p>
+<section id="report-tconf-instead-of-tpass">
+<h3>Report TCONF instead of TPASS<a class="headerlink" href="#report-tconf-instead-of-tpass" title="Permalink to this heading"></a></h3>
+<p>Maybe the test should report <code class="docutils literal notranslate"><span class="pre">TCONF:</span> <span class="pre">Not</span> <span class="pre">implemented</span></code> instead or perhaps
+<code class="docutils literal notranslate"><span class="pre">TBROK</span></code>. Try changing it do so.</p>
+</section>
+<section id="check-git-ignores-the-executable">
+<h3>Check Git ignores the executable<a class="headerlink" href="#check-git-ignores-the-executable" title="Permalink to this heading"></a></h3>
+<p>Is your <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> correct?</p>
+</section>
+<section id="run-make-check">
+<h3>Run make check<a class="headerlink" href="#run-make-check" title="Permalink to this heading"></a></h3>
+<p>Check coding style with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code>.</p>
+</section>
+<section id="install-the-ltp-and-run-the-test-with-runtest">
+<h3>Install the LTP and run the test with runtest<a class="headerlink" href="#install-the-ltp-and-run-the-test-with-runtest" title="Permalink to this heading"></a></h3>
+<p>Run <code class="docutils literal notranslate"><span class="pre">statx01</span></code> on its own, also using <code class="docutils literal notranslate"><span class="pre">-I0</span></code> amd <code class="docutils literal notranslate"><span class="pre">-I10</span></code>.</p>
+</section>
+</section>
+<section id="call-the-system-call">
+<h2>Call the system call<a class="headerlink" href="#call-the-system-call" title="Permalink to this heading"></a></h2>
+<p>At the time of writing <code class="docutils literal notranslate"><span class="pre">statx</span></code> has no <code class="docutils literal notranslate"><span class="pre">glibc</span></code> wrapper. It is also fairly common
+for a distribution’s C library version to be older than its kernel or it may use a
+cut down C library in comparison to the GNU one. So we must call <code class="docutils literal notranslate"><span class="pre">statx()</span></code>
+using the general <code class="docutils literal notranslate"><span class="pre">syscall()</span></code> interface.</p>
+<p>LTP contains a library for dealing with the <code class="docutils literal notranslate"><span class="pre">syscall</span></code> interface, which is
+located in <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/include/lapi">include/lapi</a>. System call numbers are listed against the relevant
+call in the <code class="docutils literal notranslate"><span class="pre">*.in</span></code> files (e.g. <code class="docutils literal notranslate"><span class="pre">x86_64.in</span></code>) which are used to generate
+<code class="docutils literal notranslate"><span class="pre">syscalls.h</span></code>, the header you should include.
+System call numbers vary between architectures, hence there are multiple
+<code class="docutils literal notranslate"><span class="pre">*.in</span></code> files for each architecture.</p>
+<p>On rare occasions, you may find that system call number is missing from <code class="docutils literal notranslate"><span class="pre">*.in</span></code>
+files. In these cases, they will need to be updated using
+<a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/include/lapi/syscalls/generate_arch.sh">include/lapi/syscalls/generate_arch.sh</a> script as following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>include/lapi/syscalls/generate_arch.sh<span class="w"> </span>/path/to/Linux/sources
+</pre></div>
+</div>
+<p>The script will generate all the needed <code class="docutils literal notranslate"><span class="pre">*.in</span></code> files accordingly to the Linux
+source code which has been used. Make sure that your Linux source code has
+been updated to the latest version.</p>
+<p>Once the new syscalls files have been updated, to rebuild our <code class="docutils literal notranslate"><span class="pre">syscalls.h</span></code>
+file, please re-run <code class="docutils literal notranslate"><span class="pre">./configure</span></code> script.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm">* Test statx</span>
+<span class="cm">*</span>
+<span class="cm">* Check if statx exists and what error code it returns when we give it dodgy</span>
+<span class="cm">* data.</span>
+<span class="cm">*/</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tst_test.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;lapi/syscalls.h&quot;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">statx_timestamp</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int64_t</span><span class="w">        </span><span class="n">tv_sec</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">       </span><span class="n">tv_nsec</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w">        </span><span class="n">__reserved</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">statx</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">        </span><span class="n">stx_mask</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">        </span><span class="n">stx_blksize</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w">        </span><span class="n">stx_attributes</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">        </span><span class="n">stx_nlink</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">        </span><span class="n">stx_uid</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">        </span><span class="n">stx_gid</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w">        </span><span class="n">stx_mode</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w">        </span><span class="n">__spare0</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w">        </span><span class="n">stx_ino</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w">        </span><span class="n">stx_size</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w">        </span><span class="n">stx_blocks</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w">        </span><span class="n">stx_attributes_mask</span><span class="p">;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">statx_timestamp</span><span class="w">  </span><span class="n">stx_atime</span><span class="p">;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">statx_timestamp</span><span class="w">  </span><span class="n">stx_btime</span><span class="p">;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">statx_timestamp</span><span class="w">  </span><span class="n">stx_ctime</span><span class="p">;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">statx_timestamp</span><span class="w">  </span><span class="n">stx_mtime</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">        </span><span class="n">stx_rdev_major</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">        </span><span class="n">stx_rdev_minor</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">        </span><span class="n">stx_dev_major</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">        </span><span class="n">stx_dev_minor</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w">        </span><span class="n">__spare2</span><span class="p">[</span><span class="mi">14</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">sys_statx</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">dirfd</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pathname</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">flags</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">statx</span><span class="w"> </span><span class="o">*</span><span class="n">statxbuf</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">tst_syscall</span><span class="p">(</span><span class="n">__NR_statx</span><span class="p">,</span><span class="w"> </span><span class="n">dirfd</span><span class="p">,</span><span class="w"> </span><span class="n">pathname</span><span class="p">,</span><span class="w"> </span><span class="n">flags</span><span class="p">,</span><span class="w"> </span><span class="n">mask</span><span class="p">,</span><span class="w"> </span><span class="n">statxbuf</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>So the top part of the code is now boiler plate for calling <code class="docutils literal notranslate"><span class="pre">statx</span></code>. It is
+common for the kernel to be newer than the user land libraries and headers. So
+for new system calls like <code class="docutils literal notranslate"><span class="pre">statx</span></code>, we copy, with a few modifications, the
+relevant definitions into the LTP. This is somewhat like ‘vendoring’, although
+we are usually just copying headers required for interacting with the Kernel’s
+ABI (Application Binary Interface), rather than integrating actual
+functionality.</p>
+<p>So from the top we include the <code class="docutils literal notranslate"><span class="pre">stdint.h</span></code> library which gives us the standard
+<code class="docutils literal notranslate"><span class="pre">(u)int*_t</span></code> type definitions. We use these in place of the Kernel type
+definitions such as <code class="docutils literal notranslate"><span class="pre">__u64</span></code> in <code class="docutils literal notranslate"><span class="pre">linux/types.h</span></code>. We then have a couple of
+structure definitions which form part of the <code class="docutils literal notranslate"><span class="pre">statx</span></code> API. These were copied
+from <a class="reference external" href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/uapi/linux/stat.h">include/uapi/linux/stat.h</a> in the Linux kernel tree.</p>
+<p>After that, there is a wrapper function, which saves us from writing
+<code class="docutils literal notranslate"><span class="pre">tst_syscall(__NR_statx,</span> <span class="pre">...</span></code>, every time we want to make a call to
+<code class="docutils literal notranslate"><span class="pre">statx</span></code>. This also provides a stub for when <code class="docutils literal notranslate"><span class="pre">statx</span></code> is eventually integrated
+into the LTP library and also implemented by the C library. At that point we
+can switch to using the C library implementation if available or fallback to
+our own.</p>
+<p>The advantage of using the C library implementation is that it will often be
+better supported across multiple architectures. It will also mean we are using
+the system call in the same way most real programs would. Sometimes there are
+advantages to bypassing the C library, but in general it should not be our
+first choice.</p>
+<p>The final test should do a check during configuration (i.e. when we run
+<code class="docutils literal notranslate"><span class="pre">./configure</span></code> before building) which checks if the <code class="docutils literal notranslate"><span class="pre">statx</span></code> system call and
+associated structures exists. This requires writing an <code class="docutils literal notranslate"><span class="pre">m4</span></code> file for use with
+<a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/configure.ac">configure.ac</a> which is processed during <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">autotools</span></code> and produces the
+configure script.</p>
+<p>For the time being though we shall just ignore this. All you need to know for
+now is that this is a problem which eventually needs to be dealt with and that
+there is a system in place to handle it.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">...</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">run</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">statx</span><span class="w"> </span><span class="n">statxbuf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">TEST</span><span class="p">(</span><span class="n">sys_statx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">statxbuf</span><span class="p">));</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TST_RET</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">tst_res</span><span class="p">(</span><span class="n">TFAIL</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;statx thinks it can stat NULL&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TST_ERR</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">EFAULT</span><span class="p">)</span>
+<span class="w">        </span><span class="n">tst_res</span><span class="p">(</span><span class="n">TPASS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;statx set errno to EFAULT as expected&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">tst_res</span><span class="p">(</span><span class="n">TFAIL</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">TERRNO</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;statx set errno to some unexpected value&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">tst_test</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">test_all</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">min_kver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;4.11&quot;</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">TEST</span></code> macro sets <code class="docutils literal notranslate"><span class="pre">TST_RET</span></code> to the return value of <code class="docutils literal notranslate"><span class="pre">tst_statx()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">TST_ERR</span></code> to the value of <code class="docutils literal notranslate"><span class="pre">errno</span></code> immediately after the functions
+return. This is mainly just for convenience, although it potentially could
+have other uses.</p>
+<p>We check whether the return value indicates success and if it doesn’t also
+check the value of <code class="docutils literal notranslate"><span class="pre">errno</span></code>. The last call to <code class="docutils literal notranslate"><span class="pre">tst_res</span></code> includes <code class="docutils literal notranslate"><span class="pre">TERRNO</span></code>,
+which will print the current error number and associated description in
+addition to the message we have provided. Note that it uses the current value
+of <code class="docutils literal notranslate"><span class="pre">errno</span></code> not <code class="docutils literal notranslate"><span class="pre">TST_ERR</span></code>.</p>
+<p>What we should have done in the example above is use <code class="docutils literal notranslate"><span class="pre">TTERRNO</span></code> which takes the
+value of <code class="docutils literal notranslate"><span class="pre">TST_ERR</span></code>.</p>
+<p>If we try to run the test on a kernel where <code class="docutils literal notranslate"><span class="pre">statx</span></code> does not exist, then
+<code class="docutils literal notranslate"><span class="pre">tst_syscall</span></code> will cause it to fail gracefully with <code class="docutils literal notranslate"><span class="pre">TCONF</span></code>. Where <code class="docutils literal notranslate"><span class="pre">TCONF</span></code>
+indicates the test is not applicable to our configuration.</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">tst_syscall</span></code> calls <code class="docutils literal notranslate"><span class="pre">tst_brk(TCONF,...)</span></code> on failure. <code class="docutils literal notranslate"><span class="pre">tst_brk</span></code>
+causes the test to exit immediately, which prevents any further test code from
+being run.</p>
+<section id="what-are-the-differences-between-tst-brk-and-tst-res">
+<h3>What are the differences between <code class="docutils literal notranslate"><span class="pre">tst_brk</span></code> and <code class="docutils literal notranslate"><span class="pre">tst_res</span></code>?<a class="headerlink" href="#what-are-the-differences-between-tst-brk-and-tst-res" title="Permalink to this heading"></a></h3>
+<p>See <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/include/tst_test.h">include/tst_test.h</a>. Also what do they have in common?</p>
+</section>
+<section id="what-happens-if-you-call-tst-res-tinfo-after-sys-statx">
+<h3>What happens if you call <code class="docutils literal notranslate"><span class="pre">tst_res(TINFO,</span> <span class="pre">...)</span></code> after <code class="docutils literal notranslate"><span class="pre">sys_statx</span></code>?<a class="headerlink" href="#what-happens-if-you-call-tst-res-tinfo-after-sys-statx" title="Permalink to this heading"></a></h3>
+<p>Does the test still function correctly?</p>
+</section>
+<section id="extend-the-test-to-handle-other-basic-error-conditions">
+<h3>Extend the test to handle other basic error conditions<a class="headerlink" href="#extend-the-test-to-handle-other-basic-error-conditions" title="Permalink to this heading"></a></h3>
+<p>For example, see if you can trigger <code class="docutils literal notranslate"><span class="pre">ENOENT</span></code> instead. You shouldn’t
+have to create any files, which is discussed in the next section.</p>
+</section>
+</section>
+<section id="setup-cleanup-and-files">
+<h2>Setup, Cleanup and files<a class="headerlink" href="#setup-cleanup-and-files" title="Permalink to this heading"></a></h2>
+<p>Some tests require resources to be allocated, or system settings to be
+changed, before the test begins. This <code class="docutils literal notranslate"><span class="pre">setup</span></code> only has to be done once at the
+beginning and at the end of the test needs to be removed or reverted. The
+<code class="docutils literal notranslate"><span class="pre">cleanup</span></code> also has to be done regardless of whether the test breaks.</p>
+<p>Fortunately, like most test libraries, we have setup and cleanup (teardown)
+callbacks. <code class="docutils literal notranslate"><span class="pre">setup</span></code> is called once before <code class="docutils literal notranslate"><span class="pre">run</span></code> and <code class="docutils literal notranslate"><span class="pre">cleanup</span></code> is called once
+afterwards. Note that <code class="docutils literal notranslate"><span class="pre">run</span></code> itself can be called multiple times by the test
+harness, but that <code class="docutils literal notranslate"><span class="pre">setup</span></code> and <code class="docutils literal notranslate"><span class="pre">cleanup</span></code> are only called once.</p>
+<p>If either your code, a <code class="docutils literal notranslate"><span class="pre">SAFE_*</span></code> macro or a library function such as
+<code class="docutils literal notranslate"><span class="pre">tst_syscall</span></code> call <code class="docutils literal notranslate"><span class="pre">tst_brk</span></code>, then <code class="docutils literal notranslate"><span class="pre">run</span></code> will exit immediately and the
+<code class="docutils literal notranslate"><span class="pre">cleanup</span></code> function is then called. Once <code class="docutils literal notranslate"><span class="pre">cleanup</span></code> is completed, the test
+executable will then exit altogether abandoning any remaining iterations of
+<code class="docutils literal notranslate"><span class="pre">run</span></code>.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">statx</span></code> we would like to create some files or file like objects which we
+have control over. Deciding where to create the files is easy, we just create
+it in the current working directory and let the LTP test harness handle where
+that should be by setting <code class="docutils literal notranslate"><span class="pre">.needs_tmpdir</span> <span class="pre">=</span> <span class="pre">1</span></code>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm">* Test statx</span>
+<span class="cm">*</span>
+<span class="cm">* Check if statx exists and what error code it returns when we give it dodgy</span>
+<span class="cm">* data. Then stat a file and check it returns success.</span>
+<span class="cm">*/</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tst_test.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;lapi/syscalls.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;lapi/fcntl.h&quot;</span>
+
+<span class="cp">#define FNAME &quot;file_to_stat&quot;</span>
+<span class="cp">#define STATX_BASIC_STATS 0x000007ffU</span>
+
+<span class="cm">/*************** statx structure and wrapper goes here ! ***************/</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>We have added an extra include <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/lapi/fcntl.h">lapi/fcntl.h</a> which wraps the system header by
+the same name (<code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;fcntl.h&gt;</span></code>). This header ensures we have definitions
+for recently added macros such as <code class="docutils literal notranslate"><span class="pre">AT_FDCWD</span></code> by providing fall backs if the
+system header does not have them. The <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/lapi/">lapi/</a> directory contains a number of
+headers like this.</p>
+<p>At some point we may wish to add <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/lapi/stat.h">lapi/stat.h</a> to provide a fall back for
+macros such as <code class="docutils literal notranslate"><span class="pre">STATX_BASIC_STATS</span></code>. However for the time being we have just
+defined it in the test.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">...</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">setup</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">SAFE_TOUCH</span><span class="p">(</span><span class="n">FNAME</span><span class="p">,</span><span class="w"> </span><span class="mo">0777</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">run</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">statx</span><span class="w"> </span><span class="n">statxbuf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">TEST</span><span class="p">(</span><span class="n">sys_statx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">statxbuf</span><span class="p">));</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TST_RET</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">tst_res</span><span class="p">(</span><span class="n">TFAIL</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;statx thinks it can stat NULL&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TST_ERR</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">EFAULT</span><span class="p">)</span>
+<span class="w">        </span><span class="n">tst_res</span><span class="p">(</span><span class="n">TPASS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;statx set errno to EFAULT as expected&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">tst_res</span><span class="p">(</span><span class="n">TFAIL</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">TERRNO</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;statx set errno to some unexpected value&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">TEST</span><span class="p">(</span><span class="n">sys_statx</span><span class="p">(</span><span class="n">AT_FDCWD</span><span class="p">,</span><span class="w"> </span><span class="n">FNAME</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">STATX_BASIC_STATS</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">statxbuf</span><span class="p">));</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TST_RET</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">tst_res</span><span class="p">(</span><span class="n">TPASS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;It returned zero so it must have worked!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">tst_res</span><span class="p">(</span><span class="n">TFAIL</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">TERRNO</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;statx can not stat a basic file&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">tst_test</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">setup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setup</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">test_all</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">min_kver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;4.11&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">needs_tmpdir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">setup</span></code> callback uses one of the LTP’s <code class="docutils literal notranslate"><span class="pre">SAFE</span></code> functions to create an empty
+file <code class="docutils literal notranslate"><span class="pre">file_to_stat</span></code>. Because we have set <code class="docutils literal notranslate"><span class="pre">.needs_tmpdir</span></code>, we can just create
+this file in the present working directory. We don’t need to create a
+<code class="docutils literal notranslate"><span class="pre">cleanup</span></code> callback yet because the LTP test harness will recursively delete
+the temporary directory and its contents.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">run</span></code> function can be called multiple times by the test harness, however
+<code class="docutils literal notranslate"><span class="pre">setup</span></code> and <code class="docutils literal notranslate"><span class="pre">cleanup</span></code> callbacks will only be ran once.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>By this point you may have begun to explore the LTP library headers or older
+tests. In which case you will have come across functions from the old API such
+as <code class="docutils literal notranslate"><span class="pre">tst_brkm</span></code>. The old API is being phased out, so you should not use these
+functions.</p>
+</div>
+<p>So far we haven’t had to do any clean up. So our example doesn’t answer the
+question “what happens if part of the clean up fails?”. To answer this we are
+going to modify the test to ask the (highly contrived) question “What happens
+if I create and open a file, then create a hard-link to it, then call open
+again on the hard-link, then <code class="docutils literal notranslate"><span class="pre">stat</span></code> the file”.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define LNAME &quot;file_to_stat_link&quot;</span>
+
+<span class="p">...</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">setup</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAFE_OPEN</span><span class="p">(</span><span class="n">FNAME</span><span class="p">,</span><span class="w"> </span><span class="n">O_CREAT</span><span class="p">,</span><span class="w"> </span><span class="mo">0777</span><span class="p">);</span>
+<span class="w">    </span><span class="n">SAFE_LINK</span><span class="p">(</span><span class="n">FNAME</span><span class="p">,</span><span class="w"> </span><span class="n">LNAME</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lfd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAFE_OPEN</span><span class="p">(</span><span class="n">LNAME</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">cleanup</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lfd</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">SAFE_CLOSE</span><span class="p">(</span><span class="n">lfd</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fd</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">SAFE_CLOSE</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">run</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="p">...</span>
+
+<span class="w">    </span><span class="n">TEST</span><span class="p">(</span><span class="n">sys_statx</span><span class="p">(</span><span class="n">AT_FDCWD</span><span class="p">,</span><span class="w"> </span><span class="n">LNAME</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">STATX_BASIC_STATS</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">statxbuf</span><span class="p">));</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TST_RET</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">tst_res</span><span class="p">(</span><span class="n">TPASS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;It returned zero so it must have worked!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">tst_res</span><span class="p">(</span><span class="n">TFAIL</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">TERRNO</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;statx can not stat a basic file&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">tst_test</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">setup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setup</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">cleanup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cleanup</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">test_all</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">tcnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">min_kver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;4.11&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">needs_tmpdir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Because we are now opening a file, we need a <code class="docutils literal notranslate"><span class="pre">cleanup</span></code> function to close the
+file descriptors. We have to manually close the files to ensure the temporary
+directory is deleted by the test harness (see <a class="reference internal" href="writing_tests.html"><span class="doc">Writing tests</span></a> for details).</p>
+<p>As a matter of good practice, the file descriptors are closed in reverse
+order. In some circumstances the order which <code class="docutils literal notranslate"><span class="pre">cleanup</span></code> is performed is
+significant. In those cases, resources created towards the end of <code class="docutils literal notranslate"><span class="pre">setup</span></code> are
+dependent to ones near the beginning. During <code class="docutils literal notranslate"><span class="pre">cleanup</span></code> we remove the
+dependants before their dependencies.</p>
+<p>If, for some reason, the file descriptor <code class="docutils literal notranslate"><span class="pre">lfd</span></code> became invalid during the test,
+but <code class="docutils literal notranslate"><span class="pre">fd</span></code> was still open, we do not want <code class="docutils literal notranslate"><span class="pre">SAFE_CLOSE(lfd)</span></code> to cause the
+<code class="docutils literal notranslate"><span class="pre">cleanup</span></code> function to exit prematurely. If it did, then <code class="docutils literal notranslate"><span class="pre">fd</span></code> would remain
+open which would cause problems on some file systems.</p>
+<p>Nor do we want to call <code class="docutils literal notranslate"><span class="pre">cleanup</span></code> recursively. So during <code class="docutils literal notranslate"><span class="pre">cleanup</span></code>
+<code class="docutils literal notranslate"><span class="pre">tst_brk</span></code>, and consequently the <code class="docutils literal notranslate"><span class="pre">SAFE</span></code> functions, do not cause the test to
+exit with <code class="docutils literal notranslate"><span class="pre">TBROK</span></code>. Instead they just print an error message with <code class="docutils literal notranslate"><span class="pre">TWARN</span></code>.</p>
+<p>It is not entirely necessary to check if the file descriptors have a none zero
+value before attempting to close them. However it avoids a bunch of spurious
+warning messages if we fail to open <code class="docutils literal notranslate"><span class="pre">file_to_stat</span></code>. Test case failures can be
+difficult to interpret at the best of times, so avoid filling the log with
+noise.</p>
+<section id="check-statx-returns-the-correct-number-of-hard-links">
+<h3>Check <code class="docutils literal notranslate"><span class="pre">statx</span></code> returns the correct number of hard links<a class="headerlink" href="#check-statx-returns-the-correct-number-of-hard-links" title="Permalink to this heading"></a></h3>
+<p>The field <code class="docutils literal notranslate"><span class="pre">statx.stx_nlink</span></code> should be equal to 2, right?</p>
+</section>
+<section id="git-branch">
+<h3>Git-branch<a class="headerlink" href="#git-branch" title="Permalink to this heading"></a></h3>
+<p>We are about to make some organizational changes to the test, so now would be
+a good time to branch. Then we can switch between the old and new versions, to
+check the behavior has not been changed by accident.</p>
+</section>
+</section>
+<section id="split-the-test">
+<h2>Split the test<a class="headerlink" href="#split-the-test" title="Permalink to this heading"></a></h2>
+<p>In our current test, we have essentially rolled two different test cases into
+one. Firstly we check if an error is returned when bad arguments are provided
+and secondly we check what happens when we stat an actual file. Quite often it
+makes sense to call <code class="docutils literal notranslate"><span class="pre">tst_res</span></code> multiple times in a single test case because we
+are checking different properties of the same result, but here we are clearly
+testing two different scenarios.</p>
+<p>So we should split the test in two. One obvious way to do this is to create
+<code class="docutils literal notranslate"><span class="pre">statx02.c</span></code>, but that seems like overkill in order to separate two simple test
+cases. So, for now at least, we are going to do it a different way.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">...</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">run_stat_null</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">statx</span><span class="w"> </span><span class="n">statxbuf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">TEST</span><span class="p">(</span><span class="n">sys_statx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">statxbuf</span><span class="p">));</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TST_RET</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">tst_res</span><span class="p">(</span><span class="n">TFAIL</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;statx thinks it can stat NULL&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TST_ERR</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">EFAULT</span><span class="p">)</span>
+<span class="w">        </span><span class="n">tst_res</span><span class="p">(</span><span class="n">TPASS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;statx set errno to EFAULT as expected&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">tst_res</span><span class="p">(</span><span class="n">TFAIL</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">TERRNO</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;statx set errno to some unexpected value&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">run_stat_symlink</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">statx</span><span class="w"> </span><span class="n">statxbuf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">TEST</span><span class="p">(</span><span class="n">sys_statx</span><span class="p">(</span><span class="n">AT_FDCWD</span><span class="p">,</span><span class="w"> </span><span class="n">LNAME</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">STATX_BASIC_STATS</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">statxbuf</span><span class="p">));</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TST_RET</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">tst_res</span><span class="p">(</span><span class="n">TPASS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;It returned zero so it must have worked!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">tst_res</span><span class="p">(</span><span class="n">TFAIL</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">TERRNO</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;statx can not stat a basic file&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">run</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="w"> </span><span class="n">run_stat_null</span><span class="p">();</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="n">run_stat_symlink</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">tst_test</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">setup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setup</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">cleanup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cleanup</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">run</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">tcnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">min_kver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;4.11&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">needs_tmpdir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>So we have used an alternative form of the <code class="docutils literal notranslate"><span class="pre">test</span></code> or <code class="docutils literal notranslate"><span class="pre">run</span></code> callback which
+accepts an index. Some tests use this index with an array of parameters and
+expected return values. Others do something similar to the above. The index
+can be used how you want so long as each iteration calls <code class="docutils literal notranslate"><span class="pre">tst_res</span></code> in a
+meaningful way.</p>
+<p>If an iteration fails to return a result (i.e. call <code class="docutils literal notranslate"><span class="pre">tst_res</span></code> with a value
+other than <code class="docutils literal notranslate"><span class="pre">TINFO</span></code>) then the test harness will report <code class="docutils literal notranslate"><span class="pre">TBROK</span></code> and print the
+iteration which failed. This prevents a scenario in your test from silently
+failing due to some faulty logic.</p>
+<section id="what-is-wrong-with-the-switch-statement">
+<h3>What is wrong with the switch statement?<a class="headerlink" href="#what-is-wrong-with-the-switch-statement" title="Permalink to this heading"></a></h3>
+<p>Were you paying attention? Also see the output of <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code>.</p>
+</section>
+<section id="test-a-feature-unique-to-statx">
+<h3>Test a feature unique to statx<a class="headerlink" href="#test-a-feature-unique-to-statx" title="Permalink to this heading"></a></h3>
+<p>So far we have not tested anything which is unique to <code class="docutils literal notranslate"><span class="pre">statx</span></code>. So, for
+example, you could check stx_btime is correct (possibly only to within a
+margin of error) and that it differs from <code class="docutils literal notranslate"><span class="pre">stx_mtime</span></code> after writing to the
+file.</p>
+<p>Alternatively you could check that <code class="docutils literal notranslate"><span class="pre">stx_dev_major</span></code> and <code class="docutils literal notranslate"><span class="pre">stx_dev_minor</span></code> are set
+correctly. Note that the LTP has helper functions for creating devices and
+file systems.</p>
+<p>This could be quite a challenging exercise. You may wish to tackle an
+altogether different test scenario instead. If you get stuck just move onto
+the next section and come back later.</p>
+</section>
+</section>
+<section id="submitting-the-test-for-review">
+<h2>Submitting the test for review<a class="headerlink" href="#submitting-the-test-for-review" title="Permalink to this heading"></a></h2>
+<p>Ignoring the fact we should probably create <a class="reference external" href="https://github.com/linux-test-project/ltp/blob/master/lapi/stat.h">lapi/stat.h</a> along with a bunch
+of fallback logic in the build system. We can now get our test ready for
+submission.</p>
+<p>The first thing you need to do before considering submitting your test is run
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check-statx01</span></code> or <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">check</span></code> in the test’s directory. Again, we use
+the kernel style guidelines where possible. Next you should create a new
+branch, this will allow you to reshape your commit history without fear.</p>
+<p>After that we have the pleasure of doing an interactive <code class="docutils literal notranslate"><span class="pre">rebase</span></code> to clean up
+our commit history. In its current form the test only really needs a single
+commit, but if you have been using Git correctly then you should have
+many. The main reason we want to compress it to a single commit, is to make
+the LTP’s Git-log readable. It also allows us to write a coherent description
+of the work as a whole in retrospective. Although, when adding a new test, the
+test description in the code will probably make the commit message redundant.</p>
+<p>Anyway, as an example, we shall look at my personal commit history from this
+tutorial and <code class="docutils literal notranslate"><span class="pre">rebase</span></code> it. You should try following along with your own
+repository. First lets look at the commit history since we branched from
+master.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>master..HEAD
+152d39fe7<span class="w"> </span><span class="o">(</span>HEAD<span class="w"> </span>-&gt;<span class="w"> </span>tutorial-rebase2,<span class="w"> </span>tutorial-rebase<span class="o">)</span><span class="w"> </span>tutorial:<span class="w"> </span>Start<span class="w"> </span>Submitting<span class="w"> </span>patch<span class="w"> </span>section
+70f7ce7ce<span class="w"> </span>statx01:<span class="w"> </span>Stop<span class="w"> </span>checkpatch<span class="w"> </span>from<span class="w"> </span>complaining
+bb0332bd7<span class="w"> </span>tutorial:<span class="w"> </span>Fix<span class="w"> </span>review<span class="w"> </span>problems
+6a87a084a<span class="w"> </span>statx01:<span class="w"> </span>Fix<span class="w"> </span>review<span class="w"> </span>problems
+d784b1e85<span class="w"> </span>test-writing-guidelines:<span class="w"> </span>Remove<span class="w"> </span>old<span class="w"> </span>API<span class="w"> </span>argument
+c26e1be7a<span class="w"> </span>fixup!<span class="w"> </span>tutorial
+1e24a5fb5<span class="w"> </span><span class="o">(</span>me/tutorial-rebase<span class="o">)</span><span class="w"> </span>fixup!<span class="w"> </span>tutorial
+568a3f7be<span class="w"> </span>fixup!<span class="w"> </span>tutorial
+09dd2c829<span class="w"> </span>statx:<span class="w"> </span>stage<span class="w"> </span><span class="m">6</span>
+bfeef7902<span class="w"> </span>statx:<span class="w"> </span>stage<span class="w"> </span>5b
+76e03d714<span class="w"> </span>statx:<span class="w"> </span>stage<span class="w"> </span>5a
+98f5bc7ac<span class="w"> </span>statx:<span class="w"> </span>stage<span class="w"> </span><span class="m">4</span>
+6f8c16438<span class="w"> </span>statx:<span class="w"> </span>stage<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="o">(</span>Add<span class="w"> </span>statx01<span class="o">)</span>
+5d93b84d8<span class="w"> </span>Add<span class="w"> </span>statx<span class="w"> </span>and<span class="w"> </span>other<span class="w"> </span>syscall<span class="w"> </span>numbers
+5ca627b78<span class="w"> </span>tutorial:<span class="w"> </span>Add<span class="w"> </span>a<span class="w"> </span>step-by-step<span class="w"> </span>C<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tutorial
+</pre></div>
+</div>
+<p>So we have told git to show all the commits which don’t exist in <code class="docutils literal notranslate"><span class="pre">master</span></code>, but
+are in <code class="docutils literal notranslate"><span class="pre">HEAD</span></code>, where <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> is the top of the current branch. The current
+branch is <code class="docutils literal notranslate"><span class="pre">tutorial-rebase2</span></code> which I just created. I have already done one
+<code class="docutils literal notranslate"><span class="pre">rebase</span></code> and submitted a patch for review, so my original branch was just called
+<code class="docutils literal notranslate"><span class="pre">tutorial</span></code>.</p>
+<p>As usual my commit history is starting to look like a bit of mess! There is
+even a commit in there which should not be in the this branch (Remove old API
+argument), however it can be ignored for now and ‘cherry picked’ into a new branch
+later.</p>
+<p>For my patch I actually need at least two commits, one which contains the
+tutorial text and one which contains the test and associated files. So first
+of all I want to ‘squash’ (amalgamate) all the commits appended with
+<code class="docutils literal notranslate"><span class="pre">tutorial:</span></code> into the bottom commit.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>5ca627b78<span class="se">\^</span>
+...
+</pre></div>
+</div>
+<p>This begins an interactive <code class="docutils literal notranslate"><span class="pre">rebase</span></code> where commit <code class="docutils literal notranslate"><span class="pre">5ca6427b78</span></code> is the earliest
+commit we want to edit. The <code class="docutils literal notranslate"><span class="pre">^</span></code> symbol after the commit hash, specifies the
+commit before this one. The interactive <code class="docutils literal notranslate"><span class="pre">rebase</span></code> command takes the last commit
+we want to keep unaltered as it’s argument (in other words it takes a
+non-inclusive range).</p>
+<p>Upon entering a similar command you will be presented with a text file
+similar to the following. The file should be displayed in your text editor of
+choice, if it doesn’t, then you may change the editor variable in
+<code class="docutils literal notranslate"><span class="pre">.gitconfig</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pick<span class="w"> </span>5ca627b78<span class="w"> </span>tutorial:<span class="w"> </span>Add<span class="w"> </span>a<span class="w"> </span>step-by-step<span class="w"> </span>C<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tutorial
+pick<span class="w"> </span>5d93b84d8<span class="w"> </span>Add<span class="w"> </span>statx<span class="w"> </span>and<span class="w"> </span>other<span class="w"> </span>syscall<span class="w"> </span>numbers
+pick<span class="w"> </span>6f8c16438<span class="w"> </span>statx:<span class="w"> </span>stage<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="o">(</span>Add<span class="w"> </span>statx01<span class="o">)</span>
+pick<span class="w"> </span>98f5bc7ac<span class="w"> </span>statx:<span class="w"> </span>stage<span class="w"> </span><span class="m">4</span>
+pick<span class="w"> </span>76e03d714<span class="w"> </span>statx:<span class="w"> </span>stage<span class="w"> </span>5a
+pick<span class="w"> </span>bfeef7902<span class="w"> </span>statx:<span class="w"> </span>stage<span class="w"> </span>5b
+pick<span class="w"> </span>09dd2c829<span class="w"> </span>statx:<span class="w"> </span>stage<span class="w"> </span><span class="m">6</span>
+pick<span class="w"> </span>568a3f7be<span class="w"> </span>fixup!<span class="w"> </span>tutorial
+pick<span class="w"> </span>1e24a5fb5<span class="w"> </span>fixup!<span class="w"> </span>tutorial
+pick<span class="w"> </span>c26e1be7a<span class="w"> </span>fixup!<span class="w"> </span>tutorial
+pick<span class="w"> </span>d784b1e85<span class="w"> </span>test-writing-guidelines:<span class="w"> </span>Remove<span class="w"> </span>old<span class="w"> </span>API<span class="w"> </span>argument
+pick<span class="w"> </span>6a87a084a<span class="w"> </span>statx01:<span class="w"> </span>Fix<span class="w"> </span>review<span class="w"> </span>problems
+pick<span class="w"> </span>bb0332bd7<span class="w"> </span>tutorial:<span class="w"> </span>Fix<span class="w"> </span>review<span class="w"> </span>problems
+pick<span class="w"> </span>70f7ce7ce<span class="w"> </span>statx01:<span class="w"> </span>Stop<span class="w"> </span>checkpatch<span class="w"> </span>from<span class="w"> </span>complaining
+pick<span class="w"> </span>152d39fe7<span class="w"> </span>tutorial:<span class="w"> </span>Start<span class="w"> </span>Submitting<span class="w"> </span>patch<span class="w"> </span>section
+</pre></div>
+</div>
+<p>The last commit from Git-log is shown at the top. The left hand column
+contains the commands we want to run on each commit. <code class="docutils literal notranslate"><span class="pre">pick</span></code> just means we
+re-apply the commit as-is. We can reorder the lines to apply the commits in a
+different order, but we need to be careful when reordering commits to the same
+file. If your <code class="docutils literal notranslate"><span class="pre">rebase</span></code> results in a merge conflict, then you have probably
+reordered some commits which contained changes to the same piece of code.</p>
+<p>Perhaps a better name for the interactive <code class="docutils literal notranslate"><span class="pre">rebase</span></code> command would be ‘replay’. As
+we pick a point in the commit history, undo all those commits before that
+point, then reapply them one at a time. During the replay we can reorder the
+commits, drop, merge, split and edit them, creating a new history.</p>
+<p>The commands I am going to use are <code class="docutils literal notranslate"><span class="pre">reword</span></code> and <code class="docutils literal notranslate"><span class="pre">fixup</span></code>. The <code class="docutils literal notranslate"><span class="pre">reword</span></code> command
+allows you to edit a single commit’s message. The ‘fixup’ command ‘squashes’ a
+commit into the commit above/preceding it, merging the two commits into
+one. The commit which has <code class="docutils literal notranslate"><span class="pre">fixup</span></code> applied has its commit message deleted. If
+you think a commit might have something useful in its message then you can use
+<code class="docutils literal notranslate"><span class="pre">squash</span></code> instead.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>reword<span class="w"> </span>5ca627b78<span class="w"> </span>tutorial:<span class="w"> </span>Add<span class="w"> </span>a<span class="w"> </span>step-by-step<span class="w"> </span>C<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tutorial
+fixup<span class="w"> </span>568a3f7be<span class="w"> </span>fixup!<span class="w"> </span>tutorial
+fixup<span class="w"> </span>1e24a5fb5<span class="w"> </span>fixup!<span class="w"> </span>tutorial
+fixup<span class="w"> </span>c26e1be7a<span class="w"> </span>fixup!<span class="w"> </span>tutorial
+fixup<span class="w"> </span>bb0332bd7<span class="w"> </span>tutorial:<span class="w"> </span>Fix<span class="w"> </span>review<span class="w"> </span>problems
+fixup<span class="w"> </span>152d39fe7<span class="w"> </span>tutorial:<span class="w"> </span>Start<span class="w"> </span>Submitting<span class="w"> </span>patch<span class="w"> </span>section
+fixup<span class="w"> </span>276edecab<span class="w"> </span>tutorial:<span class="w"> </span>Save<span class="w"> </span>changes<span class="w"> </span>before<span class="w"> </span>rebase
+pick<span class="w"> </span>5d93b84d8<span class="w"> </span>Add<span class="w"> </span>statx<span class="w"> </span>and<span class="w"> </span>other<span class="w"> </span>syscall<span class="w"> </span>numbers
+pick<span class="w"> </span>6f8c16438<span class="w"> </span>statx:<span class="w"> </span>stage<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="o">(</span>Add<span class="w"> </span>statx01<span class="o">)</span>
+pick<span class="w"> </span>98f5bc7ac<span class="w"> </span>statx:<span class="w"> </span>stage<span class="w"> </span><span class="m">4</span>
+pick<span class="w"> </span>76e03d714<span class="w"> </span>statx:<span class="w"> </span>stage<span class="w"> </span>5a
+pick<span class="w"> </span>bfeef7902<span class="w"> </span>statx:<span class="w"> </span>stage<span class="w"> </span>5b
+pick<span class="w"> </span>09dd2c829<span class="w"> </span>statx:<span class="w"> </span>stage<span class="w"> </span><span class="m">6</span>
+pick<span class="w"> </span>d784b1e85<span class="w"> </span>test-writing-guidelines:<span class="w"> </span>Remove<span class="w"> </span>old<span class="w"> </span>API<span class="w"> </span>argument
+pick<span class="w"> </span>6a87a084a<span class="w"> </span>statx01:<span class="w"> </span>Fix<span class="w"> </span>review<span class="w"> </span>problems
+</pre></div>
+</div>
+<p>So all the commits marked with <code class="docutils literal notranslate"><span class="pre">fixup</span></code> will be re-played by Git immediately
+after 5ca62 at the top. A new commit will then be created with the amalgamated
+changes of all the commits and 5ca62’s log message. It turns out that I didn’t
+need to reword anything, but there is no harm in checking. It is easy to
+forget the <code class="docutils literal notranslate"><span class="pre">Signed-off-by:</span></code> line.</p>
+<p>I could now do the same for the commits to the <code class="docutils literal notranslate"><span class="pre">statx</span></code> test, making the commit
+message prefixes consistent. However I am not actually going to submit the
+test (yet).</p>
+<p>I won’t attempt to show you this, but if you need to do the opposite and split
+apart a commit. It is also possible using Git-rebase by marking a line with
+<code class="docutils literal notranslate"><span class="pre">edit</span></code>. This will pause Git just after replaying the marked commit. You can
+then use a ‘soft’ Git-reset to bring the selected commit’s changes back into
+the ‘index’ where you are then able to un-stage some parts before
+re-committing.</p>
+<p>You can also use <code class="docutils literal notranslate"><span class="pre">edit</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code> together to change a commit
+deep in your history, but without resetting the ‘index’. The ‘index’ contains
+changes which you have staged with <a class="reference external" href="https://git-scm.com/docs/git-add">git add</a>, but not yet committed.</p>
+<p>So now that the commit history has been cleaned up, we need to submit a patch
+to the mailing list or make a pull request on GitHub. The mailing list is the
+preferred place to make submissions and is more difficult for most people, so
+I will only cover that method.</p>
+<p>Just before we create the patch, we need to check that our changes will still
+apply to the master branch without problems. To do this we can use another
+type of <code class="docutils literal notranslate"><span class="pre">rebase</span></code> and then try rebuilding and running the test.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>master
+git<span class="w"> </span>pull<span class="w"> </span>origin
+git<span class="w"> </span>checkout<span class="w"> </span>tutorial-rebase2
+git<span class="w"> </span>rebase<span class="w"> </span>master
+</pre></div>
+</div>
+<p>Above, I update the master branch and then replay our changes onto it using
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">master</span></code>. You may find that after the rebase there is a merge
+conflict. This will result in something which looks like the following (taken
+from a Makefile conflict which was caused by reordering commits in a <code class="docutils literal notranslate"><span class="pre">rebase</span></code>).</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="w">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
+<span class="w">cve-2016-7117:      LDFLAGS += -lpthread</span>
+<span class="gh">=======</span>
+<span class="w">cve-2014-0196:      LDFLAGS += -lpthread -lutil -lrt</span>
+<span class="w">cve-2016-7117:      LDFLAGS += -lpthread -lrt</span>
+<span class="w">&gt;&gt;&gt;&gt;&gt;&gt;&gt; 4dbfb8e79... Add -lrt</span>
+</pre></div>
+</div>
+<p>The first line tells us this is the beginning of a conflict. The third line
+separates the two conflicting pieces of content and the last line is the end
+of the conflict. Usually, all you need to do is remove the lines you don’t
+want, stage the changes and continue the <code class="docutils literal notranslate"><span class="pre">rebase</span></code> with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span>
+<span class="pre">--continue</span></code>.</p>
+<p>In order to create a patch e-mail we use <a class="reference external" href="https://git-scm.com/docs/git-format-patch">git format-patch</a>,
+we can then send that e-mail using <a class="reference external" href="https://git-scm.com/docs/git-send-email">git send-email</a>.
+It is also possible to import the patch (<code class="docutils literal notranslate"><span class="pre">mbox</span></code>) file into a number of e-mail
+programs.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>format-patch<span class="w"> </span>-1<span class="w"> </span>-v<span class="w"> </span><span class="m">2</span><span class="w"> </span>-o<span class="w"> </span>output<span class="w"> </span>--to<span class="w"> </span>ltp@lists.linux.it<span class="w"> </span>fd3cc8596
+output/v2-0001-tutorial-Add-a-step-by-step-C-test-tutorial.patch
+</pre></div>
+</div>
+<p>The first argument <code class="docutils literal notranslate"><span class="pre">-1</span></code> specifies we want one commit from fd3cc8596
+onwards. If we wanted this commit and the one after it we could specify <code class="docutils literal notranslate"><span class="pre">-2</span></code>
+instead.</p>
+<p>This is my second patch submission so I have used <code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">2</span></code>, which indicates this
+is the second version of a patch set. The <code class="docutils literal notranslate"><span class="pre">-o</span></code> option specifies the output
+directory (literally called <code class="docutils literal notranslate"><span class="pre">output</span></code>). The <code class="docutils literal notranslate"><span class="pre">--to</span></code> option adds the <code class="docutils literal notranslate"><span class="pre">To:</span></code> e-mail
+header, which I have set to the LTP mailing list.</p>
+<p>We can then send this patch with the following command sans <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>send-email<span class="w"> </span>--dry-run<span class="w"> </span>output/v2-0001-tutorial-Add-a-step-by-step-C-test-tutorial.patch
+</pre></div>
+</div>
+<p>Git will ask some questions (which you can ignore) and then tell you what it
+would do if this weren’t a dry-run. In order for this to work you have to have
+a valid SMTP server set in <code class="docutils literal notranslate"><span class="pre">.gitconfig</span></code> and also be signed up to the LTP
+mailing list under the same e-mail address you have configured in Git. You can
+sign up at <a class="reference external" href="https://lists.linux.it/listinfo/ltp">https://lists.linux.it/listinfo/ltp</a>.</p>
+</section>
+<section id="doing-code-review">
+<h2>Doing code review<a class="headerlink" href="#doing-code-review" title="Permalink to this heading"></a></h2>
+<p>While waiting for your test to be reviewed, you are invited and encouraged to
+review other contributors’ code. This may seem bizarre when you are completely
+new to the project, but there are two important ways in which you can
+contribute here:</p>
+<ol class="upperalpha simple">
+<li><p>Point out logical errors in the code.</p></li>
+<li><p>Improve your own understanding</p></li>
+</ol>
+<p>It doesn’t matter whether you know the canonical way of writing an LTP test in
+C. An error of logic, when properly explained, is usually indisputable. These
+are the most important errors to find as they always result in false test
+results. Once someone points out such an error it is usually obvious to
+everyone that it is a bug and needs to be fixed.</p>
+<p>Obviously testing the patch is one way of finding errors. You can apply patches
+using <a class="reference external" href="https://git-scm.com/docs/git-am">git am</a>. Then it is just a case of compiling and running the tests.</p>
+<p>Finally, reading and attempting to comment on other peoples patches, gives
+you a better understanding of the reviewers perspective. This is better for
+the project and for you.</p>
+<p>Style and organizational issues are best left to after you have found logical
+errors.</p>
+</section>
+<section id="final-notes">
+<h2>Final notes<a class="headerlink" href="#final-notes" title="Permalink to this heading"></a></h2>
+<p>Hopefully you can now grasp the structure of an LTP test and have some idea of
+what is available in the LTP test library. There are a vast number of library
+functions available (mainly located in include and lib), some of which are
+documented in the test writing guidelines and many of which are not.</p>
+<p>We have only scratched the surface of the immense technical complexity of
+systems programming across multiple Kernel and C lib versions as well as
+different hardware architectures. The important thing to take away from this
+is that you have to be conscientious of what will happen on systems different
+from yours. The LTP has a huge and varied user base, so situations you may
+think are unlikely can and do happen to somebody.</p>
+<p>Of course you don’t want to spend time allowing for situations which may never
+arise either, so you have to do your research and think about each situation
+critically. The more systems you can test on before submitting your changes,
+the better, although we understand not everyone has access to a lab.</p>
+<p>One important topic which has not been covered by this tutorial, is
+multi-process or multi-threaded testing. The LTP library functions work inside
+child processes and threads, but their semantics change slightly. There are
+also various helper functions for synchronizing and forking processes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When it comes time to submit a test, the preferred way to do it is on the
+mailing list although you can also use GitHub. The LTP follows similar rules
+to the kernel for formatting and submitting patches. Generally speaking the
+review cycle is easier for small patches, so try to make small changes or
+additions where possible.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="writing_tests.html" class="btn btn-neutral float-left" title="Writing tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api_c_tests.html" class="btn btn-neutral float-right" title="LTP C API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Linux Test Project.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
