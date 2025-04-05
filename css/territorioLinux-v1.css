@@ -1,0 +1,21 @@
+body { /* aleja al menu statico */
+	padding-top: 70px;
+        background-color: #e6ffff;	
+}
+.footer {
+	background-color: #303030;
+	color: white;
+}
+.features .glyphicon {
+	font-size: 32px;	
+}
+/*
+Place an image with responsive design
+body { 
+  background: url(images/bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+*/

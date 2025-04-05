@@ -8,6 +8,94 @@
     <link rel='icon' type='image/png' href='images/tmr15.png'>  
     <title>DriversVM</title>
     <link href='css/bootstrap.min.css' rel='stylesheet'>
+    <style>
+      :root {
+        --dark-bg: #1a1a1a;
+        --darker-bg: #121212;
+        --primary-color: #4a89dc;
+        --text-color: #e0e0e0;
+        --muted-text: #aaaaaa;
+      }
+      body {
+        background-color: var(--dark-bg);
+        color: var(--text-color);
+      }
+      .navbar-default {
+        background-color: var(--darker-bg);
+        border-color: #080808;
+      }
+      .navbar-default .navbar-brand,
+      .navbar-default .navbar-nav > li > a {
+        color: var(--text-color);
+      }
+      .well, .panel {
+        background-color: var(--darker-bg);
+        border-color: #333;
+      }
+      .panel-success {
+        border-color: #3c763d;
+      }
+      .panel-success > .panel-heading {
+        background-color: #2d482d;
+        border-color: #3c763d;
+        color: #dff0d8;
+      }
+      .panel-warning > .panel-heading {
+        background-color: #4a3c15;
+        border-color: #66512c;
+        color: #fcf8e3;
+      }
+      .panel-danger > .panel-heading {
+        background-color: #4a2626;
+        border-color: #843534;
+        color: #f2dede;
+      }
+      .quote {
+        background-color: var(--darker-bg);
+        border-left: 5px solid var(--primary-color);
+      }
+      .btn-primary {
+        background-color: var(--primary-color);
+        border-color: #357ebd;
+      }
+      .btn-info {
+        background-color: #5bc0de;
+        border-color: #46b8da;
+      }
+      h1, h2, h3, h4 {
+        color: var(--text-color);
+      }
+      .dropdown-menu {
+        background-color: var(--darker-bg);
+      }
+      .dropdown-menu > li > a {
+        color: var(--text-color);
+      }
+      .nav-tabs > li > a {
+        color: var(--text-color);
+      }
+      .nav-tabs > li.active > a,
+      .nav-tabs > li.active > a:hover,
+      .nav-tabs > li.active > a:focus {
+        background-color: var(--darker-bg);
+        color: var(--primary-color);
+        border: 1px solid #333;
+        border-bottom-color: transparent;
+      }
+      .tab-content {
+        background-color: var(--darker-bg);
+        padding: 15px;
+        border: 1px solid #333;
+        border-top: none;
+      }
+      .footer {
+        background-color: var(--darker-bg);
+        border-top: 1px solid #333;
+      }
+      .text-center {
+        text-align: center;
+      }
+    </style>
     <link href='css/main.css' rel='stylesheet'>
   </head>
   <body>
@@ -16,7 +104,9 @@
       <div class='container'>
         <div class='navbar-header'>
           <a href='/' class='navbar-brand'>DriversVM</a>
-            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
+            <button type='button' class='navbar-toggle'
+                                                        data-toggle='collapse'
+                                                        data-target='.navbar-collapse'>
                <span class='sr-only'>Toggle navigation</span>
                <span class='icon-bar'></span>
                <span class='icon-bar'></span>
@@ -44,81 +134,62 @@
       </div>
     </div>
     <div class='container'>
-      <div class='row well well-lg'>
-        <div class='col-md-6'>
-          <h2>DriversVM</h2>
-          <p class='lead'>Device drivers and virtualization solutions</p>
+      <div class='row well well-lg text-center'>
+        <div class='col-md-12'>
+          <h2>Device Drivers & Virtualization</h2>
+          <p class='lead'>Expert solutions for Linux device drivers and VM optimization</p>
 
           <div class='btn-group'>
             <button data-toggle='dropdown' type='button'
                class='btn btn-default btn-lg dropdown-toggle'>
-              Guided Tour<span class='caret'></span>
+              Visita guiada<span class='caret'></span>
             </button>
             <ul class='dropdown-menu'>
-              <li><a href='offcanvas.html'>Linux Device Drivers</a></li>
-              <li><a href='#'>Recent Updates</a></li>
-              <li><a href='#'>By Topic</a></li>
+              <li><a href='offcanvas.html'>Driver Development</a></li>
+              <li><a href='#'>VM Configuration</a></li>
+              <li><a href='#'>Performance Tuning</a></li>
               <li class='divider'></li>
-              <li><a href='/html/index.html'>PCI drivers (rtd)</a></li>
+              <li><a href='/html/index.html'>PCI Drivers</a></li>
             </ul>
           </div>
 
-          <button type='button' class='btn btn-lg btn-primary'>Book Tickets Now</button>
-        </div>
-        <div class='col-md-6 visible-md visible-lg'>
-          <img src='/images/pingui2.png' alt='DriversVM' />
+          <button type='button' class='btn btn-lg btn-primary'>Get Started</button>
         </div>
       </div>
       <div class='row text-center features'>
         <div class='col-sm-4 col-xs-10 col-xs-offset-1 col-sm-offset-0'>
           <i class='glyphicon glyphicon-briefcase'></i>
-          <h3>Device Drivers</h3>
-          <p>Comprehensive guides for Linux device drivers. Kernel modules, hardware interfaces, and driver development techniques.</p>
+          <h3>Driver Development</h3>
+          <p>Comprehensive guides for developing and troubleshooting Linux device drivers. Kernel modules, PCIe, USB, and embedded systems support.</p>
         </div>
 
         <div class='col-sm-4 col-xs-6'>
           <i class='glyphicon glyphicon-random'></i>
           <h3>Virtual Machines</h3>
-          <p>Complete virtualization solutions. Performance tuning, driver passthrough, and containerization technologies.</p>
+          <p>Optimize your virtual environments with our KVM, QEMU, and Xen configuration guides. Performance tuning and hardware passthrough techniques.</p>
         </div>
 
         <div class='col-sm-4 col-xs-6'>
           <i class='glyphicon glyphicon-send'></i>
-          <h3>El Zoco</h3>
-          <p>Hardware compatibility lists and driver recommendations for optimal VM performance.</p>
+          <h3>Hardware Compatibility</h3>
+          <p>Detailed compatibility matrices for hardware components with Linux drivers. GPU passthrough, network interfaces, and storage controllers.</p>
         </div>
       </div>
     </div>
     <div class='quote'>
-      <div class='container'>
+      <div class='container text-center'>
         <blockquote>
-          <p>Give me six hours to chop down a tree and I will spend the first four sharpening the axe.</p>
-          <footer>Abraham Lincoln <cite title="Source Title">US President</cite></footer>
+          <p>The computer was born to solve problems that did not exist before.</p>
+          <footer>Bill Gates <cite title="Source Title">Microsoft Co-founder</cite></footer>
         </blockquote>
       </div>
     </div>
 
-    <!--Google Adsense -->
-    <div class='container adsense'>
-      <div class='row'>
-       <div class='col-md-10 col-md-offset-1'>
-    <ins class="adsbygoogle"
-           style="display:inline-block;width:728px;height:90px"
-                data-ad-client="ca-pub-0997574766527072"
-                     data-ad-slot="6821125786"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-       </div> 
-      </div>
-    </div>
-    <!--End Google Adsense -->
-
     <div class='container transport-systems'>
       <div class='row'>
-        <div class='col-md-10 col-md-offset-1'>
-          <h2>Our Driver Solutions</h2>
-          <p>Optimize your system with the right drivers and virtualization setup. Performance benchmarks and compatibility guides.</p>
+        <div class='col-md-10 col-md-offset-1 text-center'>
+          <h2>Our Expertise</h2>
+          <p>Specialized knowledge in low-level system programming and virtualization technologies.</p>
         </div>
       </div>
 
@@ -127,65 +198,65 @@
           <h3>Driver Development</h3>
           <ul class='list-unstyled'>
             <li>Kernel module programming</li>
-            <li>Hardware interfacing</li>
-            <li>Debugging techniques</li>
+            <li>Character & Block devices</li>
+            <li>PCI/PCIe subsystem</li>
           </ul>
-          <p><button class='btn btn-info'><i class='glyphicon glyphicon-transfer'></i> Get Started</button></p>
+          <p><button class='btn btn-info'><i class='glyphicon glyphicon-transfer'></i> Learn More</button></p>
         </div>
         <div class='space-elevator col-md-3 col-md-offset-1 well well-sm'>
           <h3>Virtualization</h3>
           <ul class='list-unstyled'>
-            <li>KVM/QEMU configurations</li>
+            <li>KVM/QEMU optimization</li>
             <li>GPU passthrough</li>
-            <li>Container solutions</li>
+            <li>Container integration</li>
           </ul>
-          <p><button class='btn btn-info'><i class='glyphicon glyphicon-sort'></i> Virtualize Now</button></p>
+          <p><button class='btn btn-info'><i class='glyphicon glyphicon-sort'></i> Explore</button></p>
         </div>
         <div class='rocketbus col-md-3 col-md-offset-1 well well-sm'>
           <h3>Performance</h3>
           <ul class='list-unstyled'>
-            <li>Benchmark comparisons</li>
-            <li>Driver optimization</li>
-            <li>VM tuning guides</li>
+            <li>Benchmarking tools</li>
+            <li>Interrupt handling</li>
+            <li>Memory management</li>
           </ul>
           <p><button class='btn btn-info'><i class='glyphicon glyphicon-plane'></i> Optimize</button></p>
         </div>
       </div>
     </div>
     <div class='quote'>
-      <div class='container'>
+      <div class='container text-center'>
         <blockquote>
-          <p>Any sufficiently advanced technology is indistinguishable from magic.</p>
-          <footer>Arthur C. Clarke</footer>
+          <p>Virtualization is the future of computing, and Linux is at its core.</p>
+          <footer>Linus Torvalds in <cite title="Source Title">Linux Foundation</cite></footer>
         </blockquote>
       </div>
     </div>
     <div class='container'>
       <div class='row'>
         <div class='col-md-8'>
-          <h2>Quick Overview</h2>
+          <h2 class='text-center'>Latest Resources</h2>
 
           <ul class='nav nav-tabs'>
-            <li class='active'><a href='#time'>Driver Updates</a></li>
-            <li><a href='#deals'>VM Solutions</a></li>
+            <li class='active'><a href='#time'>Drivers</a></li>
+            <li><a href='#deals'>Virtualization</a></li>
             <li><a href='#forecast'>Tutorials</a></li>
           </ul>
 
           <div class='tab-content'>
             <div class='tab-pane fade active' id='time'>
-              <p>Latest NVIDIA drivers - version 525.85.05</p>
-              <p>AMD GPU-Pro - stable release</p>
-              <p>Intel i915 driver updates</p>
+              <p>Writing PCI Drivers for Modern Linux Kernels</p>
+              <p>USB 3.0 Driver Development Guide</p>
+              <p>Kernel Module Debugging Techniques</p>
             </div>
             <div class='tab-pane fade' id='deals'>
-              <p>KVM with GPU passthrough</p>
-              <p>Docker container networking</p>
-              <p>VirtualBox guest additions</p>
+              <p>GPU Passthrough with KVM/QEMU</p>
+              <p>Optimizing VM Memory Allocation</p>
+              <p>Nested Virtualization Performance</p>
             </div>
             <div class='tab-pane fade' id='forecast'>
-              <p>Writing your first kernel module</p>
-              <p>Debugging driver issues</p>
-              <p>VM performance tuning</p>
+              <p>Step-by-Step Driver Development</p>
+              <p>Creating Custom VM Images</p>
+              <p>Benchmarking Driver Performance</p>
             </div>
           </div>
         </div>
@@ -202,7 +273,7 @@
                 <div class='panel-body'>
                   <p>All systems operational</p>
                   <ul class='list-unstyled'>
-                    <li><i class='glyphicon glyphicon-ok'></i> Driver Database</li>
+                    <li><i class='glyphicon glyphicon-ok'></i> Driver Resources</li>
                     <li><i class='glyphicon glyphicon-ok'></i> VM Guides</li>
                     <li><i class='glyphicon glyphicon-ok'></i> Tutorials</li>
                   </ul>
@@ -213,16 +284,16 @@
             <div class='panel panel-warning'>
               <div class='panel-heading'>
                 <h4 class='panel-title'>
-                  <a data-toggle='collapse' data-parent='.panel-group' href='#weatherAlert'>Announcement</a>
+                  <a data-toggle='collapse' data-parent='.panel-group' href='#weatherAlert'>Announcements</a>
                 </h4>
               </div>
               <div id='weatherAlert' class='panel-collapse collapse'>
                 <div class='panel-body'>
-                  <p>New Linux kernel release includes improved VM performance and driver support. Major updates to AMDGPU and Intel drivers.</p>
+                  <p>New Linux kernel 6.x driver development guide released!</p>
                   <ul class='list-unstyled'>
-                    <li><strong>Kernel 6.2 released</strong></li>
-                    <li><strong>QEMU 7.2 available</strong></li>
-                    <li><strong>NVIDIA 525 drivers</strong></li>
+                    <li><strong>Latest: Kernel 6.8 features</strong></li>
+                    <li><strong>QEMU 8.2 performance</strong></li>
+                    <li><strong>Rust for drivers update</strong></li>
                   </ul>
                 </div>
               </div>
@@ -231,12 +302,12 @@
             <div class='panel panel-danger'>
               <div class='panel-heading'>
                 <h4 class='panel-title'>
-                  <a data-toggle='collapse' data-parent='.panel-group' href='#transportationWarning'>Service Notice</a>
+                  <a data-toggle='collapse' data-parent='.panel-group' href='#transportationWarning'>Maintenance</a>
                 </h4>
               </div>
               <div id='transportationWarning' class='panel-collapse collapse'>
                 <div class='panel-body'>
-                  <p>We're currently experiencing higher than normal traffic on our driver database. Response times may be slower than usual. Our team is working to resolve this issue.</p>
+                  <p>Scheduled maintenance for database upgrades. Some resources may be temporarily unavailable.</p>
                 </div>
               </div>
             </div>
@@ -249,7 +320,7 @@
         <div class='row'>
           <div class='col-md-3 col-sm-4 col-xs-6'>
             <h4>About Us</h4>
-            <p><i>DriversVM&copy;</i> your reference for device drivers and virtualization. <a href='tickets.html'>Optimize your system</a>!</p>
+            <p><i>DriversVM</i> specializes in Linux device drivers and virtualization technologies.</p>
             <p><a href='About.html'>More about us <i class='glyphicon glyphicon-arrow-right'></i></a></p>            
           </div>
 
@@ -266,10 +337,10 @@
           <div class='clearfix visible-xs'></div>
 
           <div class='col-sm-2 col-xs-6'>
-            <h4>Stay in Touch</h4>
+            <h4>Stay Connected</h4>
             <ul class='list-unstyled'>
               <li><a href='about.html'>About</a></li>
-              <li><a href='contact.html'>Contact</a></li>
+              <li><a href='contact.html'>Contacto</a></li>
               <li><a href='/blog'>Blog</a></li>
               <li><a href='https://twitter.com/heliogabalo2'>Twitter</a></li>
               <li><a href='https://www.facebook.com/heliogabalo.santosjugon'>Facebook</a></li>
