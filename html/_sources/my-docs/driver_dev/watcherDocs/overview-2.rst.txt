@@ -25,6 +25,7 @@ Plan to maintain functionality in separate Python modules and build a script tha
 
    - Write a script that takes the hexadecimal values (e.g., ``0x8086``) and looks them up in the ``pci_ids.h`` file to find the corresponding human-readable names (e.g., ``Intel Corporation``).
    - This script should:
+   
      - Parse the ``pci_ids.h`` file to build a lookup table (e.g., a dictionary mapping hex values to names).
      - Accept input from the previous script (e.g., the dictionary of hex values).
      - Replace the hex values with their human-readable equivalents.

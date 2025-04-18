@@ -1,0 +1,98 @@
+Working with Older Kernel Versions: Challenges and Solutions
+==============================================================
+
+Introduction
+--------------
+
+When developing or testing kernel-related code, the ideal scenario involves a fresh installation with all required dependencies (kernel headers, toolchain, etc.). However, many real-world situations require working with older kernel versions, which presents unique challenges.
+
+Challenges with Older Kernels
+-------------------------------
+
+1. **Header Availability Issues**
+   - Missing headers in modern distributions
+   - Incompatible header structures between versions
+   - Deprecated interfaces and macros
+
+2. **Toolchain Compatibility**
+   - Modern compilers may reject older kernel code
+   - Changes in ABI/API expectations
+   - Linker behavior differences
+
+3. **Dependency Management**
+   - Circular dependencies between kernel headers and userspace libraries
+   - Missing or outdated build tools
+
+Case Study: LTP Build System Header Missing Issue
+---------------------------------------------------
+
+In our recent work with the Linux Test Project (LTP), we encountered several of these challenges:
+
+The Problem
+~~~~~~~~~~~~~~
+
+The LTP build system failed because:
+
+- Required kernel headers were missing (``syscall.h`` wasn't in the expected location)
+- Modern distributions have reorganized kernel headers
+- The build system expected legacy header locations
+
+Our Solution Approach
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. **Header Linking Workaround**
+
+   .. code-block:: bash
+
+      cd /usr/include/asm && sudo ln -s /usr/include/x86_64-linux-gnu/asm/unistd_64.h unistd.h
+      cd /usr/include/asm-generic && sudo ln -s /usr/include/x86_64-linux-gnu/asm/unistd_64.h unistd.h
+
+   - Created symbolic links to satisfy build system expectations
+   - Maintained compatibility without modifying source code
+
+2. **Rationale for This Approach**
+
+   - Minimal system modification
+   - Reversible changes
+   - Maintained original code structure
+   - Avoided forking or extensive patching
+
+3. **Alternative Solutions Considered**
+
+   - **Header path modification**: Risk of breaking other components
+   - **Build system patching**: Requires ongoing maintenance
+   - **Containerization**: Added complexity for simple builds
+   - **Full kernel header installation**: Potentially incompatible versions
+
+Best Practices for Working with Older Kernels
+-----------------------------------------------
+
+1. **Isolation Strategies**
+   - Use containers or VMs with period-appropriate distributions
+   - Maintain dedicated build environments
+
+2. **Compatibility Layers**
+   - Create targeted symbolic links (as in our solution)
+   - Develop wrapper headers for critical interfaces
+
+3. **Documentation**
+   - Clearly record all workarounds
+   - Document original and modified paths
+   - Include rationale for each decision
+
+4. **Risk Management**
+   - Limit system modifications to build requirements
+   - Prefer user-space solutions over system-wide changes
+   - Maintain cleanup procedures
+
+Conclusion
+------------
+
+Working with older kernel versions requires balancing compatibility needs with system stability. Our solution for the LTP build system demonstrates a pragmatic approach that:
+
+- Solves the immediate problem
+- Minimizes system impact
+- Remains maintainable
+- Documents the rationale
+
+This approach serves as a model for similar compatibility challenges when modern systems must build and test legacy kernel code.

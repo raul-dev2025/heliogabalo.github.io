@@ -77,30 +77,35 @@
 <p class="caption" role="heading"><span class="caption-text">Custom Documents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Topic Index</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../vm_config/cxt4testing.html">Setting Up LTP Test Cases on a Linux VM Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../vm_config/vm-setup.html">Setting Up a VM to Boot with a Copied Kernel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../vm_config/enableBootMenu.html">Enabling the Boot Menu During Boot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../vm_config/bootloader-dirs.html">Understanding Bootloader Directories and Customizing GRUB</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../vm_config/bootloader-mode.html">Determine Boot Mode and Bootloader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="weakness_config.html">LTP build log</a></li>
-<li class="toctree-l2"><a class="reference internal" href="documents-build.html">Building the Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rst_symbols.html">List of Symbols</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoConfHd.html">Using Autoconf Macros to Check for Headers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="checkHeaders.html">Check Headers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="build_workflow.html">Using Autotools in the LTP Build Process</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Debuggin Kernel Headers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="directoryPermissions.html">Understanding Directory Permission Strings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../driver_dev/drv_refs/driverBrief.html">Briefing on LTP (Linux Test Project) and Device Driver Test Cases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../driver_dev/drv_refs/mmioVsIOports.html">Briefing: Memory-Mapped I/O vs. I/O Ports</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../driver_dev/drv_refs/pcie-symobls.html">PCIe Symobls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../driver_dev/drv_refs/deadline-iosched.html">Deadline IO scheduler tunables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../driver_dev/drv_refs/quick-ref-pci.html">PCI Functions Reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../hw_resources/sysTasks.html">Concurrent ltp build with system tasks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../hw_resources/bus-map.html">Bus Map</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../hw_resources/pci-exp-tests-HOWTO.html">HOWTO –&gt;       PCI-Express test scripts for LTP</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../hw_resources/hw_specs/workFlow-strace.html">Workflow for Using <code class="docutils literal notranslate"><span class="pre">strace</span></code> to Trap System Calls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sys_config/kernel_conf/environ-kconf.html">Kernel Configuration for KUnit Tests</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sys_config/sys_files/dummy-build.html">Safe Dry-Run for Sphinx Builds</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Testing Environment Setup</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../vm_config/cxt4testing.html">Setting Up LTP Test Cases on a Linux VM Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vm_config/vm-setup.html">Setting Up a VM to Boot with a Copied Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vm_config/enableBootMenu.html">Enabling the Boot Menu During Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vm_config/bootloader-dirs.html">Understanding Bootloader Directories and Customizing GRUB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vm_config/bootloader-mode.html">Determine Boot Mode and Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vm_config/queringXML.html">Querying XML File Configuration with libvirt Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vm_config/identifyBootloader.html">Inspecting the MBR to Identify the Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vm_config/bootloaderDebug.html">Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vm_config/vmCxtBootLoad.html">Focusing on the VM Context: How the Kernel and Initramfs Are Loaded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vm_config/envsWithGrub.html">Understanding <code class="docutils literal notranslate"><span class="pre">grub2-editenv</span> <span class="pre">list</span></code> Output: Saved Entry Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="weakness_config.html">LTP build log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents-build.html">Building the Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rst_symbols.html">List of Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoConfHd.html">Using Autoconf Macros to Check for Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="checkHeaders.html">Check Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build_workflow.html">Using Autotools in the LTP Build Process</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Debuggin Kernel Headers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#summary-of-steps">Summary of Steps:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="directoryPermissions.html">Understanding Directory Permission Strings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Debugging/bootloaderChecks.html">Confirming Bootloader and Kernel Loading with UUID</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../driver_dev/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hw_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sys_config/index.html">System Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Unordered/index.html">Unordered Topics</a></li>
 </ul>
 </li>
 </ul>
@@ -120,6 +125,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Topic Index</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Testing Environment Setup</a></li>
       <li class="breadcrumb-item active">Debuggin Kernel Headers</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/my-docs/testenv_setup/ltp_setup/deugHeaders.rst.txt" rel="nofollow"> View page source</a>
@@ -135,7 +141,7 @@
 <p>If the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script is still not finding the four headers (<code class="docutils literal notranslate"><span class="pre">dmapi.h</span></code>, <code class="docutils literal notranslate"><span class="pre">mm.h</span></code>, <code class="docutils literal notranslate"><span class="pre">linux/module.h</span></code>, and <code class="docutils literal notranslate"><span class="pre">sys/jfsdmapi.h</span></code>) even after defining <code class="docutils literal notranslate"><span class="pre">CPPFLAGS=&quot;-I/usr/src/k-ver/include&quot;</span></code>, there could be several reasons for this. Let’s troubleshoot step by step:</p>
 <hr class="docutils" />
 <ol class="arabic">
-<li><p>Verify the Path in <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code></p>
+<li><p><strong>Verify the Path in</strong> <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code></p>
 <ul>
 <li><p>Ensure that the path specified in <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code> is correct and contains the required headers.</p></li>
 <li><p>Run the following command to check if the headers exist in the specified directory:</p>
@@ -149,7 +155,7 @@
 </ol>
 <hr class="docutils" />
 <ol class="arabic simple" start="2">
-<li><p>Check Subdirectories</p>
+<li><p><strong>Check Subdirectories</strong></p>
 <ul class="simple">
 <li><p>Some headers might be located in subdirectories. For example:
 - <code class="docutils literal notranslate"><span class="pre">linux/module.h</span></code> is typically located in <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver/include/linux/module.h</span></code>.
@@ -160,7 +166,7 @@
 </ol>
 <hr class="docutils" />
 <ol class="arabic" start="3">
-<li><p>Kernel Version Mismatch</p>
+<li><p><strong>Kernel Version Mismatch</strong></p>
 <ul>
 <li><p>The headers in <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver/include</span></code> must match the version of the running kernel. If there is a mismatch, the headers might not be compatible, and the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script might fail to recognize them.</p></li>
 <li><p>Check the kernel version:</p>
@@ -174,7 +180,7 @@
 </ol>
 <hr class="docutils" />
 <ol class="arabic" start="4">
-<li><p>Use Groups for Development</p>
+<li><p><strong>Use Groups for Development</strong></p>
 <ul>
 <li><p>To manage access to the <code class="docutils literal notranslate"><span class="pre">include</span></code> directory for multiple users, consider using a dedicated group (e.g., <code class="docutils literal notranslate"><span class="pre">developers</span></code>).</p></li>
 <li><p>Follow these steps:</p>
@@ -217,7 +223,7 @@ groups<span class="w"> </span>root
 </ul>
 </li>
 </ol>
-<p>4.99 Analyzing the Permission String</p>
+<p>4.99 <strong>Analyzing the Permission String</strong></p>
 <p>The permission string for the directory <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver/include</span></code> is:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>drwxr-xr-x. 28 root developers /usr/src/k-ver/include
 </pre></div>
@@ -263,7 +269,7 @@ groups<span class="w"> </span>root
 </ul>
 <hr class="docutils" />
 <ol class="arabic" start="5">
-<li><p><code class="docutils literal notranslate"><span class="pre">configure</span></code> Script Behavior</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">configure</span></code> <strong>Script Behavior</strong></p>
 <ul>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">configure</span></code> script might not be using <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code> correctly. To verify, add debugging output to the <code class="docutils literal notranslate"><span class="pre">configure.ac</span></code> file:</p>
 <div class="highlight-m4 notranslate"><div class="highlight"><pre><span></span>AC_MSG_CHECKING([for CPPFLAGS])
@@ -282,7 +288,7 @@ AC_MSG_RESULT([$CPPFLAGS])
 </ol>
 <hr class="docutils" />
 <ol class="arabic" start="6">
-<li><p>Header Dependencies</p>
+<li><p><strong>Header Dependencies</strong></p>
 <ul>
 <li><p>Some headers might depend on other headers or macros being defined. For example, <code class="docutils literal notranslate"><span class="pre">linux/module.h</span></code> might require <code class="docutils literal notranslate"><span class="pre">LINUX_VERSION_CODE</span></code> or other kernel-specific macros.</p></li>
 <li><p>Modify the <code class="docutils literal notranslate"><span class="pre">AC_CHECK_HEADERS</span></code> macro to include necessary dependencies:</p>
@@ -298,7 +304,7 @@ AC_MSG_RESULT([$CPPFLAGS])
 </ol>
 <hr class="docutils" />
 <ol class="arabic" start="7">
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">--with-linux-dir</span></code> Instead of <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code></p>
+<li><p><strong>Use</strong> <code class="docutils literal notranslate"><span class="pre">--with-linux-dir</span></code> <strong>Instead of</strong> <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code></p>
 <ul>
 <li><p>If the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script supports the <code class="docutils literal notranslate"><span class="pre">--with-linux-dir</span></code> option, use it instead of manually setting <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./configure<span class="w"> </span>--with-linux-dir<span class="o">=</span>/usr/src/k-ver
@@ -311,7 +317,7 @@ AC_MSG_RESULT([$CPPFLAGS])
 </ol>
 <hr class="docutils" />
 <ol class="arabic simple" start="8">
-<li><p>Check <code class="docutils literal notranslate"><span class="pre">config.log</span></code> for Errors</p>
+<li><p><strong>Check</strong> <code class="docutils literal notranslate"><span class="pre">config.log</span></code> <strong>for Errors</strong></p>
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">config.log</span></code> file contains detailed information about why the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script failed to find the headers.</p></li>
 <li><p>Open <code class="docutils literal notranslate"><span class="pre">config.log</span></code> and search for the header names (e.g., <code class="docutils literal notranslate"><span class="pre">dmapi.h</span></code>, <code class="docutils literal notranslate"><span class="pre">mm.h</span></code>, etc.) to see the exact error messages.</p></li>
@@ -320,7 +326,7 @@ AC_MSG_RESULT([$CPPFLAGS])
 </ol>
 <hr class="docutils" />
 <ol class="arabic" start="9">
-<li><p>Manually Verify Header Compilation</p>
+<li><p><strong>Manually Verify Header Compilation</strong></p>
 <ul>
 <li><p>Create a small test program to check if the headers can be included:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;dmapi.h&gt;</span>
@@ -345,7 +351,7 @@ AC_MSG_RESULT([$CPPFLAGS])
 </ol>
 <hr class="docutils" />
 <ol class="arabic" start="10">
-<li><p>Install Missing Kernel Headers</p>
+<li><p><strong>Install Missing Kernel Headers</strong></p>
 <ul>
 <li><p>If the headers are missing from <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver/include</span></code>, you might need to install the appropriate kernel headers package. For example:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>linux-headers-<span class="k">$(</span>uname<span class="w"> </span>-r<span class="k">)</span>
@@ -357,15 +363,19 @@ AC_MSG_RESULT([$CPPFLAGS])
 </li>
 </ol>
 <hr class="docutils" />
-<p>Summary of Steps
-1. Verify the headers exist in <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver/include</span></code>.
-2. Check for subdirectories and permissions.
-3. Ensure the kernel version matches.
-4. Debug <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code> usage in the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script.
-5. Use <code class="docutils literal notranslate"><span class="pre">--with-linux-dir</span></code> if available.
-6. Check <code class="docutils literal notranslate"><span class="pre">config.log</span></code> for detailed errors.
-7. Manually test header compilation.</p>
+<section id="summary-of-steps">
+<h2>Summary of Steps:<a class="headerlink" href="#summary-of-steps" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Verify the headers exist in <code class="docutils literal notranslate"><span class="pre">/usr/src/k-ver/include</span></code>.</p></li>
+<li><p>Check for subdirectories and permissions.</p></li>
+<li><p>Ensure the kernel version matches.</p></li>
+<li><p>Debug <code class="docutils literal notranslate"><span class="pre">CPPFLAGS</span></code> usage in the <code class="docutils literal notranslate"><span class="pre">configure</span></code> script.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">--with-linux-dir</span></code> if available.</p></li>
+<li><p>Check <code class="docutils literal notranslate"><span class="pre">config.log</span></code> for detailed errors.</p></li>
+<li><p>Manually test header compilation.</p></li>
+</ol>
 <p>If the issue persists after these steps, let me know, and we can dive deeper into the specific errors in <code class="docutils literal notranslate"><span class="pre">config.log</span></code>.</p>
+</section>
 </section>
 
 

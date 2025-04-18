@@ -87,14 +87,21 @@
 <li class="toctree-l3"><a class="reference internal" href="vm_config/identifyBootloader.html">Inspecting the MBR to Identify the Bootloader</a></li>
 <li class="toctree-l3"><a class="reference internal" href="vm_config/bootloaderDebug.html">Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM</a></li>
 <li class="toctree-l3"><a class="reference internal" href="vm_config/vmCxtBootLoad.html">Focusing on the VM Context: How the Kernel and Initramfs Are Loaded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vm_config/envsWithGrub.html">Understanding <code class="docutils literal notranslate"><span class="pre">grub2-editenv</span> <span class="pre">list</span></code> Output: Saved Entry Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ltp_setup/oldKernels.html">Working with Older Kernel Versions: Challenges and Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ltp_setup/build_workflow.html">Using Autotools in the LTP Build Process</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ltp_setup/weakness_config.html">LTP build log</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ltp_setup/documents-build.html">Building the Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ltp_setup/checkHeaders.html">Check Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ltp_setup/debugHeaders.html">Debuggin Kernel Headers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ltp_setup/configLog_analysis.html">LTP Configuration Debugging Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ltp_setup/headerResolution.html">How to Fix Missing <cite>linux/module.h</cite> in LTP Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ltp_setup/relevantLinuxSource.html">Understanding /usr/src/linux Symlink Importance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ltp_setup/sadButTrue.html">The /usr/src/linux Reality Check</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ltp_setup/rst_symbols.html">List of Symbols</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ltp_setup/autoConfHd.html">Using Autoconf Macros to Check for Headers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ltp_setup/checkHeaders.html">Check Headers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ltp_setup/build_workflow.html">Using Autotools in the LTP Build Process</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ltp_setup/deugHeaders.html">Debuggin Kernel Headers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ltp_setup/directoryPermissions.html">Understanding Directory Permission Strings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ltp_setup/gccSearchPath.html">Check GCC Search Path for Kernel Headers in GNU/Linux</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Debugging/bootloaderChecks.html">Confirming Bootloader and Kernel Loading with UUID</a></li>
 </ul>
 </li>
@@ -146,20 +153,27 @@
 <li class="toctree-l1"><a class="reference internal" href="vm_config/identifyBootloader.html">Inspecting the MBR to Identify the Bootloader</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vm_config/bootloaderDebug.html">Determining the Bootloader and Kernel/Ramdisk Loading in a KVM VM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vm_config/vmCxtBootLoad.html">Focusing on the VM Context: How the Kernel and Initramfs Are Loaded</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm_config/envsWithGrub.html">Understanding <code class="docutils literal notranslate"><span class="pre">grub2-editenv</span> <span class="pre">list</span></code> Output: Saved Entry Hash</a></li>
 </ul>
 </div>
 <p>Available documents covering the configuration of virtual machine for testing purposes.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">LTP Setup:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="ltp_setup/oldKernels.html">Working with Older Kernel Versions: Challenges and Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ltp_setup/build_workflow.html">Using Autotools in the LTP Build Process</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ltp_setup/weakness_config.html">LTP build log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ltp_setup/documents-build.html">Building the Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ltp_setup/checkHeaders.html">Check Headers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ltp_setup/debugHeaders.html">Debuggin Kernel Headers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ltp_setup/configLog_analysis.html">LTP Configuration Debugging Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ltp_setup/headerResolution.html">How to Fix Missing <cite>linux/module.h</cite> in LTP Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ltp_setup/relevantLinuxSource.html">Understanding /usr/src/linux Symlink Importance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ltp_setup/sadButTrue.html">The /usr/src/linux Reality Check</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ltp_setup/rst_symbols.html">List of Symbols</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ltp_setup/autoConfHd.html">Using Autoconf Macros to Check for Headers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ltp_setup/checkHeaders.html">Check Headers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ltp_setup/build_workflow.html">Using Autotools in the LTP Build Process</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ltp_setup/deugHeaders.html">Debuggin Kernel Headers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ltp_setup/directoryPermissions.html">Understanding Directory Permission Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ltp_setup/gccSearchPath.html">Check GCC Search Path for Kernel Headers in GNU/Linux</a></li>
 </ul>
 </div>
 <p>Available documents covering the configuration of the Linux Test Project (LTP).</p>

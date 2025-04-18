@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Network Debugging Guide &mdash; Linux Test Project 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/js/pathTruncator.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Network Connectivity Troubleshooting Guide" href="hardening-timedate.html" />
+    <link rel="prev" title="What Happens When You Pipe a Build Process to less: Processor Impact" href="pipeToLog.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Linux Test Project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">For users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../users/quick_start.html">Installation and tests execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../users/setup_tests.html">Tests setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../users/supported_systems.html">Supported systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../users/stats.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../users/test_catalog.html">Test catalog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/setup_mailinglist.html">Setting up the Mailing list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/writing_tests.html">Writing tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/test_case_tutorial.html">Test case tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/api_c_tests.html">LTP C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/api_shell_tests.html">LTP shell API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/api_network_tests.html">Developing using network API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/api_kvm_tests.html">Developing using KVM API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/ltp_library.html">LTP Library guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/build_system.html">Build system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/debugging.html">Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/documentation.html">Documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For maintainers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../maintainers/patch_review.html">Patch review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../maintainers/ltp_release_procedure.html">Release process</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Custom Documents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Topic Index</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../testenv_setup/index.html">Testing Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../driver_dev/index.html">Driver Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hw_resources/index.html">Hardware and System Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sys_config/index.html">System Configuration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Unordered Topics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gitTrackNoStage.html">Tracking Untracked Files Without Staging Them</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gitSplitHunks.html">Splitting Files into Smaller Hunks for Staging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stagedLogs.html">Viewing the Log of Staged Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashedTask.html">Viewing Stashed Changes in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stashingFiles.html">Stashing Files Independently in Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailDrafts.html">Saving Draft Emails with the <code class="docutils literal notranslate"><span class="pre">mail</span></code> Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mailCmds.html">Linux Mail Command Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pathTruncator.html">Integrating Path Truncation into Read the Docs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regexNotation.html">REGEX notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="a_diffCounter.html">How to Get a Resumed (Counter) Output Using <code class="docutils literal notranslate"><span class="pre">diff</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="verticalS.html">Vertical Space in reStructuredText</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mathSymbols.html">Definitions of Integral and Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipeToLog.html">What Happens When You Pipe a Build Process to <code class="docutils literal notranslate"><span class="pre">less</span></code>: Processor Impact</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Network Debugging Guide</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initial-issue">Initial Issue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diagnostic-steps">Diagnostic Steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#key-findings">Key Findings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#solutions-applied">Solutions Applied</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#final-recommendations">Final Recommendations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hardening-timedate.html">Network Connectivity Troubleshooting Guide</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Linux Test Project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Topic Index</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Unordered Topics</a></li>
+      <li class="breadcrumb-item active">Network Debugging Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/my-docs/Unordered/hardening-timedate-summary.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="network-debugging-guide">
+<h1>Network Debugging Guide<a class="headerlink" href="#network-debugging-guide" title="Permalink to this heading"></a></h1>
+<section id="initial-issue">
+<h2>Initial Issue<a class="headerlink" href="#initial-issue" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>User reported <code class="docutils literal notranslate"><span class="pre">ping</span> <span class="pre">pool.ntp.org</span></code> freezing the console.</p></li>
+<li><p>Subsequent tests (<code class="docutils literal notranslate"><span class="pre">ping</span> <span class="pre">8.8.8.8</span></code>, <code class="docutils literal notranslate"><span class="pre">curl</span></code>, <code class="docutils literal notranslate"><span class="pre">mtr</span></code>) showed either freezes or incomplete data.</p></li>
+</ul>
+</section>
+<section id="diagnostic-steps">
+<h2>Diagnostic Steps<a class="headerlink" href="#diagnostic-steps" title="Permalink to this heading"></a></h2>
+<section id="basic-connectivity-checks">
+<h3>1. Basic Connectivity Checks<a class="headerlink" href="#basic-connectivity-checks" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check interface status</span>
+ip<span class="w"> </span>link<span class="w"> </span>show
+ip<span class="w"> </span>a
+
+<span class="c1"># Test raw connectivity</span>
+nc<span class="w"> </span>-zv<span class="w"> </span><span class="m">8</span>.8.8.8<span class="w"> </span><span class="m">80</span>
+arping<span class="w"> </span>-I<span class="w"> </span>eth0<span class="w"> </span><span class="m">192</span>.168.1.1
+</pre></div>
+</div>
+</section>
+<section id="routing-and-dns">
+<h3>2. Routing and DNS<a class="headerlink" href="#routing-and-dns" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verify routing table</span>
+ip<span class="w"> </span>route
+
+<span class="c1"># Test DNS resolution</span>
+nslookup<span class="w"> </span>google.com
+dig<span class="w"> </span>google.com
+</pre></div>
+</div>
+</section>
+<section id="firewall-inspection">
+<h3>3. Firewall Inspection<a class="headerlink" href="#firewall-inspection" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check iptables</span>
+sudo<span class="w"> </span>iptables<span class="w"> </span>-L
+
+<span class="c1"># Check nftables</span>
+sudo<span class="w"> </span>nft<span class="w"> </span>list<span class="w"> </span>ruleset
+</pre></div>
+</div>
+</section>
+<section id="advanced-diagnostics">
+<h3>4. Advanced Diagnostics<a class="headerlink" href="#advanced-diagnostics" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Kernel network stats</span>
+sudo<span class="w"> </span>netstat<span class="w"> </span>-i
+sudo<span class="w"> </span>ethtool<span class="w"> </span>-S<span class="w"> </span>eth0
+
+<span class="c1"># Strace analysis</span>
+strace<span class="w"> </span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">8</span>.8.8.8
+</pre></div>
+</div>
+</section>
+</section>
+<section id="key-findings">
+<h2>Key Findings<a class="headerlink" href="#key-findings" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Network Stack Behavior:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sendto()</span></code> calls succeeded (outbound packets sent)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">poll()</span></code> timed out (no replies received)</p></li>
+<li><p>ARP working (gateway reachable at L2)</p></li>
+</ul>
+</li>
+<li><p>Identified Issues:</p>
+<ul class="simple">
+<li><p>Outbound packets not being routed back</p></li>
+<li><p>Possible causes:
+* Gateway misconfiguration
+* ISP blocking
+* NAT/firewall interference</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="solutions-applied">
+<h2>Solutions Applied<a class="headerlink" href="#solutions-applied" title="Permalink to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Gateway Testing:</p>
+<ul class="simple">
+<li><p>Recommended testing router’s WAN connectivity</p></li>
+<li><p>Suggested bypassing gateway via hotspot</p></li>
+</ul>
+</li>
+<li><p>ISP Verification:</p>
+<ul class="simple">
+<li><p>Recommended VPN test to bypass potential ISP blocking</p></li>
+</ul>
+</li>
+<li><p>Kernel Parameters:</p>
+<ul>
+<li><p>Checked ICMP echo settings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sysctl</span> <span class="n">net</span><span class="o">.</span><span class="n">ipv4</span><span class="o">.</span><span class="n">icmp_echo_ignore_all</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Alternative Networks:</p>
+<ul class="simple">
+<li><p>Suggested testing with different network interfaces</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="final-recommendations">
+<h2>Final Recommendations<a class="headerlink" href="#final-recommendations" title="Permalink to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Conclusive Tests:</p>
+<ul class="simple">
+<li><p>Use mobile hotspot to isolate gateway issues</p></li>
+<li><p>Test with VPN to check for ISP blocking</p></li>
+</ul>
+</li>
+<li><p>Administrative Actions:</p>
+<ul class="simple">
+<li><p>Contact ISP if gateway cannot ping 8.8.8.8</p></li>
+<li><p>Check router logs for dropped packets</p></li>
+</ul>
+</li>
+<li><p>Persistent Configuration:</p>
+<ul>
+<li><p>For DNS issues:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;nameserver 8.8.8.8&quot;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">resolv</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+</li>
+<li><p>For routing issues:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">ip</span> <span class="n">route</span> <span class="n">add</span> <span class="n">default</span> <span class="n">via</span> <span class="o">&lt;</span><span class="n">gateway_ip</span><span class="o">&gt;</span> <span class="n">dev</span> <span class="o">&lt;</span><span class="n">interface</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pipeToLog.html" class="btn btn-neutral float-left" title="What Happens When You Pipe a Build Process to less: Processor Impact" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hardening-timedate.html" class="btn btn-neutral float-right" title="Network Connectivity Troubleshooting Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Linux Test Project.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

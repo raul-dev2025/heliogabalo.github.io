@@ -24,7 +24,7 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Briefing on LTP (Linux Test Project) and Device Driver Test Cases" href="../drv_refs/driverBrief.html" />
+    <link rel="next" title="Planing Structures - JSON to C Struct Translation Example" href="planingStructures.html" />
     <link rel="prev" title="Plan-Overview" href="overview.html" /> 
 </head>
 
@@ -84,6 +84,7 @@
 <li class="toctree-l3"><a class="reference internal" href="init.html">device_watcher_init()</a></li>
 <li class="toctree-l3"><a class="reference internal" href="overview.html">Plan-Overview</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Plan-overview 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="planingStructures.html">Planing Structures - JSON to C Struct Translation Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../drv_refs/driverBrief.html">Briefing on LTP (Linux Test Project) and Device Driver Test Cases</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../drv_refs/mmioVsIOports.html">Briefing: Memory-Mapped I/O vs. I/O Ports</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../drv_refs/pcie-symobls.html">PCIe Symobls</a></li>
@@ -150,10 +151,13 @@
 <li><p><strong>Hexadecimal to Human-Readable Conversion</strong></p>
 <ul class="simple">
 <li><p>Write a script that takes the hexadecimal values (e.g., <code class="docutils literal notranslate"><span class="pre">0x8086</span></code>) and looks them up in the <code class="docutils literal notranslate"><span class="pre">pci_ids.h</span></code> file to find the corresponding human-readable names (e.g., <code class="docutils literal notranslate"><span class="pre">Intel</span> <span class="pre">Corporation</span></code>).</p></li>
-<li><p>This script should:
-- Parse the <code class="docutils literal notranslate"><span class="pre">pci_ids.h</span></code> file to build a lookup table (e.g., a dictionary mapping hex values to names).
-- Accept input from the previous script (e.g., the dictionary of hex values).
-- Replace the hex values with their human-readable equivalents.</p></li>
+<li><p>This script should:</p>
+<ul>
+<li><p>Parse the <code class="docutils literal notranslate"><span class="pre">pci_ids.h</span></code> file to build a lookup table (e.g., a dictionary mapping hex values to names).</p></li>
+<li><p>Accept input from the previous script (e.g., the dictionary of hex values).</p></li>
+<li><p>Replace the hex values with their human-readable equivalents.</p></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p><strong>Reusable Lookup Logic</strong></p>
@@ -202,7 +206,7 @@ Class: USB Controller
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="overview.html" class="btn btn-neutral float-left" title="Plan-Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../drv_refs/driverBrief.html" class="btn btn-neutral float-right" title="Briefing on LTP (Linux Test Project) and Device Driver Test Cases" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="planingStructures.html" class="btn btn-neutral float-right" title="Planing Structures - JSON to C Struct Translation Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

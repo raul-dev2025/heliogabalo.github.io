@@ -5,14 +5,45 @@ Unordered Topics
 
 This section contains miscellaneous topics that do not fit into the other categories, including Git-related topics and path truncation.
 
+----
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Distributed Version Control System(DVCS):
+   
+   gitTrackNoStage.rst
+   gitSplitHunks.rst
+   stagedLogs.rst
+   stashedTask.rst
+   stashingFiles.rst
+   
+Available documents about *git repositories*.
+
+.. ..
+.. ..
+.. toctree::
+   :maxdepth: 1
+   :caption: Mail:
+   
+   mailDrafts.rst
+   mailCmds.rst
+   
+   
+Available documents about mail agents agents and related content.
+
+.. ..
+.. ..
 .. toctree::
    :maxdepth: 1
    :caption: Miscellaneous:
 
    pathTruncator.rst
    regexNotation.rst
-   gitTrackNoStage.rst
-   gitSplitHunks.rst
-   stagedLogs.rst
    a_diffCounter.rst
    verticalS.rst
+   mathSymbols.rst
+   pipeToLog.rst
+   hardening-timedate-summary.rst
+   hardening-timedate.rst
+   
+Miscellaneous documents.
