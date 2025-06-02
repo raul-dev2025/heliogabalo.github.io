@@ -1,0 +1,241 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+  padding-bottom: 40px;
+  color: #5a5a5a;
+  background: url(../images/Fallout-1-HD.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover !important;
+  -o-background-size: cover !important;
+  background-size: cover !important;
+}
+body .my_color{
+  background-color: rgb(230, 230, 255) !important;
+  background-color: rgba(230, 230, 255, .5) !important;
+}
+body .my_color-transp{
+  background-color: rgb(255, 255, 255) !important;
+  background-color: rgba(255, 2550, 255, .5) !important; 
+}
+
+
+
+
+
+.component-card {
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+}
+.component-card:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.selected-component {
+  background-color: #f8f9fa;
+  border-left: 4px solid #0d6efd;
+}
+.compatibility-alert {
+  display: none;
+}
+.build-section {
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  padding: 20px;
+}
+.price-tag {
+  font-weight: bold;
+  color: #0d6efd;
+}
+/*.img-circle {*/
+/*	border-radius: 50%;*/
+/*	object-fit: cover;*/
+/*	width: 100%;*/
+/*	max-width: 140px;*/
+/*	height: auto;*/
+/*	aspect-ratio: 1/1;*/
+/*}*/
+
+.img-circle:hover {
+	transform: scale(1.05);
+	transition: transform 0.3 ease;
+	box-shadow: 0 4px rgba(0,0,0,0.1);
+}
+
+.marketing .col-lg-4 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.marketing .img-circle {
+	border-radius: 50%;
+	object-fit: cover;
+	width: 140px;
+	height: 140px;
+	margin: 0 auto;
+	display: block;
+}
+
+.marketing h2 {
+	margin-top: 15px;
+	font-size: 1.5rem;
+	width: 100%;
+}
+
+.marketing p {
+	margin: 10px auto 15px;
+	max-width: 80%;
+	line-height: 1.4;
+}
+
+.marketing .btm {
+	margin-top: 10px;
+}
+
+.jumbotron.my_color-transp {
+  background-color: rgba(255, 2550, 255, 0.7) !important; 
+  border-radius: 10px;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.featurette-image {
+	max-width: 100%;
+	height: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*/* CUSTOMIZE THE NAVBAR*/
+/*-------------------------------------------------- */*/
+
+/*/* Special class on .container surrounding .navbar, used for positioning it into place. */*/
+/*.navbar-wrapper {*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  right: 0;*/
+/*  left: 0;*/
+/*  z-index: 20;*/
+/*}*/
+
+/*/* Flip around the padding for proper display in narrow viewports */*/
+/*.navbar-wrapper > .container {*/
+/*  padding-right: 0;*/
+/*  padding-left: 0;*/
+/*}*/
+/*.navbar-wrapper .navbar {*/
+/*  padding-right: 15px;*/
+/*  padding-left: 15px;*/
+/*}*/
+/*.navbar-wrapper .navbar .container {*/
+/*  width: auto;*/
+/*}*/
+
+
+/*/* CUSTOMIZE THE CAROUSEL*/
+/*-------------------------------------------------- */*/
+
+/*/* Carousel base class */*/
+/*.carousel {*/
+/*  height: 500px;*/
+/*  margin-bottom: 60px;*/
+/*}*/
+/*/* Since positioning the image, we need to help out the caption */*/
+/*.carousel-caption {*/
+/*  z-index: 10;*/
+/*}*/
+
+/*/* Declare heights because of positioning of img element */*/
+/*.carousel .item {*/
+/*  height: 500px;*/
+/*  background-color: #777;*/
+/*}*/
+/*.carousel-inner > .item > img {*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  min-width: 100%;*/
+/*  height: 500px;*/
+/*}*/
+
+
+/*/* MARKETING CONTENT*/
+/*-------------------------------------------------- */*/
+
+/*/* Center align the text within the three columns below the carousel */*/
+/*.marketing .col-lg-4 {*/
+/*  margin-bottom: 20px;*/
+/*  text-align: center;*/
+/*}*/
+/*.marketing h2 {*/
+/*  font-weight: normal;*/
+/*}*/
+/*.marketing .col-lg-4 p {*/
+/*  margin-right: 10px;*/
+/*  margin-left: 10px;*/
+/*}*/
+
+
+/*/* Featurettes*/
+/*------------------------- */*/
+
+/*.featurette-divider {*/
+/*  margin: 80px 0; /* Space out the Bootstrap <hr> more */*/
+/*}*/
+
+/*/* Thin out the marketing headings */*/
+/*.featurette-heading {*/
+/*  font-weight: 300;*/
+/*  line-height: 1;*/
+/*  letter-spacing: -1px;*/
+/*}*/
+
+
+/*/* RESPONSIVE CSS*/
+/*-------------------------------------------------- */*/
+
+/*@media (min-width: 768px) {*/
+/*  /* Navbar positioning foo */*/
+/*  .navbar-wrapper {*/
+/*    margin-top: 20px;*/
+/*  }*/
+/*  .navbar-wrapper .container {*/
+/*    padding-right: 15px;*/
+/*    padding-left: 15px;*/
+/*  }*/
+/*  .navbar-wrapper .navbar {*/
+/*    padding-right: 0;*/
+/*    padding-left: 0;*/
+/*  }*/
+
+/*  /* The navbar becomes detached from the top, so we round the corners */*/
+/*  .navbar-wrapper .navbar {*/
+/*    border-radius: 4px;*/
+/*  }*/
+
+/*  /* Bump up size of carousel content */*/
+/*  .carousel-caption p {*/
+/*    margin-bottom: 20px;*/
+/*    font-size: 21px;*/
+/*    line-height: 1.4;*/
+/*  }*/
+
+/*  .featurette-heading {*/
+/*    font-size: 50px;*/
+/*  }*/
+/*}*/
+
+/*@media (min-width: 992px) {*/
+/*  .featurette-heading {*/
+/*    margin-top: 120px;*/
+/*  }*/
+/*}*/
