@@ -148,3 +148,108 @@ function getComponentTypeName(type) {
   };
   return names[type] || type;
 }
+
+// Manejar formularios
+// Manejo de registro
+document.getElementById('registerForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const username = document.getElementById('registerUsername').value;
+  const email = document.getElementById('registerEmail').value;
+  const password = document.getElementById('registerPassword').value;
+  const passwordConfirm = document.getElementById('registerPasswordConfirm').value;
+  
+  if(password !== passwordConfirm) {
+    alert('Las contraseñas no coinciden');
+    return;
+  }
+  
+  try {
+    const response = await fetch('/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, email, password })
+    });
+    
+    const data = await response.json();
+    
+    if(response.ok) {
+      alert('Registro exitoso! Por favor inicia sesión.');
+      bootstrap.Modal.getInstance(document.getElementById('registerModal')).hide();
+    } else {
+      alert(data.message || 'Error en el registro');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Error al conectar con el servidor');
+  }
+});
+
+// Manejo de login
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+  
+  try {
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    });
+    
+    const data = await response.json();
+    
+    if(response.ok) {
+      // Guardar token y actualizar UI
+      localStorage.setItem('authToken', data.token);
+      updateAuthUI(true);
+      bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
+    } else {
+      alert(data.message || 'Credenciales incorrectas');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Error al conectar con el servidor');
+  }
+});
+
+// Actualizar UI según estado de autenticación
+function updateAuthUI(isLoggedIn) {
+  const userDropdown = document.getElementById('user-dropdown');
+  
+  if(isLoggedIn) {
+    // Cambiar el dropdown para mostrar opciones de usuario logeado
+    userDropdown.innerHTML = `
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+        <i class="bi bi-person-check"></i> Mi Cuenta
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li><a class="dropdown-item" href="#">Mis Configuraciones</a></li>
+        <li><a class="dropdown-item" href="#">Perfil</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#" id="logoutBtn">Cerrar Sesión</a></li>
+      </ul>
+    `;
+    
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+  }
+}
+
+// Función de logout
+function logout() {
+  localStorage.removeItem('authToken');
+  updateAuthUI(false);
+}
+
+// Verificar estado al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+  const token = localStorage.getItem('authToken');
+  updateAuthUI(!!token);
+});
+// END Manejar formularios
