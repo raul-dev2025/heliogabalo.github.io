@@ -12,11 +12,34 @@ body, html {
     background: #eaf6ff;
 }
 */
+
+/* sustituido por 'btn-container'
 .my-container {
     height: 100%;
     width: 671px;
     position: relative;
     margin: 200px auto;
+}
+*/
+
+.btn-container {
+	width: 100%;
+	padding: 0 15px;
+	margin: 2rem auto;
+/*
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.5rem;
+*/
+}
+
+.btn-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1.5rem;
+	max-width: 600px;
+	margin: 0 auto;
 }
 
 /* Buttons */
@@ -36,6 +59,13 @@ body, html {
     cursor: pointer;
 }
 
+/* Anulado
+.btn-group-vertical {
+	display: inline-block;
+	max-width: 400px;
+}
+*/
+
 .btn:after {
     content: "";
     position: absolute;
@@ -45,7 +75,13 @@ body, html {
 
 .btn-perspective {
     perspective: 800px;
-    display: inline-block;
+    /*display: inline-block;*/
+/*
+    margin: 0 auto 1.5rem;
+    width: 100%;
+    max-width: 250px;
+    position: relative;
+*/
 }
 
 .btn-3d {
@@ -54,7 +90,6 @@ body, html {
     outline: 1px solid transparent;
     transform-style: preserve-3d;
 }
-
 
 /* Button One */
 .btn-one {

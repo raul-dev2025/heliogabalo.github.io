@@ -40,7 +40,57 @@
 	.navbar-brand {
 		padding: 15px 15px 15px 0;
 	}
+	
+	#nosotros-content h4 {
+		margin-bottom: 1.5rem;
+	}
+	
+	.btn-container {
+		width: 90%;
+		margin: 1.5rem;
+		padding: 0 5%;
+	}
+	
+	.btn-perspective-grid {
+		grid-template-columns: 1fr;
+		max-width: 300px;
+	}
+
+/*
+	.btn-group-vertical {
+		width: 100%;
+		max-width: 300px;
+	}
+*/
+	
+	.btn-grid {
+		grid-template-columns: 1fr !important;
+		max-width: 280px !important;		
+	}
+	
+	.btn-perspective {
+		max-width: 100%;
+		margin: 0 auto 1rem !important;
+	}
+	
+	.btn-3d {
+		width: 100% !important;
+		box-sizing: border-box;
+	}
 }
+
+@media (min-width: 768px;) {
+	.btn-perspective {
+		width: 100%;
+		max-width: none;
+	}
+	.btn-3d {
+		width: 100% !important;
+	}
+}
+
+
+
 
 .navbar-default {
 	background-color: #020c1b;
@@ -142,3 +192,37 @@ blockquote {
     border-color: #64ffda;
     color: #0a192f;
 }
+
+/* nosotros.html -- espaciado e interlineado*/
+
+#nosotros-content h4 {
+	margin-bottom: 1.8rem;
+	display: flex;
+	align-items: center;
+	gap: 0.8rem;
+}
+
+#nosotros-content p {
+	margin-bottom: 1.2rem;
+	line-height: 1.6;
+	transition: margin 0.3s ease;
+}
+
+#nosotros-content ul {
+	margin: 1.5rem 0;
+}
+
+#nosotros-content li {
+	margin-bottom: 0.8rem ;
+}
+
+
+
+
+
+
+
+
+
+
+
