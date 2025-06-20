@@ -1,0 +1,197 @@
+@media (max-width: 767px){
+ .navbar-collapse{
+  background-color: #020c1b;
+  border-top: 1px solid #233554;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  margin-left: -15px;
+  margin-right: -15px;
+  padding: 0 15px;
+ }
+	
+ .navbar-nav {
+  margin: 0 -15px;
+  float: none !important;
+ }
+	
+ .navbar-nav > li > a {
+  padding: 15px;
+  border-bottom: 1px solid #233554;
+  color: #e6f1ff !important;
+ }
+	
+ .dropdown-menu {
+  background-color: #112240;
+  border: none;
+  box-shadow: none;
+  float: none;
+  position: static;
+  width: auto;
+ }
+	
+ .dropdown-menu > li > a {
+  color: #a8b2d1;
+  padding: 10px 25px;
+ }
+	
+ .dropdown-menu > li > a:hover {
+  background-color: #233554;
+  color: #64ffda;
+ }
+ .navbar-brand {
+  padding: 15px 15px 15px 0;
+ }
+	
+ #nosotros-content h4 {
+  margin-bottom: 1.5rem;
+ }
+	
+ .btn-container {
+  width: 100%;
+  margin: 1.5rem auto;
+  padding: 0 15px;
+ }
+	
+ .btn-grid {
+  grid-template-columns: 1fr;
+  max-width: 280px;
+  gap: 1rem;
+ }
+	
+ .btn-perspective {
+  max-width: 100%;
+  margin: 0 auto 1rem !important;
+ }
+	
+ .btn {
+  width: 100%;
+  padding: 20px 40px;
+  margin: 10px 0;
+  box-sizing: border-box;
+ }
+}
+
+@media (min-width: 768px) {
+ .btn-perspective {
+  width: 100%;
+  max-width: none;
+ }
+ .btn-3d {
+  width: 100% !important;
+ }
+}
+
+.navbar-default {
+ background-color: #020c1b;
+ border-color: #233554;
+ border-radius: 0;
+ border-width: 0 0 1px;
+}
+
+.navbar-default .navbar-toggle {
+ border-color: #64ffda;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+ background-color: #64ffda;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+ background-color: transparent;
+}
+
+.navbar-brand {
+ padding: 15px;
+ font-weight: bold;
+}
+
+body {
+ padding-top: 70px;
+ background-color: #0a192f;
+ color: #e6f1ff;
+}
+.footer {
+ background-color: #020c1b;
+ color: #a8b2d1;
+}
+.features .glyphicon {
+ font-size: 32px;
+ color: #64ffda;
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a {
+ color: #e6f1ff;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-nav > li > a:hover {
+ color: #64ffda;
+}
+
+.well {
+ background-color: #112240;
+ border-color: #233554;
+ color: #e6f1ff;
+}
+
+.panel {
+ background-color: #112240;
+ border-color: #233554;
+}
+
+.panel-default > .panel-heading {
+ background-color: #020c1b;
+ border-color: #233554;
+ color: #e6f1ff;
+}
+
+blockquote {
+ border-left: 5px solid #64ffda;
+ color: #ccd6f6;
+}
+
+.btn-primary {
+ background-color: #0a192f;
+ border-color: #64ffda;
+ color: #64ffda;
+}
+
+.btn-primary:hover {
+ background-color: #64ffda;
+ border-color: #64ffda;
+ color: #0a192f;
+}
+
+.btn-info {
+ background-color: #112240;
+ border-color: #64ffda;
+ color: #64ffda;
+}
+
+.btn-info:hover {
+ background-color: #64ffda;
+ border-color: #64ffda;
+ color: #0a192f;
+}
+
+#nosotros-content h4 {
+ margin-bottom: 1.8rem;
+ display: flex;
+ align-items: center;
+ gap: 0.8rem;
+}
+
+#nosotros-content p {
+ margin-bottom: 1.2rem;
+ line-height: 1.6;
+ transition: margin 0.3s ease;
+}
+
+#nosotros-content ul {
+ margin: 1.5rem 0;
+}
+
+#nosotros-content li {
+ margin-bottom: 0.8rem;
+}

@@ -74,10 +74,7 @@
 	}
 	
 	.btn-3d {
-		width: 90% !important;
-		margin: 2rem;
-		padding: 18px 10px !important;
-		text-align: center;
+		width: 100% !important;
 		box-sizing: border-box;
 	}
 }
