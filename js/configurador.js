@@ -241,6 +241,22 @@ function updateAuthUI(isLoggedIn) {
   }
 }
 
+// temporal function to test if frontend can reach backend.
+async function testConnection() {
+	try {
+		const response = await fetch('http://192.168.122.27:3000/api/health')
+		const data = await response.json();
+		console.log('Connection test:', data);
+	} catch (error) {
+		console.log('Connection failed:', error);
+	}
+}
+
+
+
+
+testConnection();
+
 // Función de logout
 function logout() {
   localStorage.removeItem('authToken');
