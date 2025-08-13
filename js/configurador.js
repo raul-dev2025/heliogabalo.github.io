@@ -1,3 +1,7 @@
+const API_BASE_URL = window.location.hostname === 'heliogabalo.github.io'
+	? 'https://heliogabalo.github.io'
+	: 'http://192.168.122.27';
+
 // Sample component data
 const components = {
   cpus: [
@@ -154,18 +158,23 @@ function getComponentTypeName(type) {
 document.getElementById('registerForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   
+  console.log('Registration form submitted');
+  
   const username = document.getElementById('registerUsername').value;
   const email = document.getElementById('registerEmail').value;
   const password = document.getElementById('registerPassword').value;
   const passwordConfirm = document.getElementById('registerPasswordConfirm').value;
   
+  console.log('Form values:', {username, email, password, passwordConfirm});
+  
   if(password !== passwordConfirm) {
+  	console.log('Password do not match');
     alert('Las contraseñas no coinciden');
     return;
   }
   
   try {
-    const response = await fetch('http://192.168.122.27:3000/api/register', {
+    const response = await fetch('${API_BASE_URL}/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -173,7 +182,10 @@ document.getElementById('registerForm').addEventListener('submit', async functio
       body: JSON.stringify({ username, email, password })
     });
     
+    console.log('Response status:', response.status);
+    
     const data = await response.json();
+    console.log('Response data:', data);
     
     if(response.ok) {
       alert('Registro exitoso! Por favor inicia sesión.');
@@ -195,7 +207,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
   const password = document.getElementById('loginPassword').value;
   
   try {
-    const response = await fetch('http://192.168.122.27:3000//api/login', {
+    const response = await fetch('${API_BASE_URL}/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -244,11 +256,22 @@ function updateAuthUI(isLoggedIn) {
 // temporal function to test if frontend can reach backend.
 async function testConnection() {
 	try {
-		const response = await fetch('http://192.168.122.27:3000/api/health')
+		const response = await fetch('${API_BASE_URL}/api/health', {
+			mode: 'cors';
+			credentials: 'include'
+		});
+		
+		if (!response.ok) {
+			throw new Error('HTTP error! status: ${response.status}');
+		}
+		
 		const data = await response.json();
-		console.log('Connection test:', data);
+		console.log('Connection test successful:', data);
+		return true;
 	} catch (error) {
-		console.log('Connection failed:', error);
+		console.log('Connection test failed:', error);
+		alert('Failed to connect to backend: ${error.message}');
+		return false;
 	}
 }
 
