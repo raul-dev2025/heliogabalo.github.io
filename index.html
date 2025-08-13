@@ -286,11 +286,24 @@
     <!-- Bootstrap JS -->
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
     <script src='js/bootstrap.min.js'></script>
-    <script>
-      $(function() {
-        $('.nav-tabs a').click(function (e) {
-          e.preventDefault();
+    <script src='js/main.js'></script>
+
+  </body>
+</html>
           $(this).tab('show');
+        });
+
+        // Fix for custom dropdown in "Nuestros Servicios" for mobile
+        $('.btn-group .dropdown-toggle').on('click', function(e) {
+          e.preventDefault();
+          $(this).next('.dropdown-menu').toggle();
+        });
+
+        // Optional: Close dropdown when clicking outside
+        $(document).on('click', function(e) {
+          if (!$(e.target).closest('.btn-group').length) {
+            $('.btn-group .dropdown-menu').hide();
+          }
         });
       });   
     </script>
