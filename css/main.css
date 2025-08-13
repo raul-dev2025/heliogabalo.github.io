@@ -16,7 +16,7 @@
 	.navbar-nav > li > a {
 		padding: 15px;
 		border-bottom: 1px solid #233554;
-		color: # e6f1ff !important;
+		color: #e6f1ff !important;
 	}
 	
 	.dropdown-menu {
@@ -82,7 +82,7 @@
 	}
 }
 
-@media (min-width: 768px;) {
+@media (min-width: 768px) {
 	.btn-perspective {
 		width: 100%;
 		max-width: none;
