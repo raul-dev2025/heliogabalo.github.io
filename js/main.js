@@ -6,7 +6,7 @@ $(function() {
 
   // Fix for custom dropdown in "Nuestros Servicios" for mobile
   $('.btn-group .dropdown-toggle').on('click', function(e) {
-    e.preventDefault();
+    //e.preventDefault();
     $(this).next('.dropdown-menu').toggle();
   });
 
