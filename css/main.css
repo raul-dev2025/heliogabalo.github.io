@@ -134,7 +134,32 @@ blockquote {
   border-radius: 0.5em;
 }
 
+.list-servicios {
+  list-style-type: none;
+  text-align: left;
+  padding: 1.5em 0.5em 1.5em 2em;
+  margin: 0 0.5em 0.5em 9em;
+}
 
+#servicio {
+  /* background-color: #020c1b; */
+  padding: 2em 0 2em 0;
+}
 
+#mantenimiento {
+  /* background-color: #020c1b; */
+  padding: 2em 0 5em 0;
+  margin-bottom: 5em;
+}
+#servicio h3,
+#mantenimiento h3 {
+  color: #64ffda;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5em;
+}
 
-
+.p-cont {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+}
