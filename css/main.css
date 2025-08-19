@@ -134,7 +134,70 @@ blockquote {
   border-radius: 0.5em;
 }
 
+.list-servicios {
+  list-style-type: none;
+  text-align: left;
+  padding: 1.5em 0.5em 1.5em 2em;
+  margin: 0 0.5em 0.5em 9em;
+}
 
+#servicio {
+  /* background-color: #020c1b; */
+  padding: 2em 0 2em 0;
+}
 
+#mantenimiento {
+  /* background-color: #020c1b; */
+  padding: 2em 0 5em 0;
+  margin-bottom: 5em;
+}
+#servicio h3,
+#mantenimiento h3 {
+  color: #64ffda;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5em;
+}
 
+.p-cont {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+}
 
+#soluciones-img {
+  /* background-color: #020c1b; */
+  padding: 2em 0 5em 0;
+}
+#soluciones-text_right {
+  /* background-color: #020c1b; */
+  padding: 5em 1em 0 0;
+}
+#soluciones-text_left {
+  /* background-color: #020c1b; */
+  padding: 5em 0 0 1em;
+}
+#soluciones-lista-right {
+  /* background-color: #020c1b; */
+  padding: 0em 0em 5em 1em;
+}
+
+#soluciones-lista-left {
+  /* background-color: #020c1b; */
+  padding: 0em 1em 5em 0em;
+}
+
+#lista-sin-puntos {
+  list-style-type: none;
+}
+
+#lista-sin-puntos > li {
+  line-height: 1.5em; /* ajusta la altura de la línea para que los glifos y el texto estén alineados */
+}
+
+#lista-sin-puntos > li i {
+  vertical-align: middle; /* alinea los glifos verticalmente en el medio */
+}
+
+#lista-sin-puntos > li a, #lista-sin-puntos > li span {
+  vertical-align: middle; /* alinea el texto del email y la numeración del teléfono verticalmente en el medio */
+}
