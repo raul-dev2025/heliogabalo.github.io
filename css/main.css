@@ -201,3 +201,37 @@ blockquote {
 #lista-sin-puntos > li a, #lista-sin-puntos > li span {
   vertical-align: middle; /* alinea el texto del email y la numeración del teléfono verticalmente en el medio */
 }
+
+.img-responsive {
+  padding: 0 0 0 5em;
+  transform: rotate(+35deg) scale(0.65);
+  filter: grayscale(100%);
+}
+.img-responsive:hover {
+  transform: rotate(+35deg) scale(0.75);
+  filter: grayscale(0%);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.img-rh {
+  margin: 10em 0 0 4em;
+  border-radius: 0.3em;
+  border: 0.1em solid #cf0707;
+}
+
+.img-rh:hover {
+  transform: scale(1.1);
+  filter: grayscale(0%);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.img-dollarBag {
+  margin: 10em 0 0 4em;
+  transform: scale(1.2);
+}
+
+.img-dollarBag:hover {
+  transform: rotate(-15deg) scale(1.5);
+  filter: grayscale(0%);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
