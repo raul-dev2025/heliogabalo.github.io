@@ -234,4 +234,35 @@ blockquote {
   transform: rotate(-15deg) scale(1.5);
   filter: grayscale(0%);
   transition: transform 0.3s ease, filter 0.3s ease;
+}}
+
+/* Css soporte tecnico*/
+.soporte {}
+
+.tel-support {}
+
+.mail-support {}
+
+.versalitas {
+  font-size: 1.2em;
+  font-style: small-caps;
 }
+
+div.mail-support > p > a > button {
+  margin: 1.6em 0 0 0 !important;
+}
+
+.docs-support-tittle {
+  padding-top: 1em;
+}
+
+.docs-support-paragraph {
+  margin-bottom: 6em;
+  padding-bottom: 3em;
+}
+
+.docs-support-paragraph > strong, i {
+  font-size: larger;
+  font-weight: bold;
+}
+/* END Css soporte tecnico*/
