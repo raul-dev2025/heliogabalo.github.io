@@ -234,7 +234,7 @@ blockquote {
   transform: rotate(-15deg) scale(1.5);
   filter: grayscale(0%);
   transition: transform 0.3s ease, filter 0.3s ease;
-}}
+}
 
 /* Css soporte tecnico*/
 .soporte {}
@@ -266,3 +266,22 @@ div.mail-support > p > a > button {
   font-weight: bold;
 }
 /* END Css soporte tecnico*/
+
+
+/* Css Instalación de sistemas*/
+div.beneficios-install > h2 {
+  margin-bottom: 1.4em;
+}
+.well-install {
+  background-color: #020c1b;
+  border-color: #233554;
+  color: #e6f1ff;
+  margin-top: 5em;
+  margin-bottom: 21em;
+}
+
+.contact-install > a > button {
+  margin: 1.6em 0.3em 0.3em 0.4em !important;
+} 
+
+/* END Css Instalación de sistemas*/
