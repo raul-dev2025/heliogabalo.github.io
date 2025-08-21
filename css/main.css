@@ -202,12 +202,12 @@ blockquote {
   vertical-align: middle; /* alinea el texto del email y la numeración del teléfono verticalmente en el medio */
 }
 
-.img-responsive {
+.img-rocket {
   padding: 0 0 0 5em;
   transform: rotate(+35deg) scale(0.65);
   filter: grayscale(100%);
 }
-.img-responsive:hover {
+.img-rocket:hover {
   transform: rotate(+35deg) scale(0.75);
   filter: grayscale(0%);
   transition: transform 0.3s ease, filter 0.3s ease;
