@@ -1,33 +1,19 @@
-/*
-.img-wrap img {
-	display: block;
-	margin: 0 auto 15px auto;
-}
-.small-image img {
-	width: 4em;		
-}
-.ng-invalid.ng-dirty {
-  border-color: red;
-}
-
-.ng-valid.ng-dirty {
-  border-color: green;
-}
-/*pull-left*/
 header{
   color: white;
   background: transparent;
   border: 1px solid darkblue;
   border-radius: 3px;
-  background-image: url("../images/medusa.jpg");
+  background-image: url("../images/code.png");
   background-color: #cccccc;
   margin-bottom: 5px;
 }
 div.head-div{
   padding-bottom: 5px;
 }
+
 body{
-  max-width: 500px;
+  /*max-width: 500px;*/
+  background-color: #0a192f;
   margin: 0 auto;
   padding-top: 70px;
 }
