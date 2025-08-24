@@ -1,0 +1,23 @@
+<!-- <!DOCTYPE html>
+<html ng-app="gemStore">
+  <head>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/zoco.css" />
+    <script type="text/javascript" src="/Angular/angular.min.js"></script>        
+    <script type="text/javascript" src="/Angular/app.js"></script>
+    <script type="text/javascript" src="/Angular/products.js"></script>
+
+    THIS BUNCH OF FILES IS IGNORED, AS THE CONTENT IS EMBEDDED IN THE MAIN HTML FILE
+
+  </head> -->
+
+	<div ng-show="product.images.length">
+  	<div class="img-wrap">
+    	<img ng-src="{{product.images[gallery.current]}}" />
+      	</div>      	
+        	<ul class="img-thumbnails clearfix">
+          	<li class="small-image pull-left thumbnail" ng-repeat="image in product.images">
+              <img ng-src="{{image}}" />
+            </li>
+          </ul>				
+			</div>
