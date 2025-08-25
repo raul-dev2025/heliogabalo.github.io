@@ -138,4 +138,11 @@ img{
   border-radius: 3px;
 }
 
+.zoco-header {
+  margin: 0 0 8em 0;
+  padding: 0 0 0 0;
+  /*background-color: #ac005f;
+  color: white;*/
+  border-radius: 3px;
+}
 }
