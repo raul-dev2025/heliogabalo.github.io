@@ -128,3 +128,14 @@ img{
 .ng-valid.ng-dirty {
   border-color: green;
 }
+
+/* Add to cart button */
+.list-group-item > button {
+  margin-top: 5px;
+  color: white;
+  background-color: #ac005f;
+  border-color: #ac005f;
+  border-radius: 3px;
+}
+
+}
