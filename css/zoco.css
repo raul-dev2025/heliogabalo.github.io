@@ -4,6 +4,10 @@
   border-color: transparent;
 }
 
+.navbar.navbar-default.navbar-fixed-top .navbar-brand {
+  color: #ac005f;
+}
+
 header{
   color: white;
   background: transparent;
