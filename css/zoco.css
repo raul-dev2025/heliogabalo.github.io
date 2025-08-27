@@ -12,6 +12,12 @@
   color: #ac005f; /* Active/default text color */
 }
 
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #ff3399; /* Optional: brighter magenta on hover */
+  background-color: rgba(172, 0, 95, 0.1); /* Soft magenta tint */
+}
+
 header{
   color: white;
   background: transparent;
