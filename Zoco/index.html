@@ -86,9 +86,9 @@
       <div class="col-md-8 list-group">
         <!--  Product Container  -->
         <div class="list-group-item product-gallery">
-          <h3>{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h3>
-          <!-- Image Gallery  -->
-          <product-gallery></product-gallery>
+          <h3>{{store.activeProduct.name}} <em class="pull-right">{{store.activeProduct.price | currency}}</em></h3>
+            <!-- Image Gallery  -->
+            <product-gallery product="store.activeProduct"></product-gallery>
 
           <!-- Product Tabs  -->
           <product-tabs></product-tabs>
