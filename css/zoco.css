@@ -209,3 +209,7 @@ img{
   transition: background-color 0.3s ease;
 }
 
+.zoco-cathegories .nav-stacked > li:hover {
+  background-color: #173d5c;
+}
+
