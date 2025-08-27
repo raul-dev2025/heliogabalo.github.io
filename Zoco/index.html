@@ -85,7 +85,7 @@
       </div>
       <div class="col-md-8 list-group">
         <!--  Product Container  -->
-        <div class="list-group-item" ng-repeat="product in store.products |limitTo:1">
+        <div class="list-group-item product-gallery">
           <h3>{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h3>
           <!-- Image Gallery  -->
           <product-gallery></product-gallery>
