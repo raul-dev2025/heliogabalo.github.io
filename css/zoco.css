@@ -31,6 +31,12 @@ div.head-div{
   padding-bottom: 5px;
 }
 
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 body{
   /*max-width: 500px;*/
   background-color: #051832;
