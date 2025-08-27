@@ -213,3 +213,10 @@ img{
   background-color: #173d5c;
 }
 
+.footer {
+  background-color: #0a2545;
+}
+
+.footer  li {
+  color: #ac005f;  
+}
