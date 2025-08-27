@@ -53,6 +53,12 @@ body {
   min-height: 50px;
 }
 
+.product-gallery::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 h3 {
   color: rgb(7, 0, 0);
   font-weight: bold;
