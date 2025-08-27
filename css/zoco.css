@@ -170,6 +170,12 @@ img{
   border-color: green;
 }
 
+.list-group-item {
+  background-color: #0a2545; /* or a slightly lighter navy */
+  border-color: #ac005f;     /* match your accent color */
+  color: #ac005f;            /* ensure text is readable */
+}
+
 /* Add to cart button */
 .list-group-item > button {
   margin-top: 5px;
