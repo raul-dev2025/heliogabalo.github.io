@@ -13,7 +13,7 @@
 
 	<div ng-show="product.images.length">
   	<div class="img-wrap">
-    	<img ng-src="{{product.images[gallery.current]}}" />
+    	<img ng-src="{{product.images[gallery.current]}}" alt="{{product.name}}">
       	</div>      	
         	<ul class="img-thumbnails clearfix">
           	<li class="small-image pull-left thumbnail" ng-repeat="image in product.images">
