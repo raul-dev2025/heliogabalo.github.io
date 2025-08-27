@@ -8,6 +8,10 @@
   color: #ac005f;
 }
 
+.navbar-default .navbar-nav > li > a {
+  color: #ac005f; /* Active/default text color */
+}
+
 header{
   color: white;
   background: transparent;
