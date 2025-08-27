@@ -37,8 +37,14 @@ div.head-div{
   clear: both;
 }
 
-body{
-  /*max-width: 500px;*/
+body {
+  max-width: none;
+  margin: 0;
+  padding-top: 70px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #ac005f;
   background-color: #051832;
   margin: 0 auto;
   padding-top: 70px;
