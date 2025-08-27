@@ -76,8 +76,10 @@
         <h3>Categories</h3>
         <ul class="nav nav-pills nav-stacked">
           <li class="active"><a href="#">All</a></li>
-          <li ng-repeat="product in store.products">
-            <a href="#">{{ product.name }}</a>
+          <li ng-repeat="product in store.products"
+              ng-click="store.setActiveProduct(product)"
+              ng-class="{'active': store.activeProduct === product}">
+            {{product.name}}
           </li>
         </ul>
       </div>
