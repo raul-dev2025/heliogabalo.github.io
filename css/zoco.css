@@ -46,8 +46,11 @@ body {
   line-height: 1.42857143;
   color: #ac005f;
   background-color: #051832;
-  margin: 0 auto;
-  padding-top: 70px;
+}
+.product-gallery {
+  display: block;
+  border: 1px dashed red;
+  min-height: 50px;
 }
 
 h3 {
