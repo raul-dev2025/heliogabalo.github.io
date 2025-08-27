@@ -196,3 +196,16 @@ img{
 .zoco-cathegories h3 {
   color: white;
 }
+
+.zoco-cathegories .nav-stacked > li {
+  background-color: #0f2a44;
+  color: #e6f1ff;
+  margin-bottom: 6px;
+  padding: 8px 12px;
+  font-size: 15px;
+  /*padding: 10px;*/
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
