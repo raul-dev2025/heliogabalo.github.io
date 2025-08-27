@@ -7,10 +7,12 @@
     "rarity": 7,
     "color": "#CCC",
     "faces": 14,
+    "canPurchase": true,
+    "soldOut": false,
     "images": [
-      "../images/gem-02.gif",
-      "../images/gem-05.gif",
-      "../images/gem-09.gif"
+      "/images/gem-02.gif",
+      "/images/gem-05.gif",
+      "/images/gem-09.gif"
     ],
     "reviews": []
   },
@@ -23,12 +25,12 @@
     "color": "#EEE",
     "faces": 12,
     "images": [
-      "../images/gem-01.gif",
-      "../images/gem-03.gif",
-      "../images/gem-04.gif"
+      "/images/gem-01.gif",
+      "/images/gem-03.gif",
+      "/images/gem-04.gif"
     ],
     "reviews": []
-  },
+  },    
   {
     "name": "Zircon",
     "description": "Zircon is our most coveted and sought after gem. You will pay much to be the proud owner of this gorgeous and high shine gem.",
@@ -38,9 +40,22 @@
     "color": "#000",
     "faces": 6,
     "images": [    
-      "../images/gem-06.gif",
-      "../images/gem-07.gif",
-      "../images/gem-08.gif"
+      "/images/gem-06.gif",
+      "/images/gem-07.gif",
+      "/images/gem-08.gif"
+    ],
+    "reviews": []
+  },
+  {
+    "name": "Quartz",
+    "description": "Quartz is a common stone but with the right cuts, it can be quite beautiful.",
+    "shine": 70,
+    "price": 1.00,
+    "rarity": 2,
+    "color": "#CCC",
+    "faces": 6,
+    "images": [    
+      "/images/gem-10.gif"
     ],
     "reviews": []
   }

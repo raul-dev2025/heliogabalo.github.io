@@ -24,13 +24,13 @@
 }
 
 body { /* aleja al menu statico */
- padding-top: 70px;
-        background-color: #0a192f; /* Dark navy blue */
-        color: #e6f1ff; /* Light blue text for contrast */
+  padding-top: 70px;
+  background-color: #0a192f; /* Dark navy blue */
+  color: #e6f1ff; /* Light blue text for contrast */
 }
 .footer {
- background-color: #020c1b; /* Darker navy blue */
- color: #a8b2d1; /* Soft blue-gray text */
+  background-color: #020c1b; /* Darker navy blue */
+  color: #a8b2d1; /* Soft blue-gray text */
 }
 .features .glyphicon {
  font-size: 32px;

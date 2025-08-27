@@ -7,7 +7,7 @@
     <link rel='icon' type='image/png' href='/images/simulation.png'>
     <title>Servicios Técnicos de Sistemas</title>
     <link href='/css/bootstrap.min.css' rel='stylesheet'>
-    <link href='/css/main.css' rel='stylesheet'>
+    <!-- <link href='/css/main.css' rel='stylesheet'> -->
         <!-- Angular links -->
     <link rel="stylesheet" type="text/css" href="/css/zoco.css"/>
     <script type="text/javascript" src="/js/angular.min.js"></script>
@@ -51,9 +51,12 @@
     </div>
     <!-- END This is the nav-bar -->
 
+
+
+
   <div class="container">
     <div class="row">
-      <div class="col-md-8 col-md-offset-2">
+      <div class="col-md-10 zoco-header">
         <!--  Store Header  -->
         <header>
           <div class=head-div>
@@ -62,22 +65,39 @@
           </div>
         </header>
         <!--  Products Container  -->
-        <div class="list-group">
+      </div>
+    </div>
+  </div>
 
-          <!--  Product Container  -->
-          <div class="list-group-item" ng-repeat="product in store.products">
-            <h3>{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h3>
+  <!-- This is the main container -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2 zoco-cathegories">
+        <h3>Categories</h3>
+        <ul class="nav nav-pills nav-stacked">
+          <li class="active"><a href="#">All</a></li>
+          <li ng-repeat="product in store.products"
+              ng-click="store.setActiveProduct(product)"
+              ng-class="{'active': store.activeProduct === product}">
+            {{product.name}}
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-8 list-group">
+        <!--  Product Container  -->
+        <div class="list-group-item product-gallery">
+          <h3>{{store.activeProduct.name}} <em class="pull-right">{{store.activeProduct.price | currency}}</em></h3>
             <!-- Image Gallery  -->
-            <product-gallery></product-gallery>
+            <product-gallery product="store.activeProduct"></product-gallery>
 
           <!-- Product Tabs  -->
-            <product-tabs></product-tabs>
-            <button ng-show="product.canPurchase">Add to Cart</button>
-          </div>
+          <product-tabs></product-tabs>
+          <button ng-show="store.activeProduct.canPurchase">Add to Cart</button>
         </div>
       </div>
     </div>
   </div>
+  <!-- END This is the main container -->
 
     <!-- this is the footer -->
     <div class='footer'>
