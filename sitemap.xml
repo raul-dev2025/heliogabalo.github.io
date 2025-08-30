@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" 
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<urlset xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="https://www.sitemaps.org/schemas/sitemap/0.9 https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" 
+  xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="https://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>http://heliogabalo.github.io/</loc>
+    <loc>https://raulvilchez.org/</loc>
     <lastmod>2015-03-27T22:13:37+01:00</lastmod>
   </url>
   <url>
-    <loc>http://heliogabalo.github.io/nosotros.html</loc>
+    <loc>https://raulvilchez.org/nosotros.html</loc>
   </url>
   <url>
-    <loc>http://heliogabalo.github.io/contacto.html</loc>
+    <loc>https://raulvilchez.org/contacto.html</loc>
   </url>
   <url>
-    <loc>http://heliogabalo.github.io/index.html</loc>
+    <loc>https://raulvilchez.org/index.html</loc>
     <image:image>
-      <image:loc>http://heliogabalo.github.io/images/html.svg</image:loc>
+      <image:loc>https://raulvilchez.org/images/html.svg</image:loc>
     </image:image>
   </url>
   <url>
-   <loc>http://heliogabalo.github.io/MantenPrevent.html</loc>
+   <loc>https://raulvilchez.org/MantenPrevent.html</loc>
   </url>  
   <url>
-   <loc>http://heliogabalo.github.io/Blog/index.html</loc>
+   <loc>https://raulvilchez.org/Blog/index.html</loc>
   </url>
   <url>
-    <loc>http://heliogabalo.github.io/servicios.html</loc>
+    <loc>https://raulvilchez.org/servicios.html</loc>
   </url>
   <url>
-    <loc>http://heliogabalo.github.io/sistemsInstallation.html</loc>
+    <loc>https://raulvilchez.org/sistemsInstallation.html</loc>
   </url>
   <url>
-    <loc>http://heliogabalo.github.io/soluciones.html</loc>
+    <loc>https://raulvilchez.org/soluciones.html</loc>
   </url>
   <url>
-    <loc>http://heliogabalo.github.io/tecSupport.html</loc>
+    <loc>https://raulvilchez.org/tecSupport.html</loc>
   </url>
   <url>
-    <loc>http://heliogabalo.github.io/Zoco/index.html</loc>
+    <loc>https://raulvilchez.org/Zoco/index.html</loc>
   </url>
 
     <!-- Otros enlaces -->
   <url>
-    <loc>http://heliogabalo.github.io/template.html</loc>
+    <loc>https://raulvilchez.org/template.html</loc>
   </url>
 
 </urlset>
