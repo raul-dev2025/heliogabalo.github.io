@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" 
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>http://heliogabalo.github.io/</loc>
+    <lastmod>2015-03-27T22:13:37+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://heliogabalo.github.io/About.html</loc>
+  </url>
+  <url>
+    <loc>http://heliogabalo.github.io/contact.html</loc>
+  </url>
+  <url>
+    <loc>http://heliogabalo.github.io/index.html</loc>
+    <image:image>
+      <image:loc>http://heliogabalo.github.io/images/corei7.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+   <loc>http://heliogabalo.github.io/steam.html</loc>
+  </url>  
+  <url>
+   <loc>http://heliogabalo.github.io/Blog/index.html</loc>
+  </url>
+  <url>
+    <loc>http://heliogabalo.github.io/offcanvas.html</loc>
+  </url>
+  <url>
+    <loc>http://heliogabalo.github.io/TerritorioLinux/qemu_doc.html</loc>
+  </url>
+
+    <!-- Otros enlaces -->
+
+  <url>
+   <loc>http://escenariodejuego.blogspot.com.es</loc>
+  </url>
+  <url>
+    <loc>http://escenariodejuego.blogspot.com</loc>
+  </url>  
+  <url>
+    <loc>http://aleatorioh.blogspot.com.es</loc>
+  </url>  
+  <url>
+    <loc>http://aleatorioh.blogspot.com</loc>
+  </url>
+
+</urlset>
