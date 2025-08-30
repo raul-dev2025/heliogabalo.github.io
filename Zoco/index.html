@@ -94,6 +94,11 @@
           <product-tabs></product-tabs>
           <button ng-show="store.activeProduct.canPurchase">Add to Cart</button>
         </div>
+      
+        <!-- All Products View -->
+        <div class="list-group-item all-gallery" ng-show="store.showAll">
+          <product-available products="store.products"></product-available>
+        </div>
       </div>
     </div>
   </div>
