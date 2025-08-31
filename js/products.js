@@ -1,5 +1,18 @@
 (function() {
   var app = angular.module('store-directives', []);
+
+    app.directive("productAvailable", function() {
+      return {
+        restrict: "E",
+        scope: {
+          products: '='
+        },
+        templateUrl: "product-available.html"
+      };
+    });
+
+
+  
   
     app.directive("productDescription", function() {
     return {
