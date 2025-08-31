@@ -1,0 +1,9 @@
+<div class="product-gallery all-view">
+  <h3 class="allAvailable">Todos los productos</h3>
+  <div class="thumbnail-list">
+    <div class="thumbnail-item" ng-repeat="product in products">
+      <img ng-src="{{product.images[0]}}" alt="{{product.name}}" class="thumbnail-img">
+      <p class="product-name">{{product.name}}</p>
+    </div>
+  </div>
+</div>

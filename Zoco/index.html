@@ -75,7 +75,9 @@
       <div class="col-md-2 zoco-cathegories">
         <h3>Categories</h3>
         <ul class="nav nav-pills nav-stacked">
-          <li class="active"><a href="#">All</a></li>
+          <li ng-click="store.showAllProducts()" ng-class="{'active': store.showAll}">
+            <a href="#">All</a>
+          </li>
           <li ng-repeat="product in store.products"
               ng-click="store.setActiveProduct(product)"
               ng-class="{'active': store.activeProduct === product}">
@@ -84,15 +86,19 @@
         </ul>
       </div>
       <div class="col-md-8 list-group">
-        <!--  Product Container  -->
-        <div class="list-group-item product-gallery">
+        <!-- Product Container: only when a product is selected and not showing all -->
+        <div class="list-group-item product-gallery" ng-show="!store.showAll && store.activeProduct">
           <h3>{{store.activeProduct.name}} <em class="pull-right">{{store.activeProduct.price | currency}}</em></h3>
-            <!-- Image Gallery  -->
-            <product-gallery product="store.activeProduct"></product-gallery>
-
-          <!-- Product Tabs  -->
+          <!-- Image Gallery -->
+          <product-gallery product="store.activeProduct"></product-gallery>
+          <!-- Product Tabs -->
           <product-tabs></product-tabs>
           <button ng-show="store.activeProduct.canPurchase">Add to Cart</button>
+        </div>
+      
+        <!-- All Products View -->
+        <div class="list-group-item all-gallery" ng-show="store.showAll">
+          <product-available products="store.products"></product-available>
         </div>
       </div>
     </div>

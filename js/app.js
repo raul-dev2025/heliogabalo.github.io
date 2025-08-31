@@ -5,10 +5,17 @@
     var store = this;
     store.products = [];
     store.activeProduct = null;
+    store.showAll = false;
 
     store.setActiveProduct = function(product) {
       store.activeProduct = product;
+      store.showAll = false;
     };
+
+    store.showAllProducts = function() {
+      store.activeProduct = null;
+      store.showAll = true;
+    }
 
     $http.get('/js/store-products.json').success(function(data){
       store.products = data;
