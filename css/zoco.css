@@ -47,9 +47,9 @@ body {
   color: #ac005f;
   background-color: #051832;
 }
-.product-gallery {
+.list-group-item.product-gallery {
   display: block;
-  border: 1px dashed red;
+  border: 1px solid #020a18;
   min-height: 50px;
 }
 
