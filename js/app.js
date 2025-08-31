@@ -12,6 +12,11 @@
       store.showAll = false;
     };
 
+    store.showAllProducts = function() {
+      store.activeProduct = null;
+      store.showAll = true;
+    }
+
     $http.get('/js/store-products.json').success(function(data){
       store.products = data;
       store.activeProduct = store.products[0]; // initialize after data loads
