@@ -5,6 +5,7 @@
     var store = this;
     store.products = [];
     store.activeProduct = null;
+    store.showAll = false;
 
     store.setActiveProduct = function(product) {
       store.activeProduct = product;
