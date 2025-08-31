@@ -86,8 +86,8 @@
         </ul>
       </div>
       <div class="col-md-8 list-group">
-        <!--  Product Container  -->
-        <div class="list-group-item product-gallery">
+        <!-- Product Container: only when a product is selected and not showing all -->
+        <div class="list-group-item product-gallery" ng-show="!store.showAll && store.activeProduct">
           <h3>{{store.activeProduct.name}} <em class="pull-right">{{store.activeProduct.price | currency}}</em></h3>
             <!-- Image Gallery  -->
             <product-gallery product="store.activeProduct"></product-gallery>
