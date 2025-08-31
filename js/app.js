@@ -9,6 +9,7 @@
 
     store.setActiveProduct = function(product) {
       store.activeProduct = product;
+      store.showAll = false;
     };
 
     $http.get('/js/store-products.json').success(function(data){
