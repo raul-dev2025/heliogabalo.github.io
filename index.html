@@ -187,85 +187,55 @@
       <div class='col-md-8'>
         <h2>Nuestros Servicios</h2>
 
-        <ul class='nav nav-tabs'>
-          <li class='active'><a href='#time'>Asesoramiento</a></li>
-          <li><a href='#deals'>Mantenimiento</a></li>
-          <li><a href='#forecast'>Instalaciones</a></li>
-        </ul>
+        <div class='btn-group'>
+          <button data-toggle='dropdown' type='button' class='btn btn-default btn-lg dropdown-toggle'>
+            Nuestros Servicios <span class='caret'></span>
+          </button>
+          <ul class='dropdown-menu'>
+            <li><a href='asesoramiento.html'>Asesoramiento Personalizado</a></li>
+            <li><a href='MantenPrevent.html'>Mantenimiento Preventivo</a></li>
+            <li><a href='tecSupport.html'>Soporte Técnico</a></li>
+            <li class='divider'></li>
+            <li><a href='sistemsInstallation.html'>Instalación de Sistemas</a></li>
+            <li><a href='https://raul-dev2025.github.io/'>Documentación</a></li>
+            <!-- <li><a href='https://driversvm.onrender.com/my-docs/index.html'>Documentación</a></li> -->
+          </ul>
+        </div>
 
-        <div class='tab-content'>
-          <div class='tab-pane fade in active' id='time'>
-            <p>Asesoramiento personalizado en infraestructuras IT.</p>
-            <p>Diagnóstico gratuito de necesidades tecnológicas.</p>
-            <p>Estrategias IT personalizadas para su negocio.</p>
+        <div class='panel panel-warning'>
+          <div class='panel-heading'>
+            <h4 class='panel-title'>
+              <a data-toggle='collapse' data-parent='.panel-group' href='#weatherAlert'>Novedades</a>
+            </h4>
           </div>
-          <div class='tab-pane fade' id='deals'>
-            <p>Mantenimiento preventivo para equipos y servidores.</p>
-            <p>Soporte técnico remoto y presencial.</p>
-            <p>Bolsa de horas disponibles para empresas.</p>
-          </div>
-          <div class='tab-pane fade' id='forecast'>
-            <p>Instalación de sistemas operativos Windows/Linux.</p>
-            <p>Gestión de controladores y actualizaciones.</p>
-            <p>Configuración de redes y seguridad básica.</p>
+          <div id='weatherAlert' class='panel-collapse collapse'>
+            <div class='panel-body'>
+              <p>Nuevos servicios disponibles para pymes y autónomos. Paquetes especiales de mantenimiento.</p>
+              <ul class='list-unstyled'>
+                <li><strong>Mantenimiento mensual</strong></li>
+                <li><strong>Soporte prioritario</strong></li>
+                <li><strong>Actualizaciones</strong></li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class='col-md-3 col-md-offset-1'>
-        <div class='panel-group'>
-          <div class='panel panel-success'>
-            <div class='panel-heading'>
-              <h4 class='panel-title'>
-                <a data-toggle='collapse' data-parent='.panel-group' href='#systemsOperational'>Estado del Servicio</a>
-              </h4>
-            </div>
-            <div id='systemsOperational' class='panel-collapse collapse in'>
-              <div class='panel-body'>
-                <p>Todos los sistemas operativos</p>
-                <ul class='list-unstyled'>
-                  <li><i class='glyphicon glyphicon-ok'></i> Soporte Remoto</li>
-                  <li><i class='glyphicon glyphicon-ok'></i> Asesoramiento</li>
-                  <li><i class='glyphicon glyphicon-ok'></i> Emergencias</li>
-                </ul>
-              </div>
-            </div>
+        <div class='panel panel-danger'>
+          <div class='panel-heading'>
+            <h4 class='panel-title'>
+              <a data-toggle='collapse' data-parent='.panel-group' href='#transportationWarning'>Aviso Importante</a>
+            </h4>
           </div>
-
-          <div class='panel panel-warning'>
-            <div class='panel-heading'>
-              <h4 class='panel-title'>
-                <a data-toggle='collapse' data-parent='.panel-group' href='#weatherAlert'>Novedades</a>
-              </h4>
-            </div>
-            <div id='weatherAlert' class='panel-collapse collapse'>
-              <div class='panel-body'>
-                <p>Nuevos servicios disponibles para pymes y autónomos. Paquetes especiales de mantenimiento.</p>
-                <ul class='list-unstyled'>
-                  <li><strong>Mantenimiento mensual</strong></li>
-                  <li><strong>Soporte prioritario</strong></li>
-                  <li><strong>Actualizaciones</strong></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class='panel panel-danger'>
-            <div class='panel-heading'>
-              <h4 class='panel-title'>
-                <a data-toggle='collapse' data-parent='.panel-group' href='#transportationWarning'>Aviso Importante</a>
-              </h4>
-            </div>
-            <div id='transportationWarning' class='panel-collapse collapse'>
-              <div class='panel-body'>
-                <p>Durante los meses de verano, nuestro horario de atención se verá reducido. Disculpen las molestias.
-                </p>
-              </div>
+          <div id='transportationWarning' class='panel-collapse collapse'>
+            <div class='panel-body'>
+              <p>Durante los meses de verano, nuestro horario de atención se verá reducido. Disculpen las molestias.
+              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
   <div class='footer'>
     <div class='container'>
