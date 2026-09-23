@@ -1,129 +1,264 @@
 .navbar-default {
-	background-color: #020c1b;
-	border-color: #233554;
-	border-radius: 0;
-	border-width: 0 0 1px;
+  background-color: #020c1b;
+  border-color: #233554;
+  border-radius: 0;
+  border-width: 0 0 1px;
 }
 
 .navbar-default .navbar-toggle {
-	border-color: #64ffda;
+  border-color: #64ffda;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
-	background-color: #64ffda;
+  background-color: #64ffda;
 }
 
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-	background-color: transparent;
+  background-color: transparent;
 }
 
 .navbar-brand {
-	padding: 15px;
-	font-weight: bold;
+  padding: 15px;
+  font-weight: bold;
 }
 
-body { /* aleja al menu statico */
+/* #### Custom language button #### */
+
+.lang-dropdown {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+  margin-right: 10px !important;
+}
+
+/* Forzar transparencia absoluta en todos los estados base */
+.navbar-default .lang-dropdown .btn-lang,
+.lang-dropdown .btn-lang,
+.lang-dropdown button.btn-lang {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-color: transparent !important;
+  color: #64ffda !important;
+  padding: 6px 10px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  outline: none !important;
+  filter: none !important;
+}
+
+/* Estados Hover, Focus y Menú Desplegado Abierto */
+.navbar-default .lang-dropdown .btn-lang:hover,
+.navbar-default .lang-dropdown .btn-lang:focus,
+.navbar-default .lang-dropdown .btn-lang:active,
+.lang-dropdown.open>.btn-lang.dropdown-toggle,
+.lang-dropdown.open>.btn-lang.dropdown-toggle:hover,
+.lang-dropdown.open>.btn-lang.dropdown-toggle:focus {
+  background: rgba(255, 255, 255, 0.08) !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  background-image: none !important;
+  color: #64ffda !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.btn-lang .glyphicon {
+  margin-right: 3px;
+  font-size: 13px;
+}
+
+.btn-lang .caret {
+  margin-left: 3px;
+}
+
+/* --- Menú desplegable en tema oscuro --- */
+.lang-dropdown .dropdown-menu {
+  background-color: #0b1325;
+  /* Fondo oscuro acorde al navbar */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  min-width: 120px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.lang-dropdown .dropdown-menu>li>a {
+  color: #cccccc;
+  padding: 8px 15px;
+}
+
+.lang-dropdown .dropdown-menu>li>a:hover,
+.lang-dropdown .dropdown-menu>li>a:focus {
+  background-color: rgba(32, 201, 151, 0.15);
+  color: #20c997;
+}
+
+.lang-dropdown .dropdown-menu>.active>a,
+.lang-dropdown .dropdown-menu>.active>a:hover,
+.lang-dropdown .dropdown-menu>.active>a:focus {
+  background-color: #20c997;
+  color: #ffffff;
+}
+
+/* #### END Custom language button #### */
+
+body {
+  /* aleja al menu statico */
   padding-top: 70px;
-  background-color: #0a192f; /* Dark navy blue */
-  color: #e6f1ff; /* Light blue text for contrast */
+  background-color: #0a192f;
+  /* Dark navy blue */
+  color: #e6f1ff;
+  /* Light blue text for contrast */
 }
+
 .footer {
-  background-color: #020c1b; /* Darker navy blue */
-  color: #a8b2d1; /* Soft blue-gray text */
+  background-color: #020c1b;
+  /* Darker navy blue */
+  color: #a8b2d1;
+  /* Soft blue-gray text */
 }
+
 .features .glyphicon {
- font-size: 32px;
- color: #64ffda; /* Teal accent color for icons */
+  font-size: 32px;
+  color: #64ffda;
+  /* Teal accent color for icons */
 }
 
 /* Additional dark theme elements */
 .navbar-default {
-    background-color: #020c1b; /* Darker navy blue */
-    border-color: #233554;
+  background-color: #020c1b;
+  /* Darker navy blue */
+  border-color: #233554;
 }
 
 .navbar-default .navbar-brand,
-.navbar-default .navbar-nav > li > a {
-    color: #e6f1ff;
+.navbar-default .navbar-nav>li>a {
+  color: #e6f1ff;
 }
 
 .navbar-default .navbar-brand:hover,
-.navbar-default .navbar-nav > li > a:hover {
-    color: #64ffda; /* Teal accent for hover */
+.navbar-default .navbar-nav>li>a:hover {
+  color: #64ffda;
+  /* Teal accent for hover */
 }
 
 .well {
-    background-color: #112240; /* Medium dark blue */
-    border-color: #233554;
-    color: #e6f1ff;
+  background-color: #112240;
+  /* Medium dark blue */
+  border-color: #233554;
+  color: #e6f1ff;
 }
 
 .panel {
-    background-color: #112240;
-    border-color: #233554;
+  background-color: #112240;
+  border-color: #233554;
 }
 
-.panel-default > .panel-heading {
-    background-color: #020c1b;
-    border-color: #233554;
-    color: #e6f1ff;
+.panel-default>.panel-heading {
+  background-color: #020c1b;
+  border-color: #233554;
+  color: #e6f1ff;
 }
 
 blockquote {
-    border-left: 5px solid #64ffda; /* Teal accent */
-    color: #ccd6f6;
+  border-left: 5px solid #64ffda;
+  /* Teal accent */
+  color: #ccd6f6;
 }
 
 .btn-primary {
-    background-color: #0a192f;
-    border-color: #64ffda;
-    color: #64ffda;
+  background-color: #0a192f;
+  border-color: #64ffda;
+  color: #64ffda;
 }
 
 .btn-primary:hover {
-    background-color: #64ffda;
-    border-color: #64ffda;
-    color: #0a192f;
+  background-color: #64ffda;
+  border-color: #64ffda;
+  color: #0a192f;
 }
 
 .btn-info {
-    background-color: #112240;
-    border-color: #64ffda;
-    color: #64ffda;
+  background-color: #112240;
+  border-color: #64ffda;
+  color: #64ffda;
 }
 
 .btn-info:hover {
-    background-color: #64ffda;
-    border-color: #64ffda;
-    color: #0a192f;
+  background-color: #64ffda;
+  border-color: #64ffda;
+  color: #0a192f;
 }
 
-/* nosotros.html -- espaciado e interlineado*/
+/* --- Estilos para el desplegable de "Nuestros Servicios" --- */
 
+/* 1. Fondo del botón cuando el desplegable está abierto (.open) */
+.btn-group.open>.btn-primary.dropdown-toggle,
+.btn-group.open>.btn-primary.dropdown-toggle:hover,
+.btn-group.open>.btn-primary.dropdown-toggle:focus {
+  background-color: #020c1b !important;
+  border-color: #64ffda !important;
+  color: #64ffda !important;
+  box-shadow: none !important;
+}
+
+/* 2. Caja del menú desplegable */
+.btn-group>.dropdown-menu {
+  background-color: #112240 !important;
+  border: 1px solid #233554 !important;
+  box-shadow: 0 10px 25px -10px rgba(2, 12, 27, 0.7) !important;
+  margin-top: 4px;
+}
+
+/* Enlaces del menú */
+.btn-group>.dropdown-menu>li>a {
+  color: #e6f1ff !important;
+  padding: 8px 20px;
+}
+
+/* Hover/Focus en las opciones */
+.btn-group>.dropdown-menu>li>a:hover,
+.btn-group>.dropdown-menu>li>a:focus {
+  background-color: rgba(100, 255, 218, 0.1) !important;
+  color: #64ffda !important;
+}
+
+/* Línea divisoria dentro del menú */
+.btn-group>.dropdown-menu .divider {
+  background-color: #233554 !important;
+}
+
+/* --- END Estilos para el desplegable de "Nuestros Servicios" --- */
+
+
+
+/* nosotros.html -- espaciado e interlineado*/
 #nosotros-content h4 {
-	margin-bottom: 1.8rem;
-	display: flex;
-	align-items: center;
-	gap: 0.8rem;
+  margin-bottom: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
 }
 
 #nosotros-content p {
-	margin-bottom: 1.2rem;
-	line-height: 1.6;
-	transition: margin 0.3s ease;
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+  transition: margin 0.3s ease;
 }
 
 #nosotros-content ul {
-	margin: 1.5rem 0;
+  margin: 1.5rem 0;
 }
 
 #nosotros-content li {
-	margin-bottom: 0.8rem ;
+  margin-bottom: 0.8rem;
 }
 
 .beneficios-lista {
-    text-align: left;
+  text-align: left;
 }
 
 #cont-asesoramiento {
@@ -151,6 +286,7 @@ blockquote {
   padding: 2em 0 5em 0;
   margin-bottom: 5em;
 }
+
 #servicio h3,
 #mantenimiento h3 {
   color: #64ffda;
@@ -168,14 +304,17 @@ blockquote {
   /* background-color: #020c1b; */
   padding: 2em 0 5em 0;
 }
+
 #soluciones-text_right {
   /* background-color: #020c1b; */
   padding: 5em 1em 0 0;
 }
+
 #soluciones-text_left {
   /* background-color: #020c1b; */
   padding: 5em 0 0 1em;
 }
+
 #soluciones-lista-right {
   /* background-color: #020c1b; */
   padding: 0em 0em 5em 1em;
@@ -190,16 +329,20 @@ blockquote {
   list-style-type: none;
 }
 
-#lista-sin-puntos > li {
-  line-height: 1.5em; /* ajusta la altura de la línea para que los glifos y el texto estén alineados */
+#lista-sin-puntos>li {
+  line-height: 1.5em;
+  /* ajusta la altura de la línea para que los glifos y el texto estén alineados */
 }
 
-#lista-sin-puntos > li i {
-  vertical-align: middle; /* alinea los glifos verticalmente en el medio */
+#lista-sin-puntos>li i {
+  vertical-align: middle;
+  /* alinea los glifos verticalmente en el medio */
 }
 
-#lista-sin-puntos > li a, #lista-sin-puntos > li span {
-  vertical-align: middle; /* alinea el texto del email y la numeración del teléfono verticalmente en el medio */
+#lista-sin-puntos>li a,
+#lista-sin-puntos>li span {
+  vertical-align: middle;
+  /* alinea el texto del email y la numeración del teléfono verticalmente en el medio */
 }
 
 .img-rocket {
@@ -207,6 +350,7 @@ blockquote {
   transform: rotate(+35deg) scale(0.65);
   filter: grayscale(100%);
 }
+
 .img-rocket:hover {
   transform: rotate(+35deg) scale(0.75);
   filter: grayscale(0%);
@@ -248,7 +392,7 @@ blockquote {
   font-style: small-caps;
 }
 
-div.mail-support > p > a > button {
+div.mail-support>p>a>button {
   margin: 1.6em 0 0 0 !important;
 }
 
@@ -261,17 +405,20 @@ div.mail-support > p > a > button {
   padding-bottom: 3em;
 }
 
-.docs-support-paragraph > strong, i {
+.docs-support-paragraph>strong,
+i {
   font-size: larger;
   font-weight: bold;
 }
+
 /* END Css soporte tecnico*/
 
 
 /* Css Instalación de sistemas*/
-div.beneficios-install > h2 {
+div.beneficios-install>h2 {
   margin-bottom: 1.4em;
 }
+
 .well-install {
   background-color: #020c1b;
   border-color: #233554;
@@ -280,8 +427,8 @@ div.beneficios-install > h2 {
   margin-bottom: 21em;
 }
 
-.contact-install > a > button {
+.contact-install>a>button {
   margin: 1.6em 0.3em 0.3em 0.4em !important;
-} 
+}
 
 /* END Css Instalación de sistemas*/
