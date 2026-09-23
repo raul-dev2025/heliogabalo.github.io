@@ -1,307 +1,337 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name=viewport content="width=device-width, initial-scale=1">
-    <link rel='icon' type='image/png' href='images/simulation.png'>
-    <title>Servicios Técnicos de Sistemas</title>
-    <link href='css/bootstrap.min.css' rel='stylesheet'>
-    <link href='css/main.css' rel='stylesheet'>
-  </head>
-  <body>
 
-    <div class='navbar navbar-default navbar-fixed-top'>
-      <div class='container'>
-        <div class='navbar-header'>
-          <a href='/' class='navbar-brand'>TécnicoSistemas</a>
-            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
-               <span class='sr-only'>Toggle navigation</span>
-               <span class='icon-bar'></span>
-               <span class='icon-bar'></span>
-               <span class='icon-bar'></span>
-            </button>
-           </div>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <link rel='icon' type='image/png' href='images/simulation.png'>
+  <title>Servicios Técnicos de Sistemas</title>
+  <link href='css/bootstrap.min.css' rel='stylesheet'>
+  <link href='css/main.css' rel='stylesheet'>
+</head>
 
-        <ul class='nav navbar-nav navbar-collapse collapse'>
-          <li><a href='servicios.html'>Servicios</a></li>
-          <li><a href='soluciones.html'>Soluciones</a></li>
-          <li>
-            <a href='nosotros.html' class='dropdown-toggle' data-toggle='dropdown'>
-                        Nosotros <span class='caret'></span></a>
-              <ul class='dropdown-menu'>
-								<li><a href='nosotros.html'>Sobre nosotros</a></li>
-                <li><a href='contacto.html'>Contacto</a></li>
-                <li class='divider'></li>
-                <li><a href='/Blog/index.html'>Blog Técnico</a></li>
-                <li class='divider'></li>
-                <li><a href='#'>Twitter</a></li>
-                <li><a href='#'>Facebook</a></li>
-              </ul>
-            <!-- idioma -->
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Idioma <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="index.html">Castellano</a></li>
-                <li><a href="langs/cat/index.ca.html">Català</a></li>
-              </ul>
-            <!--END idioma -->
-            </li>
+<body>
+
+  <div class='navbar navbar-default navbar-fixed-top'>
+    <div class='container'>
+      <div class='navbar-header'>
+        <a href='/' class='navbar-brand'>TécnicoSistemas</a>
+
+        <!-- Botón hamburgesa -->
+        <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
+          <span class='sr-only'>Toggle navigation</span>
+          <span class='icon-bar'></span>
+          <span class='icon-bar'></span>
+          <span class='icon-bar'></span>
+        </button>
+
+        <!-- Botón de idioma -->
+        <div class="dropdown pull-right lang-dropdown">
+          <button class="btn btn-default btn-lang dropdown-toggle" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="glyphicon glyphicon-globe"></i> ES <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li class="active"><a href="index.html">Castellano</a></li>
+            <li><a href="langs/cat/index.ca.html">Català</a></li>
+          </ul>
+        </div>
+        <!-- END Botón de idioma -->
+      </div>
+
+      <ul class='nav navbar-nav navbar-collapse collapse'>
+        <li><a href='servicios.html'>Servicios</a></li>
+        <li><a href='soluciones.html'>Soluciones</a></li>
+        <li>
+          <a href='nosotros.html' class='dropdown-toggle' data-toggle='dropdown'>
+            Nosotros <span class='caret'></span></a>
+          <ul class='dropdown-menu'>
+            <li><a href='nosotros.html'>Sobre nosotros</a></li>
+            <li><a href='contacto.html'>Contacto</a></li>
+            <li class='divider'></li>
+            <li><a href='/Blog/index.html'>Blog Técnico</a></li>
+            <li class='divider'></li>
+            <li><a href='#'>Twitter</a></li>
+            <li><a href='#'>Facebook</a></li>
+          </ul>
+        </li>
+        <!-- idioma 
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+            aria-expanded="false">
+            Idioma <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="index.html">Castellano</a></li>
+            <li><a href="langs/cat/index.ca.html">Català</a></li>
+          </ul>
+            END idioma -->
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class='container'>
+    <div class='row well well-lg'>
+      <div class='col-md-6'>
+        <h2>Servicios Técnicos de Sistemas</h2>
+        <p class='lead'>Soluciones IT personalizadas para empresas y particulares</p>
+
+        <div class='btn-group'>
+          <button data-toggle='dropdown' type='button' class='btn btn-primary btn-lg dropdown-toggle'>
+            Nuestros Servicios <span class='caret'></span>
+          </button>
+          <ul class='dropdown-menu'>
+            <li><a href='asesoramiento.html'>Asesoramiento Personalizado</a></li>
+            <li><a href='MantenPrevent.html'>Mantenimiento Preventivo</a></li>
+            <li><a href='tecSupport.html'>Soporte Técnico</a></li>
+            <li class='divider'></li>
+            <li><a href='sistemsInstallation.html'>Instalación de Sistemas</a></li>
+            <li><a href='https://raul-dev2025.github.io/'>Documentación</a></li>
+            <!-- <li><a href='https://driversvm.onrender.com/my-docs/index.html'>Documentación</a></li> -->
+          </ul>
+        </div>
+
+        <a href='contacto.html'><button type='button' class='btn btn-lg btn-primary'>Contactar Ahora</button></a>
+      </div>
+      <div class='col-md-6 visible-md visible-lg'>
+        <figure>
+          <img src='images/portadaTec.jpg' alt='Servicios IT' />
+          <figcaption class="text-center">Foto de <a
+              href="https://unsplash.com/es/@robinne?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Robs</a>
+            en <a
+              href="https://unsplash.com/es/fotos/un-grupo-de-personas-de-pie-una-al-lado-de-la-otra-HOrhCnQsxnQ?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class='row text-center features'>
+      <div class='col-sm-4 col-xs-10 col-xs-offset-1 col-sm-offset-0'>
+        <i class='glyphicon glyphicon-wrench'></i>
+        <h3>Asesoramiento IT</h3>
+        <p>Análisis y diagnóstico de necesidades tecnológicas para alinear la infraestructura con sus objetivos de
+          negocio.</p>
+      </div>
+
+      <div class='col-sm-4 col-xs-6'>
+        <i class='glyphicon glyphicon-hdd'></i>
+        <h3>Mantenimiento</h3>
+        <p>Soluciones preventivas y correctivas para minimizar paradas imprevistas y garantizar continuidad.</p>
+      </div>
+
+      <div class='col-sm-4 col-xs-6'>
+        <i class='glyphicon glyphicon-cog'></i>
+        <h3>Instalaciones</h3>
+        <p>Configuración de sistemas operativos, controladores y actualizaciones de hardware/software.</p>
+      </div>
+    </div>
+  </div>
+  <div class='quote'>
+    <div class='container'>
+      <blockquote>
+        <p>Hablar es barato. Muéstrame el código.</p>
+        <footer>Linus Torvalds</footer>
+      </blockquote>
+    </div>
+  </div>
+
+  <div class='container transport-systems'>
+    <div class='row'>
+      <div class='col-md-10 col-md-offset-1'>
+        <h2>Nuestras Soluciones IT</h2>
+        <p>Optimizamos su infraestructura con servicios técnicos especializados y tiempos de respuesta rápidos.</p>
+      </div>
+    </div>
+
+    <div class='row text-center'>
+      <div class='transporter col-md-3 col-md-offset-1 well well-sm'>
+        <h3>Consultoría IT</h3>
+        <ul class='list-unstyled'>
+          <li>Diagnóstico de necesidades</li>
+          <li>Estrategias personalizadas</li>
+          <li>Soporte continuo</li>
         </ul>
+        <p><button class='btn btn-info'><i class='glyphicon glyphicon-search'></i> Más información</button></p>
+      </div>
+      <div class='space-elevator col-md-3 col-md-offset-1 well well-sm'>
+        <h3>Soporte Técnico</h3>
+        <ul class='list-unstyled'>
+          <li>Resolución de incidencias</li>
+          <li>Instalación de sistemas</li>
+          <li>Controladores</li>
+        </ul>
+        <p><a href='contacto.html'><button class='btn btn-info'><i class='glyphicon glyphicon-phone-alt'></i>
+              Contactar</button></a></p>
+      </div>
+      <div class='rocketbus col-md-3 col-md-offset-1 well well-sm'>
+        <h3>Actualizaciones</h3>
+        <ul class='list-unstyled'>
+          <li>Software y hardware</li>
+          <li>Seguridad</li>
+          <li>Optimización</li>
+        </ul>
+        <p><button class='btn btn-info'><i class='glyphicon glyphicon-refresh'></i> Actualizar</button></p>
       </div>
     </div>
+  </div>
+  <div class='quote'>
     <div class='container'>
-      <div class='row well well-lg'>
-        <div class='col-md-6'>
-          <h2>Servicios Técnicos de Sistemas</h2>
-          <p class='lead'>Soluciones IT personalizadas para empresas y particulares</p>
+      <blockquote>
+        <p>La tecnología no es nada. Lo importante es que tengas fe en la gente, que sean básicamente buenas e
+          inteligentes, y si les das herramientas, harán cosas maravillosas con ellas.</p>
+        <footer>Steve Jobs</footer>
+      </blockquote>
+    </div>
+  </div>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-md-8'>
+        <h2>Nuestros Servicios</h2>
 
-          <div class='btn-group'>
-            <button data-toggle='dropdown' type='button'
-               class='btn btn-default btn-lg dropdown-toggle'>
-              Nuestros Servicios <span class='caret'></span>
-            </button>
-            <ul class='dropdown-menu'>
-              <li><a href='asesoramiento.html'>Asesoramiento Personalizado</a></li>
-              <li><a href='MantenPrevent.html'>Mantenimiento Preventivo</a></li>
-              <li><a href='tecSupport.html'>Soporte Técnico</a></li>
-              <li class='divider'></li>
-              <li><a href='sistemsInstallation.html'>Instalación de Sistemas</a></li>
-              <li><a href='https://raul-dev2025.github.io/'>Documentación</a></li>
-              <!-- <li><a href='https://driversvm.onrender.com/my-docs/index.html'>Documentación</a></li> -->
-            </ul>
+        <ul class='nav nav-tabs'>
+          <li class='active'><a href='#time'>Asesoramiento</a></li>
+          <li><a href='#deals'>Mantenimiento</a></li>
+          <li><a href='#forecast'>Instalaciones</a></li>
+        </ul>
+
+        <div class='tab-content'>
+          <div class='tab-pane fade in active' id='time'>
+            <p>Asesoramiento personalizado en infraestructuras IT.</p>
+            <p>Diagnóstico gratuito de necesidades tecnológicas.</p>
+            <p>Estrategias IT personalizadas para su negocio.</p>
+          </div>
+          <div class='tab-pane fade' id='deals'>
+            <p>Mantenimiento preventivo para equipos y servidores.</p>
+            <p>Soporte técnico remoto y presencial.</p>
+            <p>Bolsa de horas disponibles para empresas.</p>
+          </div>
+          <div class='tab-pane fade' id='forecast'>
+            <p>Instalación de sistemas operativos Windows/Linux.</p>
+            <p>Gestión de controladores y actualizaciones.</p>
+            <p>Configuración de redes y seguridad básica.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class='col-md-3 col-md-offset-1'>
+        <div class='panel-group'>
+          <div class='panel panel-success'>
+            <div class='panel-heading'>
+              <h4 class='panel-title'>
+                <a data-toggle='collapse' data-parent='.panel-group' href='#systemsOperational'>Estado del Servicio</a>
+              </h4>
+            </div>
+            <div id='systemsOperational' class='panel-collapse collapse in'>
+              <div class='panel-body'>
+                <p>Todos los sistemas operativos</p>
+                <ul class='list-unstyled'>
+                  <li><i class='glyphicon glyphicon-ok'></i> Soporte Remoto</li>
+                  <li><i class='glyphicon glyphicon-ok'></i> Asesoramiento</li>
+                  <li><i class='glyphicon glyphicon-ok'></i> Emergencias</li>
+                </ul>
+              </div>
+            </div>
           </div>
 
-          <a href='contacto.html'><button type='button' class='btn btn-lg btn-primary'>Contactar Ahora</button></a>
-        </div>
-        <div class='col-md-6 visible-md visible-lg'>
-          <figure>
-            <img src='images/portadaTec.jpg' alt='Servicios IT' />
-            <figcaption class="text-center">Foto de <a href="https://unsplash.com/es/@robinne?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Robs</a> en <a href="https://unsplash.com/es/fotos/un-grupo-de-personas-de-pie-una-al-lado-de-la-otra-HOrhCnQsxnQ?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-      </figcaption>
-          </figure>
-        </div>
-      </div>
-      <div class='row text-center features'>
-        <div class='col-sm-4 col-xs-10 col-xs-offset-1 col-sm-offset-0'>
-          <i class='glyphicon glyphicon-wrench'></i>
-          <h3>Asesoramiento IT</h3>
-          <p>Análisis y diagnóstico de necesidades tecnológicas para alinear la infraestructura con sus objetivos de negocio.</p>
-        </div>
+          <div class='panel panel-warning'>
+            <div class='panel-heading'>
+              <h4 class='panel-title'>
+                <a data-toggle='collapse' data-parent='.panel-group' href='#weatherAlert'>Novedades</a>
+              </h4>
+            </div>
+            <div id='weatherAlert' class='panel-collapse collapse'>
+              <div class='panel-body'>
+                <p>Nuevos servicios disponibles para pymes y autónomos. Paquetes especiales de mantenimiento.</p>
+                <ul class='list-unstyled'>
+                  <li><strong>Mantenimiento mensual</strong></li>
+                  <li><strong>Soporte prioritario</strong></li>
+                  <li><strong>Actualizaciones</strong></li>
+                </ul>
+              </div>
+            </div>
+          </div>
 
-        <div class='col-sm-4 col-xs-6'>
-          <i class='glyphicon glyphicon-hdd'></i>
-          <h3>Mantenimiento</h3>
-          <p>Soluciones preventivas y correctivas para minimizar paradas imprevistas y garantizar continuidad.</p>
-        </div>
-
-        <div class='col-sm-4 col-xs-6'>
-          <i class='glyphicon glyphicon-cog'></i>
-          <h3>Instalaciones</h3>
-          <p>Configuración de sistemas operativos, controladores y actualizaciones de hardware/software.</p>
+          <div class='panel panel-danger'>
+            <div class='panel-heading'>
+              <h4 class='panel-title'>
+                <a data-toggle='collapse' data-parent='.panel-group' href='#transportationWarning'>Aviso Importante</a>
+              </h4>
+            </div>
+            <div id='transportationWarning' class='panel-collapse collapse'>
+              <div class='panel-body'>
+                <p>Durante los meses de verano, nuestro horario de atención se verá reducido. Disculpen las molestias.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class='quote'>
-      <div class='container'>
-        <blockquote>
-          <p>Hablar es barato. Muéstrame el código.</p>
-          <footer>Linus Torvalds</footer>
-        </blockquote>
-      </div>
-    </div>
-
-    <div class='container transport-systems'>
-      <div class='row'>
-        <div class='col-md-10 col-md-offset-1'>
-          <h2>Nuestras Soluciones IT</h2>
-          <p>Optimizamos su infraestructura con servicios técnicos especializados y tiempos de respuesta rápidos.</p>
-        </div>
-      </div>
-
-      <div class='row text-center'>
-        <div class='transporter col-md-3 col-md-offset-1 well well-sm'>
-          <h3>Consultoría IT</h3>
-          <ul class='list-unstyled'>
-            <li>Diagnóstico de necesidades</li>
-            <li>Estrategias personalizadas</li>
-            <li>Soporte continuo</li>
-          </ul>
-          <p><button class='btn btn-info'><i class='glyphicon glyphicon-search'></i> Más información</button></p>
-        </div>
-        <div class='space-elevator col-md-3 col-md-offset-1 well well-sm'>
-          <h3>Soporte Técnico</h3>
-          <ul class='list-unstyled'>
-            <li>Resolución de incidencias</li>
-            <li>Instalación de sistemas</li>
-            <li>Controladores</li>
-          </ul>
-          <p><a href='contacto.html'><button class='btn btn-info'><i class='glyphicon glyphicon-phone-alt'></i> Contactar</button></a></p>
-        </div>
-        <div class='rocketbus col-md-3 col-md-offset-1 well well-sm'>
-          <h3>Actualizaciones</h3>
-          <ul class='list-unstyled'>
-            <li>Software y hardware</li>
-            <li>Seguridad</li>
-            <li>Optimización</li>
-          </ul>
-          <p><button class='btn btn-info'><i class='glyphicon glyphicon-refresh'></i> Actualizar</button></p>
-        </div>
-      </div>
-    </div>
-    <div class='quote'>
-      <div class='container'>
-        <blockquote>
-          <p>La tecnología no es nada. Lo importante es que tengas fe en la gente, que sean básicamente buenas e inteligentes, y si les das herramientas, harán cosas maravillosas con ellas.</p>
-          <footer>Steve Jobs</footer>
-        </blockquote>
-      </div>
-    </div>
+  </div>
+  <div class='footer'>
     <div class='container'>
       <div class='row'>
-        <div class='col-md-8'>
-          <h2>Nuestros Servicios</h2>
+        <div class='col-md-3 col-sm-4 col-xs-6'>
+          <h4>Sobre Nosotros</h4>
+          <p><i>TécnicoSistemas&copy;</i> ofrece soluciones IT profesionales para empresas y particulares. <a
+              href='servicios.html'>Descubra nuestros servicios</a>!</p>
+          <p><a href='nosotros.html'>Más sobre nosotros <i class='glyphicon glyphicon-arrow-right'></i></a></p>
+        </div>
 
-          <ul class='nav nav-tabs'>
-            <li class='active'><a href='#time'>Asesoramiento</a></li>
-            <li><a href='#deals'>Mantenimiento</a></li>
-            <li><a href='#forecast'>Instalaciones</a></li>
+        <div class='col-md-offset-1 col-sm-2 col-xs-6'>
+          <h4>Enlaces</h4>
+          <ul class='list-unstyled'>
+            <li><a href='/'>Inicio</a></li>
+            <li><a href='servicios.html'>Servicios</a></li>
+            <li><a href='soluciones.html'>Soluciones</a></li>
+            <li><a href='blog.html'>Blog</a></li>
           </ul>
-
-          <div class='tab-content'>
-            <div class='tab-pane fade in active' id='time'>
-              <p>Asesoramiento personalizado en infraestructuras IT.</p>
-              <p>Diagnóstico gratuito de necesidades tecnológicas.</p>
-              <p>Estrategias IT personalizadas para su negocio.</p>
-            </div>
-            <div class='tab-pane fade' id='deals'>
-              <p>Mantenimiento preventivo para equipos y servidores.</p>
-              <p>Soporte técnico remoto y presencial.</p>
-              <p>Bolsa de horas disponibles para empresas.</p>
-            </div>
-            <div class='tab-pane fade' id='forecast'>
-              <p>Instalación de sistemas operativos Windows/Linux.</p>
-              <p>Gestión de controladores y actualizaciones.</p>
-              <p>Configuración de redes y seguridad básica.</p>
-            </div>
-          </div>
         </div>
 
-        <div class='col-md-3 col-md-offset-1'>
-          <div class='panel-group'>
-            <div class='panel panel-success'>
-              <div class='panel-heading'>
-                <h4 class='panel-title'>
-                  <a data-toggle='collapse' data-parent='.panel-group' href='#systemsOperational'>Estado del Servicio</a>
-                </h4>
-              </div>
-              <div id='systemsOperational' class='panel-collapse collapse in'>
-                <div class='panel-body'>
-                  <p>Todos los sistemas operativos</p>
-                  <ul class='list-unstyled'>
-                    <li><i class='glyphicon glyphicon-ok'></i> Soporte Remoto</li>
-                    <li><i class='glyphicon glyphicon-ok'></i> Asesoramiento</li>
-                    <li><i class='glyphicon glyphicon-ok'></i> Emergencias</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+        <div class='clearfix visible-xs'></div>
 
-            <div class='panel panel-warning'>
-              <div class='panel-heading'>
-                <h4 class='panel-title'>
-                  <a data-toggle='collapse' data-parent='.panel-group' href='#weatherAlert'>Novedades</a>
-                </h4>
-              </div>
-              <div id='weatherAlert' class='panel-collapse collapse'>
-                <div class='panel-body'>
-                  <p>Nuevos servicios disponibles para pymes y autónomos. Paquetes especiales de mantenimiento.</p>
-                  <ul class='list-unstyled'>
-                    <li><strong>Mantenimiento mensual</strong></li>
-                    <li><strong>Soporte prioritario</strong></li>
-                    <li><strong>Actualizaciones</strong></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+        <div class='col-sm-2 col-xs-6'>
+          <h4>Contacto</h4>
+          <ul class='list-unstyled'>
+            <li><a href='nosotros.html'>Nosotros</a></li>
+            <li><a href='contacto.html'>Contacto</a></li>
+            <li><a href='blog.html'>Blog</a></li>
+            <li><a href='https://twitter.com/tecnico_sistemas'>Twitter</a></li>
+            <li><a href='https://www.facebook.com/tecnicodesistemas'>Facebook</a></li>
+          </ul>
+        </div>
 
-            <div class='panel panel-danger'>
-              <div class='panel-heading'>
-                <h4 class='panel-title'>
-                  <a data-toggle='collapse' data-parent='.panel-group' href='#transportationWarning'>Aviso Importante</a>
-                </h4>
-              </div>
-              <div id='transportationWarning' class='panel-collapse collapse'>
-                <div class='panel-body'>
-                  <p>Durante los meses de verano, nuestro horario de atención se verá reducido. Disculpen las molestias.</p>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class='col-md-3 col-md-offset-1 col-sm-4 col-xs-6'>
+          <h4>Dónde Estamos</h4>
+          <ul class='list-unstyled'>
+            <li><i class='glyphicon glyphicon-globe'></i> Barcelona, España</li>
+            <li><i class='glyphicon glyphicon-phone'></i> +34 613 523 505</li>
+            <li><i class='glyphicon glyphicon-envelope'></i> <a href='mailto:raulmicrosistemas@gmail.com'>correo Técnico
+                Sistemas</a></li>
+          </ul>
+          <p>TécnicoSistemas &copy;2014.</p>
         </div>
       </div>
     </div>
-    <div class='footer'>
-      <div class='container'>
-        <div class='row'>
-          <div class='col-md-3 col-sm-4 col-xs-6'>
-            <h4>Sobre Nosotros</h4>
-            <p><i>TécnicoSistemas&copy;</i> ofrece soluciones IT profesionales para empresas y particulares. <a href='servicios.html'>Descubra nuestros servicios</a>!</p>
-            <p><a href='nosotros.html'>Más sobre nosotros <i class='glyphicon glyphicon-arrow-right'></i></a></p>            
-          </div>
+  </div>
 
-          <div class='col-md-offset-1 col-sm-2 col-xs-6'>
-            <h4>Enlaces</h4>
-            <ul class='list-unstyled'>
-              <li><a href='/'>Inicio</a></li>
-              <li><a href='servicios.html'>Servicios</a></li>
-              <li><a href='soluciones.html'>Soluciones</a></li>
-              <li><a href='blog.html'>Blog</a></li>
-            </ul>
-          </div>
+  <!-- Google Analytics -->
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-36392075-6', 'auto');
+    ga('send', 'pageview');
+  </script>
 
-          <div class='clearfix visible-xs'></div>
+  <!-- Bootstrap JS -->
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <script src='js/bootstrap.min.js'></script>
+  <script src='js/main.js'></script>
+  <!-- <script src='js/main.js'></script> -->
 
-          <div class='col-sm-2 col-xs-6'>
-            <h4>Contacto</h4>
-            <ul class='list-unstyled'>
-              <li><a href='nosotros.html'>Nosotros</a></li>
-              <li><a href='contacto.html'>Contacto</a></li>
-              <li><a href='blog.html'>Blog</a></li>
-              <li><a href='https://twitter.com/tecnico_sistemas'>Twitter</a></li>
-              <li><a href='https://www.facebook.com/tecnicodesistemas'>Facebook</a></li>
-            </ul>
-          </div>
+</body>
 
-          <div class='col-md-3 col-md-offset-1 col-sm-4 col-xs-6'>
-            <h4>Dónde Estamos</h4>
-            <ul class='list-unstyled'>
-              <li><i class='glyphicon glyphicon-globe'></i> Barcelona, España</li>
-              <li><i class='glyphicon glyphicon-phone'></i> +34 613 523 505</li>
-              <li><i class='glyphicon glyphicon-envelope'></i> <a href='mailto:raulmicrosistemas@gmail.com'>correo Técnico Sistemas</a></li>
-            </ul>
-            <p>TécnicoSistemas &copy;2014.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Google Analytics -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-36392075-6', 'auto');
-      ga('send', 'pageview');
-    </script>
-
-    <!-- Bootstrap JS -->
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-    <script src='js/bootstrap.min.js'></script>
-    <script src='js/main.js'></script>
-    <!-- <script src='js/main.js'></script> -->
-
-  </body>
 </html>
