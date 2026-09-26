@@ -318,7 +318,7 @@ blockquote {
   text-align: left;
 }
 
-#cont-asesoramiento {
+.well-featured {
   background-color: #112240;
   border-color: #f5f6f7;
   margin-top: 1.5em;
@@ -501,9 +501,9 @@ body.light-theme {
 /* 2. Barra de navegación y Footer */
 body.light-theme .navbar-default,
 body.light-theme .footer {
-  background-color: #ffffff;
+  background-color: #e2e8f0;
   border-color: #cbd5e1;
-  color: #475569;
+  color: #1e293b;
 }
 
 body.light-theme .navbar-default .navbar-brand,
@@ -683,7 +683,7 @@ body.light-theme .navbar-default .navbar-nav .dropdown-menu .divider {
 }
 
 /* Realce de contraste y profundidad para el contenedor en tema claro */
-body.light-theme #cont-asesoramiento,
+body.light-theme .well-featured,
 body.light-theme .well-install {
   background-color: #e2e8f0 !important;
   border: 1px solid #cbd5e1 !important;
@@ -692,16 +692,16 @@ body.light-theme .well-install {
   color: #1e293b !important;
 }
 
-body.light-theme #cont-asesoramiento h2,
-body.light-theme #cont-asesoramiento h3,
-body.light-theme #cont-asesoramiento h4,
+body.light-theme .well-featured h2,
+body.light-theme .well-featured h3,
+body.light-theme .well-featured h4,
 body.light-theme .well-install h2,
 body.light-theme .well-install h3 {
   color: #1e293b !important;
 }
 
-body.light-theme #cont-asesoramiento p,
-body.light-theme #cont-asesoramiento li,
+body.light-theme .well-featured p,
+body.light-theme .well-featured li,
 body.light-theme .well-install p,
 body.light-theme .well-install li {
   color: #334155 !important;
