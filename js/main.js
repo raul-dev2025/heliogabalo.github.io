@@ -9,9 +9,19 @@ $(function () {
   var $body = $('body');
   var $themeBtn = $('#btn-theme-light');
 
-  // Restaurar el tema guardado previamente en el navegador
-  if (localStorage.getItem('theme') === 'light') {
+  // Leer tema guardado (si no existe preferencia, la primera visita es 'light')
+  var savedTheme = localStorage.getItem('theme');
+
+  if (!savedTheme) {
+    savedTheme = 'light';
+    localStorage.setItem('theme', 'light');
+  }
+
+  // Aplicar tema según la preferencia guardada o el valor por defecto
+  if (savedTheme === 'light') {
     $body.addClass('light-theme');
+  } else {
+    $body.removeClass('light-theme');
   }
 
   // Evento al pulsar el botón de tema
@@ -20,7 +30,7 @@ $(function () {
       e.preventDefault();
       $body.toggleClass('light-theme');
 
-      // Guardar preferencia
+      // Guardar preferencia actualizada
       if ($body.hasClass('light-theme')) {
         localStorage.setItem('theme', 'light');
       } else {

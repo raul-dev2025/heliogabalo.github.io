@@ -1,7 +1,8 @@
 /* Basic */
 * {
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
+
 /*
 body, html {
     height: 100%;
@@ -23,10 +24,10 @@ body, html {
 */
 
 .btn-container {
-	width: 100%;
-	padding: 0 15px;
-	margin: 2rem auto;
-/*
+  width: 100%;
+  padding: 0 15px;
+  margin: 2rem auto;
+  /*
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -35,28 +36,28 @@ body, html {
 }
 
 .btn-grid {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 1.5rem;
-	max-width: 600px;
-	margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 /* Buttons */
-.btn {
-    border: none;
-    position: relative;
-    background: none;
-    padding: 28px 90px;
-    display: inline-block;
-    text-transform: uppercase;
-    margin: 30px;
-    color: inherit;
-    letter-spacing: 2px;
-    font-size: 0.9em;
-    outline: none;
-    transition: all 0.4s;
-    cursor: pointer;
+.btn-container .btn {
+  border: none;
+  position: relative;
+  background: none;
+  padding: 28px 90px;
+  display: inline-block;
+  text-transform: uppercase;
+  margin: 30px;
+  color: inherit;
+  letter-spacing: 2px;
+  font-size: 0.9em;
+  outline: none;
+  transition: all 0.4s;
+  cursor: pointer;
 }
 
 /* Anulado
@@ -66,17 +67,17 @@ body, html {
 }
 */
 
-.btn:after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    transition: all 04.s;
+.btn-container .btn:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  transition: all 0.4s;
 }
 
 .btn-perspective {
-    perspective: 800px;
-    /*display: inline-block;*/
-/*
+  perspective: 800px;
+  /*display: inline-block;*/
+  /*
     margin: 0 auto 1.5rem;
     width: 100%;
     max-width: 250px;
@@ -85,76 +86,84 @@ body, html {
 }
 
 .btn-3d {
-    color: #fff;
-    display: block;
-    outline: 1px solid transparent;
-    transform-style: preserve-3d;
+  color: #fff;
+  display: block;
+  outline: 1px solid transparent;
+  transform-style: preserve-3d;
 }
 
 /* Button One */
-.btn-one {
-    background-color: #E74C3C;
+.btn-container .btn-one {
+  background-color: #E74C3C;
 }
-.btn-one:after {
-    width: 100%;
-    height: 42%;
-    left: 0;
-    top: -40%;
-    background: #C0392D;
-    transform-origin: 0% 100%;
-    transform: rotateX(90deg);
+
+.btn-container .btn-one:after {
+  width: 100%;
+  height: 42%;
+  left: 0;
+  top: -40%;
+  background: #C0392D;
+  transform-origin: 0% 100%;
+  transform: rotateX(90deg);
 }
-.btn-one:hover {
-    transform: rotateX(-45deg);   
+
+.btn-container .btn-one:hover {
+  transform: rotateX(-45deg);
 }
 
 /* Button Two */
-.btn-two {
-    background-color: #3498DB;
+.btn-container .btn-two {
+  background-color: #3498DB;
 }
-.btn-two:after {
-    width: 100%;
-    height: 40%;
-    left: 0;
-    top: 100%;
-    background: #2980D9;
-    transform-origin: 0% 0%;
-    transform: rotateX(-90deg);
+
+.btn-container .btn-two:after {
+  width: 100%;
+  height: 40%;
+  left: 0;
+  top: 100%;
+  background: #2980D9;
+  transform-origin: 0% 0%;
+  transform: rotateX(-90deg);
 }
-.btn-two:hover {
-    transform: rotateX(35deg);   
+
+.btn-container .btn-two:hover {
+  transform: rotateX(35deg);
 }
 
 /* Button Three */
-.btn-three {
-    background-color: #1ABC9C;
+.btn-container .btn-three {
+  background-color: #1ABC9C;
 }
-.btn-three:after {
-    width: 20%;
-    height: 100%;
-    left: -20%;
-    top: 0;
-    background: #16A085;
-    transform-origin:100% 0%;
-    transform: rotateY(-90deg);
+
+.btn-container .btn-three:after {
+  width: 20%;
+  height: 100%;
+  left: -20%;
+  top: 0;
+  background: #16A085;
+  transform-origin: 100% 0%;
+  transform: rotateY(-90deg);
 }
-.btn-three:hover {
-    transform: rotateY(25deg);   
+
+.btn-container .btn-three:hover {
+  transform: rotateY(25deg);
 }
 
 /* Button Four */
-.btn-four {
-    background-color: #9B59B6;
+.btn-container .btn-four {
+  background-color: #9B59B6;
 }
-.btn-four:after {
-    width: 20%;
-    height: 100%;
-    left: 100%;
-    top: 0;
-    background: #8E44AD;
-    transform-origin: 0% 0%;
-    transform: rotateY(90deg);
+
+.btn-container .btn-four:after {
+  width: 20%;
+  height: 100%;
+  left: 100%;
+  top: 0;
+  background: #8E44AD;
+  transform-origin: 0% 0%;
+  transform: rotateY(90deg);
 }
-.btn-four:hover {
-    transform: rotateY(-25deg);
+
+.btn-container .btn-four:hover {
+  transform: rotateY(-25deg);
 }

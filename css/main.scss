@@ -1,0 +1,559 @@
+// ==========================================
+// 1. VARIABLES DE COLOR Y CONFIGURACIÓN
+// ==========================================
+
+// Tema Oscuro (por defecto)
+$dark-bg: #0a192f;
+$dark-navbar-bg: #020c1b;
+$dark-card-bg: #112240;
+$dark-border: #233554;
+$dark-text-main: #e6f1ff;
+$dark-text-muted: #a8b2d1;
+$dark-accent: #64ffda;
+
+// Tema Claro
+$light-bg: #f8f9fa;
+$light-navbar-bg: #ffffff;
+$light-card-bg: #ffffff;
+$light-card-alt: #f1f5f9;
+$light-border: #cbd5e1;
+$light-text-main: #1e293b;
+$light-text-muted: #475569;
+$light-accent: #0d9488;
+
+// ==========================================
+// 2. MIXINS REUTILIZABLES
+// ==========================================
+
+@mixin dropdown-theme($bg-color, $border-color, $accent-color, $text-color) {
+  background-color: $bg-color !important;
+  border: 1px solid $border-color !important;
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.3) !important;
+
+  >li>a {
+    color: $text-color !important;
+    padding: 8px 20px;
+
+    &:hover,
+    &:focus {
+      background-color: rgba($accent-color, 0.1) !important;
+      color: $accent-color !important;
+    }
+  }
+
+  .divider {
+    background-color: $border-color !important;
+  }
+}
+
+// ==========================================
+// 3. BASE & TEMA OSCURO
+// ==========================================
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding-top: 70px;
+  background-color: $dark-bg;
+  color: $dark-text-main;
+}
+
+.footer {
+  background-color: $dark-navbar-bg;
+  color: $dark-text-muted;
+}
+
+.features .glyphicon {
+  font-size: 32px;
+  color: $dark-accent;
+}
+
+blockquote {
+  border-left: 5px solid $dark-accent;
+  color: #ccd6f6;
+}
+
+.well,
+.panel {
+  background-color: $dark-card-bg;
+  border-color: $dark-border;
+  color: $dark-text-main;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+}
+
+.panel-default>.panel-heading {
+  background-color: $dark-navbar-bg;
+  border-color: $dark-border;
+  color: $dark-text-main;
+}
+
+// Botones genéricos de Bootstrap
+.btn-primary,
+.btn-info {
+  background-color: $dark-card-bg;
+  border-color: $dark-accent;
+  color: $dark-accent;
+
+  &:hover {
+    background-color: $dark-accent;
+    border-color: $dark-accent;
+    color: $dark-bg;
+  }
+}
+
+.btn-primary {
+  background-color: $dark-bg;
+}
+
+// ==========================================
+// 4. NAVBAR & DESPLEGABLES (TEMA OSCURO)
+// ==========================================
+
+.navbar-default {
+  background-color: $dark-navbar-bg;
+  border-color: $dark-border;
+  border-radius: 0;
+  border-width: 0 0 1px;
+
+  .navbar-brand {
+    padding: 15px;
+    font-weight: bold;
+    color: $dark-text-main;
+
+    &:hover {
+      color: $dark-accent;
+    }
+  }
+
+  .navbar-nav>li>a {
+    color: $dark-text-main;
+
+    &:hover {
+      color: $dark-accent;
+    }
+  }
+
+  // Estado abierto del enlace desplegable ("Nosotros", etc.)
+  .navbar-nav>.open>a {
+
+    &,
+    &:hover,
+    &:focus {
+      background-color: $dark-navbar-bg !important;
+      color: $dark-accent !important;
+    }
+  }
+
+  // Menús desplegables del Navbar
+  .navbar-nav .dropdown-menu {
+    @include dropdown-theme($dark-card-bg, $dark-border, $dark-accent, $dark-text-main);
+  }
+
+  // Menú Hamburguesa en móvil
+  .navbar-toggle {
+    border-color: $dark-accent;
+
+    .icon-bar {
+      background-color: $dark-accent;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: transparent;
+    }
+  }
+}
+
+// Desplegable genérico (.btn-group "Nuestros Servicios")
+.btn-group {
+  &.open>.btn-primary.dropdown-toggle {
+
+    &,
+    &:hover,
+    &:focus {
+      background-color: $dark-navbar-bg !important;
+      border-color: $dark-accent !important;
+      color: $dark-accent !important;
+      box-shadow: none !important;
+    }
+  }
+
+  >.dropdown-menu {
+    margin-top: 4px;
+    @include dropdown-theme($dark-card-bg, $dark-border, $dark-accent, $dark-text-main);
+  }
+}
+
+// Botones de Idioma y Cambio de Tema en Navbar
+.lang-dropdown,
+.theme-toggle-btn {
+  margin: 8px 10px 8px 0 !important;
+}
+
+.btn-lang,
+.theme-toggle-btn {
+
+  &,
+  button& {
+    background: transparent !important;
+    border: 0 !important;
+    color: $dark-accent !important;
+    padding: 6px 10px;
+    font-size: 14px;
+    box-shadow: none !important;
+    outline: none !important;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: rgba(255, 255, 255, 0.08) !important;
+      color: $dark-accent !important;
+    }
+  }
+
+  .glyphicon {
+    font-size: 13px;
+    margin-right: 3px;
+  }
+
+  .caret {
+    margin-left: 3px;
+  }
+}
+
+.lang-dropdown {
+  &.open>.btn-lang.dropdown-toggle {
+
+    &,
+    &:hover,
+    &:focus {
+      background: rgba(255, 255, 255, 0.08) !important;
+      color: $dark-accent !important;
+    }
+  }
+
+  .dropdown-menu {
+    @include dropdown-theme(#0b1325, rgba(255, 255, 255, 0.15), #20c997, #cccccc);
+    min-width: 120px;
+
+    >.active>a {
+
+      &,
+      &:hover,
+      &:focus {
+        background-color: #20c997 !important;
+        color: #ffffff !important;
+      }
+    }
+  }
+}
+
+// ==========================================
+// 5. SECCIONES ESPECÍFICAS
+// ==========================================
+
+#nosotros-content {
+  h4 {
+    margin-bottom: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  p {
+    margin-bottom: 1.2rem;
+    line-height: 1.6;
+    transition: margin 0.3s ease;
+  }
+
+  ul {
+    margin: 1.5rem 0;
+  }
+
+  li {
+    margin-bottom: 0.8rem;
+  }
+}
+
+.beneficios-lista {
+  text-align: left;
+}
+
+#cont-asesoramiento {
+  background-color: $dark-card-bg;
+  border-color: #f5f6f7;
+  margin-top: 1.5em;
+  padding: 1.5em;
+  border-radius: 0.5em;
+}
+
+.list-servicios {
+  list-style-type: none;
+  text-align: left;
+  padding: 1.5em 0.5em 1.5em 2em;
+  margin: 0 0.5em 0.5em 9em;
+}
+
+#servicio,
+#mantenimiento {
+  padding: 2em 0;
+
+  h3 {
+    color: $dark-accent;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1.5em;
+  }
+}
+
+#mantenimiento {
+  padding-bottom: 5em;
+  margin-bottom: 5em;
+}
+
+.p-cont {
+  padding: 1.5em 0;
+}
+
+#soluciones-img {
+  padding: 2em 0 5em 0;
+}
+
+#soluciones-text_right {
+  padding: 5em 1em 0 0;
+}
+
+#soluciones-text_left {
+  padding: 5em 0 0 1em;
+}
+
+#soluciones-lista-right {
+  padding: 0 0 5em 1em;
+}
+
+#soluciones-lista-left {
+  padding: 0 1em 5em 0;
+}
+
+#lista-sin-puntos {
+  list-style-type: none;
+
+  >li {
+    line-height: 1.5em;
+
+    i,
+    a,
+    span {
+      vertical-align: middle;
+    }
+  }
+}
+
+.img-rocket {
+  padding-left: 5em;
+  transform: rotate(35deg) scale(0.65);
+  filter: grayscale(100%);
+  transition: transform 0.3s ease, filter 0.3s ease;
+
+  &:hover {
+    transform: rotate(35deg) scale(0.75);
+    filter: grayscale(0%);
+  }
+}
+
+.img-rh {
+  margin: 10em 0 0 4em;
+  border-radius: 0.3em;
+  border: 0.1em solid #cf0707;
+  transition: transform 0.3s ease, filter 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    filter: grayscale(0%);
+  }
+}
+
+.img-dollarBag {
+  margin: 10em 0 0 4em;
+  transform: scale(1.2);
+  transition: transform 0.3s ease, filter 0.3s ease;
+
+  &:hover {
+    transform: rotate(-15deg) scale(1.5);
+    filter: grayscale(0%);
+  }
+}
+
+.versalitas {
+  font-size: 1.2em;
+  font-style: small-caps;
+}
+
+div.mail-support>p>a>button {
+  margin-top: 1.6em !important;
+}
+
+.docs-support-tittle {
+  padding-top: 1em;
+}
+
+.docs-support-paragraph {
+  margin-bottom: 6em;
+  padding-bottom: 3em;
+
+  >strong,
+  i {
+    font-size: larger;
+    font-weight: bold;
+  }
+}
+
+div.beneficios-install>h2 {
+  margin-bottom: 1.4em;
+}
+
+.well-install {
+  background-color: $dark-navbar-bg;
+  border-color: $dark-border;
+  color: $dark-text-main;
+  margin-top: 5em;
+  margin-bottom: 21em;
+}
+
+.contact-install>a>button {
+  margin: 1.6em 0.3em 0.3em 0.4em !important;
+}
+
+// ==========================================
+// 6. LIGHT THEME OVERRIDES (SASS ANIDADO)
+// ==========================================
+
+body.light-theme {
+  background-color: $light-bg;
+  color: $light-text-main;
+
+  .navbar-default,
+  .footer {
+    background-color: $light-navbar-bg;
+    border-color: $light-border;
+    color: $light-text-muted;
+  }
+
+  .navbar-default {
+
+    .navbar-brand,
+    .navbar-nav>li>a {
+      color: $light-text-main;
+
+      &:hover {
+        color: $light-accent;
+      }
+    }
+
+    .navbar-nav>.open>a {
+
+      &,
+      &:hover,
+      &:focus {
+        background-color: $light-card-alt !important;
+        color: $light-accent !important;
+      }
+    }
+
+    .navbar-nav .dropdown-menu {
+      @include dropdown-theme($light-navbar-bg, $light-border, $light-accent, $light-text-main);
+    }
+
+    .navbar-toggle {
+      border-color: $light-accent;
+
+      .icon-bar {
+        background-color: $light-accent;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: rgba($light-accent, 0.1);
+      }
+    }
+
+    .lang-dropdown .btn-lang,
+    .theme-toggle-btn {
+      color: $light-accent !important;
+      background: transparent !important;
+
+      &:hover,
+      &:focus {
+        background: rgba($light-accent, 0.1) !important;
+        color: $light-accent !important;
+      }
+    }
+
+    .lang-dropdown .dropdown-menu {
+      @include dropdown-theme($light-navbar-bg, $light-border, $light-accent, $light-text-muted);
+    }
+  }
+
+  .well,
+  .panel {
+    background-color: $light-navbar-bg;
+    border-color: $light-border;
+    color: $light-text-main;
+  }
+
+  .panel-default>.panel-heading {
+    background-color: $light-card-alt;
+    border-color: $light-border;
+    color: $light-text-main;
+  }
+
+  .btn-primary,
+  .btn-info {
+    background-color: $light-navbar-bg;
+    border-color: $light-accent;
+    color: $light-accent;
+
+    &:hover {
+      background-color: $light-accent;
+      border-color: $light-accent;
+      color: #ffffff;
+    }
+  }
+
+  .btn-info {
+    background-color: $light-card-alt;
+  }
+
+  .btn-group {
+    &.open>.btn-primary.dropdown-toggle {
+
+      &,
+      &:hover,
+      &:focus {
+        background-color: $light-card-alt !important;
+        border-color: $light-accent !important;
+        color: $light-accent !important;
+      }
+    }
+
+    >.dropdown-menu {
+      @include dropdown-theme($light-navbar-bg, $light-border, $light-accent, $light-text-main);
+    }
+  }
+
+  .features .glyphicon {
+    color: $light-accent;
+  }
+
+  blockquote {
+    border-left-color: $light-accent;
+    color: #334155;
+  }
+}
