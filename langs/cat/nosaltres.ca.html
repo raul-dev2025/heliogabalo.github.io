@@ -19,12 +19,34 @@
     <div class='container'>
       <div class='navbar-header'>
         <a href='/langs/cat/index.ca.html' class='navbar-brand'>TècnicSistemes</a>
+
+        <!-- Botón hamburgesa -->
         <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
           <span class='sr-only'>Toggle navigation</span>
           <span class='icon-bar'></span>
           <span class='icon-bar'></span>
           <span class='icon-bar'></span>
         </button>
+
+        <!-- Botón de idioma -->
+        <div class="dropdown pull-right lang-dropdown">
+          <button class="btn btn-default btn-lang dropdown-toggle" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="glyphicon glyphicon-globe"></i> CAT <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li class="active"><a href="/index.html">Castellano</a></li>
+            <li><a href="langs/cat/index.ca.html">Català</a></li>
+          </ul>
+        </div>
+        <!-- END Botón de idioma -->
+
+        <!-- Botón Tema Claro / Oscuro -->
+        <button type="button" class="btn btn-default pull-right theme-toggle-btn" id="btn-theme-light">
+          <i class="glyphicon glyphicon-adjust"></i>
+        </button>
+        <!-- Botón Tema Claro / Oscuro -->
+
       </div>
 
       <ul class='nav navbar-nav navbar-right collapse navbar-collapse'>
@@ -179,7 +201,7 @@
   </div>
 
   <!-- Script de Analitics -->
-  <script>
+  <!-- <script>
     (function (i, s, o, g, r, a, m) {
       i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
         (i[r].q = i[r].q || []).push(arguments)
@@ -188,19 +210,20 @@
     })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
     ga('create', 'UA-36392075-6', 'auto');
     ga('send', 'pageview');
-  </script>
+  </script> -->
 
   <!--Script de bootstrap -->
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
   <script src='/js/bootstrap.min.js'></script>
-  <script>
+  <script src='js/main.js'></script>
+  <!-- <script>
     $(function () {
       $('.nav-tabs a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
       });
     });
-  </script>
+  </script> -->
 
 </body>
 

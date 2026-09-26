@@ -17,12 +17,34 @@
     <div class='container'>
       <div class='navbar-header'>
         <a href='/' class='navbar-brand'>TécnicoSistemas</a>
+
+        <!-- Botón hamburgesa -->
         <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
           <span class='sr-only'>Toggle navigation</span>
           <span class='icon-bar'></span>
           <span class='icon-bar'></span>
           <span class='icon-bar'></span>
         </button>
+
+        <!-- Botón de idioma -->
+        <div class="dropdown pull-right lang-dropdown">
+          <button class="btn btn-default btn-lang dropdown-toggle" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="glyphicon glyphicon-globe"></i> ES <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li class="active"><a href="index.html">Castellano</a></li>
+            <li><a href="langs/cat/index.ca.html">Català</a></li>
+          </ul>
+        </div>
+        <!-- END Botón de idioma -->
+
+        <!-- Botón Tema Claro / Oscuro -->
+        <button type="button" class="btn btn-default pull-right theme-toggle-btn" id="btn-theme-light">
+          <i class="glyphicon glyphicon-adjust"></i>
+        </button>
+        <!-- Botón Tema Claro / Oscuro -->
+
       </div>
 
       <ul class='nav navbar-nav navbar-collapse collapse'>
@@ -157,7 +179,7 @@
   <!-- Bootstrap JS -->
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
   <script src='js/bootstrap.min.js'></script>
-  <!-- <script src='js/main.js'></script> -->
+  <script src='js/main.js'></script>
 
 
 </body>

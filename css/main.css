@@ -25,7 +25,8 @@
 
 /* #### Custom language button #### */
 
-.lang-dropdown {
+.lang-dropdown,
+.theme-toggle-btn {
   margin-top: 8px !important;
   margin-bottom: 8px !important;
   margin-right: 10px !important;
@@ -34,7 +35,10 @@
 /* Forzar transparencia absoluta en todos los estados base */
 .navbar-default .lang-dropdown .btn-lang,
 .lang-dropdown .btn-lang,
-.lang-dropdown button.btn-lang {
+.lang-dropdown button.btn-lang,
+.navbar-default .theme-toggle-btn,
+.theme-toggle-btn,
+button.theme-toggle-btn {
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
@@ -54,6 +58,12 @@
 .navbar-default .lang-dropdown .btn-lang:hover,
 .navbar-default .lang-dropdown .btn-lang:focus,
 .navbar-default .lang-dropdown .btn-lang:active,
+.navbar-default .theme-toggle-btn:hover,
+.navbar-default .theme-toggle-btn:focus,
+.navbar-default .theme-toggle-btn:active,
+.theme-toggle-btn:hover,
+.theme-toggle-btn:focus,
+.theme-toggle-btn:active,
 .lang-dropdown.open>.btn-lang.dropdown-toggle,
 .lang-dropdown.open>.btn-lang.dropdown-toggle:hover,
 .lang-dropdown.open>.btn-lang.dropdown-toggle:focus {
@@ -66,9 +76,13 @@
   outline: none !important;
 }
 
+.btn-lang .glyphicon,
+.theme-toggle-btn .glyphicon {
+  font-size: 13px;
+}
+
 .btn-lang .glyphicon {
   margin-right: 3px;
-  font-size: 13px;
 }
 
 .btn-lang .caret {
@@ -150,6 +164,12 @@ body {
   /* Medium dark blue */
   border-color: #233554;
   color: #e6f1ff;
+}
+
+.well img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
 }
 
 .panel {
@@ -432,3 +452,167 @@ div.beneficios-install>h2 {
 }
 
 /* END Css Instalación de sistemas*/
+
+/* #### Light Theme Overrides #### */
+
+/* 1. Fondo general y texto base */
+body.light-theme {
+  background-color: #f8f9fa;
+  color: #1e293b;
+}
+
+/* 2. Barra de navegación y Footer */
+body.light-theme .navbar-default,
+body.light-theme .footer {
+  background-color: #ffffff;
+  border-color: #cbd5e1;
+  color: #475569;
+}
+
+body.light-theme .navbar-default .navbar-brand,
+body.light-theme .navbar-default .navbar-nav>li>a {
+  color: #1e293b;
+}
+
+body.light-theme .navbar-default .navbar-brand:hover,
+body.light-theme .navbar-default .navbar-nav>li>a:hover {
+  color: #0d9488;
+}
+
+/* 3. Tarjetas (well y panel) */
+body.light-theme .well,
+body.light-theme .panel {
+  background-color: #ffffff;
+  border-color: #cbd5e1;
+  color: #1e293b;
+}
+
+body.light-theme .well img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+body.light-theme .panel-default>.panel-heading {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #1e293b;
+}
+
+/* 4. Botones principales (Primary e Info) adaptados */
+body.light-theme .btn-primary {
+  background-color: #ffffff;
+  border-color: #0d9488;
+  color: #0d9488;
+}
+
+body.light-theme .btn-primary:hover {
+  background-color: #0d9488;
+  border-color: #0d9488;
+  color: #ffffff;
+}
+
+body.light-theme .btn-info {
+  background-color: #f1f5f9;
+  border-color: #0d9488;
+  color: #0d9488;
+}
+
+body.light-theme .btn-info:hover {
+  background-color: #0d9488;
+  border-color: #0d9488;
+  color: #ffffff;
+}
+
+/* 5. Iconos informativos (Features) y citas */
+body.light-theme .features .glyphicon {
+  color: #0d9488;
+}
+
+body.light-theme blockquote {
+  border-left-color: #0d9488;
+  color: #334155;
+}
+
+/* 6. Botones del Header (Idioma y Toggle de Tema) */
+body.light-theme .navbar-default .lang-dropdown .btn-lang,
+body.light-theme .navbar-default .theme-toggle-btn {
+  color: #0d9488 !important;
+}
+
+body.light-theme .navbar-default .lang-dropdown .btn-lang:hover,
+body.light-theme .navbar-default .lang-dropdown .btn-lang:focus,
+body.light-theme .navbar-default .theme-toggle-btn:hover,
+body.light-theme .navbar-default .theme-toggle-btn:focus {
+  background: rgba(13, 148, 136, 0.1) !important;
+  color: #0d9488 !important;
+}
+
+/* Menú desplegable de Idioma en modo claro */
+body.light-theme .lang-dropdown .dropdown-menu {
+  background-color: #ffffff;
+  border-color: #cbd5e1;
+}
+
+body.light-theme .lang-dropdown .dropdown-menu>li>a {
+  color: #334155;
+}
+
+body.light-theme .lang-dropdown .dropdown-menu>li>a:hover {
+  background-color: rgba(13, 148, 136, 0.1);
+  color: #0d9488;
+}
+
+/* --- Ajustes de componentes Bootstrap para Tema Claro --- */
+
+/* 1. Menú desplegable de "Nuestros Servicios" (.btn-group) */
+body.light-theme .btn-group.open>.btn-primary.dropdown-toggle,
+body.light-theme .btn-group.open>.btn-primary.dropdown-toggle:hover,
+body.light-theme .btn-group.open>.btn-primary.dropdown-toggle:focus {
+  background-color: #f1f5f9 !important;
+  border-color: #0d9488 !important;
+  color: #0d9488 !important;
+}
+
+body.light-theme .btn-group>.dropdown-menu {
+  background-color: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.15) !important;
+}
+
+body.light-theme .btn-group>.dropdown-menu>li>a {
+  color: #1e293b !important;
+}
+
+body.light-theme .btn-group>.dropdown-menu>li>a:hover,
+body.light-theme .btn-group>.dropdown-menu>li>a:focus {
+  background-color: rgba(13, 148, 136, 0.1) !important;
+  color: #0d9488 !important;
+}
+
+body.light-theme .btn-group>.dropdown-menu .divider {
+  background-color: #e2e8f0 !important;
+}
+
+/* 2. Botón Hamburgesa (.navbar-toggle) en móviles */
+body.light-theme .navbar-default .navbar-toggle {
+  border-color: #0d9488;
+}
+
+body.light-theme .navbar-default .navbar-toggle .icon-bar {
+  background-color: #0d9488;
+}
+
+body.light-theme .navbar-default .navbar-toggle:hover,
+body.light-theme .navbar-default .navbar-toggle:focus {
+  background-color: rgba(13, 148, 136, 0.1);
+}
+
+/* 3. Corrección del fondo del botón de tema en header */
+body.light-theme .navbar-default .theme-toggle-btn,
+body.light-theme .theme-toggle-btn {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* #### END Light Theme Overrides #### */

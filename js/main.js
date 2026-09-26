@@ -1,19 +1,31 @@
-$(function() {
+$(function () {
+  // Manejo de pestañas nav-tabs
   $('.nav-tabs a').click(function (e) {
     e.preventDefault();
     $(this).tab('show');
   });
 
-  // // Fix for custom dropdown in "Nuestros Servicios" for mobile
-  // $('.btn-group .dropdown-toggle').on('click', function(e) {
-  //   //e.preventDefault();
-  //   $(this).next('.dropdown-menu').toggle();
-  // });
+  // --- Lógica de cambio de tema Claro / Oscuro ---
+  var $body = $('body');
+  var $themeBtn = $('#btn-theme-light');
 
-  // Optional: Close dropdown when clicking outside
-  // $(document).on('click', function(e) {
-  //   if (!$(e.target).closest('.btn-group').length) {
-  //     $('.btn-group .dropdown-menu').hide();
-  //   }
-  // });
+  // Restaurar el tema guardado previamente en el navegador
+  if (localStorage.getItem('theme') === 'light') {
+    $body.addClass('light-theme');
+  }
+
+  // Evento al pulsar el botón de tema
+  if ($themeBtn.length) {
+    $themeBtn.on('click', function (e) {
+      e.preventDefault();
+      $body.toggleClass('light-theme');
+
+      // Guardar preferencia
+      if ($body.hasClass('light-theme')) {
+        localStorage.setItem('theme', 'light');
+      } else {
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  }
 });
